@@ -6,7 +6,7 @@ Spec synced with contrast accessibility fix. Opacity values raised across hero a
 
 ### AC updated
 - **REQ-SF-1:** Hero label opacity corrected from 0.5 to 0.7. Tagline opacity corrected from 0.5 to 0.7. Location label changed from hardcoded English to locale-aware string (Croatian, German, Slovenian, English).
-- **REQ-A11Y-4:** AC expanded from vague "contrast guaranteed via overlay" to specify minimum alpha thresholds: 0.6 for large text (56px+, where WCAG AA requires only 3:1), 0.7 for normal text on dark backgrounds. The 0.6 large-text threshold aligns with REQ-SF-1 hero title accent line.
+- **REQ-A11Y-4:** AC expanded from vague "contrast guaranteed via overlay" to specify minimum alpha thresholds: 0.65 for large text (56px+, where WCAG AA requires only 3:1), 0.7 for normal text on dark backgrounds. The 0.65 large-text threshold aligns with REQ-SF-1 hero title accent line.
 
 ## 2026-04-02 — Revision 12: Visual Design Refinement (2a49348)
 
