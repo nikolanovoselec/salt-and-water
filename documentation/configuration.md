@@ -91,7 +91,9 @@ npx wrangler d1 migrations apply apartmani-db --remote
 | File | Contents |
 |---|---|
 | `migrations/0001_auth.sql` | `auth_codes` and `sessions` tables with indexes |
-| `migrations/0002_availability.sql` | `availability_blocks`, `inquiries`, `events`, and `redirects` tables with indexes |
+| `migrations/0002_availability.sql` | `availability_blocks` (with `source` and `inquiry_id` columns), `inquiries` (full lifecycle columns including `price_estimate`, `email_status`, `retry_at`), `events`, and `redirects` tables with indexes |
+
+**Note:** `POST /api/inquiry` queries a `seasons` table for price estimation. This table is not yet covered by a migration file — a `0003_seasons.sql` migration is required before price estimates will function. See [Architecture](architecture.md#pricing-model) for the schema shape.
 
 ---
 

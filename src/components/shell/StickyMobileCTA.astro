@@ -98,8 +98,8 @@ const ctaText = lowestPrice
 
     function updateVisibility() {
       const shouldShow = !heroVisible && !inquiryVisible;
-      stickyCta.classList.toggle("is-visible", shouldShow);
-      stickyCta.setAttribute("aria-hidden", String(!shouldShow));
+      stickyCta?.classList.toggle("is-visible", shouldShow);
+      stickyCta?.setAttribute("aria-hidden", String(!shouldShow));
     }
 
     heroObserver.observe(heroSentinel);

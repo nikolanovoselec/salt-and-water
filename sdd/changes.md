@@ -1,5 +1,53 @@
 # Changelog
 
+## 2026-04-02 — Revision 6: Phase 5 Implementation Sync
+
+Spec synced with Phase 5 commit (inquiry server pipeline, confirm+block dates, email delivery, GDPR consent, analytics events).
+
+### Status changes: Planned -> Implemented
+- **REQ-BK-2:** Inquiry server pipeline — POST /api/inquiry with full pipeline: Zod validation (discriminated union for booking vs quick-question), Turnstile server-side verification, honeypot bot detection, input sanitization (HTML stripped, email header injection prevented, URL stripping), server-side availability revalidation (half-open interval overlap query), D1 persist before email attempt (data never lost), outbox pattern with retry (email_status pending->sent/retry, retry_at set on failure), owner notification + guest auto-reply via Resend (4-locale guest emails with explicit "not a confirmed booking" disclaimer), correct API response contract (200/202/400/403/409), server-side analytics event tracking (inquiry_submit/question_submit to D1 events table).
+- **REQ-BK-6:** Booking business rules — server-side integration now complete. Cross-season pricing computed via `computeStayPrice` with season data from D1. Tourist tax with child exemption (under-12 exempt). Availability revalidated at submit time. Capacity validated by Zod schema. Previously only pure functions existed; now wired into the inquiry pipeline.
+- **REQ-TC-5:** GDPR consent on forms — `gdprConsent: z.literal(true)` in Zod schema rejects submissions without consent. Consent timestamp stored as `gdpr_consent_at` in D1. Per-locale label text in all 4 translation files with Privacy Policy link placeholder.
+
+### Implementation progress noted (status remains Planned)
+- **REQ-BK-1:** Server-side pipeline (REQ-BK-2) fully consumes the Zod schema matching REQ-BK-1 field structure. Client-side form widget (date picker, capacity selector, tabs, UI validation feedback) not yet built. Status remains Planned.
+- **REQ-BK-7:** Confirm + block dates endpoint implemented at POST /admin/api/inquiries/:id/confirm using D1 batch (overlap check, insert availability_block, update inquiry status). Missing from AC: authentication middleware not wired (comment-only), no CSRF token validation, no signed single-use URL token, no decline/spam actions, no admin inquiry list UI, no unread count badge. Status remains Planned.
+
+### AC deviations noted (implementation gaps within Implemented requirements)
+- **REQ-BK-2 AC gap — error message localization:** All error responses are in English only. Spec AC states "All error messages localized per active locale." Implementation returns English strings regardless of locale parameter.
+- **REQ-BK-2 AC gap — logging:** Spec AC requires logging "timestamp, locale, apartment, source, referrer." Implementation tracks events to D1 events table but does not log referrer.
+- **REQ-BK-6 AC gap — tourist tax rate:** Hardcoded to 1.35 EUR with a TODO comment. Spec requires "Rate configurable in CMS." Cleaning fee hardcoded to 0 with a TODO comment. Spec requires "configurable per apartment."
+- **REQ-BK-6 AC gap — check-in/out times:** Not included in confirmation emails yet. Spec AC requires "Displayed on apartment pages and in confirmation emails."
+
+### Previous gap resolved
+- Revision 4 noted "Inquiry Zod schema exists but no server endpoint consumes it yet." This is now resolved — POST /api/inquiry fully consumes the schema.
+
+## 2026-04-02 — Revision 5: Phase 4 Implementation Sync
+
+Spec synced with Phase 4 commit (apartment pages, availability API, D1 schema, analytics, SEO components).
+
+### Status changes: Planned -> Implemented
+- **REQ-AP-2:** Apartment listing page — card grid with hero photo, name, capacity, beach distance, price, sea view badge, "Best for" label. Zero-apartment "Coming soon" state. Single-apartment redirect to detail. 2-column desktop / 1-column mobile. Image hover zoom. Staggered fade-up entry.
+- **REQ-AP-4:** Seasonal pricing table — season name, date range, price/night, min stay columns sorted chronologically. Cleaning fee + tourist tax as separate items. "Price on request" fallback for empty seasons. Locale-aware formatting via `Intl.NumberFormat`. Disclaimer text. PAngV `showTotalPrice` prop accepted (rendering deferred to detail page integration).
+- **REQ-SEO-1:** Schema.org structured data — generic SchemaOrg component supporting VacationRental, FAQPage, BreadcrumbList types. Breadcrumbs component emitting BreadcrumbList JSON-LD with correct ListItem schema.
+- **REQ-SEO-3:** Analytics and conversion events — POST /api/track endpoint writing to D1 events table. All 8 event types defined (inquiry_submit, question_submit, whatsapp_click, call_click, apartment_view, gallery_open, language_switch, calendar_select). Cookieless, no PII.
+
+### Implementation progress noted (status remains Planned)
+- **REQ-AP-5:** Availability API backend implemented (GET /api/apartments/:id/availability with half-open interval query, uncached). Visual calendar component not yet built.
+- **REQ-AP-6:** Photo gallery grid layout implemented (asymmetric 2fr/1fr desktop, horizontal scroll-snap mobile, "View all X photos" button, lightbox data injection). Missing: blurhash placeholder rendering, responsive srcset, clip-path animation, lightbox keyboard nav, focus trapping, image load error handling.
+- **REQ-AP-3:** Amenity grid component implemented (grouped by category with icon + label). Breadcrumbs component implemented. Remaining detail page sections (hero, description, inquiry widget, trust strip, bed config, house rules, floor plan, FAQs) not yet built.
+
+### D1 schema implemented (supporting future requirements)
+- `availability_blocks` table: half-open interval `[check_in, check_out)`, source tracking (manual/ics/inquiry), apartment_id + date indexes. Supports REQ-BK-6 availability data model.
+- `inquiries` table: full booking pipeline with type (booking/question), guest fields (adults, children age buckets, pets), status lifecycle (new/read/responded/confirmed/declined/spam), email outbox pattern (pending/sent/retry/failed with retry_at and attempt count), GDPR consent timestamp, Turnstile verification flag, price estimate. Supports REQ-BK-1, REQ-BK-2, REQ-BK-7.
+- `events` table: analytics events with type, apartment_slug, locale, page_path. Supports REQ-SEO-3.
+- `redirects` table: slug history with locale, entity type, old/current slug. Supports REQ-CMS-7, REQ-SEO-7.
+
+### Minor AC gaps noted (no status impact)
+- REQ-AP-2: `valueProp` field exists in data type but is not rendered on listing cards. AC specifies "one-line value proposition" on cards.
+- REQ-AP-4: PAngV total price display (AC for German locale) has the `showTotalPrice` prop wired but no conditional total price row rendered yet.
+- REQ-SEO-3: Cloudflare Web Analytics beacon (pageview analytics portion) not yet integrated into page layout. Server-side custom event tracking is complete.
+
 ## 2026-04-02 — Revision 4: Post-Implementation Sync (Phases 1-3)
 
 Spec synced with implementation from last 3 commits (Phase 1: data foundation, Phase 2: visitor shell, Phase 3: auth + uploads + schema).

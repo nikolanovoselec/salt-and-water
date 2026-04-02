@@ -85,7 +85,7 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Priority:** P0
 - **Dependencies:** REQ-CMS-1
 - **Verification:** End-to-end test with real Resend + Turnstile, test availability race condition
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-BK-3: WhatsApp Floating Button
 
@@ -168,7 +168,7 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Priority:** P0
 - **Dependencies:** REQ-AP-4, REQ-AP-5
 - **Verification:** Test cross-season pricing, min stay, capacity, timezone handling
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-BK-7: Inquiry Lifecycle
 

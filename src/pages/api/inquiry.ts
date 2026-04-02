@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { getEnv } from "~/lib/env";
 import { inquirySchema, type Inquiry } from "~/schemas/inquiry";
 import { verifyTurnstileToken, isTokenExpired } from "~/lib/turnstile";
 import { hasOverlap } from "~/lib/availability";
@@ -18,11 +19,11 @@ import { sendEmail } from "~/lib/resend";
  * 7. Return appropriate status code
  */
 export const POST: APIRoute = async ({ request, locals }) => {
-  const env = (locals as { runtime: { env: Record<string, unknown> } }).runtime.env;
-  const db = env.DB as D1Database;
-  const turnstileSecret = (env.TURNSTILE_SECRET_KEY as string) ?? "";
-  const resendKey = (env.RESEND_API_KEY as string) ?? "";
-  const adminEmails = (env.ADMIN_EMAILS as string) ?? "";
+  const env = getEnv(locals as Record<string, unknown>);
+  const db = env.DB;
+  const turnstileSecret = env.TURNSTILE_SECRET_KEY ?? "";
+  const resendKey = env.RESEND_API_KEY ?? "";
+  const adminEmails = env.ADMIN_EMAILS ?? "";
 
   // Parse body
   const rawBody = await request.json().catch(() => null);
@@ -81,7 +82,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       .bind(data.apartmentId, data.checkOut, data.checkIn)
       .all<{ id: string; apartment_id: string; check_in: string; check_out: string }>();
 
-    const existingBlocks = (blocks.results ?? []).map((r) => ({
+    const existingBlocks = (blocks.results ?? []).map((r: { id: string; apartment_id: string; check_in: string; check_out: string }) => ({
       id: r.id,
       apartmentId: r.apartment_id,
       checkIn: r.check_in,
@@ -101,7 +102,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       .bind(data.apartmentId)
       .all<{ id: string; apartment_id: string; name: string; start_date: string; end_date: string; price_per_night: number; min_stay: number }>();
 
-    const seasonData: Season[] = (seasons.results ?? []).map((s) => ({
+    const seasonData: Season[] = (seasons.results ?? []).map((s: { id: string; apartment_id: string; name: string; start_date: string; end_date: string; price_per_night: number; min_stay: number }) => ({
       id: s.id,
       apartmentId: s.apartment_id,
       name: s.name,

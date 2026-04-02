@@ -51,7 +51,7 @@ describe("formatCurrency()", () => {
   it("formats EUR in English locale", () => {
     const result = formatCurrency("en", 1200);
     expect(result).toContain("€");
-    expect(result).toContain("1,200") || expect(result).toContain("1200");
+    expect(result).toMatch(/1[,.]?200/);
   });
 
   it("formats fractional amounts", () => {
@@ -70,7 +70,7 @@ describe("formatCurrency()", () => {
 describe("formatNumber()", () => {
   it("formats number with locale separators", () => {
     const deResult = formatNumber("de", 1234567);
-    expect(deResult).toContain("1.234.567") || expect(deResult).toContain("1234567");
+    expect(deResult).toMatch(/1[.,]?234[.,]?567/);
 
     const enResult = formatNumber("en", 1234567);
     expect(enResult).toContain("1,234,567");

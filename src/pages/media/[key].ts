@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { getEnv } from "~/lib/env";
 
 /**
  * Image serving route: fetches from private R2, applies Cloudflare Image Resizing.
@@ -10,38 +11,32 @@ export const GET: APIRoute = async ({ params, url, locals }) => {
     return new Response("Missing key", { status: 400 });
   }
 
-  const env = (locals as { runtime?: { env?: Record<string, unknown> } }).runtime?.env as
-    | { MEDIA?: { get: (key: string) => Promise<{ body: ReadableStream; httpMetadata?: { contentType?: string } } | null> } }
-    | undefined;
-
-  const bucket = env?.MEDIA;
+  const env = getEnv(locals as Record<string, unknown>);
+  const bucket = env.MEDIA;
   if (!bucket) {
     return new Response("Storage not configured", { status: 503 });
   }
 
-  const object = await bucket.get(key);
-  if (!object) {
-    return new Response("Not found", { status: 404 });
+  try {
+    const object = await bucket.get(key);
+    if (!object) {
+      return new Response("Not found", { status: 404 });
+    }
+
+    const headers = new Headers({
+      "Cache-Control": "public, max-age=31536000, immutable",
+    });
+
+    if (object.httpMetadata?.contentType) {
+      headers.set("Content-Type", object.httpMetadata.contentType);
+    }
+
+    // TODO: Apply Cloudflare Image Resizing via cf: { image: {} }
+    // when zone has Image Resizing enabled. For now serve originals.
+    // Query params (w, f, q, fit) are parsed by clients but not yet applied.
+
+    return new Response(object.body, { headers });
+  } catch {
+    return new Response("Internal error", { status: 500 });
   }
-
-  // Parse transform options from query params
-  const width = url.searchParams.get("w");
-  const format = url.searchParams.get("f");
-  const quality = url.searchParams.get("q");
-  const fit = url.searchParams.get("fit");
-
-  const headers = new Headers({
-    "Cache-Control": "public, max-age=31536000, immutable",
-  });
-
-  if (object.httpMetadata?.contentType) {
-    headers.set("Content-Type", object.httpMetadata.contentType);
-  }
-
-  // If Cloudflare Image Resizing is available, apply transforms
-  // In production, this is handled via cf: { image: {} } on the fetch
-  // For now, serve the original with appropriate cache headers
-  const response = new Response(object.body, { headers });
-
-  return response;
 };

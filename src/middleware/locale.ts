@@ -54,7 +54,7 @@ export const localeMiddleware: MiddlewareHandler = async (context, next) => {
   const locale = extractLocaleFromPath(pathname);
 
   if (locale) {
-    context.locals.locale = locale;
+    (context.locals as Record<string, unknown>).locale = locale;
   }
 
   return next();

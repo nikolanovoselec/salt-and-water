@@ -40,8 +40,8 @@ export async function sendEmail(params: SendEmailParams): Promise<SendEmailResul
     });
 
     if (!response.ok) {
-      const text = await response.text().catch(() => "unknown");
-      return { success: false, error: `HTTP ${response.status}: ${text}` };
+      // Don't leak Resend API error details to callers
+      return { success: false, error: "Failed to send email" };
     }
 
     return { success: true };

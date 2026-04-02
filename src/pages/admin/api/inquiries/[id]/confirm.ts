@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { getEnv } from "~/lib/env";
 
 /**
  * POST /admin/api/inquiries/:id/confirm
@@ -11,8 +12,8 @@ export const POST: APIRoute = async ({ params, locals }) => {
     return jsonResponse({ error: "Missing inquiry ID" }, 400);
   }
 
-  const env = (locals as { runtime: { env: Record<string, unknown> } }).runtime.env;
-  const db = env.DB as D1Database;
+  const env = getEnv(locals as Record<string, unknown>);
+  const db = env.DB;
 
   // Get the inquiry
   const inquiry = await db

@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { getEnv } from "~/lib/env";
 
 const validEventTypes = [
   "inquiry_submit",
@@ -17,8 +18,8 @@ const validEventTypes = [
  * No PII stored — only event type, apartment slug, locale, timestamp, page path.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
-  const env = (locals as { runtime: { env: Record<string, unknown> } }).runtime.env;
-  const db = env.DB as D1Database;
+  const env = getEnv(locals as Record<string, unknown>);
+  const db = env.DB;
 
   const body = await request.json().catch(() => null) as {
     type?: string;
@@ -34,10 +35,22 @@ export const POST: APIRoute = async ({ request, locals }) => {
     });
   }
 
-  await db
-    .prepare("INSERT INTO events (type, apartment_slug, locale, page_path) VALUES (?, ?, ?, ?)")
-    .bind(body.type, body.apartmentSlug ?? null, body.locale ?? null, body.pagePath ?? null)
-    .run();
+  // Truncate fields to prevent abuse
+  const slug = (body.apartmentSlug ?? "").slice(0, 100) || null;
+  const locale = (body.locale ?? "").slice(0, 10) || null;
+  const pagePath = (body.pagePath ?? "").slice(0, 500) || null;
+
+  try {
+    await db
+      .prepare("INSERT INTO events (type, apartment_slug, locale, page_path) VALUES (?, ?, ?, ?)")
+      .bind(body.type, slug, locale, pagePath)
+      .run();
+  } catch {
+    return new Response(JSON.stringify({ error: "Failed to record event" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 
   return new Response(JSON.stringify({ ok: true }), {
     headers: {

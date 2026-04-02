@@ -108,7 +108,7 @@ GDPR, privacy policy, Impressum, house rules, cancellation policy, security head
 - **Priority:** P0
 - **Dependencies:** REQ-BK-1, REQ-TC-2
 - **Verification:** Test form without consent (rejected), with consent (accepted)
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-TC-6: Security Headers
 

@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { getEnv } from "~/lib/env";
 import { hashCode, createJWT, generateRefreshToken, isAdminEmail } from "~/lib/auth";
 
 /**
@@ -6,10 +7,10 @@ import { hashCode, createJWT, generateRefreshToken, isAdminEmail } from "~/lib/a
  * Verify the 6-digit code and issue JWT + refresh token.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
-  const env = (locals as { runtime: { env: Record<string, unknown> } }).runtime.env;
-  const jwtSecret = (env.JWT_SECRET as string) ?? "";
-  const adminEmails = (env.ADMIN_EMAILS as string) ?? "";
-  const db = env.DB as D1Database;
+  const env = getEnv(locals as Record<string, unknown>);
+  const jwtSecret = env.JWT_SECRET ?? "";
+  const adminEmails = env.ADMIN_EMAILS ?? "";
+  const db = env.DB;
 
   const body = await request.json().catch(() => null) as { email?: string; code?: string } | null;
   const email = body?.email?.trim().toLowerCase();
@@ -19,8 +20,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return jsonResponse({ error: "Email and code required" }, 400);
   }
 
+  // Use same error message for all failures to prevent enumeration
+  const genericError = { error: "Invalid or expired code" };
+
   if (!isAdminEmail(email, adminEmails)) {
-    return jsonResponse({ error: "Invalid credentials" }, 403);
+    return jsonResponse(genericError, 403);
   }
 
   const codeHash = await hashCode(code);
@@ -32,10 +36,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
     .first<{ id: number }>();
 
   if (!stored) {
-    return jsonResponse({ error: "Invalid or expired code" }, 403);
+    return jsonResponse(genericError, 403);
   }
 
-  // Delete used code and all expired codes for this email
+  // Delete used code and all expired codes
   await db
     .prepare("DELETE FROM auth_codes WHERE email = ? AND (id = ? OR expires_at <= datetime('now'))")
     .bind(email, stored.id)

@@ -57,7 +57,7 @@ See [Authentication](authentication.md#rate-limiting) for implementation detail.
 
 ### Form Submissions
 
-All public inquiry forms require a valid Cloudflare Turnstile token. The token is verified server-side against `https://challenges.cloudflare.com/turnstile/v0/siteverify` before any processing occurs.
+All public inquiry forms require a valid Cloudflare Turnstile token. The token is verified server-side against `https://challenges.cloudflare.com/turnstile/v0/siteverify` before any processing occurs. On `POST /api/inquiry`, Turnstile verification runs before any D1 write or email dispatch.
 
 ## Bot Protection (Turnstile)
 
@@ -90,6 +90,17 @@ All API inputs are validated with Zod before any business logic runs. The inquir
 - `gdprConsent: true` literal (must be explicitly checked)
 - Honeypot field must be empty (`z.string().max(0)`)
 - Turnstile token required
+- `checkOut > checkIn` cross-field refinement (booking type only)
+
+## Honeypot
+
+`POST /api/inquiry` includes a `honeypot` field (`z.string().max(0)`). Any non-empty value triggers a silent fake-success response — the request is discarded with no D1 write or email, and the bot receives `{ "success": true }`. This prevents discovery of the bot-rejection mechanism.
+
+## Availability Double-Check
+
+On booking inquiries, `POST /api/inquiry` re-queries `availability_blocks` for overlap immediately before the D1 insert. This guards against the race condition where dates appeared available on the client but were taken between page load and form submission. A `409 stale_availability` is returned to the guest if overlap is detected.
+
+The same overlap check runs on `POST /admin/api/inquiries/:id/confirm` before the atomic D1 batch, returning `409 date_conflict` if another block was created in the interim.
 
 ## Authentication Security
 

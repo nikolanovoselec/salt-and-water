@@ -40,7 +40,9 @@ Apartmani Pašman is a server-side rendered Astro site deployed as a Cloudflare 
 | `src/middleware/` | Request pipeline: redirects → locale → security headers |
 | `src/pages/media/[key].ts` | Image serving route — fetches from R2, applies cache headers |
 | `src/pages/admin/api/` | Auth API endpoints (login, verify, upload-url) |
+| `src/pages/admin/api/inquiries/[id]/confirm.ts` | Confirm booking inquiry and block dates atomically |
 | `src/pages/api/apartments/[id]/availability.ts` | Availability API — returns booked dates for calendar display |
+| `src/pages/api/inquiry.ts` | Inquiry submission — full booking pipeline (validate, persist, email) |
 | `src/pages/api/track.ts` | Analytics API — cookieless event logging to D1 |
 | `src/layouts/` | Base and Page layout shells |
 | `src/components/shell/` | Navigation, Footer, LanguageSwitcher, WhatsAppButton, StickyMobileCTA |
@@ -89,12 +91,47 @@ Cookieless analytics events are logged to the D1 `events` table via `POST /api/t
 
 Inquiries are stored in D1 `inquiries` table covering the full lifecycle: `new → read → responded → confirmed | declined | spam`. Email delivery status is tracked separately (`pending → sent | retry | failed`) with retry metadata. The D1 record is the source of truth for status; email is the primary notification channel (see [AD6](decisions/README.md#ad6-inquiry-lifecycle-via-email-first-d1-as-backup-log)).
 
+### Submission Flow (POST /api/inquiry)
+
+```
+Browser submits form
+  → Turnstile verification (server-side, 10s timeout)
+  → Honeypot check (silent fake-success on bot)
+  → Zod schema validation (discriminated union: booking | question)
+  → Input sanitization (stripHtml, sanitizeEmail, stripUrls, etc.)
+  → [booking only] Server-side availability overlap recheck → 409 if stale
+  → [booking only] Price estimate from seasons table
+  → INSERT INTO inquiries (status='new', email_status='pending')
+  → Resend: owner notification + guest auto-reply
+  → UPDATE inquiries SET email_status='sent'|'retry'
+  → INSERT INTO events (type='inquiry_submit'|'question_submit')
+  → 200 (email sent) or 202 (email failed, inquiry saved)
+```
+
+### Confirmation Flow (POST /admin/api/inquiries/:id/confirm)
+
+```
+Admin triggers confirm
+  → Lookup inquiry by ID → 404 if missing
+  → Guard: type must be 'booking' → 400 if question
+  → Guard: status must not be 'confirmed' → 409 if already done
+  → Overlap check against availability_blocks → 409 if conflict
+  → D1 batch (atomic):
+      INSERT INTO availability_blocks (source='inquiry', inquiry_id=N)
+      UPDATE inquiries SET status='confirmed'
+  → 200 success
+```
+
+The D1 `batch()` call ensures the availability block and status update either both succeed or both fail — there is no window where dates appear unblocked after confirmation.
+
 ---
 
 ## Related Documentation
 
+- [API Reference](api-reference.md#post-apiinquiry) — Inquiry and confirm endpoint signatures
 - [API Reference](api-reference.md) — All endpoint signatures and response formats
 - [Configuration](configuration.md#environment-variables) — All env vars and bindings
 - [Authentication](authentication.md#magic-link-flow) — Auth flow detail
+- [Security](security.md#availability-double-check) — Overlap guard on inquiry submit and confirm
 - [Security](security.md#content-security-policy) — CSP and header policy
 - [Decisions](decisions/README.md) — Trade-off rationale for key choices

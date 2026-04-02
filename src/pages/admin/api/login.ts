@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { getEnv } from "~/lib/env";
 import { generateCode, hashCode, isAdminEmail } from "~/lib/auth";
 import { sendEmail } from "~/lib/resend";
 
@@ -7,9 +8,9 @@ import { sendEmail } from "~/lib/resend";
  * Send a 6-digit magic link code to the owner's email.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
-  const env = (locals as { runtime: { env: Record<string, unknown> } }).runtime.env;
-  const adminEmails = (env.ADMIN_EMAILS as string) ?? "";
-  const resendKey = (env.RESEND_API_KEY as string) ?? "";
+  const env = getEnv(locals as Record<string, unknown>);
+  const adminEmails = env.ADMIN_EMAILS ?? "";
+  const resendKey = env.RESEND_API_KEY ?? "";
 
   const body = await request.json().catch(() => null) as { email?: string } | null;
   const email = body?.email?.trim().toLowerCase();
@@ -23,7 +24,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return jsonResponse({ success: true });
   }
 
-  const db = env.DB as D1Database;
+  const db = env.DB;
 
   // Brute force protection: max 5 attempts per email per hour
   const recentAttempts = await db
@@ -44,8 +45,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
     .bind(email, codeHash)
     .run();
 
-  // Send code via Resend
-  await sendEmail({
+  // Send code via Resend — check result
+  const emailResult = await sendEmail({
     to: [email],
     subject: "Your login code — Apartmani Ždrelac",
     html: `
@@ -59,6 +60,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
     apiKey: resendKey,
     from: "Apartmani Ždrelac <noreply@apartmani.hr>",
   });
+
+  if (!emailResult.success) {
+    // Delete the stored code since email failed — don't count against brute force limit
+    await db
+      .prepare("DELETE FROM auth_codes WHERE email = ? AND code_hash = ?")
+      .bind(email, codeHash)
+      .run();
+    return jsonResponse({ error: "Failed to send code. Please try again." }, 503);
+  }
 
   return jsonResponse({ success: true });
 };
