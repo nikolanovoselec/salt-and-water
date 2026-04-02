@@ -1,0 +1,40 @@
+---
+import Base from "~/layouts/Base.astro";
+
+const { locale } = Astro.params;
+const supported = ["hr", "de", "sl", "en"];
+
+if (!locale || !supported.includes(locale)) {
+  return Astro.redirect("/hr/", 302);
+}
+
+const titles: Record<string, string> = {
+  hr: "Apartmani Ždrelac — Otok Pašman",
+  de: "Ferienwohnungen Ždrelac — Insel Pašman",
+  sl: "Apartmaji Ždrelac — Otok Pašman",
+  en: "Apartments Ždrelac — Pašman Island",
+};
+---
+
+<Base title={titles[locale] ?? titles.hr} lang={locale}>
+  <main style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem; text-align: center;">
+    <h1 style="font-size: 2.5rem; font-weight: 300; color: #0C2D48;">
+      {locale === "hr" && "Apartmani Ždrelac"}
+      {locale === "de" && "Ferienwohnungen Ždrelac"}
+      {locale === "sl" && "Apartmaji Ždrelac"}
+      {locale === "en" && "Apartments Ždrelac"}
+    </h1>
+    <p style="font-size: 1.25rem; color: #1B6B93; margin-top: 1rem;">
+      {locale === "hr" && "Otok Pašman, Hrvatska"}
+      {locale === "de" && "Insel Pašman, Kroatien"}
+      {locale === "sl" && "Otok Pašman, Hrvaška"}
+      {locale === "en" && "Pašman Island, Croatia"}
+    </p>
+    <p style="margin-top: 2rem; color: #4A4A4A;">
+      {locale === "hr" && "Stranica je u izradi. Uskoro dolazi!"}
+      {locale === "de" && "Die Webseite ist im Aufbau. Kommt bald!"}
+      {locale === "sl" && "Spletna stran je v pripravi. Kmalu prihaja!"}
+      {locale === "en" && "Website is under construction. Coming soon!"}
+    </p>
+  </main>
+</Base>

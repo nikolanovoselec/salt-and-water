@@ -1,0 +1,9 @@
+# Copy to .dev.vars and fill in real values
+RESEND_API_KEY=re_xxxxxxxxxxxx
+TURNSTILE_SECRET_KEY=0x000000000000000000000
+TURNSTILE_SITE_KEY=0x000000000000000000000
+ADMIN_EMAILS=owner@example.com
+JWT_SECRET=generate-a-random-32-char-string
+EMDASH_AUTH_SECRET=generate-another-random-string
+R2_ACCESS_KEY_ID=your-r2-access-key
+R2_SECRET_ACCESS_KEY=your-r2-secret-key

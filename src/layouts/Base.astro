@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+}
+
+const { title, description = "Apartments in Ždrelac, Pašman island, Croatia", lang = "hr" } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

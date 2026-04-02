@@ -1,0 +1,12 @@
+---
+// Root redirect: detect locale and redirect to prefixed route
+const acceptLanguage = Astro.request.headers.get("accept-language") ?? "";
+const supported = ["hr", "de", "sl", "en"];
+const detected = acceptLanguage
+  .split(",")
+  .map((part) => part.split(";")[0].trim().split("-")[0].toLowerCase())
+  .find((lang) => supported.includes(lang));
+
+const locale = detected ?? "hr";
+return Astro.redirect(`/${locale}/`, 302);
+---
