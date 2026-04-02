@@ -8,6 +8,38 @@ All public and internal API endpoints for Apartmani Pašman.
 
 ## Public API
 
+### GET /sitemap.xml
+
+Dynamic multilingual sitemap. Generates one `<url>` entry per locale per page, with `xhtml:link` alternate entries for all four active locales and an `x-default` pointing to the Croatian (`hr`) variant.
+
+**Authentication:** None required.
+
+**Response:** `application/xml` — a Sitemap Protocol 0.9 document with `xmlns:xhtml` alternates.
+
+**Included pages:** `/`, `/apartmani`, `/zasto-pasman`, `/dolazak`, `/vodic`, `/o-nama`, `/faq`, `/privatnost`, `/impressum` — each emitted once per locale.
+
+**Cache:** `Cache-Control: public, max-age=3600`.
+
+**Implementation:** `src/pages/sitemap.xml.ts`.
+
+---
+
+### GET /robots.txt
+
+Dynamic robots.txt. Allows all crawlers on public pages and disallows crawling of admin, CMS, media, and API paths. References the sitemap URL dynamically using the request origin.
+
+**Authentication:** None required.
+
+**Response:** `text/plain`.
+
+**Disallowed paths:** `/admin/`, `/_emdash/`, `/media/`, `/api/`.
+
+**Cache:** `Cache-Control: public, max-age=86400`.
+
+**Implementation:** `src/pages/robots.txt.ts`.
+
+---
+
 ### GET /api/apartments/:id/availability
 
 Returns booked dates for a single apartment within a date range. Used by the availability calendar on apartment pages.
@@ -280,6 +312,8 @@ Confirms a booking inquiry and atomically blocks the dates in `availability_bloc
 - [Authentication](authentication.md#magic-link-flow) — Auth flow, token details, rate limiting
 - [Architecture](architecture.md#inquiry-pipeline) — Inquiry submission and confirmation flows
 - [Architecture](architecture.md#request-lifecycle) — Request pipeline and middleware order
+- [Architecture](architecture.md#public-page-routes) — Full list of public page routes
 - [Security](security.md#honeypot) — Honeypot and availability double-check
 - [Security](security.md#rate-limiting) — Rate limiting and bot protection
 - [Configuration](configuration.md#d1-migrations) — D1 schema for all tables used by these endpoints
+- [SEO](seo.md#structured-data) — Schema.org markup strategy for FAQPage and other types

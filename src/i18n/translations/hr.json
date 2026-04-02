@@ -97,12 +97,14 @@
   "guide.activities": "Aktivnosti",
   "guide.dayTrips": "Izleti",
   "guide.distanceFromProperty": "{km} km od smještaja",
+  "guide.comingSoon": "Lokalni savjeti uskoro dolaze.",
 
   "gettingHere.title": "Kako doći",
   "gettingHere.ferry": "Trajekt",
   "gettingHere.drive": "Automobilom",
   "gettingHere.airport": "Aerodrom",
   "gettingHere.transfer": "Možemo organizirati transfer s aerodroma",
+  "gettingHere.viewOnMap": "Pogledaj na karti",
 
   "faq.title": "Često postavljena pitanja",
 

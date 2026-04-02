@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="hero-simple">
+  <div class="container text-center">
+    <h1 class="hero-title">{title}</h1>
+  </div>
+</section>
+
+<style>
+  .hero-simple {
+    padding: calc(var(--nav-height) + var(--space-3xl)) 0 var(--space-3xl);
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  .hero-simple h1 {
+    color: var(--color-white);
+  }
+</style>

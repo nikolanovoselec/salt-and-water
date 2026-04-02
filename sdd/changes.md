@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-04-02 — Revision 10: Phase 6 Editorial, Legal, SEO Pages (3f30f66)
+
+Spec synced with Phase 6 commit (editorial pages, legal pages, sitemap, robots.txt, local guide stub).
+
+### Implementation progress noted (all statuses remain Planned)
+
+All editorial pages use hardcoded static content with TODO comments for Emdash CMS integration. CMS-managed content and section toggles are core AC items for each requirement, so none qualify for Implemented status yet. Progress is documented per requirement below.
+
+- **REQ-ED-1:** "Why Pasman" page at `/{locale}/zasto-pasman`. Implements: 4 sections (crystal-clear sea, island tranquility, 25 min from mainland, authentic Dalmatia) with poetic headlines and 2-3 sentence descriptions in all 4 locales, scroll reveal animations. Missing from AC: full-bleed photos, scroll-driven storytelling with pinned sections, olive groves + cycling/walking sections, links to guide entries, CMS integration, section toggle.
+- **REQ-ED-2:** "Getting Here" page at `/{locale}/dolazak`. Implements: ferry info (Biograd-Tkon, 25 min, Jadrolinija link, peak season advice), alternative route via Zdrelac bridge from Ugljan, Zadar Airport (ZAD) section, Google Maps + Apple Maps deep links, airport transfer offer text. Missing from AC: visual journey timeline, "without car" section, Split Airport section, parking info, ferry cost/frequency, WhatsApp link on transfer offer, German cost breakdowns, CMS integration, section toggle.
+- **REQ-ED-4:** Local guide stub at `/{locale}/vodic`. Shows 5 category cards (Beaches, Food & Drink, Restaurants, Activities, Day Trips) with "coming soon" message. Minimal implementation — no entries, no filtering, no descriptions. Status remains Planned.
+- **REQ-ED-5:** "About Hosts" page at `/{locale}/o-nama`. Implements: standalone page with warm personal story in all 4 locales ("Our family has been on this island for generations"), response time badge. Missing from AC: host photos with Dalmatian arch clip-path mask, WhatsApp link, homepage condensed version, CMS integration, section toggle.
+- **REQ-ED-7:** FAQ page at `/{locale}/faq`. Implements: accordion UI with `<details>/<summary>`, Schema.org FAQPage JSON-LD markup via SchemaOrg component, 5 preloaded FAQ items across 3 categories (getting-there, apartment, booking) in all 4 locales. Missing from AC: Emdash CMS collection, category filtering UI, contextual display on other pages (apartment/transport), owner phone management, section toggle.
+- **REQ-TC-2:** Privacy Policy page at `/{locale}/privatnost`. Implements: standalone page in all 4 locales with template content covering all required GDPR items (data controller, legal basis Art. 6(1)(b), data collected, D1 storage in EU, Resend + Cloudflare processors, 2-year retention, data subject rights, Cloudflare Web Analytics note, WhatsApp third-country transfer note, no third-party data sales). Missing from AC: CMS integration (hardcoded with TODO), verification that German version is available when DE locale is disabled (CON-LEGAL exception).
+- **REQ-TC-3:** Impressum page at `/{locale}/impressum`. Implements: standalone page in all 4 locales with template content (address, email, phone placeholders). Code comment acknowledges CON-LEGAL German availability requirement. Missing from AC: CMS integration, actual owner data (placeholder template), verification of 1-click footer access and DE-disabled availability.
+- **REQ-SEO-4:** Multilingual sitemap at `/sitemap.xml`. Implements: XML sitemap with all page paths, `xhtml:link` alternates for all locales per URL, `x-default` pointing to Croatian, proper XML content type. Missing from AC: filtering by active locales only (TODO in code), dynamic apartment page inclusion from D1/Emdash, auto-regeneration on content changes, noindex enforcement on disabled locale pages.
+- **REQ-SEO-7:** robots.txt at `/robots.txt`. Implements: dynamic robots.txt blocking `/admin/`, `/_emdash/`, `/media/`, `/api/` from indexing, Sitemap directive pointing to `/sitemap.xml`. Combined with existing trailing slash redirects and canonical URLs from Phase 3, this closes the robots.txt and media URL noindex AC items. Remaining gaps: www redirect (DNS-level), noindex on disabled locale pages and draft preview URLs, slug change redirects (REQ-CMS-7).
+
+### AC deviations noted
+- **REQ-ED-1:** Implementation has 4 sections; spec AC lists 6 topics (crystal-clear sea, quiet island rhythm, easy ferry access, authentic Dalmatia, olive groves, cycling/walking). Missing: olive groves and cycling/walking as standalone sections.
+- **REQ-ED-2:** Transfer offer text uses `t(typedLocale, "gettingHere.transfer")` but no WhatsApp link — spec requires WhatsApp link for transfer arrangement.
+
 ## 2026-04-02 — Revision 9: Confirm Atomicity Fix (eba28ad)
 
 ### AC updated

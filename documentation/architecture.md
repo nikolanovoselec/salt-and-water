@@ -65,6 +65,23 @@ Browser → Cloudflare edge
 
 All public pages are prefixed with the locale: `/hr/`, `/de/`, `/sl/`, `/en/`. Croatian (`hr`) is the default. The root path `/` redirects to the detected locale via `Accept-Language` header. The locale middleware sets `locals.locale` for downstream use. API, media, and admin routes bypass locale middleware entirely.
 
+### Public Page Routes
+
+| Route | File | Description |
+|---|---|---|
+| `/:locale/` | `src/pages/[locale]/index.astro` | Homepage |
+| `/:locale/apartmani` | `src/pages/[locale]/apartmani.astro` | Apartment listing |
+| `/:locale/apartmani/:slug` | `src/pages/[locale]/apartmani/[slug].astro` | Apartment detail |
+| `/:locale/zasto-pasman` | `src/pages/[locale]/zasto-pasman.astro` | Why Pašman — 4 selling-point sections |
+| `/:locale/dolazak` | `src/pages/[locale]/dolazak.astro` | Getting Here — ferry, airport, map links |
+| `/:locale/faq` | `src/pages/[locale]/faq.astro` | FAQ — accordion with Schema.org FAQPage markup |
+| `/:locale/o-nama` | `src/pages/[locale]/o-nama.astro` | About Us — host story |
+| `/:locale/vodic` | `src/pages/[locale]/vodic.astro` | Local Guide — category grid (beaches, food, activities) |
+| `/:locale/privatnost` | `src/pages/[locale]/privatnost.astro` | Privacy Policy (GDPR) |
+| `/:locale/impressum` | `src/pages/[locale]/impressum.astro` | Legal notice |
+
+`/:locale` is one of `hr`, `de`, `sl`, `en`.
+
 ## Media Pipeline
 
 Uploaded images are stored in R2 as opaque UUID-named objects. Public access goes through `/media/:key`, which fetches from R2 and adds long-lived cache headers (`Cache-Control: public, max-age=31536000, immutable`). Transform parameters (`w`, `f`, `q`, `fit`) are passed as query strings and forwarded to Cloudflare Image Resizing at the edge. The `buildMediaUrl()` helper in `src/lib/media.ts` constructs these URLs.
@@ -131,9 +148,10 @@ Overlap detection is embedded in the INSERT statement itself (`INSERT...WHERE NO
 ## Related Documentation
 
 - [API Reference](api-reference.md#post-apiinquiry) — Inquiry and confirm endpoint signatures
-- [API Reference](api-reference.md) — All endpoint signatures and response formats
+- [API Reference](api-reference.md#get-sitemapxml) — Sitemap and robots.txt endpoints
 - [Configuration](configuration.md#environment-variables) — All env vars and bindings
 - [Authentication](authentication.md#magic-link-flow) — Auth flow detail
 - [Security](security.md#availability-double-check) — Overlap guard on inquiry submit and confirm
 - [Security](security.md#content-security-policy) — CSP and header policy
+- [SEO](seo.md) — Keyword targets, structured data, sitemap strategy
 - [Decisions](decisions/README.md) — Trade-off rationale for key choices

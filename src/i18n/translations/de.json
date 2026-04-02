@@ -97,12 +97,14 @@
   "guide.activities": "Aktivitäten",
   "guide.dayTrips": "Tagesausflüge",
   "guide.distanceFromProperty": "{km} km von der Unterkunft",
+  "guide.comingSoon": "Lokale Tipps werden bald hinzugefügt.",
 
   "gettingHere.title": "Anreise",
   "gettingHere.ferry": "Fähre",
   "gettingHere.drive": "Mit dem Auto",
   "gettingHere.airport": "Flughafen",
   "gettingHere.transfer": "Wir können einen Flughafentransfer organisieren",
+  "gettingHere.viewOnMap": "Auf der Karte ansehen",
 
   "faq.title": "Häufig gestellte Fragen",
 

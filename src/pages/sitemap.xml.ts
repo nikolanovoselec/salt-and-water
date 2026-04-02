@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { locales } from "~/i18n/config";
+import { locales, defaultLocale } from "~/i18n/config";
 
 const pages = [
   "",              // homepage
@@ -38,7 +38,7 @@ export const GET: APIRoute = async ({ url }) => {
       urls.push(`  <url>
     <loc>${loc}</loc>
 ${alternates}
-    <xhtml:link rel="alternate" hreflang="x-default" href="${origin}/hr${page}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${origin}/${defaultLocale}${page}" />
   </url>`);
     }
   }

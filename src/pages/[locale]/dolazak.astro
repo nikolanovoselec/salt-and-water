@@ -78,7 +78,7 @@ const air = airport[typedLocale] ?? airport.hr;
   {/* Map links */}
   <section class="section bg-alt" data-reveal>
     <div class="container text-center">
-      <h3>{typedLocale === "de" ? "Auf der Karte ansehen" : typedLocale === "sl" ? "Pogled na zemljevidu" : typedLocale === "en" ? "View on map" : "Pogledaj na karti"}</h3>
+      <h3>{t(typedLocale, "gettingHere.viewOnMap")}</h3>
       <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; margin-top: var(--space-lg);">
         <a href="https://maps.google.com/?q=Ždrelac,+Pašman,+Croatia" target="_blank" rel="noopener noreferrer" class="btn">
           Google Maps
