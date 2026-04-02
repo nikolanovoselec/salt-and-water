@@ -59,7 +59,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Logo, language switcher, and nav links always visible
   - "Inquire" CTA button always visible in nav
   - Hamburger menu on mobile with fullscreen overlay
-  - Hamburger button: explicit `z-index: 101` and `position: relative` to stay above overlay, three `<span>` elements with CSS transform morph to X on `.is-open` (translateY + rotate)
+  - Hamburger button: inline styles for bulletproof rendering (display, flex-direction, gap, background, border, cursor, padding, z-index 101, position relative), three `<span>` elements with inline base styles (block, 24x2px, currentColor background, 1px border-radius, transform/opacity transitions). Selected via `#hamburger-btn` ID. CSS transform morph to X on `.is-open` (translateY + rotate).
   - Menu items stagger in with animation
   - Focus trapping when fullscreen menu is open
   - Transition driven by IntersectionObserver (0.4s ease)
@@ -93,15 +93,14 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Intent:** Emotionally sell the destination, not just the apartment
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - **Photo strip** between hero and Why Pasman: 3-image grid (equal columns, 16:9 aspect, 4px gap), hover zoom effect, stacks to single column on mobile (21:9 aspect)
-  - 3-4 selling points: crystal sea, quiet island, 25-min ferry, authentic Dalmatia
-  - Brief Ždrelac village introduction below (REQ-ED-6) — where exactly on the island the apartments are
-  - Each point has a brief poetic line + supporting photo
-  - Scroll-triggered fade-up reveal per point
+  - **Photo strip** between hero and Why Pasman: 3-image edge-to-edge grid (equal columns, 3:2 aspect, no gaps, no border-radius), no hover zoom, stacks to single column on mobile (21:9 aspect). Uniform treatment — images bleed to viewport edges.
+  - Split-section layout: heading + label on left, body text + tag row on right (desktop). Selling points displayed as uppercase bordered tag pills (not icon+text grid).
+  - Brief Ždrelac village introduction as full-bleed image with bottom text overlay (aspect-ratio 21:9 desktop, 16:9 mobile, gradient overlay from transparent to navy at bottom)
+  - Scroll-triggered fade-up reveal per section
   - Links to full editorial content
   - Responsive: stacks vertically on mobile
-  - **Apartments preview** section with side-by-side layout (text left, asymmetric image grid right on desktop), localized descriptive copy, ghost CTA to apartments page
-  - **Food & experience teaser** (REQ-ED-4): 3-column image grid with overlay labels (food, olive oil, beaches), 4:5 portrait aspect, hover zoom, gradient label overlay at bottom
+  - **Apartments preview** section with split-section layout (text + duo-image grid), duo-image is uniform 1:1 column grid with 4px gap, 3:4 portrait aspect, no border-radius. Ghost CTA to apartments page.
+  - **Experience triptych** (REQ-ED-4): 3-column edge-to-edge image grid with overlay labels (food, olive oil, beaches), 4:5 portrait aspect, hover zoom (1.03x), gradient label overlay at bottom, no border-radius. Stacks to single column (16:9 aspect) on mobile.
   - Toggleable via CMS section settings (REQ-CMS-5)
   - CMS-managed content per locale
 - **Constraints:** CON-PERF, CON-I18N

@@ -208,6 +208,21 @@ The entire visual language lives in `src/styles/global.css` as CSS custom proper
 | `.container--narrow` | Constrained to `--max-width-narrow` (720px) |
 | `.texture-stone` | SVG fractal-noise grain overlay via `::before` pseudo-element (opacity 0.02) |
 | `.section-divider` | 120px × 1px sand-colored horizontal rule |
+| `.image-hover-zoom` | Wrapper that scales the child `<img>` to 1.05× on hover with a slow ease — used on apartment cards and gallery items |
+
+### Homepage Photo Patterns
+
+These layout components are defined as scoped styles in `src/pages/[locale]/index.astro`. They enforce a unified photo aesthetic: no rounded corners, no padding on photo sections (edge-to-edge), and uniform aspect ratios per pattern.
+
+| Class | Pattern | Key rules |
+|---|---|---|
+| `.photo-strip` | Horizontal strip of three images at uniform 3:2 aspect ratio, edge-to-edge | `display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px` |
+| `.full-bleed-image` | Single image at 21:9 aspect with a gradient overlay and centered text | `aspect-ratio: 21/9`; child `.full-bleed-image__text` is absolute-positioned |
+| `.duo-image` | Two images side by side at uniform 3:4 aspect, 4px gap | `display: grid; grid-template-columns: 1fr 1fr; gap: 4px` |
+| `.triptych` | Three-column edge-to-edge grid at uniform 4:5 aspect with label overlays | `display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px`; `.triptych__label` is absolute-positioned |
+| `.split-section` | Two-column layout: text (`__left`) + content (`__right`) | 50/50 columns on desktop, stacked on mobile; `.split-section--reverse` swaps column order |
+| `.tag-row` | Horizontal wrapping row of inline tag chips | `display: flex; flex-wrap: wrap; gap: var(--space-sm)` |
+| `.tag` | Individual chip inside a `.tag-row` | `border: 1px solid var(--color-border)`, small padding, `--font-size-xs` |
 
 ### Progressive Enhancement
 

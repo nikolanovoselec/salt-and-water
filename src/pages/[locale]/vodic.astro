@@ -8,74 +8,106 @@ const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
 const typedLocale = locale as Locale;
 
-// TODO: Load guide entries from Emdash CMS
-// For now, preloaded static content
 const categories = [
-  { key: "guide.beaches", icon: "🏖️" },
-  { key: "guide.foodDrink", icon: "🍽️" },
-  { key: "guide.restaurants", icon: "🏠" },
-  { key: "guide.activities", icon: "🚴" },
-  { key: "guide.dayTrips", icon: "⛵" },
+  {
+    key: "guide.beaches",
+    image: "https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=600",
+    hr: "Skrivene uvale, kristalno čisto more i kamene plaže na svakom koraku.",
+    de: "Versteckte Buchten, kristallklares Meer und Steinstrände bei jedem Schritt.",
+    sl: "Skrite zalivčke, kristalno čisto morje in kamnite plaže na vsakem koraku.",
+    en: "Hidden coves, crystal-clear sea, and pebble beaches at every turn.",
+  },
+  {
+    key: "guide.foodDrink",
+    image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=600",
+    hr: "Svježa riba s roštilja, hobotnica ispod peke, domaće maslinovo ulje i otočno vino.",
+    de: "Frischer Fisch vom Grill, Oktopus unter der Peka, hausgemachtes Olivenöl und Inselwein.",
+    sl: "Sveža riba z žara, hobotnica izpod peke, domače oljčno olje in otoško vino.",
+    en: "Fresh grilled fish, octopus peka, homemade olive oil, and island wine.",
+  },
+  {
+    key: "guide.activities",
+    image: "https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=600",
+    hr: "Biciklizam, kayaking, ronjenje, šetnje maslinicima i istraživanje otoka.",
+    de: "Radfahren, Kajakfahren, Schnorcheln, Spaziergänge durch Olivenhaine und Inselerkundung.",
+    sl: "Kolesarjenje, kajakaštvo, potapljanje, sprehodi med oljkami in raziskovanje otoka.",
+    en: "Cycling, kayaking, snorkeling, olive grove walks, and island exploration.",
+  },
+  {
+    key: "guide.dayTrips",
+    image: "https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=600",
+    hr: "Kornati, Zadar, nacionalni park Krka — sve nadohvat ruke.",
+    de: "Kornati, Zadar, Nationalpark Krka — alles in Reichweite.",
+    sl: "Kornati, Zadar, narodni park Krka — vse na dosegu roke.",
+    en: "Kornati islands, Zadar, Krka National Park — all within reach.",
+  },
 ];
 ---
 
 <Page title={t(typedLocale, "guide.title")} locale={typedLocale}>
   <HeroSimple title={t(typedLocale, "guide.title")} />
-    </div>
 
   <section class="section">
     <div class="container">
-      <div class="category-grid" data-reveal-stagger>
-        {categories.map((cat) => (
-          <div class="category-card">
-            <span class="category-card__icon">{cat.icon}</span>
-            <h3>{t(typedLocale, cat.key)}</h3>
+      <div class="guide-grid" data-reveal>
+        {categories.map((cat, i) => (
+          <div class:list={["guide-item", { "guide-item--reverse": i % 2 === 1 }]}>
+            <div class="guide-item__image">
+              <img src={cat.image} alt="" width="600" height="400" loading="lazy" />
+            </div>
+            <div class="guide-item__content">
+              <p class="text-label">{t(typedLocale, cat.key)}</p>
+              <p class="guide-item__text">{cat[typedLocale]}</p>
+            </div>
           </div>
         ))}
       </div>
-
-      <p class="coming-soon text-center" style="margin-top: var(--space-3xl);">
-        {t(typedLocale, "guide.comingSoon")}
-      </p>
     </div>
   </section>
 </Page>
 
 <style>
+  .guide-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
 
-  .category-grid {
+  .guide-item {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-lg);
-    max-width: 800px;
-    margin-inline: auto;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
   }
 
-  .category-card {
-    text-align: center;
-    padding: var(--space-xl);
-    background: var(--color-white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    transition: box-shadow var(--duration-normal) var(--ease-out);
+  @media (min-width: 768px) {
+    .guide-item {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+    .guide-item--reverse .guide-item__image {
+      order: 2;
+    }
+    .guide-item--reverse .guide-item__content {
+      order: 1;
+    }
   }
 
-  .category-card:hover {
-    box-shadow: var(--shadow-md);
+  .guide-item__image {
+    overflow: hidden;
   }
 
-  .category-card__icon {
-    font-size: 2rem;
+  .guide-item__image img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
     display: block;
-    margin-bottom: var(--space-md);
   }
 
-  .category-card h3 {
+  .guide-item__text {
     font-size: var(--font-size-lg);
-  }
-
-  .coming-soon {
-    color: var(--color-text-light);
-    font-style: italic;
+    line-height: 1.7;
+    margin-top: var(--space-md);
+    color: var(--color-text);
   }
 </style>

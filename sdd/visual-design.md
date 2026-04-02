@@ -117,13 +117,14 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Intent:** Make photos look polished and art-directed
 - **Applies To:** System
 - **Acceptance Criteria:**
+  - **Homepage photos (uniform system):** All homepage photo treatments use edge-to-edge layout with no border-radius, no padding, no shadow. Photos bleed to viewport edges. Specific treatments: photo strip (3:2, 3-col), full-bleed image (21:9 desktop / 16:9 mobile), duo-image (3:4, 2-col with 4px gap), triptych (4:5, 3-col with labels). No decorative framing on homepage.
   - **Apartment galleries:** Standard aspect ratios (4:3 landscape, 3:4 portrait) with subtle `border-radius: 4-8px`. No extreme clip-path masks — let the photography speak.
   - **Editorial/curated photos** (local guide, food, Why Pašman): Dalmatian stone arch `clip-path` for select featured images only (pre-curated in CMS, not auto-applied to all uploads)
   - **Testimonial avatars:** Circular mask, small size
   - **Host story photo:** Soft rounded rectangle or arch — owner chooses in CMS from 2-3 preset frame styles
   - All masks via CSS `clip-path` — no image processing
-  - Consistent padding and subtle shadow treatment
-  - Mobile: masks scale proportionally
+  - Consistent padding and subtle shadow treatment on non-homepage contexts
+  - Mobile: masks scale proportionally, homepage photos switch to single-column stacking with adjusted aspect ratios
   - **Guard rail:** Arch masks never auto-applied to user-uploaded apartment photos. Only used on editorial images where composition is controlled.
 - **Constraints:** CON-PERF
 - **Priority:** P1
