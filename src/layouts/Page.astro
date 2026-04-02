@@ -1,0 +1,50 @@
+---
+import type { Locale } from "~/i18n/config";
+import Base from "./Base.astro";
+import Navigation from "~/components/shell/Navigation.astro";
+import LanguageSwitcher from "~/components/shell/LanguageSwitcher.astro";
+import Footer from "~/components/shell/Footer.astro";
+import WhatsAppButton from "~/components/shell/WhatsAppButton.astro";
+import StickyMobileCTA from "~/components/shell/StickyMobileCTA.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  locale: Locale;
+  ogImage?: string;
+  noIndex?: boolean;
+  lowestPrice?: number;
+  whatsappNumber?: string;
+  apartmentName?: string;
+  hasHero?: boolean;
+}
+
+const {
+  title,
+  description,
+  locale,
+  ogImage,
+  noIndex,
+  lowestPrice,
+  whatsappNumber,
+  apartmentName,
+  hasHero = false,
+} = Astro.props;
+---
+
+<Base title={title} description={description} lang={locale} ogImage={ogImage} noIndex={noIndex}>
+  <Navigation locale={locale}>
+    <LanguageSwitcher slot="language-switcher" currentLocale={locale} currentPath={Astro.url.pathname} />
+  </Navigation>
+
+  {hasHero && <div class="hero-sentinel" style="height: 1px; position: absolute; top: 0;"></div>}
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <Footer locale={locale} />
+
+  <WhatsAppButton locale={locale} whatsappNumber={whatsappNumber} apartmentName={apartmentName} />
+  <StickyMobileCTA locale={locale} lowestPrice={lowestPrice} />
+</Base>

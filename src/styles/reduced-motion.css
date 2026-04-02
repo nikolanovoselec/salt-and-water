@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Reduced Motion — respects prefers-reduced-motion
+   All animations disabled, content immediately visible
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal],
+  [data-reveal-stagger] > *,
+  [data-reveal-clip] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  .hero-title,
+  .hero-subtitle {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .scroll-indicator {
+    animation: none !important;
+    opacity: 0.6 !important;
+  }
+
+  .section-divider {
+    width: 120px !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,125 @@
+---
+import { locales, localeNames, type Locale } from "~/i18n/config";
+
+interface Props {
+  currentLocale: Locale;
+  currentPath: string;
+}
+
+const { currentLocale, currentPath } = Astro.props;
+
+// Build equivalent URLs for other locales
+function getLocalizedPath(targetLocale: Locale): string {
+  // Replace the locale prefix in the current path
+  const pathWithoutLocale = currentPath.replace(/^\/[a-z]{2}(\/|$)/, "/");
+  return `/${targetLocale}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`;
+}
+---
+
+<div class="lang-switcher" aria-label="Select language">
+  <button class="lang-switcher__current" aria-expanded="false" aria-haspopup="listbox">
+    {currentLocale.toUpperCase()}
+    <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+      <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <ul class="lang-switcher__dropdown" role="listbox" aria-label="Languages">
+    {locales.map((locale) => (
+      <li role="option" aria-selected={locale === currentLocale}>
+        <a
+          href={getLocalizedPath(locale)}
+          class:list={["lang-switcher__option", { "is-current": locale === currentLocale }]}
+          lang={locale}
+        >
+          {localeNames[locale]}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .lang-switcher {
+    position: relative;
+  }
+
+  .lang-switcher__current {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: inherit;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .lang-switcher__dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    list-style: none;
+    min-width: 140px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition: opacity var(--duration-fast), transform var(--duration-fast);
+    z-index: 10;
+  }
+
+  .lang-switcher__current[aria-expanded="true"] + .lang-switcher__dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .lang-switcher__option {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-warm-gray);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    transition: background var(--duration-fast);
+  }
+
+  .lang-switcher__option:hover {
+    background: var(--color-stone);
+    text-decoration: none;
+  }
+
+  .lang-switcher__option.is-current {
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+</style>
+
+<script>
+  const switchers = document.querySelectorAll(".lang-switcher");
+  for (const switcher of switchers) {
+    const btn = switcher.querySelector(".lang-switcher__current");
+    if (!btn) continue;
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!switcher.contains(e.target as Node)) {
+        btn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        btn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+</script>

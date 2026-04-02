@@ -1,0 +1,109 @@
+---
+import type { Locale } from "~/i18n/config";
+import { t } from "~/i18n/t";
+import { localeNames } from "~/i18n/config";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <h3 class="footer__logo">Apartmani Ždrelac</h3>
+        <p class="footer__tagline">{t(locale, "hero.tagline")}</p>
+        <p class="footer__direct">{t(locale, "footer.bookDirect")}</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <a href={`/${locale}/apartmani`}>{t(locale, "nav.apartments")}</a>
+        <a href={`/${locale}/dolazak`}>{t(locale, "nav.gettingHere")}</a>
+        <a href={`/${locale}/vodic`}>{t(locale, "nav.localGuide")}</a>
+        <a href={`/${locale}/o-nama`}>{t(locale, "nav.about")}</a>
+        <a href={`/${locale}/faq`}>{t(locale, "nav.faq")}</a>
+      </nav>
+
+      <div class="footer__legal">
+        <a href={`/${locale}/privatnost`}>{t(locale, "footer.privacy")}</a>
+        <a href={`/${locale}/impressum`}>{t(locale, "footer.impressum")}</a>
+        <a href={`/${locale}/faq#house-rules`}>{t(locale, "footer.houseRules")}</a>
+        <a href={`/${locale}/pristupacnost`}>{t(locale, "footer.accessibility")}</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; {new Date().getFullYear()} Apartmani Ždrelac</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-navy);
+    color: rgba(255, 255, 255, 0.7);
+    padding: var(--space-3xl) 0 var(--space-xl);
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: var(--space-2xl);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .footer__grid {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+  }
+
+  .footer__logo {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: var(--font-size-2xl);
+    color: var(--color-white);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer__tagline {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__direct {
+    font-size: var(--font-size-sm);
+    color: var(--color-terracotta);
+    font-weight: 500;
+  }
+
+  .footer__nav,
+  .footer__legal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer__nav a,
+  .footer__legal a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    transition: color var(--duration-fast);
+  }
+
+  .footer__nav a:hover,
+  .footer__legal a:hover {
+    color: var(--color-white);
+  }
+
+  .footer__bottom {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: var(--font-size-xs);
+    text-align: center;
+  }
+</style>

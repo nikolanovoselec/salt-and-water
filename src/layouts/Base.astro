@@ -1,11 +1,29 @@
 ---
+import type { Locale } from "~/i18n/config";
+import { t } from "~/i18n/t";
+import "~/styles/global.css";
+import "~/styles/animations.css";
+import "~/styles/reduced-motion.css";
+
 interface Props {
   title: string;
   description?: string;
-  lang?: string;
+  lang?: Locale;
+  ogImage?: string;
+  noIndex?: boolean;
 }
 
-const { title, description = "Apartments in Ždrelac, Pašman island, Croatia", lang = "hr" } = Astro.props;
+const {
+  title,
+  description,
+  lang = "hr",
+  ogImage,
+  noIndex = false,
+} = Astro.props;
+
+const fullTitle = title.includes("—") ? title : `${title} — ${t(lang, "meta.titleSuffix")}`;
+const metaDescription = description ?? t(lang, "meta.description");
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 ---
 
 <!doctype html>
@@ -13,11 +31,58 @@ const { title, description = "Apartments in Ždrelac, Pašman island, Croatia", 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <link rel="preload" href="/fonts/cormorant-garamond-light.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+
+    <style is:inline>
+      @font-face {
+        font-family: "Cormorant Garamond";
+        src: url("/fonts/cormorant-garamond-light.woff2") format("woff2");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("/fonts/inter-variable.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
+    <a href="#main-content" class="skip-to-content">
+      {lang === "de" ? "Zum Inhalt springen" : lang === "sl" ? "Preskoči na vsebino" : lang === "en" ? "Skip to content" : "Preskoči na sadržaj"}
+    </a>
     <slot />
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      );
+      document.querySelectorAll("[data-reveal], [data-reveal-stagger], [data-reveal-clip], .section-divider").forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

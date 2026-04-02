@@ -1,0 +1,72 @@
+---
+import type { Locale } from "~/i18n/config";
+import { t } from "~/i18n/t";
+
+interface Props {
+  locale: Locale;
+  heroImageUrl?: string;
+}
+
+const { locale, heroImageUrl } = Astro.props;
+
+// Fallback gradient if no image
+const bgStyle = heroImageUrl
+  ? `background-image: linear-gradient(180deg, rgba(12,45,72,0.35) 0%, rgba(12,45,72,0.5) 100%), url('${heroImageUrl}'); background-size: cover; background-position: center;`
+  : `background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-azure) 100%);`;
+---
+
+<section class="hero" style={bgStyle}>
+  <div class="hero__content">
+    <h1 class="hero-title">Apartmani Ždrelac</h1>
+    <p class="hero-subtitle">{t(locale, "hero.tagline")}</p>
+  </div>
+
+  <div class="hero__scroll scroll-indicator" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M19 12l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-white);
+    overflow: hidden;
+  }
+
+  .hero__content {
+    max-width: 800px;
+    padding: 0 var(--space-lg);
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-display);
+    font-weight: 300;
+    color: var(--color-white);
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-xl);
+    font-weight: 300;
+    opacity: 0.9;
+    max-width: 500px;
+    margin-inline: auto;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: var(--space-2xl);
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>

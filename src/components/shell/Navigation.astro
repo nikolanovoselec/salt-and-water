@@ -1,0 +1,289 @@
+---
+import type { Locale } from "~/i18n/config";
+import { t } from "~/i18n/t";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const navItems = [
+  { key: "nav.apartments", href: `/${locale}/apartmani` },
+  { key: "nav.whyPasman", href: `/${locale}/zasto-pasman` },
+  { key: "nav.gettingHere", href: `/${locale}/dolazak` },
+  { key: "nav.localGuide", href: `/${locale}/vodic` },
+  { key: "nav.about", href: `/${locale}/o-nama` },
+  { key: "nav.faq", href: `/${locale}/faq` },
+];
+---
+
+<header class="nav" id="site-nav">
+  <div class="nav__inner container">
+    <a href={`/${locale}`} class="nav__logo" aria-label={t(locale, "nav.home")}>
+      <span class="nav__logo-text">Apartmani Ždrelac</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Main navigation">
+      {navItems.map((item) => (
+        <a href={item.href} class="nav__link">
+          {t(locale, item.key)}
+        </a>
+      ))}
+    </nav>
+
+    <div class="nav__actions">
+      <slot name="language-switcher" />
+      <a href={`/${locale}/apartmani#inquiry`} class="btn btn--primary nav__cta">
+        {t(locale, "nav.inquire")}
+      </a>
+    </div>
+
+    <button
+      class="nav__hamburger hamburger"
+      aria-label="Menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+{/* Mobile menu overlay */}
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+    {navItems.map((item) => (
+      <a href={item.href} class="mobile-menu__link">
+        {t(locale, item.key)}
+      </a>
+    ))}
+    <a href={`/${locale}/apartmani#inquiry`} class="btn btn--primary mobile-menu__cta">
+      {t(locale, "nav.inquire")}
+    </a>
+  </nav>
+</div>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: transparent;
+    transition: background var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+  }
+
+  .nav.is-scrolled {
+    background: rgba(250, 247, 242, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-height);
+  }
+
+  .nav__logo {
+    text-decoration: none;
+    color: var(--color-white);
+    transition: color var(--duration-normal) var(--ease-out);
+  }
+
+  .nav.is-scrolled .nav__logo {
+    color: var(--color-navy);
+  }
+
+  .nav__logo-text {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-xl);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .nav__links {
+    display: none;
+    gap: var(--space-lg);
+  }
+
+  .nav__link {
+    color: var(--color-white);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color var(--duration-normal) var(--ease-out);
+  }
+
+  .nav.is-scrolled .nav__link {
+    color: var(--color-warm-gray);
+  }
+
+  .nav__link:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .nav__actions {
+    display: none;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .nav__cta {
+    color: var(--color-white);
+    border-color: var(--color-white);
+    padding: 0.5rem 1.25rem;
+    font-size: var(--font-size-xs);
+  }
+
+  .nav.is-scrolled .nav__cta {
+    color: var(--color-navy);
+    border-color: var(--color-navy);
+  }
+
+  .nav__hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+    color: var(--color-white);
+    transition: color var(--duration-normal) var(--ease-out);
+  }
+
+  .nav.is-scrolled .nav__hamburger {
+    color: var(--color-navy);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--color-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-normal) var(--ease-out);
+  }
+
+  .mobile-menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .mobile-menu__link {
+    color: var(--color-white);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-3xl);
+    font-weight: 300;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  }
+
+  .mobile-menu.is-open .mobile-menu__link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mobile-menu.is-open .mobile-menu__link:nth-child(1) { transition-delay: 0.1s; }
+  .mobile-menu.is-open .mobile-menu__link:nth-child(2) { transition-delay: 0.15s; }
+  .mobile-menu.is-open .mobile-menu__link:nth-child(3) { transition-delay: 0.2s; }
+  .mobile-menu.is-open .mobile-menu__link:nth-child(4) { transition-delay: 0.25s; }
+  .mobile-menu.is-open .mobile-menu__link:nth-child(5) { transition-delay: 0.3s; }
+  .mobile-menu.is-open .mobile-menu__link:nth-child(6) { transition-delay: 0.35s; }
+
+  .mobile-menu__cta {
+    margin-top: var(--space-lg);
+    color: var(--color-white);
+    border-color: var(--color-white);
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out) 0.4s;
+  }
+
+  .mobile-menu.is-open .mobile-menu__cta {
+    opacity: 1;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .nav__links {
+      display: flex;
+    }
+
+    .nav__actions {
+      display: flex;
+    }
+
+    .nav__hamburger {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Transparent-to-solid on scroll
+  const nav = document.getElementById("site-nav");
+  const heroSentinel = document.querySelector(".hero-sentinel");
+
+  if (nav && heroSentinel) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        nav.classList.toggle("is-scrolled", !entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(heroSentinel);
+  } else if (nav) {
+    // No hero on this page — always solid
+    nav.classList.add("is-scrolled");
+  }
+
+  // Mobile menu toggle
+  const hamburger = document.querySelector(".nav__hamburger");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("is-open");
+      hamburger.classList.toggle("is-open", isOpen);
+      hamburger.setAttribute("aria-expanded", String(isOpen));
+      mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) {
+        mobileMenu.classList.remove("is-open");
+        hamburger.classList.remove("is-open");
+        hamburger.setAttribute("aria-expanded", "false");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        (hamburger as HTMLElement).focus();
+      }
+    });
+  }
+</script>

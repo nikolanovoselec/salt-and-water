@@ -1,15 +1,22 @@
 ---
-import Base from "~/layouts/Base.astro";
+import Page from "~/layouts/Page.astro";
+
+const locale = "hr" as const;
 ---
 
-<Base title="404 — Page Not Found">
-  <main style="max-width: 600px; margin: 6rem auto; padding: 0 1.5rem; text-align: center;">
-    <h1 style="font-size: 4rem; font-weight: 200; color: #0C2D48;">404</h1>
-    <p style="font-size: 1.25rem; color: #4A4A4A; margin-top: 1rem;">
-      This page could not be found.
-    </p>
-    <a href="/" style="display: inline-block; margin-top: 2rem; color: #1B6B93; text-decoration: underline;">
-      Go to homepage
-    </a>
-  </main>
-</Base>
+<Page title="404" locale={locale}>
+  <section class="section" style="min-height: 60vh; display: flex; align-items: center;">
+    <div class="container text-center">
+      <h1 style="font-size: clamp(4rem, 10vw, 8rem); font-weight: 200; color: var(--color-navy); opacity: 0.3;">404</h1>
+      <p style="font-size: var(--font-size-xl); margin-top: var(--space-lg);">
+        This page could not be found.
+      </p>
+      <div style="margin-top: var(--space-2xl); display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: center;">
+        <a href="/hr/" class="btn">Početna (HR)</a>
+        <a href="/de/" class="btn">Startseite (DE)</a>
+        <a href="/en/" class="btn">Home (EN)</a>
+        <a href="/sl/" class="btn">Domov (SL)</a>
+      </div>
+    </div>
+  </section>
+</Page>
