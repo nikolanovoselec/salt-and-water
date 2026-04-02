@@ -10,10 +10,11 @@
       "database_id": "1b519a56-0c60-475b-a30d-34f845bcff41"
     }
   ],
-  "r2_buckets": [
-    {
-      "binding": "MEDIA",
-      "bucket_name": "apartmani-media"
-    }
-  ]
+  // R2 bucket — uncomment after enabling R2 in Cloudflare dashboard
+  // "r2_buckets": [
+  //   {
+  //     "binding": "MEDIA",
+  //     "bucket_name": "apartmani-media"
+  //   }
+  // ]
 }
