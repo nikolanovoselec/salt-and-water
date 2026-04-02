@@ -94,14 +94,14 @@ Zod validates shape and types. Sanitization addresses content safety concerns or
 
 **Rationale for R2 end state:** Bundling high-resolution stock photos as static assets would bloat the Worker bundle and slow deploys. R2 keeps the bundle small, places images behind the same CDN cache (`immutable, max-age=31536000`) as other media, and allows photo swaps without a redeploy. Descriptive slug keys (vs. UUIDs) keep markup readable and the asset inventory auditable from the R2 dashboard without a lookup table.
 
-### AD13: `[locale]` pages return 404 for `_`-prefixed params to let Emdash admin routes through
-
-**Decision:** Every `[locale]` page handler checks `locale?.startsWith("_")` and returns a 404 response immediately if true, before the locale validity check or any redirect.
-
-Astro's file-based router matches `/_emdash/admin/` against `src/pages/[locale]/index.astro` because `_emdash` is a valid dynamic segment. Without the guard, the locale validation falls through to `Astro.redirect("/hr/", 302)`, sending the browser to the Croatian homepage instead of the CMS admin. Returning 404 lets the request fall through to Emdash's own request handler. The alternative — restructuring the route tree to exclude `/_emdash/` at the file-system level — would require renaming or splitting the `[locale]` directory and is disproportionate for a single-prefix exclusion. A check in each page file is explicit, consistent, and carries its own inline comment explaining the intent.
-
 ### AD11: Scroll animations gated on `.reveal-ready` JS class
 
 **Decision:** Scroll-triggered reveal animations only activate when JavaScript adds a `.reveal-ready` class to `<body>` via IntersectionObserver. CSS selectors scope all animation rules under `.reveal-ready`, so without JS, all content renders at full opacity in its final position.
 
 If JS is blocked or slow, visitors see all content immediately — no hidden headings, no invisible sections. This avoids the most common progressive-enhancement failure mode where CSS animations make content invisible until a script runs. The pattern also ensures crawlers and no-JS users receive fully readable pages with zero layout shift.
+
+### AD13: `[locale]` pages return 404 for `_`-prefixed params to let Emdash admin routes through
+
+**Decision:** Every `[locale]` page handler checks `locale?.startsWith("_")` and returns a 404 response immediately if true, before the locale validity check or any redirect.
+
+Astro's file-based router matches `/_emdash/admin/` against `src/pages/[locale]/index.astro` because `_emdash` is a valid dynamic segment. Without the guard, the locale validation falls through to `Astro.redirect("/hr/", 302)`, sending the browser to the Croatian homepage instead of the CMS admin. Returning 404 lets the request fall through to Emdash's own request handler. The alternative — restructuring the route tree to exclude `/_emdash/` at the file-system level — would require renaming or splitting the `[locale]` directory and is disproportionate for a single-prefix exclusion. A check in each page file is explicit, consistent, and carries its own inline comment explaining the intent.

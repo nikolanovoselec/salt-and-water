@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-04-02 — Revision 18: Fix Emdash Admin 404 (b69301c)
+## 2026-04-02 — Revision 18: Fix Emdash Admin 404 (16a445e)
 
 Trailing-slash redirect middleware was stripping slashes from `/_emdash/` paths, causing the admin panel to return 404. Middleware now excludes `/_emdash/` paths from slash normalization. Additionally, all `[locale]` dynamic routes now early-return 404 for underscore-prefixed params (e.g., `_emdash`) so Astro does not treat CMS paths as locale routes.
 
