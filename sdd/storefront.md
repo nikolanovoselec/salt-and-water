@@ -18,7 +18,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Hero fills 100vh (100svh on mobile) with min-height 600px
   - **Layered gradient background:** radial gradients (azure at top-left, warm terracotta at bottom-right) over linear navy gradient, creating atmospheric depth without photography dependency
   - Stone grain SVG noise overlay at 3% opacity for tactile texture
-  - Two-line title: property name on first line, location on second line in italic at reduced opacity (0.6)
+  - Two-line title: property name on first line, location on second line in italic at reduced opacity (0.65)
   - `.text-label` location tag above title (localized per locale, e.g. "Otok Pasman, Hrvatska" for Croatian) at 0.7 opacity with wide letter-spacing
   - Tagline in uppercase sans-serif at 0.7 opacity below title
   - Ghost CTA button linking to apartments listing
