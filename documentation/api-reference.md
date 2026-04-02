@@ -267,8 +267,8 @@ Confirms a booking inquiry and atomically blocks the dates in `availability_bloc
 
 **Notes:**
 
-- Overlap detection and the availability block insert are combined into a single atomic `INSERT...WHERE NOT EXISTS` statement, executed inside a D1 `batch()` together with the status update. There is no separate pre-check — the INSERT itself is the guard.
-- If `meta.changes === 0` after the INSERT, a conflict existed and `409 date_conflict` is returned with no partial state written.
+- Confirmation is a two-step sequence. Step 1: `INSERT INTO availability_blocks ... WHERE NOT EXISTS (overlap)` runs alone in a D1 `batch()`. If `meta.changes === 0`, a conflict existed — `409 date_conflict` is returned and inquiry status is not touched. Step 2: only if the INSERT succeeded, `UPDATE inquiries SET status='confirmed'` is executed as a separate statement.
+- Keeping the INSERT alone in its batch prevents the status update from running when no block was written, which was the failure mode of the previous single-batch approach.
 - The inserted block carries `source = 'inquiry'` and `inquiry_id` referencing the confirmed inquiry.
 
 **Implementation:** `src/pages/admin/api/inquiries/[id]/confirm.ts`.

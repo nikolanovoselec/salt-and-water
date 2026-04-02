@@ -181,7 +181,7 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
   - Admin shows inquiry list: guest name, apartment, dates, status, timestamp. Sorted newest first.
   - One-tap actions on phone: "Confirm + Block Dates", "Decline", "Mark Spam"
   - **"Confirm + Block Dates" security:** Email contains link to authenticated admin confirmation page (not a direct state-changing GET). Requires valid admin session + CSRF token. Optional signed single-use token in URL preselects the inquiry (expires 48h). If session expired, prompts login, then returns to confirmation page.
-  - "Confirm + Block Dates" runs as a **D1 batch (atomic):** overlap check and availability block insertion happen in a single statement to prevent race conditions (TOCTOU), inquiry status updated to `confirmed` in same batch. If overlap detected: conflict resolution screen showing both bookings.
+  - "Confirm + Block Dates" runs in two sequential steps: (1) atomic INSERT...WHERE NOT EXISTS in a D1 batch — overlap check and availability block insertion in a single statement prevents race conditions (TOCTOU); (2) only if the INSERT affected rows, a separate UPDATE sets inquiry status to `confirmed`. If the INSERT is a no-op (date conflict), return 409 without changing inquiry status — this prevents false confirmations where the status would update despite no block being created. If overlap detected: conflict resolution screen showing both bookings.
   - Conflict warning if confirming dates that overlap an existing booking
   - Unread count badge in admin nav
 - **Constraints:** CON-CMS

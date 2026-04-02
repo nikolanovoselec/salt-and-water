@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-02 — Revision 9: Confirm Atomicity Fix (eba28ad)
+
+### AC updated
+- **REQ-BK-7:** "Confirm + Block Dates" AC revised. Previous wording: "inquiry status updated to `confirmed` in same batch." Implementation now splits into two sequential steps: (1) atomic INSERT...WHERE NOT EXISTS runs alone; (2) UPDATE inquiry status runs only if INSERT affected rows. This prevents false confirmations where the status changed to `confirmed` even when no availability block was created due to a date conflict. The overlap check + insert remains atomic; the change is that the status UPDATE is now conditional on INSERT success rather than unconditional in the same batch.
+
+### Implementation progress noted (REQ-BK-7, status remains Planned)
+- JWT_SECRET now validated for presence before use — returns 500 if missing instead of silently verifying against an empty string. Unused `stripHtml` import removed.
+- Remaining gaps from Revision 7 still apply: no CSRF token validation, no signed single-use URL token, no decline/spam actions, no admin inquiry list UI, no unread count badge.
+
 ## 2026-04-02 — Revision 8: Spec Sync for e5dfff9 Bugfix Commit
 
 ### AC updated

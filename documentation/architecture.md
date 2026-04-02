@@ -116,14 +116,15 @@ Admin triggers confirm
   → Lookup inquiry by ID → 404 if missing
   → Guard: type must be 'booking' → 400 if question
   → Guard: status must not be 'confirmed' → 409 if already done
-  → D1 batch (atomic):
+  → Step 1 — D1 batch (INSERT only):
       INSERT INTO availability_blocks ... WHERE NOT EXISTS (overlap)
-        → 0 rows inserted = 409 date_conflict, no partial write
+        → 0 rows inserted = 409 date_conflict, status NOT updated
+  → Step 2 — only if INSERT succeeded:
       UPDATE inquiries SET status='confirmed'
   → 200 success
 ```
 
-Overlap detection is embedded in the INSERT statement itself (`INSERT...WHERE NOT EXISTS`), not as a separate pre-check. The D1 `batch()` makes the insert and the status update a single atomic operation — no window exists between overlap detection and the block being written.
+Overlap detection is embedded in the INSERT statement itself (`INSERT...WHERE NOT EXISTS`), not as a separate pre-check. The INSERT runs alone in a D1 `batch()` so its result can be checked before the status update executes. If `meta.changes === 0` the function returns `409` and the UPDATE is never reached — preventing the previous failure mode where the UPDATE ran unconditionally in the same batch even when no block was written.
 
 ---
 
