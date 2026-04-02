@@ -3,10 +3,49 @@ import Page from "~/layouts/Page.astro";
 import HeroSimple from "~/components/ui/HeroSimple.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
 import { t } from "~/i18n/t";
+import { getLocalizedCollection } from "~/lib/content";
 
 const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
 const typedLocale = locale as Locale;
+
+const apartments = await getLocalizedCollection("apartments", typedLocale);
+
+// Fallback apartments when CMS not yet seeded
+const fallbackApartments = [
+  {
+    slug: "lavanda",
+    data: {
+      name: typedLocale === "de" ? "Apartment Lavanda" : typedLocale === "sl" ? "Apartma Lavanda" : typedLocale === "en" ? "Apartment Lavanda" : "Apartman Lavanda",
+      tagline: typedLocale === "de" ? "Mediterrane Ruhe mit Meerblick" : typedLocale === "sl" ? "Mediteranski mir s pogledom na morje" : typedLocale === "en" ? "Mediterranean peace with sea views" : "Mediteranski mir s pogledom na more",
+      sleeps: 4,
+      bedrooms: 2,
+      size_sqm: 55,
+      best_for: typedLocale === "de" ? "Paare und Familien" : typedLocale === "sl" ? "Pari in družine" : typedLocale === "en" ? "Couples and families" : "Parovi i obitelji",
+      beach_distance_m: 150,
+      price_from: 70,
+      hero_image: "https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg?auto=compress&w=600",
+    },
+    locale: typedLocale,
+  },
+  {
+    slug: "tramuntana",
+    data: {
+      name: typedLocale === "de" ? "Apartment Tramuntana" : typedLocale === "sl" ? "Apartma Tramuntana" : typedLocale === "en" ? "Apartment Tramuntana" : "Apartman Tramuntana",
+      tagline: typedLocale === "de" ? "Gemütlicher Rückzugsort am Meer" : typedLocale === "sl" ? "Intimen kotiček ob morju" : typedLocale === "en" ? "Intimate retreat by the sea" : "Intimni kutak uz more",
+      sleeps: 2,
+      bedrooms: 1,
+      size_sqm: 35,
+      best_for: typedLocale === "de" ? "Paare" : typedLocale === "sl" ? "Pari" : typedLocale === "en" ? "Couples" : "Parovi",
+      beach_distance_m: 100,
+      price_from: 55,
+      hero_image: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&w=600",
+    },
+    locale: typedLocale,
+  },
+];
+
+const displayApartments = apartments.length > 0 ? apartments : fallbackApartments;
 ---
 
 <Page title={t(typedLocale, "apartments.title")} locale={typedLocale}>
@@ -14,69 +53,157 @@ const typedLocale = locale as Locale;
 
   <section class="section">
     <div class="container">
-      <div class="apartments-coming" data-reveal>
-        <div class="apartments-coming__images">
-          <img src="https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg?auto=compress&w=600" alt="" width="600" height="800" loading="lazy" />
-          <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&w=600" alt="" width="600" height="800" loading="lazy" />
-        </div>
-        <div class="apartments-coming__text">
-          <p class="text-label">
-            {typedLocale === "hr" ? "Uskoro" :
-             typedLocale === "de" ? "Demnächst" :
-             typedLocale === "sl" ? "Kmalu" :
-             "Coming soon"}
-          </p>
-          <h2>
-            {typedLocale === "hr" ? "Pripremamo nešto posebno za vas" :
-             typedLocale === "de" ? "Wir bereiten etwas Besonderes für Sie vor" :
-             typedLocale === "sl" ? "Pripravljamo nekaj posebnega za vas" :
-             "We're preparing something special for you"}
-          </h2>
-          <p class="text-lead" style="margin-top: var(--space-lg);">
-            {typedLocale === "hr" ? "Naši apartmani u Ždrelacu na otoku Pašmanu čekaju vas. S pogledom na more, kamenom terasom i svim što trebate za savršen odmor na Jadranu." :
-             typedLocale === "de" ? "Unsere Ferienwohnungen in Ždrelac auf der Insel Pašman erwarten Sie. Mit Meerblick, Steinterrasse und allem, was Sie für einen perfekten Urlaub an der Adria brauchen." :
-             typedLocale === "sl" ? "Naši apartmaji v Ždrelacu na otoku Pašman vas čakajo. S pogledom na morje, kamnito teraso in vsem, kar potrebujete za popoln dopust na Jadranu." :
-             "Our apartments in Ždrelac on Pašman island await you. With sea views, stone terraces, and everything you need for a perfect Adriatic holiday."}
-          </p>
-          <a href={`/${typedLocale}/#inquiry`} class="btn btn--primary" style="margin-top: var(--space-2xl);">
-            {t(typedLocale, "booking.title")}
-          </a>
-        </div>
+      <div class="apartments-grid" data-reveal-stagger>
+        {displayApartments.map((apt) => (
+          <article class="apartment-card" data-reveal>
+            <div class="apartment-card__image">
+              <img
+                src={apt.data.hero_image as string}
+                alt={`${apt.data.name} — ${apt.data.tagline}`}
+                width="600"
+                height="400"
+                loading="lazy"
+              />
+              {apt.data.best_for && (
+                <span class="apartment-card__badge">{apt.data.best_for}</span>
+              )}
+            </div>
+            <div class="apartment-card__content">
+              <h2 class="apartment-card__name">{apt.data.name}</h2>
+              <p class="apartment-card__tagline">{apt.data.tagline}</p>
+              <div class="apartment-card__meta">
+                <span>{t(typedLocale, "apartments.sleeps").replace("{count}", String(apt.data.sleeps))}</span>
+                <span>{apt.data.size_sqm} m²</span>
+                <span>{t(typedLocale, "apartments.beachDistance").replace("{meters}", String(apt.data.beach_distance_m))}</span>
+              </div>
+              <div class="apartment-card__footer">
+                <span class="apartment-card__price">
+                  {t(typedLocale, "apartments.fromPrice").replace("{price}", String(apt.data.price_from))}
+                </span>
+                <a href={`/${typedLocale}/apartmani#inquiry`} class="btn btn--primary">
+                  {t(typedLocale, "nav.inquire")}
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
+    </div>
+  </section>
+
+  {/* Inquiry CTA */}
+  <section class="section section--alt" id="inquiry" data-reveal>
+    <div class="container text-center">
+      <h2>{typedLocale === "hr" ? "Javite nam se" : typedLocale === "de" ? "Kontaktieren Sie uns" : typedLocale === "sl" ? "Pišite nam" : "Get in touch"}</h2>
+      <p style="margin-top: var(--space-lg); margin-inline: auto; color: var(--color-text-light);">
+        {t(typedLocale, "trust.responseTime")}
+      </p>
+      <a href={`mailto:info@apartmani-zdrelac.hr`} class="btn btn--primary" style="margin-top: var(--space-xl);">
+        {t(typedLocale, "booking.title")}
+      </a>
     </div>
   </section>
 </Page>
 
 <style>
-  .apartments-coming {
+  .apartments-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
-    align-items: center;
   }
 
   @media (min-width: 768px) {
-    .apartments-coming {
-      grid-template-columns: 1fr 1.2fr;
-      gap: var(--space-3xl);
+    .apartments-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .apartments-coming__images {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
+  .apartment-card {
+    background: var(--color-white);
+    overflow: hidden;
+    transition: box-shadow var(--duration-normal) var(--ease-out);
   }
 
-  .apartments-coming__images img {
+  .apartment-card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .apartment-card__image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .apartment-card__image img {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
     display: block;
+    transition: transform var(--duration-slow) var(--ease-out);
   }
 
-  .apartments-coming__text h2 {
-    margin-top: var(--space-md);
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  .apartment-card:hover .apartment-card__image img {
+    transform: scale(1.03);
+  }
+
+  .apartment-card__badge {
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    background: var(--color-navy);
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+  }
+
+  .apartment-card__content {
+    padding: var(--space-xl);
+  }
+
+  .apartment-card__name {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-xs);
+  }
+
+  .apartment-card__tagline {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    font-style: italic;
+  }
+
+  .apartment-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+  }
+
+  .apartment-card__meta span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .apartment-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .apartment-card__price {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-xl);
+    color: var(--color-navy);
+  }
+
+  .apartment-card__footer .btn {
+    padding: 0.6rem 1.5rem;
   }
 </style>

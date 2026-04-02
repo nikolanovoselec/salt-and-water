@@ -3,55 +3,88 @@ import Page from "~/layouts/Page.astro";
 import HeroSimple from "~/components/ui/HeroSimple.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
 import { t } from "~/i18n/t";
+import { getLocalizedCollection } from "~/lib/content";
 
 const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
 const typedLocale = locale as Locale;
 
-const sections = [
-  {
-    hr: { title: "Kristalno čisto more", text: "Pašman ima jednu od najčišćih voda na Jadranu zahvaljujući stalnim morskim strujama. Tirkizno more i skrivene uvale čekaju vas na svakom koraku." },
-    de: { title: "Kristallklares Meer", text: "Pašman hat dank ständiger Meeresströmungen eines der saubersten Gewässer der Adria. Türkisfarbenes Meer und versteckte Buchten erwarten Sie bei jedem Schritt." },
-    sl: { title: "Kristalno čisto morje", text: "Pašman ima eno najčistejših voda na Jadranu zahvaljujoč stalnim morskim tokovom. Turkizno morje in skrite zalive vas čakajo na vsakem koraku." },
-    en: { title: "Crystal-clear sea", text: "Pašman has some of the cleanest waters in the Adriatic thanks to constant sea currents. Turquoise sea and hidden coves await you at every turn." },
-  },
-  {
-    hr: { title: "Mir otoka", text: "Daleko od gužvi popularnih destinacija, Pašman nudi autentični ritam otočnog života. Maslinovi nasadi, borove šume i zvuk cvrčaka — ovdje se vrijeme usporava." },
-    de: { title: "Inselruhe", text: "Fernab vom Trubel beliebter Reiseziele bietet Pašman den authentischen Rhythmus des Insellebens. Olivenhaine, Pinienwälder und Zikadengezirpe — hier verlangsamt sich die Zeit." },
-    sl: { title: "Mir otoka", text: "Daleč od gneče priljubljenih destinacij Pašman ponuja avtentični ritem otoškega življenja. Oljčni nasadi, borovi gozdovi in zvok škržatov — tukaj se čas upočasni." },
-    en: { title: "Island tranquility", text: "Far from the crowds of popular destinations, Pašman offers the authentic rhythm of island life. Olive groves, pine forests, and the sound of cicadas — time slows down here." },
-  },
-  {
-    hr: { title: "25 minuta od kopna", text: "Trajekt iz Biograda na Moru do Tkona vozi samo 25 minuta. Alternativno, možete doći preko mosta Ždrelac s otoka Ugljana. Otok je lako dostupan, a opet dovoljno daleko da se osjetite kao na pravom odmoru." },
-    de: { title: "25 Minuten vom Festland", text: "Die Fähre von Biograd na Moru nach Tkon dauert nur 25 Minuten. Alternativ können Sie über die Ždrelac-Brücke von der Insel Ugljan anreisen. Die Insel ist leicht erreichbar und dennoch weit genug entfernt, um sich wie ein echter Urlaub anzufühlen." },
-    sl: { title: "25 minut od kopna", text: "Trajekt iz Biograda na Moru do Tkona vozi le 25 minut. Alternativno lahko pridete čez most Ždrelac z otoka Ugljan. Otok je lahko dostopen, a vseeno dovolj oddaljen, da se počutite kot na pravem dopustu." },
-    en: { title: "25 minutes from the mainland", text: "The ferry from Biograd na Moru to Tkon takes just 25 minutes. Alternatively, you can arrive via the Ždrelac bridge from Ugljan island. The island is easily accessible yet far enough to feel like a real getaway." },
-  },
-  {
-    hr: { title: "Autentična Dalmacija", text: "Kamene kuće, konobe s domaćom hranom, ribarnice na rivi — Pašman je Dalmacija kakva je nekad bila. Bez velikih hotela i masovnog turizma, samo pravi mediteranski život." },
-    de: { title: "Authentisches Dalmatien", text: "Steinhäuser, Konobas mit hausgemachtem Essen, Fischmärkte an der Promenade — Pašman ist Dalmatien, wie es einmal war. Keine großen Hotels und kein Massentourismus, nur echtes mediterranes Leben." },
-    sl: { title: "Pristna Dalmacija", text: "Kamnite hiše, konobe z domačo hrano, ribje tržnice na rivi — Pašman je Dalmacija, kakršna je nekoč bila. Brez velikih hotelov in množičnega turizma, samo pravo mediteransko življenje." },
-    en: { title: "Authentic Dalmatia", text: "Stone houses, konobas with homemade food, fish markets on the promenade — Pašman is Dalmatia as it once was. No big hotels or mass tourism, just real Mediterranean life." },
-  },
+// Load from CMS
+const pages = await getLocalizedCollection("pages", typedLocale);
+const page = pages.find((p) => p.data.page_key === "why-pasman");
+
+// Parse sections from CMS or use fallback
+let sections: Array<{ title: string; text: string }> = [];
+if (page?.data.sections_json) {
+  try {
+    const raw = page.data.sections_json as string;
+    sections = JSON.parse(raw);
+  } catch { /* fallback below */ }
+}
+
+if (sections.length === 0) {
+  const fallback: Record<Locale, Array<{ title: string; text: string }>> = {
+    hr: [
+      { title: "Kristalno čisto more", text: "Pašman ima jednu od najčišćih voda na Jadranu zahvaljujući stalnim morskim strujama. Tirkizno more i skrivene uvale čekaju vas na svakom koraku." },
+      { title: "Mir otoka", text: "Daleko od gužvi popularnih destinacija, Pašman nudi autentični ritam otočnog života. Maslinovi nasadi, borove šume i zvuk cvrčaka — ovdje se vrijeme usporava." },
+      { title: "25 minuta od kopna", text: "Trajekt iz Biograda na Moru do Tkona vozi samo 25 minuta. Alternativno, možete doći preko mosta Ždrelac s otoka Ugljana." },
+      { title: "Autentična Dalmacija", text: "Kamene kuće, konobe s domaćom hranom, ribarnice na rivi — Pašman je Dalmacija kakva je nekad bila. Bez velikih hotela i masovnog turizma." },
+    ],
+    de: [
+      { title: "Kristallklares Meer", text: "Pašman hat dank ständiger Meeresströmungen eines der saubersten Gewässer der Adria. Türkisfarbenes Meer und versteckte Buchten erwarten Sie." },
+      { title: "Inselruhe", text: "Fernab vom Trubel beliebter Reiseziele bietet Pašman den authentischen Rhythmus des Insellebens. Olivenhaine, Pinienwälder und Zikadengezirpe." },
+      { title: "25 Minuten vom Festland", text: "Die Fähre von Biograd na Moru nach Tkon dauert nur 25 Minuten. Alternativ können Sie über die Ždrelac-Brücke von Ugljan anreisen." },
+      { title: "Authentisches Dalmatien", text: "Steinhäuser, Konobas mit hausgemachtem Essen, Fischmärkte — Pašman ist Dalmatien, wie es einmal war. Kein Massentourismus." },
+    ],
+    sl: [
+      { title: "Kristalno čisto morje", text: "Pašman ima eno najčistejših voda na Jadranu zahvaljujoč stalnim morskim tokovom. Turkizno morje in skrite zalive vas čakajo." },
+      { title: "Mir otoka", text: "Daleč od gneče priljubljenih destinacij Pašman ponuja avtentični ritem otoškega življenja. Oljčni nasadi, borovi gozdovi in zvok škržatov." },
+      { title: "25 minut od kopna", text: "Trajekt iz Biograda na Moru do Tkona vozi le 25 minut. Alternativno lahko pridete čez most Ždrelac z otoka Ugljan." },
+      { title: "Pristna Dalmacija", text: "Kamnite hiše, konobe z domačo hrano, ribje tržnice — Pašman je Dalmacija, kakršna je nekoč bila. Brez množičnega turizma." },
+    ],
+    en: [
+      { title: "Crystal-clear sea", text: "Pašman has some of the cleanest waters in the Adriatic thanks to constant sea currents. Turquoise sea and hidden coves await you." },
+      { title: "Island tranquility", text: "Far from the crowds, Pašman offers the authentic rhythm of island life. Olive groves, pine forests, and the sound of cicadas." },
+      { title: "25 minutes from the mainland", text: "The ferry from Biograd na Moru to Tkon takes just 25 minutes. Alternatively, arrive via the Ždrelac bridge from Ugljan." },
+      { title: "Authentic Dalmatia", text: "Stone houses, konobas with homemade food, fish markets — Pašman is Dalmatia as it once was. No mass tourism." },
+    ],
+  };
+  sections = fallback[typedLocale];
+}
+
+const images = [
+  "https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&w=800",
+  "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&w=800",
+  "https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=800",
+  "https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg?auto=compress&w=800",
+];
+const imageAlts = [
+  "Crystal-clear Adriatic waters near Pašman",
+  "Traditional stone village on the Croatian coast",
+  "Aerial view of Pašman island coastline",
+  "Sunset over the Adriatic from Pašman",
 ];
 ---
 
 <Page title={t(typedLocale, "nav.whyPasman")} locale={typedLocale}>
   <HeroSimple title={t(typedLocale, "nav.whyPasman")} />
-    </div>
 
-  {sections.map((section, i) => {
-    const content = section[typedLocale] ?? section.hr;
-    return (
-      <section class:list={["section", { "bg-alt": i % 2 === 1 }]} data-reveal>
-        <div class="container">
-          <h2>{content.title}</h2>
-          <div class="section-divider"></div>
-          <p style="margin-top: var(--space-lg);">{content.text}</p>
+  {sections.map((section, i) => (
+    <section class:list={["section", { "section--alt": i % 2 === 1 }]} data-reveal>
+      <div class="container">
+        <div class:list={["content-row", { "content-row--reverse": i % 2 === 1 }]}>
+          <div class="content-row__text">
+            <h2>{section.title}</h2>
+            <div class="section-divider" style="margin: var(--space-lg) 0;"></div>
+            <p class="text-lead">{section.text}</p>
+          </div>
+          <div class="content-row__image">
+            <img src={images[i % images.length]} alt={imageAlts[i % imageAlts.length]} width="800" height="533" loading="lazy" />
+          </div>
         </div>
-      </section>
-    );
-  })}
+      </div>
+    </section>
+  ))}
 
   <section class="section" data-reveal>
     <div class="container text-center">
@@ -63,11 +96,34 @@ const sections = [
 </Page>
 
 <style>
-
-    color: var(--color-white);
+  .content-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
   }
 
-  .bg-alt {
-    background: var(--color-bg-alt);
+  @media (min-width: 768px) {
+    .content-row {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+    .content-row--reverse .content-row__text {
+      order: 2;
+    }
+    .content-row--reverse .content-row__image {
+      order: 1;
+    }
+  }
+
+  .content-row__image img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+  }
+
+  .content-row__text h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
   }
 </style>

@@ -3,33 +3,43 @@ import Page from "~/layouts/Page.astro";
 import HeroSimple from "~/components/ui/HeroSimple.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
 import { t } from "~/i18n/t";
+import { getLocalizedCollection } from "~/lib/content";
 
 const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
 const typedLocale = locale as Locale;
 
-const hostStory = {
+const pages = await getLocalizedCollection("pages", typedLocale);
+const page = pages.find((p) => p.data.page_key === "about");
+
+const fallbackStory: Record<Locale, string> = {
   hr: "Naša obitelj je na ovom otoku generacijama. Ždrelac je naš dom — tiho mjesto na sjevernom vrhu Pašmana, povezano mostom s Ugljanom. Ovdje smo odrasli uz more, maslinike i konobe. Naši apartmani su uređeni s ljubavlju i pažnjom, jer želimo da se osjećate kao kod kuće — samo s boljim pogledom.",
   de: "Unsere Familie lebt seit Generationen auf dieser Insel. Ždrelac ist unser Zuhause — ein ruhiger Ort an der Nordspitze von Pašman, verbunden durch eine Brücke mit Ugljan. Wir sind hier am Meer aufgewachsen, zwischen Olivenhainen und Konobas. Unsere Ferienwohnungen sind mit Liebe und Sorgfalt eingerichtet, denn wir möchten, dass Sie sich wie zu Hause fühlen — nur mit besserer Aussicht.",
   sl: "Naša družina je na tem otoku že generacije. Ždrelac je naš dom — tih kraj na severnem vrhu Pašmana, povezan z mostom z Ugljanom. Tukaj smo odrasli ob morju, med oljčnimi nasadi in konobami. Naši apartmaji so urejeni z ljubeznijo in skrbjo, ker želimo, da se počutite kot doma — le z boljšim razgledom.",
   en: "Our family has been on this island for generations. Ždrelac is our home — a quiet place at the northern tip of Pašman, connected by bridge to Ugljan. We grew up here by the sea, among olive groves and konobas. Our apartments are furnished with love and care, because we want you to feel at home — just with a better view.",
 };
+
+const story = (page?.data.body as string) ?? fallbackStory[typedLocale];
 ---
 
 <Page title={t(typedLocale, "hosts.title")} locale={typedLocale}>
   <HeroSimple title={t(typedLocale, "hosts.title")} />
-    </div>
 
   <section class="section" data-reveal>
-    <div class="container host-content">
-      <div class="host-story">
-        <p class="host-story__text">{hostStory[typedLocale] ?? hostStory.hr}</p>
-        <p class="host-story__response">{t(typedLocale, "hosts.responseTime")}</p>
+    <div class="container">
+      <div class="about-layout">
+        <div class="about-image">
+          <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=600" alt="The family home in Ždrelac, Pašman island" width="600" height="400" loading="lazy" />
+        </div>
+        <div class="about-content">
+          <p class="about-story">{story}</p>
+          <p class="about-response">{t(typedLocale, "hosts.responseTime")}</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section bg-alt" data-reveal>
+  <section class="section section--alt" data-reveal>
     <div class="container text-center">
       <a href={`/${typedLocale}/apartmani`} class="btn btn--primary">
         {t(typedLocale, "nav.apartments")}
@@ -39,20 +49,36 @@ const hostStory = {
 </Page>
 
 <style>
-  .bg-alt { background: var(--color-bg-alt); }
-
-  .host-content {
-    max-width: 700px;
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+    max-width: 960px;
     margin-inline: auto;
   }
 
-  .host-story__text {
+  @media (min-width: 768px) {
+    .about-layout {
+      grid-template-columns: 1fr 1.3fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  .about-image img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-story {
     font-size: var(--font-size-lg);
     line-height: 1.8;
     color: var(--color-text);
   }
 
-  .host-story__response {
+  .about-response {
     margin-top: var(--space-xl);
     padding: var(--space-md) var(--space-lg);
     background: var(--color-stone);

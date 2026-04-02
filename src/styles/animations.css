@@ -1,15 +1,15 @@
 /* ==========================================================================
    Scroll Animations — CSS-first, IntersectionObserver triggered
+   High-end vacation rental aesthetic — smooth, cinematic reveals
    ========================================================================== */
 
 /* ---------- Fade up reveal (default for content sections) ---------- */
-/* Content is visible by default. Animation only applies after JS adds .reveal-ready */
 .reveal-ready [data-reveal] {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(40px);
   transition:
-    opacity var(--duration-slow) var(--ease-out),
-    transform var(--duration-slow) var(--ease-out);
+    opacity 1s var(--ease-out),
+    transform 1s var(--ease-out);
 }
 
 .reveal-ready [data-reveal].is-visible {
@@ -22,8 +22,8 @@
   opacity: 0;
   transform: translateY(30px);
   transition:
-    opacity var(--duration-slow) var(--ease-out),
-    transform var(--duration-slow) var(--ease-out);
+    opacity 0.8s var(--ease-out),
+    transform 0.8s var(--ease-out);
 }
 
 [data-reveal-stagger].is-visible > *:nth-child(1) { transition-delay: 0s; }
@@ -32,6 +32,7 @@
 [data-reveal-stagger].is-visible > *:nth-child(4) { transition-delay: 0.3s; }
 [data-reveal-stagger].is-visible > *:nth-child(5) { transition-delay: 0.4s; }
 [data-reveal-stagger].is-visible > *:nth-child(6) { transition-delay: 0.5s; }
+[data-reveal-stagger].is-visible > *:nth-child(7) { transition-delay: 0.6s; }
 
 .reveal-ready [data-reveal-stagger].is-visible > * {
   opacity: 1;
@@ -41,7 +42,7 @@
 /* ---------- Image clip-path reveal ---------- */
 .reveal-ready [data-reveal-clip] {
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 1s var(--ease-out);
+  transition: clip-path 1.2s var(--ease-out);
 }
 
 .reveal-ready [data-reveal-clip].is-visible {
@@ -55,7 +56,7 @@
   background: currentColor;
   opacity: 0.2;
   margin: var(--space-2xl) auto;
-  transition: width 1s var(--ease-out);
+  transition: width 1.2s var(--ease-out);
 }
 
 .reveal-ready .section-divider {
@@ -66,18 +67,17 @@
   width: 120px;
 }
 
-/* ---------- Image hover zoom (gallery cards) ---------- */
+/* ---------- Image hover zoom ---------- */
 .image-hover-zoom {
   overflow: hidden;
-  border-radius: var(--radius-sm);
 }
 
 .image-hover-zoom img {
-  transition: transform 0.6s var(--ease-out);
+  transition: transform 0.8s var(--ease-out);
 }
 
 .image-hover-zoom:hover img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 /* ---------- Form focus animation ---------- */
@@ -102,7 +102,7 @@
   left: 0;
 }
 
-/* ---------- Hero text fade up ---------- */
+/* ---------- Hero text reveals ---------- */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -114,41 +114,111 @@
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hero background Ken Burns slow zoom */
+@keyframes kenBurns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
 .hero-title {
-  animation: fadeUp 1.2s var(--ease-out) 0.3s both;
+  animation: fadeUp 1.4s var(--ease-out) 0.3s both;
 }
 
 .hero-subtitle {
-  animation: fadeUp 1.2s var(--ease-out) 0.6s both;
+  animation: fadeUp 1.4s var(--ease-out) 0.7s both;
 }
 
-/* ---------- Scroll indicator pulse ---------- */
+.hero__label {
+  animation: fadeIn 1.2s var(--ease-out) 0.1s both;
+}
+
+.hero__cta {
+  animation: fadeUp 1.2s var(--ease-out) 1s both;
+}
+
+/* ---------- Scroll indicator ---------- */
 @keyframes scrollPulse {
-  0%, 100% { opacity: 0.4; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(6px); }
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 0.8; transform: translateY(8px); }
 }
 
 .scroll-indicator {
-  animation: scrollPulse 2s ease-in-out infinite;
+  animation: scrollPulse 2.5s ease-in-out infinite;
 }
 
-/* ---------- Hamburger morph ---------- */
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 1.5px;
-  background: currentColor;
-  transition: transform var(--duration-fast) ease, opacity var(--duration-fast) ease;
+/* ---------- Photo strip hover effects ---------- */
+.photo-strip img {
+  transition: transform 0.8s var(--ease-out), filter 0.8s var(--ease-out);
 }
 
-.hamburger.is-open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+.photo-strip img:hover {
+  transform: scale(1.02);
 }
 
-.hamburger.is-open span:nth-child(2) {
-  opacity: 0;
+/* ---------- Triptych shimmer on hover ---------- */
+.triptych__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 60%
+  );
+  transition: transform 0.6s var(--ease-out);
+  transform: translateX(-100%);
+  pointer-events: none;
 }
 
-.hamburger.is-open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+.triptych__item:hover::after {
+  transform: translateX(100%);
+}
+
+/* ---------- Button ripple ---------- */
+.btn {
+  transition:
+    color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Smooth page transitions feel ---------- */
+main {
+  animation: fadeIn 0.6s var(--ease-out);
+}
+
+/* ---------- FAQ accordion smooth open ---------- */
+.faq-item__answer {
+  animation: fadeUp 0.3s var(--ease-out);
+}
+
+/* ---------- Testimonial card subtle entrance ---------- */
+.testimonial-card {
+  transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }

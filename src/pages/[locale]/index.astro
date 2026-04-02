@@ -3,6 +3,7 @@ import Page from "~/layouts/Page.astro";
 import Hero from "~/components/home/Hero.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
 import { t } from "~/i18n/t";
+import { getLocalizedCollection, type LocalizedEntry } from "~/lib/content";
 
 const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
@@ -15,22 +16,83 @@ const titles: Record<Locale, string> = {
   en: "Apartments Ždrelac — Pašman Island",
 };
 
+// Load CMS content
+const homepageSections = await getLocalizedCollection("homepage", typedLocale);
+const testimonials = await getLocalizedCollection("testimonials", typedLocale);
+const apartments = await getLocalizedCollection("apartments", typedLocale);
+
+function getSection(key: string): LocalizedEntry | undefined {
+  return homepageSections.find((e) => e.data.section_key === key);
+}
+
+const whySection = getSection("why-pasman");
+const zdrelacSection = getSection("zdrelac");
+const aptsSection = getSection("apartments");
+const ctaSection = getSection("cta");
+
+// Fallback content when CMS not yet seeded
+const whyTitle = (whySection?.data.title as string) ?? {
+  hr: "Otok koji vrijeme zaboravilo",
+  de: "Die Insel, die die Zeit vergessen hat",
+  sl: "Otok, ki ga je čas pozabil",
+  en: "The island time forgot",
+}[typedLocale];
+
+const whySubtitle = (whySection?.data.subtitle as string) ?? t(typedLocale, "nav.whyPasman");
+
+const whyBody = (whySection?.data.body as string) ?? {
+  hr: "Daleko od gužvi, Pašman nudi ono što je Dalmacija nekada bila — kamene kuće, maslinovi nasadi, konobe s domaćom hranom i more koje oduzima dah. Samo 25 minuta trajektom od kopna, a opet dovoljno daleko da se osjetite kao na pravom odmoru.",
+  de: "Fernab vom Trubel bietet Pašman das, was Dalmatien einst war — Steinhäuser, Olivenhaine, Konobas mit hausgemachtem Essen und ein atemberaubendes Meer. Nur 25 Minuten mit der Fähre vom Festland, aber weit genug für einen echten Urlaub.",
+  sl: "Daleč od gneče Pašman ponuja tisto, kar je bila nekoč Dalmacija — kamnite hiše, oljčni nasadi, konobe z domačo hrano in morje, ki jemlje dih. Le 25 minut s trajektom od kopna, a vseeno dovolj daleč za pravi dopust.",
+  en: "Far from the crowds, Pašman offers what Dalmatia once was — stone houses, olive groves, konobas with homemade food, and a sea that takes your breath away. Just 25 minutes by ferry from the mainland, yet far enough to feel like a real escape.",
+}[typedLocale];
+
 const whyItems = [
-  { icon: "◆", hr: "Kristalno čisto more", de: "Kristallklares Meer", sl: "Kristalno čisto morje", en: "Crystal-clear sea" },
-  { icon: "◆", hr: "Mir otoka", de: "Inselruhe", sl: "Mir otoka", en: "Island tranquility" },
-  { icon: "◆", hr: "25 min trajektom", de: "25 Min. Fähre", sl: "25 min s trajektom", en: "25 min by ferry" },
-  { icon: "◆", hr: "Autentična Dalmacija", de: "Authentisches Dalmatien", sl: "Pristna Dalmacija", en: "Authentic Dalmatia" },
+  { hr: "Kristalno čisto more", de: "Kristallklares Meer", sl: "Kristalno čisto morje", en: "Crystal-clear sea" },
+  { hr: "Mir otoka", de: "Inselruhe", sl: "Mir otoka", en: "Island tranquility" },
+  { hr: "25 min trajektom", de: "25 Min. Fähre", sl: "25 min s trajektom", en: "25 min by ferry" },
+  { hr: "Autentična Dalmacija", de: "Authentisches Dalmatien", sl: "Pristna Dalmacija", en: "Authentic Dalmatia" },
 ];
+
+const zdrelacTitle = (zdrelacSection?.data.title as string) ?? {
+  hr: "Tiho selo na sjevernom vrhu otoka",
+  de: "Ein ruhiges Dorf an der Nordspitze der Insel",
+  sl: "Tiha vas na severnem vrhu otoka",
+  en: "A quiet village at the northern tip of the island",
+}[typedLocale];
+
+const aptsTitle = (aptsSection?.data.title as string) ?? {
+  hr: "Vaš dom na Jadranu",
+  de: "Ihr Zuhause an der Adria",
+  sl: "Vaš dom na Jadranu",
+  en: "Your home on the Adriatic",
+}[typedLocale];
+
+const aptsBody = (aptsSection?.data.body as string) ?? {
+  hr: "Udobni apartmani s pogledom na more, kamenom terasom za jutarnju kavu i svim što trebate za savršen odmor.",
+  de: "Komfortable Ferienwohnungen mit Meerblick, Steinterrasse für den Morgenkaffee und allem, was Sie für einen perfekten Urlaub brauchen.",
+  sl: "Udobni apartmaji s pogledom na morje, kamnito teraso za jutranjo kavo in vsem, kar potrebujete za popoln dopust.",
+  en: "Comfortable apartments with sea views, a stone terrace for morning coffee, and everything you need for a perfect holiday.",
+}[typedLocale];
+
+const ctaTitle = (ctaSection?.data.title as string) ?? {
+  hr: "Javite nam se", de: "Kontaktieren Sie uns", sl: "Pišite nam", en: "Get in touch",
+}[typedLocale];
+
+// Olive oil label
+const oliveOilLabel: Record<Locale, string> = {
+  hr: "Maslinovo ulje", de: "Olivenöl", sl: "Oljčno olje", en: "Olive oil",
+};
 ---
 
 <Page title={titles[typedLocale]} locale={typedLocale} hasHero={true}>
   <Hero locale={typedLocale} />
 
-  {/* Photo strip — edge-to-edge, uniform aspect ratio, no gaps */}
+  {/* Photo strip — edge-to-edge, uniform aspect ratio */}
   <div class="photo-strip">
-    <img src="https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&w=700" alt="" width="700" height="467" loading="lazy" />
-    <img src="https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&w=700" alt="" width="700" height="467" loading="lazy" />
-    <img src="https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg?auto=compress&w=700" alt="" width="700" height="467" loading="lazy" />
+    <img src="https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&w=700" alt="Turquoise Adriatic coastline" width="700" height="467" loading="lazy" />
+    <img src="https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&w=700" alt="Mediterranean stone village" width="700" height="467" loading="lazy" />
+    <img src="https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg?auto=compress&w=700" alt="Sunset over the Adriatic islands" width="700" height="467" loading="lazy" />
   </div>
 
   {/* Why Pašman */}
@@ -38,21 +100,11 @@ const whyItems = [
     <div class="container">
       <div class="split-section">
         <div class="split-section__left">
-          <p class="text-label">{t(typedLocale, "nav.whyPasman")}</p>
-          <h2>
-            {typedLocale === "hr" ? "Otok koji vrijeme zaboravilo" :
-             typedLocale === "de" ? "Die Insel, die die Zeit vergessen hat" :
-             typedLocale === "sl" ? "Otok, ki ga je čas pozabil" :
-             "The island time forgot"}
-          </h2>
+          <p class="text-label">{whySubtitle}</p>
+          <h2>{whyTitle}</h2>
         </div>
         <div class="split-section__right">
-          <p class="text-lead">
-            {typedLocale === "hr" ? "Daleko od gužvi, Pašman nudi ono što je Dalmacija nekada bila — kamene kuće, maslinovi nasadi, konobe s domaćom hranom i more koje oduzima dah. Samo 25 minuta trajektom od kopna, a opet dovoljno daleko da se osjetite kao na pravom odmoru." :
-             typedLocale === "de" ? "Fernab vom Trubel bietet Pašman das, was Dalmatien einst war — Steinhäuser, Olivenhaine, Konobas mit hausgemachtem Essen und ein atemberaubendes Meer. Nur 25 Minuten mit der Fähre vom Festland, aber weit genug für einen echten Urlaub." :
-             typedLocale === "sl" ? "Daleč od gneče Pašman ponuja tisto, kar je bila nekoč Dalmacija — kamnite hiše, oljčni nasadi, konobe z domačo hrano in morje, ki jemlje dih. Le 25 minut s trajektom od kopna, a vseeno dovolj daleč za pravi dopust." :
-             "Far from the crowds, Pašman offers what Dalmatia once was — stone houses, olive groves, konobas with homemade food, and a sea that takes your breath away. Just 25 minutes by ferry from the mainland, yet far enough to feel like a real escape."}
-          </p>
+          <p class="text-lead">{whyBody}</p>
           <div class="tag-row">
             {whyItems.map((item) => (
               <span class="tag">{item[typedLocale]}</span>
@@ -68,15 +120,10 @@ const whyItems = [
 
   {/* Full-bleed image — Ždrelac */}
   <div class="full-bleed-image" data-reveal>
-    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=1920" alt="" width="1920" height="1080" loading="lazy" />
+    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=1920" alt="Aerial view of Ždrelac village on Pašman island" width="1920" height="1080" loading="lazy" />
     <div class="full-bleed-image__text">
       <p class="text-label" style="color: rgba(255,255,255,0.7);">Ždrelac</p>
-      <h2>
-        {typedLocale === "hr" ? "Tiho selo na sjevernom vrhu otoka" :
-         typedLocale === "de" ? "Ein ruhiges Dorf an der Nordspitze der Insel" :
-         typedLocale === "sl" ? "Tiha vas na severnem vrhu otoka" :
-         "A quiet village at the northern tip of the island"}
-      </h2>
+      <h2>{zdrelacTitle}</h2>
     </div>
   </div>
 
@@ -86,17 +133,9 @@ const whyItems = [
       <div class="split-section split-section--reverse">
         <div class="split-section__left">
           <p class="text-label" style="color: rgba(255,255,255,0.7);">{t(typedLocale, "apartments.title")}</p>
-          <h2>
-            {typedLocale === "hr" ? "Vaš dom na Jadranu" :
-             typedLocale === "de" ? "Ihr Zuhause an der Adria" :
-             typedLocale === "sl" ? "Vaš dom na Jadranu" :
-             "Your home on the Adriatic"}
-          </h2>
+          <h2>{aptsTitle}</h2>
           <p class="text-lead" style="color: rgba(255,255,255,0.75); margin-top: var(--space-lg);">
-            {typedLocale === "hr" ? "Udobni apartmani s pogledom na more, kamenom terasom za jutarnju kavu i svim što trebate za savršen odmor." :
-             typedLocale === "de" ? "Komfortable Ferienwohnungen mit Meerblick, Steinterrasse für den Morgenkaffee und allem, was Sie für einen perfekten Urlaub brauchen." :
-             typedLocale === "sl" ? "Udobni apartmaji s pogledom na morje, kamnito teraso za jutranjo kavo in vsem, kar potrebujete za popoln dopust." :
-             "Comfortable apartments with sea views, a stone terrace for morning coffee, and everything you need for a perfect holiday."}
+            {aptsBody}
           </p>
           <a href={`/${typedLocale}/apartmani`} class="btn btn--ghost" style="margin-top: var(--space-2xl);">
             {t(typedLocale, "nav.apartments")}
@@ -104,31 +143,48 @@ const whyItems = [
         </div>
         <div class="split-section__right">
           <div class="duo-image">
-            <img src="https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg?auto=compress&w=600" alt="" width="600" height="800" loading="lazy" />
-            <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&w=600" alt="" width="600" height="800" loading="lazy" />
+            <img src="https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg?auto=compress&w=600" alt="Bright apartment interior with sea view" width="600" height="800" loading="lazy" />
+            <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&w=600" alt="Cozy apartment terrace with Mediterranean plants" width="600" height="800" loading="lazy" />
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  {/* Testimonials */}
+  {testimonials.length > 0 && (
+    <section class="section" data-reveal>
+      <div class="container">
+        <p class="text-label text-center" style="margin-bottom: var(--space-md);">
+          {typedLocale === "hr" ? "Naši gosti" : typedLocale === "de" ? "Unsere Gäste" : typedLocale === "sl" ? "Naši gostje" : "Our guests"}
+        </p>
+        <div class="testimonials-grid">
+          {testimonials.slice(0, 3).map((test) => (
+            <blockquote class="testimonial-card">
+              <p class="testimonial-card__quote">"{test.data.quote}"</p>
+              <footer class="testimonial-card__footer">
+                <cite class="testimonial-card__name">{test.data.guest_name}</cite>
+                {test.data.country && <span class="testimonial-card__country">{test.data.country}</span>}
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   {/* Experience triptych — edge-to-edge, uniform */}
   <div class="triptych" data-reveal>
     <div class="triptych__item">
-      <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=600" alt="" width="600" height="750" loading="lazy" />
+      <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=600" alt="Fresh Mediterranean seafood platter" width="600" height="750" loading="lazy" />
       <span class="triptych__label">{t(typedLocale, "guide.foodDrink")}</span>
     </div>
     <div class="triptych__item">
-      <img src="https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=600" alt="" width="600" height="750" loading="lazy" />
-      <span class="triptych__label">
-        {typedLocale === "hr" ? "Maslinovo ulje" :
-         typedLocale === "de" ? "Olivenöl" :
-         typedLocale === "sl" ? "Oljčno olje" :
-         "Olive oil"}
-      </span>
+      <img src="https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=600" alt="Olive grove on Pašman island" width="600" height="750" loading="lazy" />
+      <span class="triptych__label">{oliveOilLabel[typedLocale]}</span>
     </div>
     <div class="triptych__item">
-      <img src="https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=600" alt="" width="600" height="750" loading="lazy" />
+      <img src="https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=600" alt="Hidden pebble beach in a cove" width="600" height="750" loading="lazy" />
       <span class="triptych__label">{t(typedLocale, "guide.beaches")}</span>
     </div>
   </div>
@@ -137,12 +193,7 @@ const whyItems = [
   <section class="section section--alt" id="inquiry" data-reveal>
     <div class="container text-center">
       <p class="text-label">{t(typedLocale, "nav.contact")}</p>
-      <h2 style="margin-top: var(--space-md);">
-        {typedLocale === "hr" ? "Javite nam se" :
-         typedLocale === "de" ? "Kontaktieren Sie uns" :
-         typedLocale === "sl" ? "Pišite nam" :
-         "Get in touch"}
-      </h2>
+      <h2 style="margin-top: var(--space-md);">{ctaTitle}</h2>
       <p style="margin-inline: auto; margin-top: var(--space-lg); color: var(--color-text-light);">
         {t(typedLocale, "trust.responseTime")}
       </p>
@@ -270,7 +321,7 @@ const whyItems = [
   }
 
   /* ============================================================
-     DUO IMAGE — two photos side by side, same aspect ratio, no radius
+     DUO IMAGE — two photos side by side
      ============================================================ */
   .duo-image {
     display: grid;
@@ -283,6 +334,55 @@ const whyItems = [
     aspect-ratio: 3 / 4;
     object-fit: cover;
     display: block;
+  }
+
+  /* ============================================================
+     TESTIMONIALS
+     ============================================================ */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .testimonial-card {
+    padding: var(--space-xl);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+  }
+
+  .testimonial-card__quote {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--color-navy);
+    font-style: italic;
+  }
+
+  .testimonial-card__footer {
+    margin-top: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .testimonial-card__name {
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    color: var(--color-navy);
+  }
+
+  .testimonial-card__country {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-light);
   }
 
   /* ============================================================
