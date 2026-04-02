@@ -26,6 +26,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Title and subtitle fade up with staggered CSS animation (0.3s and 0.6s delay)
   - On `prefers-reduced-motion`: all animations disabled, content immediately visible
   - Mobile: title scales down via clamp, subtitle uses smaller font size
+  - **Temporary workaround:** Stock photos currently served directly from Pexels CDN URLs (external hotlink) due to a routing bug in the `/media/:key` Worker route (404 on R2 fetch). When the `/media/` route is fixed, images will move to R2 with Cloudflare Image Resizing per REQ-PERF-1. Pexels CDN URLs use `?auto=compress&w=` for basic optimization.
   - **Future enhancement:** Ken Burns photo slideshow with crossfade can replace the single static hero photo when CMS hero photo management is available. Current single-photo hero serves as the intermediate step between gradient-only fallback and full slideshow.
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P0

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-04-02 — Revision 15: Pexels CDN Workaround for Stock Photos (3c72571)
+
+Stock photo `src` attributes switched from `/media/:key` Worker route (which returns 404 due to R2 routing bug) to direct Pexels CDN URLs as a temporary workaround. All 9 homepage images now hotlinked from `images.pexels.com` with `?auto=compress&w=` query params for basic size optimization. This is a stopgap — images will move back to R2 + Image Resizing once the `/media/` route bug is resolved.
+
+### AC updated
+- **REQ-SF-1:** Added temporary workaround note: stock photos served from Pexels CDN pending `/media/` route fix.
+
+### No status changes
+- REQ-PERF-1 and REQ-CMS-2 (the `/media/:key` pipeline) remain Status: Planned and unaffected — the Pexels workaround does not change the target architecture, only the current delivery path.
+
 ## 2026-04-02 — Revision 14: Stock Photography, Rich Homepage Content, Hamburger Fix (7efb9cd)
 
 Spec synced with commit adding stock photos to hero and homepage sections, redesigned homepage layout with photo strip, Zdrelac village section, food/experience teaser grid, apartments preview with images, and hamburger menu CSS fix.
