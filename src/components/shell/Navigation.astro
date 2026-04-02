@@ -40,14 +40,16 @@ const navItems = [
     </div>
 
     <button
-      class="nav__hamburger hamburger"
+      class="nav__hamburger"
+      id="hamburger-btn"
       aria-label="Menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
+      style="display:flex;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:12px;z-index:101;position:relative;"
     >
-      <span></span>
-      <span></span>
-      <span></span>
+      <span style="display:block;width:24px;height:2px;background:currentColor;border-radius:1px;transition:transform 0.3s ease,opacity 0.3s ease;"></span>
+      <span style="display:block;width:24px;height:2px;background:currentColor;border-radius:1px;transition:transform 0.3s ease,opacity 0.3s ease;"></span>
+      <span style="display:block;width:24px;height:2px;background:currentColor;border-radius:1px;transition:transform 0.3s ease,opacity 0.3s ease;"></span>
     </button>
   </div>
 </header>
@@ -285,7 +287,7 @@ const navItems = [
   }
 
   // Mobile menu toggle
-  const hamburger = document.querySelector(".nav__hamburger");
+  const hamburger = document.getElementById("hamburger-btn");
   const mobileMenu = document.getElementById("mobile-menu");
 
   if (hamburger && mobileMenu) {

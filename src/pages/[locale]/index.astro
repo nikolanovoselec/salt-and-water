@@ -26,26 +26,18 @@ const whyItems = [
 <Page title={titles[typedLocale]} locale={typedLocale} hasHero={true}>
   <Hero locale={typedLocale} />
 
-  {/* Photo strip — visual break */}
-  <section class="photo-strip">
-    <div class="photo-strip__grid">
-      <div class="photo-strip__item">
-        <img src="https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&w=800" alt="Pine trees and Adriatic sea" loading="lazy" />
-      </div>
-      <div class="photo-strip__item">
-        <img src="https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&w=800" alt="Pebble beach cove" loading="lazy" />
-      </div>
-      <div class="photo-strip__item">
-        <img src="https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg?auto=compress&w=800" alt="Dalmatian stone village" loading="lazy" />
-      </div>
-    </div>
-  </section>
+  {/* Photo strip — edge-to-edge, uniform aspect ratio, no gaps */}
+  <div class="photo-strip">
+    <img src="https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&w=700" alt="" width="700" height="467" loading="lazy" />
+    <img src="https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&w=700" alt="" width="700" height="467" loading="lazy" />
+    <img src="https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg?auto=compress&w=700" alt="" width="700" height="467" loading="lazy" />
+  </div>
 
   {/* Why Pašman */}
   <section class="section" data-reveal>
     <div class="container">
-      <div class="why-section">
-        <div class="why-section__header">
+      <div class="split-section">
+        <div class="split-section__left">
           <p class="text-label">{t(typedLocale, "nav.whyPasman")}</p>
           <h2>
             {typedLocale === "hr" ? "Otok koji vrijeme zaboravilo" :
@@ -54,22 +46,19 @@ const whyItems = [
              "The island time forgot"}
           </h2>
         </div>
-        <div class="why-section__body">
+        <div class="split-section__right">
           <p class="text-lead">
             {typedLocale === "hr" ? "Daleko od gužvi, Pašman nudi ono što je Dalmacija nekada bila — kamene kuće, maslinovi nasadi, konobe s domaćom hranom i more koje oduzima dah. Samo 25 minuta trajektom od kopna, a opet dovoljno daleko da se osjetite kao na pravom odmoru." :
              typedLocale === "de" ? "Fernab vom Trubel bietet Pašman das, was Dalmatien einst war — Steinhäuser, Olivenhaine, Konobas mit hausgemachtem Essen und ein atemberaubendes Meer. Nur 25 Minuten mit der Fähre vom Festland, aber weit genug für einen echten Urlaub." :
              typedLocale === "sl" ? "Daleč od gneče Pašman ponuja tisto, kar je bila nekoč Dalmacija — kamnite hiše, oljčni nasadi, konobe z domačo hrano in morje, ki jemlje dih. Le 25 minut s trajektom od kopna, a vseeno dovolj daleč za pravi dopust." :
              "Far from the crowds, Pašman offers what Dalmatia once was — stone houses, olive groves, konobas with homemade food, and a sea that takes your breath away. Just 25 minutes by ferry from the mainland, yet far enough to feel like a real escape."}
           </p>
-          <div class="why-grid">
+          <div class="tag-row">
             {whyItems.map((item) => (
-              <div class="why-grid__item">
-                <span class="why-grid__icon">{item.icon}</span>
-                <span class="why-grid__text">{item[typedLocale]}</span>
-              </div>
+              <span class="tag">{item[typedLocale]}</span>
             ))}
           </div>
-          <a href={`/${typedLocale}/zasto-pasman`} class="btn" style="margin-top: var(--space-2xl);">
+          <a href={`/${typedLocale}/zasto-pasman`} class="btn">
             {t(typedLocale, "nav.whyPasman")}
           </a>
         </div>
@@ -77,35 +66,33 @@ const whyItems = [
     </div>
   </section>
 
-  {/* Full-width image with text overlay */}
-  <section class="image-section" data-reveal>
-    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=1920" alt="Sunset over Dalmatian islands" loading="lazy" />
-    <div class="image-section__overlay">
-      <div class="container text-center">
-        <p class="text-label" style="color: rgba(255,255,255,0.7);">Ždrelac</p>
-        <h2 style="color: var(--color-white); margin-top: var(--space-md);">
-          {typedLocale === "hr" ? "Tiho selo na sjevernom vrhu otoka" :
-           typedLocale === "de" ? "Ein ruhiges Dorf an der Nordspitze der Insel" :
-           typedLocale === "sl" ? "Tiha vas na severnem vrhu otoka" :
-           "A quiet village at the northern tip of the island"}
-        </h2>
-      </div>
+  {/* Full-bleed image — Ždrelac */}
+  <div class="full-bleed-image" data-reveal>
+    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=1920" alt="" width="1920" height="1080" loading="lazy" />
+    <div class="full-bleed-image__text">
+      <p class="text-label" style="color: rgba(255,255,255,0.7);">Ždrelac</p>
+      <h2>
+        {typedLocale === "hr" ? "Tiho selo na sjevernom vrhu otoka" :
+         typedLocale === "de" ? "Ein ruhiges Dorf an der Nordspitze der Insel" :
+         typedLocale === "sl" ? "Tiha vas na severnem vrhu otoka" :
+         "A quiet village at the northern tip of the island"}
+      </h2>
     </div>
-  </section>
+  </div>
 
   {/* Apartments */}
   <section class="section section--dark" data-reveal>
     <div class="container">
-      <div class="apartments-preview">
-        <div class="apartments-preview__text">
+      <div class="split-section split-section--reverse">
+        <div class="split-section__left">
           <p class="text-label" style="color: rgba(255,255,255,0.7);">{t(typedLocale, "apartments.title")}</p>
-          <h2 style="margin-top: var(--space-md);">
+          <h2>
             {typedLocale === "hr" ? "Vaš dom na Jadranu" :
              typedLocale === "de" ? "Ihr Zuhause an der Adria" :
              typedLocale === "sl" ? "Vaš dom na Jadranu" :
              "Your home on the Adriatic"}
           </h2>
-          <p class="text-lead" style="margin-top: var(--space-lg); color: rgba(255,255,255,0.75);">
+          <p class="text-lead" style="color: rgba(255,255,255,0.75); margin-top: var(--space-lg);">
             {typedLocale === "hr" ? "Udobni apartmani s pogledom na more, kamenom terasom za jutarnju kavu i svim što trebate za savršen odmor." :
              typedLocale === "de" ? "Komfortable Ferienwohnungen mit Meerblick, Steinterrasse für den Morgenkaffee und allem, was Sie für einen perfekten Urlaub brauchen." :
              typedLocale === "sl" ? "Udobni apartmaji s pogledom na morje, kamnito teraso za jutranjo kavo in vsem, kar potrebujete za popoln dopust." :
@@ -115,50 +102,38 @@ const whyItems = [
             {t(typedLocale, "nav.apartments")}
           </a>
         </div>
-        <div class="apartments-preview__images">
-          <div class="apartments-preview__img image-hover-zoom">
-            <img src="https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg?auto=compress&w=800" alt="Apartment terrace with sea view" loading="lazy" />
-          </div>
-          <div class="apartments-preview__img apartments-preview__img--small image-hover-zoom">
-            <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&w=600" alt="Apartment living room" loading="lazy" />
+        <div class="split-section__right">
+          <div class="duo-image">
+            <img src="https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg?auto=compress&w=600" alt="" width="600" height="800" loading="lazy" />
+            <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&w=600" alt="" width="600" height="800" loading="lazy" />
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  {/* Food & experience teaser */}
-  <section class="section" data-reveal>
-    <div class="container">
-      <div class="experience-grid">
-        <div class="experience-grid__item image-hover-zoom">
-          <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=600" alt="Grilled fish" loading="lazy" />
-          <div class="experience-grid__label">
-            <p class="text-label">{t(typedLocale, "guide.foodDrink")}</p>
-          </div>
-        </div>
-        <div class="experience-grid__item image-hover-zoom">
-          <img src="https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=600" alt="Olive grove" loading="lazy" />
-          <div class="experience-grid__label">
-            <p class="text-label">
-              {typedLocale === "hr" ? "Maslinovo ulje" :
-               typedLocale === "de" ? "Olivenöl" :
-               typedLocale === "sl" ? "Oljčno olje" :
-               "Olive oil"}
-            </p>
-          </div>
-        </div>
-        <div class="experience-grid__item image-hover-zoom">
-          <img src="https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&w=800" alt="Pebble beach" loading="lazy" />
-          <div class="experience-grid__label">
-            <p class="text-label">{t(typedLocale, "guide.beaches")}</p>
-          </div>
-        </div>
-      </div>
+  {/* Experience triptych — edge-to-edge, uniform */}
+  <div class="triptych" data-reveal>
+    <div class="triptych__item">
+      <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=600" alt="" width="600" height="750" loading="lazy" />
+      <span class="triptych__label">{t(typedLocale, "guide.foodDrink")}</span>
     </div>
-  </section>
+    <div class="triptych__item">
+      <img src="https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=600" alt="" width="600" height="750" loading="lazy" />
+      <span class="triptych__label">
+        {typedLocale === "hr" ? "Maslinovo ulje" :
+         typedLocale === "de" ? "Olivenöl" :
+         typedLocale === "sl" ? "Oljčno olje" :
+         "Olive oil"}
+      </span>
+    </div>
+    <div class="triptych__item">
+      <img src="https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=600" alt="" width="600" height="750" loading="lazy" />
+      <span class="triptych__label">{t(typedLocale, "guide.beaches")}</span>
+    </div>
+  </div>
 
-  {/* Inquiry CTA */}
+  {/* CTA */}
   <section class="section section--alt" id="inquiry" data-reveal>
     <div class="container text-center">
       <p class="text-label">{t(typedLocale, "nav.contact")}</p>
@@ -171,7 +146,7 @@ const whyItems = [
       <p style="margin-inline: auto; margin-top: var(--space-lg); color: var(--color-text-light);">
         {t(typedLocale, "trust.responseTime")}
       </p>
-      <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; margin-top: var(--space-2xl);">
+      <div style="margin-top: var(--space-2xl);">
         <a href={`/${typedLocale}/apartmani#inquiry`} class="btn btn--primary">
           {t(typedLocale, "booking.title")}
         </a>
@@ -181,202 +156,180 @@ const whyItems = [
 </Page>
 
 <style>
-  /* Photo strip */
+  /* ============================================================
+     PHOTO STRIP — edge-to-edge, no border-radius, uniform 3:2
+     ============================================================ */
   .photo-strip {
-    overflow: hidden;
-  }
-
-  .photo-strip__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
   }
 
-  .photo-strip__item {
-    overflow: hidden;
-    aspect-ratio: 16 / 9;
-  }
-
-  .photo-strip__item img {
+  .photo-strip img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s var(--ease-out);
-  }
-
-  .photo-strip__item:hover img {
-    transform: scale(1.03);
+    aspect-ratio: 3 / 2;
+    display: block;
   }
 
   @media (max-width: 640px) {
-    .photo-strip__grid {
+    .photo-strip {
       grid-template-columns: 1fr;
     }
-
-    .photo-strip__item {
+    .photo-strip img {
       aspect-ratio: 21 / 9;
     }
   }
 
-  /* Why section */
-  .why-section {
+  /* ============================================================
+     SPLIT SECTION — text + content side by side
+     ============================================================ */
+  .split-section {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
-    max-width: 900px;
-    margin-inline: auto;
   }
 
   @media (min-width: 768px) {
-    .why-section {
-      grid-template-columns: 1fr 1.5fr;
+    .split-section {
+      grid-template-columns: 1fr 1.2fr;
       gap: var(--space-3xl);
-      max-width: none;
+      align-items: start;
+    }
+    .split-section--reverse {
+      grid-template-columns: 1.2fr 1fr;
+    }
+    .split-section--reverse .split-section__left {
+      order: 1;
+    }
+    .split-section--reverse .split-section__right {
+      order: 2;
     }
   }
 
-  .why-section__header {
-    position: sticky;
-    top: calc(var(--nav-height) + var(--space-xl));
-    align-self: start;
-  }
-
-  .why-section__header h2 {
+  .split-section__left h2 {
     margin-top: var(--space-md);
     font-size: clamp(1.75rem, 3.5vw, 2.75rem);
   }
 
-  .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-    margin-top: var(--space-2xl);
-  }
-
-  .why-grid__item {
+  /* Tag row */
+  .tag-row {
     display: flex;
-    align-items: center;
-    gap: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xl);
   }
 
-  .why-grid__icon {
-    color: var(--color-terracotta);
+  .tag {
     font-size: var(--font-size-xs);
-  }
-
-  .why-grid__text {
-    font-size: var(--font-size-sm);
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--color-sand);
     color: var(--color-navy);
-    letter-spacing: 0.02em;
   }
 
-  @media (max-width: 480px) {
-    .why-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Full-width image section */
-  .image-section {
+  /* ============================================================
+     FULL-BLEED IMAGE — edge-to-edge, text overlay at bottom
+     ============================================================ */
+  .full-bleed-image {
     position: relative;
-    height: 60vh;
-    min-height: 400px;
     overflow: hidden;
   }
 
-  .image-section img {
+  .full-bleed-image img {
     width: 100%;
-    height: 100%;
+    display: block;
+    aspect-ratio: 21 / 9;
     object-fit: cover;
-  }
-
-  .image-section__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(10, 31, 51, 0.3) 0%, rgba(10, 31, 51, 0.6) 100%);
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: var(--space-3xl);
-  }
-
-  .image-section__overlay h2 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-  }
-
-  /* Apartments preview */
-  .apartments-preview {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-2xl);
-    align-items: center;
-  }
-
-  @media (min-width: 768px) {
-    .apartments-preview {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-3xl);
-    }
-  }
-
-  .apartments-preview__images {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: var(--space-md);
-  }
-
-  .apartments-preview__img {
-    border-radius: var(--radius-md);
-    overflow: hidden;
-  }
-
-  .apartments-preview__img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 3 / 4;
-  }
-
-  .apartments-preview__img--small img {
-    aspect-ratio: 3 / 4;
-  }
-
-  /* Experience grid */
-  .experience-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md);
   }
 
   @media (max-width: 640px) {
-    .experience-grid {
-      grid-template-columns: 1fr;
+    .full-bleed-image img {
+      aspect-ratio: 16 / 9;
     }
   }
 
-  .experience-grid__item {
-    position: relative;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
+  .full-bleed-image__text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-2xl) clamp(1.25rem, 4vw, 3rem);
+    background: linear-gradient(transparent 40%, rgba(10, 31, 51, 0.65));
   }
 
-  .experience-grid__item img {
+  .full-bleed-image__text h2 {
+    color: var(--color-white);
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    margin-top: var(--space-sm);
+    max-width: 500px;
+  }
+
+  /* ============================================================
+     DUO IMAGE — two photos side by side, same aspect ratio, no radius
+     ============================================================ */
+  .duo-image {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  .duo-image img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
+    display: block;
   }
 
-  .experience-grid__label {
+  /* ============================================================
+     TRIPTYCH — three photos edge-to-edge, uniform, with labels
+     ============================================================ */
+  .triptych {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .triptych__item {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .triptych__item img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-out);
+  }
+
+  .triptych__item:hover img {
+    transform: scale(1.03);
+  }
+
+  .triptych__label {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: var(--space-lg);
-    background: linear-gradient(transparent, rgba(10, 31, 51, 0.7));
+    padding: var(--space-xl) var(--space-lg) var(--space-lg);
+    background: linear-gradient(transparent, rgba(10, 31, 51, 0.6));
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  .experience-grid__label .text-label {
-    color: var(--color-white);
+  @media (max-width: 640px) {
+    .triptych {
+      grid-template-columns: 1fr;
+    }
+    .triptych__item img {
+      aspect-ratio: 16 / 9;
+    }
   }
 </style>
