@@ -25,7 +25,7 @@ Reduced motion, keyboard navigation, screen reader support, and color contrast.
 - **Priority:** P0
 - **Dependencies:** REQ-VD-3
 - **Verification:** Enable reduced-motion, verify full site
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-A11Y-2: Keyboard Navigation
 

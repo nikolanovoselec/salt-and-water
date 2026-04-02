@@ -16,6 +16,10 @@ Decisions made during implementation with rationale.
 | AD4 | No PWA — unnecessary complexity for this scale | Architecture | 2026-04-02 |
 | AD5 | Structured fields over rich text for most CMS content types | UI/Frontend | 2026-04-02 |
 | AD6 | Inquiry lifecycle via email-first, D1 as backup log | Architecture | 2026-04-02 |
+| AD7 | JWT implemented with Web Crypto API, no third-party library | Security | 2026-04-02 |
+| AD8 | R2 presigned uploads via aws4fetch, not Worker-proxied | Storage | 2026-04-02 |
+| AD9 | Locale prefix on all routes including default (hr) | Architecture | 2026-04-02 |
+| AD10 | Input sanitization layer separate from Zod schema validation | Architecture | 2026-04-02 |
 
 ---
 
@@ -54,3 +58,27 @@ Mobile rich text editing is frustrating on phones. Structured fields are faster,
 **Decision:** Owner manages inquiries primarily via email (rich HTML from Resend with one-tap actions). D1 stores inquiries as backup and status tracker, not as a full inbox UI.
 
 Building a custom inbox in the CMS admin is reinventing email. The owner already checks email and WhatsApp on her phone. D1 ensures no inquiry is lost if email fails, and provides the "Confirm + Block Dates" action that email alone can't do.
+
+### AD7: JWT implemented with Web Crypto API, no third-party library
+
+**Decision:** Auth JWTs are signed and verified using `crypto.subtle` (Web Crypto API) directly, with no third-party JWT library (e.g., jose, jsonwebtoken).
+
+The Workers runtime does not support Node.js crypto modules. Third-party JWT libraries vary in Workers compatibility and add bundle weight. The HMAC-SHA-256 signing pattern requires only ~50 lines of code using standard Web Crypto API, which is available natively in all Workers environments. The implementation lives in `src/lib/auth.ts`.
+
+### AD8: R2 presigned uploads via aws4fetch, not Worker-proxied
+
+**Decision:** Browser-to-R2 uploads use presigned PUT URLs generated server-side with `aws4fetch`. The browser uploads directly to R2; the Worker is not in the upload data path.
+
+Proxying large binary uploads through a Worker consumes egress bandwidth, adds latency, and risks hitting Worker memory limits (128MB) on large images. Presigned URLs offload the upload entirely to R2's S3-compatible endpoint. The Worker only generates and returns the signed URL. `aws4fetch` is used because the Workers runtime lacks the Node.js `aws-sdk`. R2 S3 credentials are separate from the bucket binding and must be created in the Cloudflare dashboard.
+
+### AD9: Locale prefix on all routes including default (hr)
+
+**Decision:** All public page routes include a locale prefix — including the default Croatian locale (`/hr/`). The root `/` redirects to the detected locale.
+
+`prefixDefaultLocale: true` avoids having two canonical URLs for the same content (`/` and `/hr/`), which would require explicit canonical tag management. It also makes locale-switching symmetric and keeps URL structure consistent across all languages. The redirect at `/` uses `Accept-Language` for initial detection.
+
+### AD10: Input sanitization layer separate from Zod schema validation
+
+**Decision:** Form inputs go through a dedicated sanitization module (`src/lib/sanitize.ts`) in addition to Zod schema validation. Sanitization runs before or alongside schema validation, not as a Zod transform.
+
+Zod validates shape and types. Sanitization addresses content safety concerns orthogonal to schema validity: HTML injection, email header injection, URL spam in message bodies. Keeping them separate makes each responsibility testable in isolation and avoids coupling content-security logic to schema definitions.

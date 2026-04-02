@@ -1,0 +1,186 @@
+---
+import Page from "~/layouts/Page.astro";
+import { isValidLocale, type Locale } from "~/i18n/config";
+import { t } from "~/i18n/t";
+
+const { locale } = Astro.params;
+
+if (!locale || !isValidLocale(locale)) {
+  return Astro.redirect("/hr/", 302);
+}
+
+const typedLocale = locale as Locale;
+
+// TODO: Phase 4 — query apartments from Emdash CMS
+// For now, show coming soon state (REQ-AP-2 zero-apartment handling)
+const apartments: Array<{
+  id: string;
+  name: string;
+  slug: string;
+  capacity: number;
+  beachDistance: number;
+  lowestPrice: number | null;
+  seaView: boolean;
+  bestFor: string[];
+  valueProp: string;
+  heroImageKey: string | null;
+}> = [];
+---
+
+<Page title={t(typedLocale, "apartments.title")} locale={typedLocale}>
+  <section class="section" style="padding-top: calc(var(--nav-height) + var(--space-3xl));">
+    <div class="container">
+      <h1 class="text-center" data-reveal>{t(typedLocale, "apartments.title")}</h1>
+      <div class="section-divider"></div>
+
+      {apartments.length === 0 ? (
+        <div class="coming-soon text-center" data-reveal>
+          <p style="margin-top: var(--space-xl); margin-inline: auto;">
+            {t(typedLocale, "apartments.comingSoon")}
+          </p>
+        </div>
+      ) : apartments.length === 1 ? (
+        <meta http-equiv="refresh" content={`0; url=/${typedLocale}/apartmani/${apartments[0].slug}`} />
+      ) : (
+        <div class="apartment-grid" data-reveal-stagger>
+          {apartments.map((apt) => (
+            <a href={`/${typedLocale}/apartmani/${apt.slug}`} class="apartment-card image-hover-zoom">
+              <div class="apartment-card__image">
+                {apt.heroImageKey ? (
+                  <img
+                    src={`/media/${apt.heroImageKey}?w=800&f=webp&q=80`}
+                    alt={apt.name}
+                    loading="lazy"
+                    width="800"
+                    height="500"
+                  />
+                ) : (
+                  <div class="apartment-card__placeholder"></div>
+                )}
+                {apt.seaView && (
+                  <span class="apartment-card__badge">{t(typedLocale, "apartments.seaView")}</span>
+                )}
+              </div>
+              <div class="apartment-card__content">
+                <h3>{apt.name}</h3>
+                <p class="apartment-card__meta">
+                  {t(typedLocale, "apartments.sleeps", { count: String(apt.capacity) })}
+                  {" · "}
+                  {t(typedLocale, "apartments.beachDistance", { meters: String(apt.beachDistance) })}
+                </p>
+                {apt.bestFor.length > 0 && (
+                  <p class="apartment-card__best-for">
+                    {t(typedLocale, "apartments.bestFor")}: {apt.bestFor.join(", ")}
+                  </p>
+                )}
+                <p class="apartment-card__price">
+                  {apt.lowestPrice
+                    ? t(typedLocale, "apartments.fromPrice", { price: String(apt.lowestPrice) })
+                    : t(typedLocale, "pricing.onRequest")}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Page>
+
+<style>
+  .apartment-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    margin-top: var(--space-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .apartment-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .apartment-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--duration-normal) var(--ease-out);
+  }
+
+  .apartment-card:hover {
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+  }
+
+  .apartment-card__image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--color-stone);
+  }
+
+  .apartment-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .apartment-card__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-stone) 0%, var(--color-bg-alt) 100%);
+  }
+
+  .apartment-card__badge {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    background: rgba(12, 45, 72, 0.8);
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+  }
+
+  .apartment-card__content {
+    padding: var(--space-lg);
+  }
+
+  .apartment-card__content h3 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .apartment-card__meta {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+  }
+
+  .apartment-card__best-for {
+    font-size: var(--font-size-sm);
+    color: var(--color-olive);
+    margin-top: var(--space-xs);
+  }
+
+  .apartment-card__price {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-xl);
+    color: var(--color-navy);
+    margin-top: var(--space-md);
+  }
+
+  .coming-soon {
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

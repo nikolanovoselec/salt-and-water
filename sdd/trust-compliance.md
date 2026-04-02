@@ -132,7 +132,7 @@ GDPR, privacy policy, Impressum, house rules, cancellation policy, security head
 - **Priority:** P1
 - **Dependencies:** None
 - **Verification:** securityheaders.com scan
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-TC-7: Accessibility Statement
 

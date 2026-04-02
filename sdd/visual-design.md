@@ -25,7 +25,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Priority:** P0
 - **Dependencies:** None
 - **Verification:** Contrast checker for all combinations
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-VD-2: Typography System
 
@@ -45,7 +45,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Priority:** P0
 - **Dependencies:** None
 - **Verification:** Visual review in all 4 locales
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-VD-3: Scroll Animation System
 
@@ -70,7 +70,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Priority:** P1
 - **Dependencies:** None
 - **Verification:** Lighthouse audit, reduced-motion test
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-VD-4: Micro-Interactions
 
@@ -88,7 +88,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Priority:** P1
 - **Dependencies:** None
 - **Verification:** Visual review + keyboard test
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-VD-5: Section Color Progression
 
