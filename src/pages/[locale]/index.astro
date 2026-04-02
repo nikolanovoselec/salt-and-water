@@ -16,17 +16,32 @@ const titles: Record<Locale, string> = {
 };
 
 const whyItems = [
-  { icon: "◆", key: "crystal", hr: "Kristalno čisto more", de: "Kristallklares Meer", sl: "Kristalno čisto morje", en: "Crystal-clear sea" },
-  { icon: "◆", key: "peace", hr: "Mir otoka", de: "Inselruhe", sl: "Mir otoka", en: "Island tranquility" },
-  { icon: "◆", key: "ferry", hr: "25 min trajektom", de: "25 Min. Fähre", sl: "25 min s trajektom", en: "25 min by ferry" },
-  { icon: "◆", key: "dalmatia", hr: "Autentična Dalmacija", de: "Authentisches Dalmatien", sl: "Pristna Dalmacija", en: "Authentic Dalmatia" },
+  { icon: "◆", hr: "Kristalno čisto more", de: "Kristallklares Meer", sl: "Kristalno čisto morje", en: "Crystal-clear sea" },
+  { icon: "◆", hr: "Mir otoka", de: "Inselruhe", sl: "Mir otoka", en: "Island tranquility" },
+  { icon: "◆", hr: "25 min trajektom", de: "25 Min. Fähre", sl: "25 min s trajektom", en: "25 min by ferry" },
+  { icon: "◆", hr: "Autentična Dalmacija", de: "Authentisches Dalmatien", sl: "Pristna Dalmacija", en: "Authentic Dalmatia" },
 ];
 ---
 
 <Page title={titles[typedLocale]} locale={typedLocale} hasHero={true}>
   <Hero locale={typedLocale} />
 
-  {/* Why Pašman — refined editorial layout */}
+  {/* Photo strip — visual break */}
+  <section class="photo-strip">
+    <div class="photo-strip__grid">
+      <div class="photo-strip__item">
+        <img src="/media/hero-pine-sea.jpg" alt="Pine trees and Adriatic sea" loading="lazy" />
+      </div>
+      <div class="photo-strip__item">
+        <img src="/media/editorial-pebble-beach.jpg" alt="Pebble beach cove" loading="lazy" />
+      </div>
+      <div class="photo-strip__item">
+        <img src="/media/hero-stone-village.jpg" alt="Dalmatian stone village" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  {/* Why Pašman */}
   <section class="section" data-reveal>
     <div class="container">
       <div class="why-section">
@@ -62,27 +77,89 @@ const whyItems = [
     </div>
   </section>
 
-  {/* Apartments — dark section for contrast */}
+  {/* Full-width image with text overlay */}
+  <section class="image-section" data-reveal>
+    <img src="/media/hero-sunset-islands.jpg" alt="Sunset over Dalmatian islands" loading="lazy" />
+    <div class="image-section__overlay">
+      <div class="container text-center">
+        <p class="text-label" style="color: rgba(255,255,255,0.7);">Ždrelac</p>
+        <h2 style="color: var(--color-white); margin-top: var(--space-md);">
+          {typedLocale === "hr" ? "Tiho selo na sjevernom vrhu otoka" :
+           typedLocale === "de" ? "Ein ruhiges Dorf an der Nordspitze der Insel" :
+           typedLocale === "sl" ? "Tiha vas na severnem vrhu otoka" :
+           "A quiet village at the northern tip of the island"}
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  {/* Apartments */}
   <section class="section section--dark" data-reveal>
-    <div class="container text-center">
-      <p class="text-label" style="color: rgba(255,255,255,0.7);">{t(typedLocale, "apartments.title")}</p>
-      <h2 style="margin-top: var(--space-md);">
-        {typedLocale === "hr" ? "Vaš dom na Jadranu" :
-         typedLocale === "de" ? "Ihr Zuhause an der Adria" :
-         typedLocale === "sl" ? "Vaš dom na Jadranu" :
-         "Your home on the Adriatic"}
-      </h2>
-      <p class="text-lead" style="margin-inline: auto; margin-top: var(--space-lg); color: rgba(255,255,255,0.75);">
-        {t(typedLocale, "apartments.comingSoon")}
-      </p>
-      <a href={`/${typedLocale}/apartmani`} class="btn btn--ghost" style="margin-top: var(--space-2xl);">
-        {t(typedLocale, "nav.apartments")}
-      </a>
+    <div class="container">
+      <div class="apartments-preview">
+        <div class="apartments-preview__text">
+          <p class="text-label" style="color: rgba(255,255,255,0.7);">{t(typedLocale, "apartments.title")}</p>
+          <h2 style="margin-top: var(--space-md);">
+            {typedLocale === "hr" ? "Vaš dom na Jadranu" :
+             typedLocale === "de" ? "Ihr Zuhause an der Adria" :
+             typedLocale === "sl" ? "Vaš dom na Jadranu" :
+             "Your home on the Adriatic"}
+          </h2>
+          <p class="text-lead" style="margin-top: var(--space-lg); color: rgba(255,255,255,0.75);">
+            {typedLocale === "hr" ? "Udobni apartmani s pogledom na more, kamenom terasom za jutarnju kavu i svim što trebate za savršen odmor." :
+             typedLocale === "de" ? "Komfortable Ferienwohnungen mit Meerblick, Steinterrasse für den Morgenkaffee und allem, was Sie für einen perfekten Urlaub brauchen." :
+             typedLocale === "sl" ? "Udobni apartmaji s pogledom na morje, kamnito teraso za jutranjo kavo in vsem, kar potrebujete za popoln dopust." :
+             "Comfortable apartments with sea views, a stone terrace for morning coffee, and everything you need for a perfect holiday."}
+          </p>
+          <a href={`/${typedLocale}/apartmani`} class="btn btn--ghost" style="margin-top: var(--space-2xl);">
+            {t(typedLocale, "nav.apartments")}
+          </a>
+        </div>
+        <div class="apartments-preview__images">
+          <div class="apartments-preview__img image-hover-zoom">
+            <img src="/media/apt-terrace-view.jpg" alt="Apartment terrace with sea view" loading="lazy" />
+          </div>
+          <div class="apartments-preview__img apartments-preview__img--small image-hover-zoom">
+            <img src="/media/apt-living-room.jpg" alt="Apartment living room" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Food & experience teaser */}
+  <section class="section" data-reveal>
+    <div class="container">
+      <div class="experience-grid">
+        <div class="experience-grid__item image-hover-zoom">
+          <img src="/media/editorial-grilled-fish.jpg" alt="Grilled fish" loading="lazy" />
+          <div class="experience-grid__label">
+            <p class="text-label">{t(typedLocale, "guide.foodDrink")}</p>
+          </div>
+        </div>
+        <div class="experience-grid__item image-hover-zoom">
+          <img src="/media/editorial-olive-grove.jpg" alt="Olive grove" loading="lazy" />
+          <div class="experience-grid__label">
+            <p class="text-label">
+              {typedLocale === "hr" ? "Maslinovo ulje" :
+               typedLocale === "de" ? "Olivenöl" :
+               typedLocale === "sl" ? "Oljčno olje" :
+               "Olive oil"}
+            </p>
+          </div>
+        </div>
+        <div class="experience-grid__item image-hover-zoom">
+          <img src="/media/editorial-pebble-beach.jpg" alt="Pebble beach" loading="lazy" />
+          <div class="experience-grid__label">
+            <p class="text-label">{t(typedLocale, "guide.beaches")}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   {/* Inquiry CTA */}
-  <section class="section" id="inquiry" data-reveal>
+  <section class="section section--alt" id="inquiry" data-reveal>
     <div class="container text-center">
       <p class="text-label">{t(typedLocale, "nav.contact")}</p>
       <h2 style="margin-top: var(--space-md);">
@@ -94,7 +171,7 @@ const whyItems = [
       <p style="margin-inline: auto; margin-top: var(--space-lg); color: var(--color-text-light);">
         {t(typedLocale, "trust.responseTime")}
       </p>
-      <div style="margin-top: var(--space-2xl);">
+      <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; margin-top: var(--space-2xl);">
         <a href={`/${typedLocale}/apartmani#inquiry`} class="btn btn--primary">
           {t(typedLocale, "booking.title")}
         </a>
@@ -104,6 +181,44 @@ const whyItems = [
 </Page>
 
 <style>
+  /* Photo strip */
+  .photo-strip {
+    overflow: hidden;
+  }
+
+  .photo-strip__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+
+  .photo-strip__item {
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+
+  .photo-strip__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-out);
+  }
+
+  .photo-strip__item:hover img {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 640px) {
+    .photo-strip__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .photo-strip__item {
+      aspect-ratio: 21 / 9;
+    }
+  }
+
+  /* Why section */
   .why-section {
     display: grid;
     grid-template-columns: 1fr;
@@ -160,5 +275,108 @@ const whyItems = [
     .why-grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* Full-width image section */
+  .image-section {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    overflow: hidden;
+  }
+
+  .image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-section__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 31, 51, 0.3) 0%, rgba(10, 31, 51, 0.6) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: var(--space-3xl);
+  }
+
+  .image-section__overlay h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  /* Apartments preview */
+  .apartments-preview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .apartments-preview {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  .apartments-preview__images {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-md);
+  }
+
+  .apartments-preview__img {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .apartments-preview__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+  }
+
+  .apartments-preview__img--small img {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Experience grid */
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 640px) {
+    .experience-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .experience-grid__item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+  }
+
+  .experience-grid__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .experience-grid__label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-lg);
+    background: linear-gradient(transparent, rgba(10, 31, 51, 0.7));
+  }
+
+  .experience-grid__label .text-label {
+    color: var(--color-white);
   }
 </style>
