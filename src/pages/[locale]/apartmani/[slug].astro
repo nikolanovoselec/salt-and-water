@@ -13,7 +13,7 @@ const entry = await getLocalizedEntry("apartments", slug, typedLocale);
 if (!entry) return Astro.redirect(`/${locale}/apartmani`, 302);
 
 const d = entry.data;
-const name = d.name as string;
+const name = (d.name as string) ?? slug;
 const tagline = (d.tagline as string) ?? "";
 const description = (d.description as string) ?? "";
 const heroImage = (d.hero_image as string) ?? "";
@@ -27,8 +27,8 @@ const priceFrom = d.price_from as number | undefined;
 let amenities: string[] = [];
 try {
   const raw = d.amenities_json;
-  if (Array.isArray(raw)) amenities = raw as string[];
-  else if (typeof raw === "string") amenities = JSON.parse(raw);
+  const parsed = Array.isArray(raw) ? raw : typeof raw === "string" ? JSON.parse(raw) : [];
+  amenities = parsed.filter((a: unknown) => typeof a === "string");
 } catch { /* ignore */ }
 ---
 

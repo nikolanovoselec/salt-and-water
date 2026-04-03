@@ -55,7 +55,7 @@ const page = content[typedLocale];
 <Page title={page.title} locale={typedLocale}>
   {/* Village hero with aerial image */}
   <section class="village-hero">
-    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=1920" alt={`${page.title} — Pašman`} width="1920" height="1080" />
+    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=1920" alt={`${page.title} — Pašman`} width="1920" height="1080" fetchpriority="high" />
     <div class="village-hero__overlay">
       <div class="container">
         <h1>{page.title}</h1>

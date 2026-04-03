@@ -80,9 +80,9 @@ const displayApartments = apartments.length > 0 ? apartments : fallbackApartment
                 <span class="apartment-card__price">
                   {t(typedLocale, "apartments.fromPrice").replace("{price}", String(apt.data.price_from))}
                 </span>
-                <a href={`/${typedLocale}/apartmani#inquiry`} class="btn btn--primary">
+                <span class="btn btn--primary">
                   {t(typedLocale, "nav.inquire")}
-                </a>
+                </span>
               </div>
             </div>
           </a>
@@ -124,14 +124,16 @@ const displayApartments = apartments.length > 0 ? apartments : fallbackApartment
     }
   }
 
-  .apartment-card {
+  .apartment-card-link {
     background: var(--color-white);
     overflow: hidden;
-    transition: box-shadow var(--duration-normal) var(--ease-out);
+    border-radius: 12px;
+    transition: box-shadow var(--duration-normal) var(--ease-out), transform 0.4s var(--ease-out);
   }
 
-  .apartment-card:hover {
+  .apartment-card-link:hover {
     box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
   }
 
   .apartment-card__image {
@@ -147,7 +149,7 @@ const displayApartments = apartments.length > 0 ? apartments : fallbackApartment
     transition: transform var(--duration-slow) var(--ease-out);
   }
 
-  .apartment-card:hover .apartment-card__image img {
+  .apartment-card-link:hover .apartment-card__image img {
     transform: scale(1.03);
   }
 
