@@ -31,6 +31,8 @@ try {
   } catch { /* */ }
 }
 // Fallback apartments when CMS not yet seeded
+// CMS slugs have locale suffix (e.g., "lavanda-hr") — strip it for fallback matching
+const baseSlug = slug.replace(/-(?:hr|de|sl|en)$/, "");
 if (!entry) {
   const fallbacks: Record<string, Record<string, unknown>> = {
     lavanda: {
@@ -52,7 +54,7 @@ if (!entry) {
       amenities_json: ["WiFi", "A/C", "TV", typedLocale === "hr" ? "Terasa" : typedLocale === "de" ? "Terrasse" : typedLocale === "sl" ? "Terasa" : "Terrace", "Parking"],
     },
   };
-  entry = fallbacks[slug] ?? null;
+  entry = fallbacks[baseSlug] ?? fallbacks[slug] ?? null;
 }
 if (!entry) return Astro.redirect(`/${locale}/apartmani`, 302);
 
