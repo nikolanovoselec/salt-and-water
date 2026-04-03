@@ -15,6 +15,7 @@
 | **R2** | Cloudflare's object storage (S3-compatible). Used for media (photos, video). |
 | **Turnstile** | Cloudflare's privacy-preserving CAPTCHA alternative. Used in invisible mode on inquiry forms. |
 | **Resend** | Email delivery service. Used to send inquiry notifications to owner and auto-replies to guests. |
+| **Crossfade Carousel** | Image slideshow where slides transition by fading opacity (stacked via absolute positioning), as opposed to sliding/swiping. Used for the hero section. |
 | **Ken Burns** | Slow zoom and pan animation effect applied to still photographs, named after the documentary filmmaker. |
 | **Blurhash** | Compact encoding of an image placeholder as a short string, decoded to a blurred preview before the full image loads. |
 | **Portable Text** | Structured JSON format for rich text content used by Emdash, allowing flexible rendering. |

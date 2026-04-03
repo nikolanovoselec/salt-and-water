@@ -22,6 +22,8 @@ The sitemap is served at `/sitemap.xml` and generated at request time by `src/pa
 |---|---|
 | `/` | Homepage |
 | `/apartmani` | Apartment listing |
+| `/zdrelac` | Ždrelac village |
+| `/galerija` | Gallery |
 | `/zasto-pasman` | Why Pašman (editorial) |
 | `/dolazak` | Getting Here (ferry, airport, maps) |
 | `/vodic` | Local Guide (beaches, food, activities) |
@@ -30,7 +32,7 @@ The sitemap is served at `/sitemap.xml` and generated at request time by `src/pa
 | `/privatnost` | Privacy Policy |
 | `/impressum` | Legal notice |
 
-Each page is emitted once per locale, producing 36 `<url>` entries (9 pages × 4 locales).
+Each page is emitted once per locale, producing 48 `<url>` entries (12 pages × 4 locales).
 
 ### hreflang alternates
 

@@ -76,9 +76,11 @@ Astro's i18n is configured with `routing: "manual"`. File-based `[locale]` direc
 | `/:locale/` | `src/pages/[locale]/index.astro` | Homepage |
 | `/:locale/apartmani` | `src/pages/[locale]/apartmani/index.astro` | Apartment listing — card grid (2 columns desktop, 1 mobile); falls back to hardcoded data when CMS not seeded; each card links to detail page |
 | `/:locale/apartmani/:slug` | `src/pages/[locale]/apartmani/[slug].astro` | Apartment detail — hero image, description, meta grid (sleeps/bedrooms/size/beach distance), price card, amenity list; reads from `apartments` CMS collection via `getLocalizedEntry`; redirects to listing on missing slug |
-| `/:locale/zasto-pasman` | `src/pages/[locale]/zasto-pasman.astro` | Why Pašman — 4 selling-point sections |
+| `/:locale/zdrelac` | `src/pages/[locale]/zdrelac.astro` | Ždrelac village — 4 editorial sections (bridge, beaches, Dalmatian life, olive groves), localized in all 4 locales; linked from main nav |
+| `/:locale/galerija` | `src/pages/[locale]/galerija.astro` | Gallery — masonry grid of location and apartment photos with lightbox; linked from main nav |
+| `/:locale/zasto-pasman` | `src/pages/[locale]/zasto-pasman.astro` | Why Pašman — 4 selling-point sections (not in main nav) |
 | `/:locale/dolazak` | `src/pages/[locale]/dolazak.astro` | Getting Here — ferry, airport, map links |
-| `/:locale/faq` | `src/pages/[locale]/faq.astro` | FAQ — accordion with Schema.org FAQPage markup |
+| `/:locale/faq` | `src/pages/[locale]/faq.astro` | FAQ — accordion with Schema.org FAQPage markup (not in main nav) |
 | `/:locale/o-nama` | `src/pages/[locale]/o-nama.astro` | About Us — host story |
 | `/:locale/vodic` | `src/pages/[locale]/vodic.astro` | Local Guide — alternating image+text rows for 4 categories (beaches, food, activities, day trips), localized in all 4 locales |
 | `/:locale/privatnost` | `src/pages/[locale]/privatnost.astro` | Privacy Policy (GDPR) |
