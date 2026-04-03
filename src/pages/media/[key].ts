@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import { env } from "cloudflare:workers";
-import "~/lib/env";
 
 /**
  * Image serving route: fetches from private R2, applies Cloudflare Image Resizing.

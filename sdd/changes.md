@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-04-03 — Revision 30: CloudflareEnv Type Augmentation Pattern
+
+Env type declaration moved from ambient `declare module` in `src/env.d.ts` to a shared module (`src/lib/env.ts`) that augments `CloudflareEnv` interface (not `Env`) and re-exports `const env: CloudflareEnv`. All API routes import this module as a side-effect (`import "~/lib/env"`) to pick up typed bindings. Matches the pattern used in graymatter.ch.
+
+### Constraints updated
+- **CON-STACK:** Env access pattern updated to document `CloudflareEnv` interface augmentation via shared side-effect import (replaces ambient `Env` interface in `env.d.ts`).
+
 ## 2026-04-03 — Revision 29: Astro v6 Env Migration, Email Sender Domain
 
 All API routes migrated from `getEnv(locals)` helper (extracting env from `locals.runtime.env`) to direct `import { env } from "cloudflare:workers"` module import (Astro v6 pattern). The `getEnv()` function is removed. Non-secret config (`ADMIN_EMAILS`, `TURNSTILE_SITE_KEY`) moved to `wrangler.jsonc` `vars` block. Email sender address changed from `noreply@apartmani.hr` to `noreply@graymatter.ch` across all transactional emails (inquiry notifications, magic link codes, guest auto-replies). New bindings declared in env types: `SESSION` (KVNamespace), `IMAGES`, `ASSETS` (Fetcher). R2 presigned URL auth credentials (`R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`) removed from env interface.
