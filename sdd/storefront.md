@@ -62,6 +62,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - "Inquire" CTA button always visible in nav
   - Hamburger menu on mobile with fullscreen overlay, including inline language picker (locale links with active state highlight)
   - Hamburger button: `.nav__hamburger` class with CSS styles (display flex, flex-direction column, gap 6px, no background/border, cursor pointer, padding 12px, z-index 101, position relative), three `<span>` elements (block, 24x2px, currentColor background, 1px border-radius, transform/opacity transitions). Selected via `#hamburger-btn` ID. CSS transform morph to X on `.is-open` (translateY + rotate).
+  - **Nav items (current order):** Apartments, Ždrelac (village page, REQ-ED-6), Gallery (REQ-SF-8), Getting Here, Local Guide, About. "Why Pašman" and FAQ removed from primary navigation (pages still exist, accessible via footer or direct URL).
   - **Admin link:** Navigation includes a link to the Emdash admin panel (`/_emdash/admin/`) labeled with the `nav.admin` translation key. Visible in both desktop nav and mobile menu. No authentication gate on the link itself (Emdash handles auth).
   - Menu items stagger in with animation
   - Focus trapping when fullscreen menu is open
@@ -145,6 +146,21 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Dependencies:** REQ-BK-1, REQ-AP-4
 - **Verification:** Mobile device test
 - **Status:** Planned
+
+### REQ-SF-8: Gallery Page
+
+- **Intent:** Showcase the property and destination through a curated photo collection
+- **Applies To:** Visitor
+- **Acceptance Criteria:**
+  - **Current implementation:** Standalone page at `/{locale}/galerija` with `HeroSimple` header and locale-aware title. 9-image grid using masonry-like layout with alternating aspect ratios (4:3 default, 3:4 for every 3n+1 item, 1:1 for every 3n+3 item). 2-column grid on mobile, 3-column on desktop (768px+ breakpoint). Each image wrapped in a card with 12px border-radius, subtle shadow, hover lift (translateY -4px with enhanced shadow), and image zoom on hover (1.05x). Per-locale alt text and captions on each image. Captions displayed below image in muted text. Staggered reveal animation via `data-reveal-stagger`. All images currently served from Pexels CDN (stock photos).
+  - **With CMS (planned):** Owner uploads and reorders gallery photos via Emdash media library. Mix of apartment and destination images.
+  - Accessible from primary navigation in all locales
+  - Linked from navigation as top-level page (between Ždrelac and Getting Here)
+- **Constraints:** CON-PERF, CON-I18N, CON-A11Y
+- **Priority:** P1
+- **Dependencies:** None
+- **Verification:** Visual review + responsive check on mobile/desktop
+- **Status:** Implemented
 
 ## Out of Scope
 

@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-04-03 — Revision 23: Gallery Page, Ždrelac Village Page, Navigation Restructuring
+
+Gallery page added with masonry-like grid layout and hover effects. Ždrelac village gets a full standalone page with aerial hero and alternating content rows. Navigation restructured: "Why Pašman" and FAQ removed from primary nav, replaced with Ždrelac and Gallery links.
+
+### Requirements added
+- **REQ-SF-8:** Gallery Page — standalone photo gallery at `/{locale}/galerija` with masonry grid, hover effects, per-locale captions.
+
+### AC updated
+- **REQ-ED-6:** Upgraded from short homepage section to full standalone page with 70vh hero, 4 alternating content sections, CTA. Route: `/{locale}/zdrelac`.
+- **REQ-SF-3:** Added current nav item order (Apartments, Ždrelac, Gallery, Getting Here, Local Guide, About). Documented removal of "Why Pašman" and FAQ from primary nav.
+
+### Status changes
+- **REQ-ED-6:** Planned -> Implemented (standalone village page with hardcoded 4-locale content).
+
+### No status changes
+- REQ-SF-3 remains Planned (focus trapping, IntersectionObserver scroll transition still missing).
+- REQ-SF-8 is new, Status: Implemented.
+
+### Glossary
+- Added "Masonry Grid" term.
+
 ## 2026-04-03 — Revision 22: Hero Carousel, Apartment Detail Page, Navigation Fix
 
 Hero section upgraded from single static image with CSS Ken Burns to a 4-image crossfade carousel with progress dots, auto-advance (6s), and per-slide Ken Burns zoom. Apartment detail page route added (`/{locale}/apartmani/{slug}`) with hero image, meta grid, price card, amenities, and description. Apartment listing cards now link to detail pages. Navigation scripts converted to `is:inline` to fix hamburger menu bundling issue. Photo strip removed from homepage (images consolidated into hero carousel).
