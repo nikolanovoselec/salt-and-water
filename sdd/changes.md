@@ -1,11 +1,11 @@
 # Changelog
 
-## 2026-04-03 — Revision 30: CloudflareEnv Type Augmentation Pattern
+## 2026-04-03 — Revision 30: Global CloudflareBindings Interface
 
-Env type declaration moved from ambient `declare module` in `src/env.d.ts` to a shared module (`src/lib/env.ts`) that augments `CloudflareEnv` interface (not `Env`) and re-exports `const env: CloudflareEnv`. All API routes import this module as a side-effect (`import "~/lib/env"`) to pick up typed bindings. Matches the pattern used in graymatter.ch.
+Env type declaration moved from module augmentation (`declare module "cloudflare:workers"` with `CloudflareEnv` interface in `src/lib/env.ts`) to a global ambient declaration (`declare global { interface CloudflareBindings }` in `src/env.d.ts`). The `CloudflareBindings` interface is the standard Cloudflare pattern for typing the `env` export from `cloudflare:workers`. All side-effect imports (`import "~/lib/env"`) removed from API routes — the global declaration applies project-wide without explicit imports.
 
 ### Constraints updated
-- **CON-STACK:** Env access pattern updated to document `CloudflareEnv` interface augmentation via shared side-effect import (replaces ambient `Env` interface in `env.d.ts`).
+- **CON-STACK:** Env access pattern updated to document global `CloudflareBindings` interface in `src/env.d.ts` (replaces `CloudflareEnv` module augmentation via shared side-effect import).
 
 ## 2026-04-03 — Revision 29: Astro v6 Env Migration, Email Sender Domain
 
