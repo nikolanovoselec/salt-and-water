@@ -1,6 +1,7 @@
 ---
 import Page from "~/layouts/Page.astro";
 import Hero from "~/components/home/Hero.astro";
+import WaveDivider from "~/components/ui/WaveDivider.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
 import { t } from "~/i18n/t";
 import { getLocalizedCollection, type LocalizedEntry } from "~/lib/content";
@@ -122,8 +123,11 @@ const oliveOilLabel: Record<Locale, string> = {
     </div>
   </div>
 
+  {/* Wave transition to dark section */}
+  <WaveDivider fill="#0A1F33" />
+
   {/* Apartments */}
-  <section class="section section--dark water-flow" data-reveal>
+  <section class="section section--dark" data-reveal>
     <div class="container">
       <div class="split-section split-section--reverse">
         <div class="split-section__left">
@@ -149,6 +153,9 @@ const oliveOilLabel: Record<Locale, string> = {
       </div>
     </div>
   </section>
+
+  {/* Wave from dark back to cream */}
+  <WaveDivider fill="#F8F5EF" flip />
 
   {/* Testimonials */}
   {testimonials.length > 0 && (
@@ -204,6 +211,9 @@ const oliveOilLabel: Record<Locale, string> = {
       </div>
     </div>
   </section>
+
+  {/* Wave into sunset CTA */}
+  <WaveDivider fill="#0a2342" />
 
   {/* CTA — sunset gradient */}
   <section class="section sunset-gradient" id="inquiry" data-reveal>

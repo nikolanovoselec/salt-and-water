@@ -1,0 +1,37 @@
+---
+interface Props {
+  /** Color of the wave (fills the wave shape) */
+  fill?: string;
+  /** Flip vertically */
+  flip?: boolean;
+  /** CSS class */
+  class?: string;
+}
+
+const { fill = "#F8F5EF", flip = false, class: className = "" } = Astro.props;
+---
+
+<div class:list={["wave-divider", { "wave-divider--flip": flip }, className]} aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,20 1440,40 L1440,80 L0,80 Z" fill={fill} />
+  </svg>
+</div>
+
+<style>
+  .wave-divider {
+    display: block;
+    width: 100%;
+    line-height: 0;
+    overflow: hidden;
+  }
+
+  .wave-divider svg {
+    display: block;
+    width: 100%;
+    height: clamp(40px, 6vw, 80px);
+  }
+
+  .wave-divider--flip {
+    transform: scaleY(-1);
+  }
+</style>

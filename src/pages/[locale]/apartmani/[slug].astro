@@ -2,17 +2,24 @@
 import Page from "~/layouts/Page.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
 import { t } from "~/i18n/t";
-import { getLocalizedEntry } from "~/lib/content";
+import { getEmDashEntry } from "emdash";
 
 const { locale, slug } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
 if (!slug) return Astro.redirect(`/${locale}/apartmani`, 302);
 const typedLocale = locale as Locale;
 
-const entry = await getLocalizedEntry("apartments", slug, typedLocale);
+// Load apartment directly by slug — no locale filtering on detail page
+let entry: Record<string, unknown> | null = null;
+try {
+  const result = await getEmDashEntry("apartments", slug);
+  entry = result?.entry ? (result.entry as { data?: Record<string, unknown> }).data ?? null : null;
+} catch {
+  entry = null;
+}
 if (!entry) return Astro.redirect(`/${locale}/apartmani`, 302);
 
-const d = entry.data;
+const d = entry;
 const name = (d.name as string) ?? slug;
 const tagline = (d.tagline as string) ?? "";
 const description = (d.description as string) ?? "";
