@@ -59,7 +59,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Nav starts transparent with white text over hero
   - Transitions to warm cream background with `backdrop-filter: blur(10px)` after scrolling past hero
   - Logo, language switcher, and nav links always visible
-  - "Inquire" CTA button always visible in nav
+  - "Inquire" CTA button always visible in nav, links to `/{locale}/kontakt` (REQ-BK-8)
   - Hamburger menu on mobile with fullscreen overlay, including inline language picker (locale links with active state highlight)
   - Hamburger button: `.nav__hamburger` class with CSS styles (display flex, flex-direction column, gap 6px, no background/border, cursor pointer, padding 12px, z-index 101, position relative), three `<span>` elements (block, 24x2px, currentColor background, 1px border-radius, transform/opacity transitions). Selected via `#hamburger-btn` ID. CSS transform morph to X on `.is-open` (translateY + rotate).
   - **Nav items (current order):** Apartments, Ždrelac (village page, REQ-ED-6), Gallery (REQ-SF-8), Getting Here, Local Guide, About. "Why Pašman" and FAQ removed from primary navigation (pages still exist, accessible via footer or direct URL).
@@ -136,7 +136,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - After scrolling past hero, a bottom bar slides up: "From €X/night · Check Availability"
-  - Tapping opens inquiry form or scrolls to booking widget
+  - Tapping navigates to contact page (`/{locale}/kontakt`, REQ-BK-8) or scrolls to booking widget when REQ-BK-1 is implemented
   - Thin bar (~56px), does not obscure content
   - Disappears when inquiry form is in viewport
   - Price pulled from lowest active seasonal rate

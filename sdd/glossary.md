@@ -14,6 +14,7 @@
 | **Emdash** | Full-stack TypeScript CMS built as an Astro integration. Provides admin panel, REST API, media library, and content loader. |
 | **D1** | Cloudflare's serverless SQL database (SQLite-based). Used for content storage via Emdash. |
 | **R2** | Cloudflare's object storage (S3-compatible). Used for media (photos, video). |
+| **Honeypot** | Anti-spam technique using a hidden form field invisible to humans but filled by bots. Submissions with the field populated are silently rejected. |
 | **Turnstile** | Cloudflare's privacy-preserving CAPTCHA alternative. Used in invisible mode on inquiry forms. |
 | **Resend** | Email delivery service. Used to send inquiry notifications to owner and auto-replies to guests. |
 | **Crossfade Carousel** | Image slideshow where slides transition by fading opacity (stacked via absolute positioning), as opposed to sliding/swiping. Used for the hero section. |
