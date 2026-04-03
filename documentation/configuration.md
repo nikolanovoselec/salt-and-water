@@ -8,7 +8,7 @@ Environment variables, secrets, and Cloudflare resource bindings.
 
 ## Environment Variables
 
-All variables are accessed via `import { env } from "cloudflare:workers"` in API routes. Types are declared in `src/env.d.ts` as the `CloudflareEnv` interface. The `cloudflare:workers` module is marked as external by `@astrojs/cloudflare` and resolved at runtime by the Worker.
+All variables are accessed via `import { env } from "cloudflare:workers"` in API routes. Types are declared in `src/lib/env.ts`, which augments the `CloudflareEnv` interface via `declare module "cloudflare:workers"`. API routes import it as a side-effect (`import "~/lib/env"`) to pull in the types. The `cloudflare:workers` module is marked as external by `@astrojs/cloudflare` and resolved at runtime by the Worker.
 
 ### Secrets
 
