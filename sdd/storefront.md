@@ -16,8 +16,10 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - Hero fills 100vh (100svh on mobile) with min-height 600px
-  - **Background:** Stock hero photograph (`center/cover`) with semi-transparent linear gradient overlay (navy at 60% top, 40% mid, 70% bottom) providing contrast for text. Gradient-only fallback remains available when no hero photo is configured.
-  - Stone grain SVG noise overlay at 3% opacity for tactile texture
+  - **Background:** Crossfade image carousel with 4 stacked full-viewport slides. First slide eager-loaded with `fetchpriority="high"`, remaining slides lazy-loaded. Solid navy (`#0A1F33`) background color as fallback before images load. Semi-transparent linear gradient overlay (navy at 60% top, 40% mid, 70% bottom) providing contrast for text. Gradient-only fallback remains available when no hero photo is configured.
+  - **Crossfade carousel:** Slides stacked via absolute positioning, opacity 0 by default, `is-active` class sets opacity 1 with 1.8s ease-in-out CSS transition. Auto-advances every 6 seconds via inline `<script is:inline>` (IIFE pattern). Progress dots at bottom allow manual slide selection. Clicking a dot resets the auto-advance timer. Carousel pauses on mouseenter (desktop), resumes on mouseleave.
+  - **Ken Burns on active slide:** Active slide image transitions `transform: scale(1) to scale(1.08)` over 8s ease-out, creating a slow zoom effect per slide. CSS transition (not keyframe animation), resets on slide change.
+  - **Progress dots:** Centered at bottom (80px from bottom, 100px on mobile), 8px circles with 1.5px white border at 50% opacity. Active dot fills white and scales to 1.3x. `aria-label` on each dot button (`Slide N`).
   - Two-line title: property name on first line, location on second line in italic at reduced opacity (0.65)
   - `.text-label` location tag above title (localized per locale, e.g. "Otok Pasman, Hrvatska" for Croatian) at 0.7 opacity with wide letter-spacing
   - Tagline in uppercase sans-serif at 0.7 opacity below title
@@ -27,8 +29,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - On `prefers-reduced-motion`: all animations disabled, content immediately visible
   - Mobile: title scales down via clamp, subtitle uses smaller font size
   - **Temporary workaround:** Stock photos currently served directly from Pexels CDN URLs (external hotlink) due to a routing bug in the `/media/:key` Worker route (404 on R2 fetch). When the `/media/` route is fixed, images will move to R2 with Cloudflare Image Resizing per REQ-PERF-1. Pexels CDN URLs use `?auto=compress&w=` for basic optimization.
-  - **Ken Burns animation:** Hero background element uses CSS `@keyframes kenBurns` (slow zoom from `scale(1)` to `scale(1.08)`, 20s, ease-in-out, alternating infinite). Background container oversized to 110% at `-5% inset` to prevent edge visibility during zoom. Respects `prefers-reduced-motion` (animation disabled).
-  - **Future enhancement:** Ken Burns photo slideshow with crossfade (multiple images) can replace the single static hero photo when CMS hero photo management is available. Current single-photo Ken Burns hero serves as the intermediate step between gradient-only fallback and full multi-image slideshow.
+  - **Future enhancement:** CMS-managed hero image selection will replace the hardcoded Pexels URLs. Owner will be able to choose and reorder carousel images from the admin panel.
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P0
 - **Dependencies:** None
@@ -95,10 +96,9 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Intent:** Emotionally sell the destination, not just the apartment
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - **Photo strip** between hero and Why Pasman: 3-image grid within container (equal columns, 3:2 aspect, gap spacing, 16px border-radius, subtle shadow), hover zoom (1.04x), stacks to single column on mobile (16:9 aspect).
+  - ~~**Photo strip** between hero and Why Pasman~~ — **Removed:** the 3-image photo strip and wavy SVG separators between hero and "Why Pasman" were removed in favor of the hero crossfade carousel (REQ-SF-1), which now rotates multiple destination images. This eliminates redundant imagery immediately below the hero.
   - Split-section layout: heading + label on left, body text + tag row on right (desktop). Selling points displayed as uppercase bordered pill-shaped tags (20px border-radius, navy fill on hover with white text, not icon+text grid).
   - Brief Ždrelac village introduction as contained feature image with 24px border-radius (16px mobile), bottom text overlay (aspect-ratio 21:9 desktop, 16:9 mobile, gradient overlay from transparent to navy at bottom), subtle shadow, slow zoom on hover
-  - Wavy SVG separators between major homepage sections (organic bezier curves, cream fill, 60px height, flippable)
   - Scroll-triggered fade-up reveal per section
   - Links to full editorial content
   - Responsive: stacks vertically on mobile

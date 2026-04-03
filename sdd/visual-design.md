@@ -61,7 +61,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
   - Image clip-path reveal: CSS `clip-path: inset()` transition on scroll-triggered class via `data-reveal-clip` attribute
   - Staggered entry: CSS `transition-delay` per child (100ms increments) via `data-reveal-stagger` attribute
   - Section divider wavy SVG fades in on scroll entry
-  - **Ken Burns:** CSS `@keyframes kenBurns` (scale 1 to 1.08, 20s, ease-in-out, alternating infinite) applied to hero background. Pure CSS, no JS.
+  - **Ken Burns:** Hero carousel uses CSS `transition: transform 8s ease-out` on active slide images (scale 1 to 1.08), triggered by adding `is-active` class via inline JS carousel controller. Each slide zooms independently during its 6-second display window. Replaces the previous single-image `@keyframes kenBurns` infinite animation.
   - **Breathing/floating keyframes:** `@keyframes breathe` (scale 1 to 1.02, 6s infinite), `@keyframes float` (translateY 0 to -8px, 5s infinite), `@keyframes slowZoom` (scale 1 to 1.05). Utility classes `.animate-breathe` and `.animate-float` available for decorative elements.
   - **GSAP optional:** Max 1 signature moment per page if CSS cannot achieve it (e.g., pinned "A Day on Pašman" timeline on desktop). If GSAP adds >20KB to bundle, skip it and use CSS-only alternative.
   - No parallax (complexity vs. value tradeoff for this project)

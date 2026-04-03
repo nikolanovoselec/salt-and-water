@@ -1,0 +1,170 @@
+---
+import Page from "~/layouts/Page.astro";
+import { isValidLocale, type Locale } from "~/i18n/config";
+
+const { locale } = Astro.params;
+if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
+const typedLocale = locale as Locale;
+
+const content: Record<Locale, { title: string; intro: string; sections: Array<{ title: string; text: string; image: string; alt: string }> }> = {
+  hr: {
+    title: "Ždrelac",
+    intro: "Tiho ribarsko selo na sjevernom vrhu otoka Pašmana, spojeno mostom s Ugljanom. Mjesto gdje se vrijeme usporava i more postaje dio svakodnevice.",
+    sections: [
+      { title: "Most između dva otoka", text: "Ždrelac leži na najužem dijelu Pašmana, točno na mostu prema Ugljanu. To znači da imate pristup objema otocima — s jedne strane mir Pašmana, s druge živost Ugljana i brzi trajekt do Zadra.", image: "https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=800", alt: "Ždrelac iz zraka" },
+      { title: "Skrivene plaže", text: "U neposrednoj blizini sela nalaze se kamene uvale s kristalno čistim morem. Neke su dostupne samo pješice ili brodom — pravi raj za one koji traže mir.", image: "https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=800", alt: "Kristalno čisto more" },
+      { title: "Dalmatinski život", text: "Konoba na rivi, ribar koji prodaje jutarnji ulov, miris maslinovog ulja iz susjedove kuće. Ždrelac je Dalmacija kakva je nekad bila — bez masovnog turizma, samo autentični otočni život.", image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=800", alt: "Dalmatinska hrana" },
+      { title: "Maslinovi nasadi", text: "Okolica Ždrelaca prepuna je stoljetnih maslinika. Domaće maslinovo ulje jedan je od najvažnijih proizvoda otoka — zlatno zeleno, s okusom koji ne možete naći u supermarketu.", image: "https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=800", alt: "Maslinici na Pašmanu" },
+    ],
+  },
+  de: {
+    title: "Ždrelac",
+    intro: "Ein ruhiges Fischerdorf an der Nordspitze der Insel Pašman, durch eine Brücke mit Ugljan verbunden. Ein Ort, an dem die Zeit langsamer vergeht und das Meer zum Alltag gehört.",
+    sections: [
+      { title: "Brücke zwischen zwei Inseln", text: "Ždrelac liegt am schmalsten Teil von Pašman, direkt an der Brücke nach Ugljan. Das bedeutet Zugang zu beiden Inseln — die Ruhe von Pašman auf der einen, die Lebhaftigkeit von Ugljan und die schnelle Fähre nach Zadar auf der anderen Seite.", image: "https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=800", alt: "Ždrelac aus der Luft" },
+      { title: "Versteckte Strände", text: "In unmittelbarer Nähe des Dorfes befinden sich Steinbuchten mit kristallklarem Wasser. Einige sind nur zu Fuß oder per Boot erreichbar — ein wahres Paradies für Ruhesuchende.", image: "https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=800", alt: "Kristallklares Meer" },
+      { title: "Dalmatinisches Leben", text: "Die Konoba an der Promenade, der Fischer, der seinen Morgenfang verkauft, der Duft von Olivenöl aus dem Nachbarhaus. Ždrelac ist Dalmatien, wie es einmal war.", image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=800", alt: "Dalmatinische Küche" },
+      { title: "Olivenhaine", text: "Die Umgebung von Ždrelac ist voller jahrhundertealter Olivenhaine. Hausgemachtes Olivenöl ist eines der wichtigsten Produkte der Insel.", image: "https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=800", alt: "Olivenhaine auf Pašman" },
+    ],
+  },
+  sl: {
+    title: "Ždrelac",
+    intro: "Tiha ribiška vas na severnem vrhu otoka Pašman, povezana z mostom z Ugljanom. Kraj, kjer se čas upočasni in morje postane del vsakdana.",
+    sections: [
+      { title: "Most med dvema otokoma", text: "Ždrelac leži na najožjem delu Pašmana, tik ob mostu proti Ugljanu. To pomeni dostop do obeh otokov — na eni strani mir Pašmana, na drugi živahnost Ugljana in hiter trajekt do Zadra.", image: "https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=800", alt: "Ždrelac iz zraka" },
+      { title: "Skrite plaže", text: "V neposredni bližini vasi so kamnite zalivčke s kristalno čistim morjem. Nekatere so dostopne le peš ali z ladjo — pravi raj za iskalce miru.", image: "https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=800", alt: "Kristalno čisto morje" },
+      { title: "Dalmatinsko življenje", text: "Konoba na rivi, ribič, ki prodaja jutranji ulov, vonj oljčnega olja iz sosedove hiše. Ždrelac je Dalmacija, kakršna je nekoč bila.", image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=800", alt: "Dalmatinska hrana" },
+      { title: "Oljčni nasadi", text: "Okolica Ždrelaca je polna stoletnih oljčnih nasadov. Domače oljčno olje je eden najpomembnejših proizvodov otoka.", image: "https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=800", alt: "Oljčni nasadi na Pašmanu" },
+    ],
+  },
+  en: {
+    title: "Ždrelac",
+    intro: "A quiet fishing village at the northern tip of Pašman island, connected by bridge to Ugljan. A place where time slows down and the sea becomes part of everyday life.",
+    sections: [
+      { title: "Bridge between two islands", text: "Ždrelac sits at the narrowest part of Pašman, right at the bridge to Ugljan. This means access to both islands — the peace of Pašman on one side, the liveliness of Ugljan and the fast ferry to Zadar on the other.", image: "https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=800", alt: "Ždrelac from above" },
+      { title: "Hidden beaches", text: "Near the village you'll find stone coves with crystal-clear water. Some are accessible only on foot or by boat — a true paradise for those seeking peace.", image: "https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=800", alt: "Crystal-clear sea" },
+      { title: "Dalmatian life", text: "The konoba on the promenade, the fisherman selling his morning catch, the scent of olive oil from the neighbor's house. Ždrelac is Dalmatia as it once was.", image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=800", alt: "Dalmatian cuisine" },
+      { title: "Olive groves", text: "The surroundings of Ždrelac are full of centuries-old olive groves. Homemade olive oil is one of the island's most important products.", image: "https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=800", alt: "Olive groves on Pašman" },
+    ],
+  },
+};
+
+const page = content[typedLocale];
+---
+
+<Page title={page.title} locale={typedLocale}>
+  {/* Village hero with aerial image */}
+  <section class="village-hero">
+    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=1920" alt={`${page.title} — Pašman`} width="1920" height="1080" />
+    <div class="village-hero__overlay">
+      <div class="container">
+        <h1>{page.title}</h1>
+        <p class="village-hero__intro">{page.intro}</p>
+      </div>
+    </div>
+  </section>
+
+  {page.sections.map((section, i) => (
+    <section class:list={["section", { "section--alt": i % 2 === 1 }]} data-reveal>
+      <div class="container">
+        <div class:list={["village-row", { "village-row--reverse": i % 2 === 1 }]}>
+          <div class="village-row__image">
+            <img src={section.image} alt={section.alt} width="800" height="600" loading="lazy" />
+          </div>
+          <div class="village-row__content">
+            <h2>{section.title}</h2>
+            <p class="text-lead">{section.text}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section" data-reveal>
+    <div class="container text-center">
+      <a href={`/${typedLocale}/apartmani`} class="btn btn--primary">
+        {typedLocale === "hr" ? "Pogledaj apartmane" : typedLocale === "de" ? "Apartments ansehen" : typedLocale === "sl" ? "Poglej apartmaje" : "View apartments"}
+      </a>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .village-hero {
+    position: relative;
+    height: 70vh;
+    min-height: 400px;
+    overflow: hidden;
+  }
+
+  .village-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .village-hero__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    background: linear-gradient(transparent 30%, rgba(10, 31, 51, 0.8));
+    padding-bottom: var(--space-3xl);
+  }
+
+  .village-hero__overlay h1 {
+    color: var(--color-white);
+    font-size: clamp(3rem, 7vw, 6rem);
+  }
+
+  .village-hero__intro {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-lg);
+    max-width: 600px;
+    margin-top: var(--space-md);
+    line-height: 1.7;
+  }
+
+  .village-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .village-row {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+    .village-row--reverse .village-row__image {
+      order: 2;
+    }
+    .village-row--reverse .village-row__content {
+      order: 1;
+    }
+  }
+
+  .village-row__image {
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .village-row__image img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .village-row:hover .village-row__image img {
+    transform: scale(1.03);
+  }
+
+  .village-row__content h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: var(--space-md);
+  }
+</style>

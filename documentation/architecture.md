@@ -46,7 +46,8 @@ Apartmani Pašman is a server-side rendered Astro site deployed as a Cloudflare 
 | `src/pages/api/inquiry.ts` | Inquiry submission — full booking pipeline (validate, persist, email) |
 | `src/pages/api/track.ts` | Analytics API — cookieless event logging to D1 |
 | `src/layouts/` | Base and Page layout shells |
-| `src/components/shell/` | Navigation (desktop nav + mobile hamburger menu with inline language picker), Footer, LanguageSwitcher, WhatsAppButton, StickyMobileCTA |
+| `src/components/shell/` | Navigation (desktop nav + mobile hamburger menu with `is:inline` script to avoid Astro bundler stripping), Footer, LanguageSwitcher, WhatsAppButton, StickyMobileCTA |
+| `src/components/home/Hero.astro` | Hero carousel — 4 Pexels images, crossfade (1.8s CSS transition), Ken Burns zoom (8s scale 1→1.08 on active slide), auto-advance every 6 s, dot navigation, hover-pause; implemented as `is:inline` script |
 | `src/styles/global.css` | Design system — CSS custom properties, typography scale, layout utilities, component classes, animation utilities |
 
 ## Request Lifecycle
@@ -73,8 +74,8 @@ Astro's i18n is configured with `routing: "manual"`. File-based `[locale]` direc
 | Route | File | Description |
 |---|---|---|
 | `/:locale/` | `src/pages/[locale]/index.astro` | Homepage |
-| `/:locale/apartmani` | `src/pages/[locale]/apartmani/index.astro` | Apartment listing — pre-launch split layout: duo photos + editorial text + inquiry CTA |
-| `/:locale/apartmani/:slug` | `src/pages/[locale]/apartmani/[slug].astro` | Apartment detail (not yet created) |
+| `/:locale/apartmani` | `src/pages/[locale]/apartmani/index.astro` | Apartment listing — card grid (2 columns desktop, 1 mobile); falls back to hardcoded data when CMS not seeded; each card links to detail page |
+| `/:locale/apartmani/:slug` | `src/pages/[locale]/apartmani/[slug].astro` | Apartment detail — hero image, description, meta grid (sleeps/bedrooms/size/beach distance), price card, amenity list; reads from `apartments` CMS collection via `getLocalizedEntry`; redirects to listing on missing slug |
 | `/:locale/zasto-pasman` | `src/pages/[locale]/zasto-pasman.astro` | Why Pašman — 4 selling-point sections |
 | `/:locale/dolazak` | `src/pages/[locale]/dolazak.astro` | Getting Here — ferry, airport, map links |
 | `/:locale/faq` | `src/pages/[locale]/faq.astro` | FAQ — accordion with Schema.org FAQPage markup |
@@ -239,8 +240,16 @@ These classes are defined as scoped styles inside individual page components. Th
 
 | Class | Page | Pattern |
 |---|---|---|
-| `.apartments-coming` | `apartmani/index.astro` | Two-column grid: duo photos (`1fr`) + editorial text (`1.2fr`); stacks on mobile. Pre-launch placeholder layout. |
-| `.apartments-coming__images` | `apartmani/index.astro` | Two images side by side, 3:4 aspect ratio, 4px gap |
+| `.apartments-grid` | `apartmani/index.astro` | Two-column card grid (1 col mobile, 2 col ≥768px); gap `--space-2xl` |
+| `.apartment-card-link` | `apartmani/index.astro` | Full-card anchor wrapping image + content; `text-decoration: none` |
+| `.apartment-card__image` | `apartmani/index.astro` | Image at 3:2 aspect ratio with hover scale (1.03×); badge overlay top-left |
+| `.apartment-card__badge` | `apartmani/index.astro` | Navy pill showing `best_for` value |
+| `.apartment-card__footer` | `apartmani/index.astro` | Row: serif price left, inquiry `.btn` right; top border separator |
+| `.apt-hero` | `apartmani/[slug].astro` | Full-width hero at 60vh / min 400px; image cover + navy gradient overlay anchored to bottom |
+| `.apt-detail` | `apartmani/[slug].astro` | Two-column grid: main content (`1.5fr`) + sidebar (`1fr`); stacks on mobile |
+| `.apt-meta` | `apartmani/[slug].astro` | 2×2 stone-background grid of key stats (sleeps, bedrooms, size, beach distance) |
+| `.apt-price-card` | `apartmani/[slug].astro` | White card with shadow: price label + serif amount + inquiry CTA button |
+| `.apt-amenities` | `apartmani/[slug].astro` | Stone-background card; amenity list in 2-column grid with checkmark pseudo-elements |
 | `.guide-grid` | `vodic.astro` | Flex column of `.guide-item` rows, spaced by `--space-3xl` |
 | `.guide-item` | `vodic.astro` | Alternating two-column row: photo (`1fr`) + text (`1fr`), 3:2 photo aspect; odd rows reverse column order via `.guide-item--reverse` |
 

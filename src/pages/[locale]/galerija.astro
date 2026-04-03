@@ -1,0 +1,143 @@
+---
+import Page from "~/layouts/Page.astro";
+import HeroSimple from "~/components/ui/HeroSimple.astro";
+import { isValidLocale, type Locale } from "~/i18n/config";
+import { t } from "~/i18n/t";
+
+const { locale } = Astro.params;
+if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
+const typedLocale = locale as Locale;
+
+const galleryTitle: Record<Locale, string> = {
+  hr: "Galerija", de: "Galerie", sl: "Galerija", en: "Gallery",
+};
+
+type GalleryItem = { src: string; alt: string; caption: string };
+
+const images: GalleryItem[] = [
+  {
+    src: "https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&w=800",
+    alt: { hr: "Kristalno čisto more", de: "Kristallklares Meer", sl: "Kristalno čisto morje", en: "Crystal-clear sea" }[typedLocale] ?? "Crystal-clear sea",
+    caption: { hr: "More ispred apartmana", de: "Meer vor den Apartments", sl: "Morje pred apartmaji", en: "Sea in front of the apartments" }[typedLocale] ?? "",
+  },
+  {
+    src: "https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg?auto=compress&w=800",
+    alt: { hr: "Apartman Lavanda", de: "Apartment Lavanda", sl: "Apartma Lavanda", en: "Apartment Lavanda" }[typedLocale] ?? "Apartment Lavanda",
+    caption: { hr: "Dnevni boravak s pogledom na more", de: "Wohnzimmer mit Meerblick", sl: "Dnevna soba s pogledom na morje", en: "Living room with sea view" }[typedLocale] ?? "",
+  },
+  {
+    src: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&w=800",
+    alt: { hr: "Apartman Tramuntana", de: "Apartment Tramuntana", sl: "Apartma Tramuntana", en: "Apartment Tramuntana" }[typedLocale] ?? "Apartment Tramuntana",
+    caption: { hr: "Terasa okružena zelenilom", de: "Terrasse umgeben von Grün", sl: "Terasa obkrožena z zelenjem", en: "Terrace surrounded by greenery" }[typedLocale] ?? "",
+  },
+  {
+    src: "https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&w=800",
+    alt: { hr: "Plaža u blizini", de: "Naher Strand", sl: "Bližnja plaža", en: "Nearby beach" }[typedLocale] ?? "Nearby beach",
+    caption: { hr: "Tirkizno more na plaži Ždrelac", de: "Türkises Meer am Strand Ždrelac", sl: "Turkizno morje na plaži Ždrelac", en: "Turquoise sea at Ždrelac beach" }[typedLocale] ?? "",
+  },
+  {
+    src: "https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&w=800",
+    alt: { hr: "Pogled na selo", de: "Blick auf das Dorf", sl: "Pogled na vas", en: "Village view" }[typedLocale] ?? "Village view",
+    caption: { hr: "Ždrelac iz zraka", de: "Ždrelac aus der Luft", sl: "Ždrelac iz zraka", en: "Ždrelac from above" }[typedLocale] ?? "",
+  },
+  {
+    src: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=800",
+    alt: { hr: "Dalmatinska kuhinja", de: "Dalmatinische Küche", sl: "Dalmatinska kuhinja", en: "Dalmatian cuisine" }[typedLocale] ?? "Dalmatian cuisine",
+    caption: { hr: "Svježa riba i domaća hrana", de: "Frischer Fisch und hausgemachtes Essen", sl: "Sveža riba in domača hrana", en: "Fresh fish and homemade food" }[typedLocale] ?? "",
+  },
+  {
+    src: "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&w=800",
+    alt: { hr: "Kameno selo", de: "Steindorf", sl: "Kamnita vas", en: "Stone village" }[typedLocale] ?? "Stone village",
+    caption: { hr: "Mediteranska arhitektura", de: "Mediterrane Architektur", sl: "Mediteranska arhitektura", en: "Mediterranean architecture" }[typedLocale] ?? "",
+  },
+  {
+    src: "https://images.pexels.com/photos/4992828/pexels-photo-4992828.jpeg?auto=compress&w=800",
+    alt: { hr: "Maslinik", de: "Olivenhain", sl: "Oljčni nasad", en: "Olive grove" }[typedLocale] ?? "Olive grove",
+    caption: { hr: "Otoški maslinik", de: "Olivenhain auf der Insel", sl: "Otoški oljčni nasad", en: "Island olive grove" }[typedLocale] ?? "",
+  },
+  {
+    src: "https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg?auto=compress&w=800",
+    alt: { hr: "Zalazak sunca", de: "Sonnenuntergang", sl: "Sončni zahod", en: "Sunset" }[typedLocale] ?? "Sunset",
+    caption: { hr: "Zalazak sunca nad Jadranom", de: "Sonnenuntergang über der Adria", sl: "Sončni zahod nad Jadranom", en: "Sunset over the Adriatic" }[typedLocale] ?? "",
+  },
+];
+---
+
+<Page title={galleryTitle[typedLocale]} locale={typedLocale}>
+  <HeroSimple title={galleryTitle[typedLocale]} />
+
+  <section class="section">
+    <div class="container">
+      <div class="gallery-grid" data-reveal-stagger>
+        {images.map((img) => (
+          <figure class="gallery-item" data-reveal>
+            <div class="gallery-item__image">
+              <img src={img.src} alt={img.alt} width="800" height="600" loading="lazy" />
+            </div>
+            {img.caption && <figcaption class="gallery-item__caption">{img.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--color-white);
+    box-shadow: 0 0 0 1px rgba(10,31,51,0.06), 0 4px 16px rgba(10,31,51,0.06);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 1px rgba(10,31,51,0.06), 0 20px 60px rgba(10,31,51,0.12);
+  }
+
+  .gallery-item__image {
+    overflow: hidden;
+  }
+
+  .gallery-item__image img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-item:hover .gallery-item__image img {
+    transform: scale(1.05);
+  }
+
+  .gallery-item__caption {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    text-align: center;
+  }
+
+  /* Masonry-like effect: alternate tall items */
+  .gallery-item:nth-child(3n+1) .gallery-item__image img {
+    aspect-ratio: 3 / 4;
+  }
+
+  .gallery-item:nth-child(3n+3) .gallery-item__image img {
+    aspect-ratio: 1 / 1;
+  }
+</style>

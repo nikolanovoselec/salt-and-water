@@ -49,7 +49,7 @@ Apartment listings, detail pages, photo galleries, amenities, seasonal pricing, 
 - **Intent:** Let visitors browse and compare all apartments at a glance
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - **Current implementation:** Card grid showing apartments from Emdash CMS (with hardcoded fallback data when CMS is not yet seeded). Each card: hero photo (3:2 aspect, `object-fit: cover`), name, tagline (italic), meta row (sleeps count, size in m2, beach distance in meters), "Best for" badge (navy uppercase overlay on image), price ("from EUR X/night"), and inquiry CTA button. 2-column grid on desktop, single column on mobile. Cards have hover shadow lift and subtle image zoom (1.03x). Uses `HeroSimple` header. Inquiry section below cards with email CTA.
+  - **Current implementation:** Card grid showing apartments from Emdash CMS (with hardcoded fallback data when CMS is not yet seeded). Each card is a full-card link (`<a>` wrapping the entire card) to the apartment detail page (`/{locale}/apartmani/{slug}`). Card contents: hero photo (3:2 aspect, `object-fit: cover`), name, tagline (italic), meta row (sleeps count, size in m2, beach distance in meters), "Best for" badge (navy uppercase overlay on image), price ("from EUR X/night"), and inquiry CTA button. 2-column grid on desktop, single column on mobile. Cards have hover shadow lift and subtle image zoom (1.03x). Uses `HeroSimple` header. Inquiry section below cards with email CTA.
   - **Fallback behavior:** When Emdash returns no apartments (CMS not seeded), two hardcoded example apartments display (Lavanda 4-pax, Tramuntana 2-pax) with Pexels stock photos and locale-aware names/taglines/labels. This replaces the previous "coming soon" lifestyle layout.
   - **With full CMS (planned):** sea view badge if applicable, one-line value proposition, link to detail page
   - Cards link to detail page
@@ -71,7 +71,17 @@ Apartment listings, detail pages, photo galleries, amenities, seasonal pricing, 
 - **Intent:** Give the visitor everything needed to decide and inquire
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - **Visual hierarchy (top to bottom, most important first):**
+  - **Route:** `/{locale}/apartmani/{slug}` — dynamic route. Validates locale and slug; redirects to listing page if apartment not found or slug missing. Redirects to `/hr/` if locale is invalid.
+  - **Current implementation (partial):**
+    1. Hero: 60vh image (min 400px) with gradient overlay (transparent 40% to navy 75%), apartment name and tagline overlaid at bottom-left
+    2. Description: plain text from CMS `description` field
+    3. Meta grid: 2-column grid on stone background (12px radius) showing sleeps, bedrooms, size (m2), beach distance — locale-aware labels
+    4. "Best for" line below meta grid
+    5. Sidebar: price card (white, 16px radius, shadow) showing "from EUR X/night" with locale-aware label, inquiry CTA button linking to listing page inquiry section
+    6. Sidebar: amenities checklist (2-column grid on stone background, checkmark prefix) parsed from `amenities_json` field
+    7. Back-to-apartments CTA in alt-background section
+    8. Responsive: single column on mobile, 1.5fr/1fr grid on desktop (768px+ breakpoint)
+  - **Visual hierarchy (full target, top to bottom):**
     1. Hero: apartment name, key stats strip (guests, bedrooms, m2, beach distance, "Best for" label)
     2. Photo gallery (REQ-AP-6)
     3. Description: Portable Text rendered from Emdash
@@ -91,7 +101,7 @@ Apartment listings, detail pages, photo galleries, amenities, seasonal pricing, 
 - **Priority:** P0
 - **Dependencies:** REQ-AP-1, REQ-AP-4, REQ-AP-5, REQ-AP-6, REQ-BK-1
 - **Verification:** Full visual review + screen reader test
-- **Status:** Planned
+- **Status:** Implemented
 
 ### REQ-AP-4: Seasonal Pricing
 
