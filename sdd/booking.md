@@ -88,7 +88,7 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Dependencies:** REQ-CMS-1
   - **Email delivery verified:** Owner email and guest auto-reply must actually send via Resend using `RESEND_API_KEY` from Worker env. The `env as unknown as Env` cast pattern must successfully access the key at runtime. Email delivery must be verified with a real test submission, not just by reading code.
 - **Verification:** End-to-end test with real Resend + Turnstile: submit inquiry from live site → verify owner receives email → verify guest receives auto-reply. Test availability race condition.
-- **Status:** Partial — API endpoint exists and persists to D1, but email delivery via Resend not verified end-to-end (RESEND_API_KEY access via cloudflare:workers env unconfirmed)
+- **Status:** Partial — API endpoint exists, persists inquiries to D1, Turnstile verification works, honeypot filtering works, input sanitization works, owner email sends via Resend (unverified live). CRITICAL GAP: `buildGuestEmail()` function exists in inquiry.ts but is NEVER CALLED -- guest auto-reply is dead code. Outbox retry pattern partially implemented (email_status/retry_at columns exist, immediate retry on failure) but Cron Trigger for retries not implemented. Email delivery via RESEND_API_KEY from Worker env not verified end-to-end.
 
 ### REQ-BK-3: WhatsApp Floating Button
 
@@ -171,7 +171,7 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Priority:** P0
 - **Dependencies:** REQ-AP-4, REQ-AP-5
 - **Verification:** Test cross-season pricing, min stay, capacity, timezone handling
-- **Status:** Implemented
+- **Status:** Partial — Server-side pricing computation (`pricing.ts`) and availability data model (D1 `availability_blocks` table with half-open intervals) are implemented. Cross-season pricing, tourist tax computation, and cleaning fee logic work in the inquiry API. However, CMS-facing features are missing: owner cannot configure check-in/out times, minimum stay, or season pricing via admin. Season validation rules (no overlap, gap warnings) not enforced in CMS. All pricing currently comes from seed data, not owner-managed.
 
 ### REQ-BK-7: Inquiry Lifecycle
 

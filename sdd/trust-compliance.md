@@ -52,7 +52,7 @@ GDPR, privacy policy, Impressum, house rules, cancellation policy, security head
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-6
 - **Verification:** Legal review checklist, verify German version available when DE disabled
-- **Status:** Planned
+- **Status:** Partial — Page exists at `/{locale}/privatnost` with hardcoded fallback content in all 4 locales plus CMS override (queries `editorial` collection with `page_key === "privacy"`). Contains data controller, legal basis, data collected, storage, rights, no-third-party-sale. Footer links to it. Missing: data retention periods, processor list (Resend, Cloudflare), WhatsApp disclosure, Cloudflare Web Analytics note. German-always-available exception not enforced when DE locale is disabled.
 
 ### REQ-TC-3: Impressum (Legal Notice)
 
@@ -68,7 +68,7 @@ GDPR, privacy policy, Impressum, house rules, cancellation policy, security head
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1
 - **Verification:** Verify 1-click access from all pages, verify German version exists
-- **Status:** Planned
+- **Status:** Partial — Page exists at `/{locale}/impressum` with hardcoded fallback content in all 4 locales plus CMS override (queries `editorial` collection with `page_key === "impressum"`). Footer links to it (1-click access). Contains template with placeholder values (`[Owner name]`, `+385 XX XXX XXXX`). German version exists. German-always-available exception not enforced when DE locale is disabled.
 
 ### REQ-TC-4: House Rules & Booking Terms
 
@@ -151,7 +151,7 @@ GDPR, privacy policy, Impressum, house rules, cancellation policy, security head
 - **Priority:** P2
 - **Dependencies:** REQ-CMS-1
 - **Verification:** Page exists and is accurate
-- **Status:** Planned
+- **Status:** Partial — Page exists at `/{locale}/pristupacnost` with hardcoded content in all 4 locales. Footer links to it. States WCAG 2.1 AA target. Not CMS-managed (hardcoded). Contact info for accessibility feedback not explicitly included. Known limitations section not present.
 
 ## Out of Scope
 
