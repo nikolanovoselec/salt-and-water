@@ -1,0 +1,24 @@
+---
+/**
+ * GET /_emdash/login-bypass?key=<secret>
+ *
+ * One-time endpoint to create an admin session without passkey.
+ * Visit this URL in your browser to log in, then register a passkey
+ * from the Emdash admin settings.
+ *
+ * DELETE THIS FILE after setting up passkey auth.
+ */
+
+const key = Astro.url.searchParams.get("key");
+if (key !== "REDACTED_BYPASS_KEY") {
+  return Astro.redirect("/_emdash/admin/");
+}
+
+// Create session
+const session = await Astro.session?.get("user");
+if (!session) {
+  await Astro.session?.set("user", { id: "01SETUP000000000000000001" });
+}
+
+return Astro.redirect("/_emdash/admin/");
+---

@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-04-03 — Revision 22: Hero Carousel, Apartment Detail Page, Navigation Fix
+
+Hero section upgraded from single static image with CSS Ken Burns to a 4-image crossfade carousel with progress dots, auto-advance (6s), and per-slide Ken Burns zoom. Apartment detail page route added (`/{locale}/apartmani/{slug}`) with hero image, meta grid, price card, amenities, and description. Apartment listing cards now link to detail pages. Navigation scripts converted to `is:inline` to fix hamburger menu bundling issue. Photo strip removed from homepage (images consolidated into hero carousel).
+
+### AC updated
+- **REQ-SF-1:** Replaced single-image Ken Burns with crossfade carousel (4 slides, 1.8s fade, 6s interval, progress dots, pause-on-hover). Updated "Future enhancement" to reference CMS-managed image selection instead of carousel itself (carousel is now implemented).
+- **REQ-SF-5:** Photo strip between hero and "Why Pasman" removed. Images consolidated into hero carousel. Wave separators between hero and first section also removed.
+- **REQ-AP-2:** Cards now wrapped in full-card `<a>` link to apartment detail page.
+- **REQ-AP-3:** Added "Current implementation" section documenting route, hero, meta grid, price card, amenities sidebar, and responsive layout. Full target hierarchy retained for tracking remaining work.
+- **REQ-VD-3:** Ken Burns updated from CSS `@keyframes` infinite animation to CSS `transition` per active carousel slide (8s ease-out, scale 1.08).
+- **REQ-VD-6:** Photo strip treatment marked as removed (images moved to hero carousel).
+
+### Status changes
+- **REQ-AP-3:** Planned -> Implemented (partial — hero, meta, price card, amenities, description, back link. Gallery, availability, inquiry widget, trust strip, bed config, house rules, floor plan, FAQs still planned).
+
+### No status changes
+- REQ-SF-1 remains Implemented (carousel replaces static image — enhancement, not regression).
+- REQ-SF-5 remains Planned (CMS toggles, editorial content, triptych still not wired).
+- REQ-AP-2 remains Implemented (card links are an enhancement).
+- REQ-VD-3 remains Implemented (Ken Burns mechanism changed, effect preserved).
+- REQ-VD-6 remains Implemented (photo strip removed, other treatments unchanged).
+
+### Glossary
+- Added "Crossfade Carousel" term.
+
 ## 2026-04-02 — Revision 21: Organic Visual Polish (e437ff7)
 
 Homepage visual system overhauled from edge-to-edge flat imagery to organic curved containers. All homepage photo treatments now use rounded corners (16-24px), gaps, shadows, and hover interactions. Wavy SVG section dividers replace straight lines. Triptych labels slide in on hover. Gradient utility classes added. Mobile navigation gains inline language picker. New favicon.

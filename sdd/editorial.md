@@ -106,22 +106,20 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Verification:** Visual review
 - **Status:** Planned
 
-### REQ-ED-6: "About Ždrelac" Section
+### REQ-ED-6: "About Ždrelac" Page
 
 - **Intent:** Introduce the village where the apartments are located
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - Short paragraph (3-5 sentences) about Ždrelac: small village at the northern tip of Pašman, connected to Ugljan island by bridge, quiet and authentic, close to the sea
-  - Highlights: bridge to Ugljan (alternative ferry route via Zadar-Preko), proximity to both coasts of the island, local character
-  - Supporting photo(s) of the village
-  - Appears on homepage (between "Why Pašman" and apartments) and on the "Why Pašman" page
-  - CMS-managed per locale
-  - Toggleable via section settings
-- **Constraints:** CON-I18N
+  - **Current implementation:** Standalone page at `/{locale}/zdrelac` with full-screen hero (70vh, min 400px) using aerial village photo with gradient overlay (transparent 30% to navy 80%), village name as display heading, and introductory paragraph at 80% white opacity. Below the hero, 4 content sections in alternating image+text row layout (bridge access, hidden beaches, Dalmatian life, olive groves). Each row: 2-column grid on desktop (1fr + 1fr), single column on mobile. Odd rows show image left / text right; even rows reverse. Images have 16px border-radius, 4:3 aspect ratio, subtle hover zoom (1.03x). CTA button at bottom links to apartments listing. Scroll-triggered fade-up reveal on each section. Alternating section backgrounds (`.section--alt`). All content hardcoded per locale (4 languages).
+  - Highlights: bridge to Ugljan (alternative ferry route via Zadar-Preko), proximity to both coasts of the island, hidden beaches, Dalmatian village life, olive groves
+  - **Homepage appearance (planned):** Brief Ždrelac introduction on homepage between "Why Pašman" and apartments sections (condensed version of standalone page)
+  - **With CMS (planned):** CMS-managed content per locale, toggleable via section settings
+- **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
-- **Dependencies:** REQ-CMS-1, REQ-CMS-5, REQ-I18N-4
-- **Verification:** Visual review
-- **Status:** Planned
+- **Dependencies:** REQ-I18N-4
+- **Verification:** Visual review across all 4 locales
+- **Status:** Implemented
 
 ### REQ-ED-7: FAQ
 
