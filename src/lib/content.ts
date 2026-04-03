@@ -21,12 +21,17 @@ export async function getLocalizedCollection(
 
     const mapped = entries.map(mapEntry);
 
-    // Filter entries by locale field, fall back to 'hr'
-    const localeEntries = mapped.filter((e) => e.data.locale === locale);
+    // Filter by: 1) entry locale, 2) data.locale field, 3) slug suffix convention (-hr, -de, etc.)
+    const matchesLocale = (e: LocalizedEntry, loc: string): boolean =>
+      e.locale === loc ||
+      (e.data.locale as string) === loc ||
+      e.slug.endsWith(`-${loc}`);
+
+    const localeEntries = mapped.filter((e) => matchesLocale(e, locale));
     if (localeEntries.length > 0) return localeEntries;
 
     // Fallback: try Croatian
-    const hrEntries = mapped.filter((e) => e.data.locale === "hr");
+    const hrEntries = mapped.filter((e) => matchesLocale(e, "hr"));
     if (hrEntries.length > 0) return hrEntries;
 
     // Last resort: return all entries
@@ -78,10 +83,12 @@ export async function getSettings(): Promise<Record<string, unknown> | null> {
 }
 
 function mapEntry(entry: unknown): LocalizedEntry {
-  const e = entry as { slug?: string; data?: Record<string, unknown> };
+  const e = entry as { slug?: string; locale?: string; data?: Record<string, unknown> };
+  // locale is at entry level (Emdash i18n) OR in data.locale (our custom field)
+  const locale = e.locale ?? (e.data?.locale as string) ?? "hr";
   return {
     slug: e.slug ?? "",
-    locale: (e.data?.locale as string) ?? "hr",
+    locale,
     data: e.data ?? {},
   };
 }

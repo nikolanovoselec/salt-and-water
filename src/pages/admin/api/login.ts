@@ -48,7 +48,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // Send code via Resend — check result
   const emailResult = await sendEmail({
     to: [email],
-    subject: "Your login code — Apartmani Ždrelac",
+    subject: "Your login code — Apartmani Novoselec",
     html: `
       <div style="font-family: sans-serif; max-width: 400px; margin: 0 auto; text-align: center;">
         <h2 style="color: #0C2D48; font-weight: 300;">Your login code</h2>
@@ -58,7 +58,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       </div>
     `,
     apiKey: resendKey,
-    from: "Apartmani Ždrelac <noreply@apartmani.hr>",
+    from: "Apartmani Novoselec <noreply@apartmani.hr>",
   });
 
   if (!emailResult.success) {

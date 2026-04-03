@@ -166,7 +166,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       html: buildOwnerEmail(data, cleanName, cleanEmail, cleanPhone, cleanMessage, priceEstimate),
       replyTo: cleanEmail,
       apiKey: resendKey,
-      from: "Apartmani Ždrelac <noreply@apartmani.hr>",
+      from: "Apartmani Novoselec <noreply@apartmani.hr>",
     });
 
     // Guest auto-reply
@@ -178,10 +178,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
         ? "Vaše povpraševanje — Apartmaji Ždrelac"
         : data.locale === "en"
         ? "Your inquiry — Apartments Ždrelac"
-        : "Vaš upit — Apartmani Ždrelac",
+        : "Vaš upit — Apartmani Novoselec",
       html: buildGuestEmail(data, data.locale),
       apiKey: resendKey,
-      from: "Apartmani Ždrelac <noreply@apartmani.hr>",
+      from: "Apartmani Novoselec <noreply@apartmani.hr>",
     });
 
     emailSent = ownerResult.success;
@@ -272,7 +272,7 @@ function buildGuestEmail(data: Inquiry, locale: string): string {
 
   return `
     <div style="font-family:sans-serif;max-width:500px;margin:0 auto;">
-      <h2 style="color:#0C2D48;font-weight:300;">Apartmani Ždrelac</h2>
+      <h2 style="color:#0C2D48;font-weight:300;">Apartmani Novoselec</h2>
       <p>${messages[locale] ?? messages.hr}</p>
       <hr style="border:none;border-top:1px solid #eee;margin:24px 0;" />
       <p style="color:#888;font-size:12px;">Ždrelac, Pašman, Croatia</p>
