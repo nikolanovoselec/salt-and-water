@@ -16,7 +16,7 @@ Set via `npx wrangler secret put <NAME>`. Never commit these values.
 
 | Variable | Required | Description |
 |---|---|---|
-| `RESEND_API_KEY` | Yes | Resend API key — used for magic link codes and inquiry emails |
+| `RESEND_API_KEY` | Yes | Resend API key — used by `src/lib/resend.ts` for inquiry notifications and custom admin magic links (`POST /admin/api/login`) |
 | `JWT_SECRET` | Yes | HMAC-SHA-256 signing secret for auth JWTs — minimum 32 random bytes |
 | `TURNSTILE_SECRET_KEY` | Yes | Cloudflare Turnstile secret key — server-side form verification |
 | `R2_ACCESS_KEY_ID` | Yes | R2 S3-compatible access key ID — used for presigned upload URLs |
@@ -31,6 +31,12 @@ Defined in the `vars` block of `wrangler.jsonc`. Safe to commit — no sensitive
 |---|---|---|
 | `ADMIN_EMAILS` | Yes | Comma-separated list of authorized admin email addresses (case-insensitive). Current value: `hello@graymatter.ch` |
 | `TURNSTILE_SITE_KEY` | Yes | Cloudflare Turnstile site key — embedded in forms |
+
+### Emdash Plugin KV
+
+The Resend email plugin (`src/plugins/resend-email.ts`) handles Emdash's own `email:deliver` hook — triggered for Emdash CMS magic link auth. It reads the API key from Emdash's plugin KV store under the key `resend_api_key`, not from the `RESEND_API_KEY` Worker secret. This is because the plugin is bundled at build time and cannot access `cloudflare:workers` bindings at that stage.
+
+Set the key via the Emdash admin UI or directly in D1. The value must be a valid Resend API key (`re_...`).
 
 ### Setting Secrets
 

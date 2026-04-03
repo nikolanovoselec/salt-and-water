@@ -16,7 +16,8 @@
 | **R2** | Cloudflare's object storage (S3-compatible). Used for media (photos, video). |
 | **Honeypot** | Anti-spam technique using a hidden form field invisible to humans but filled by bots. Submissions with the field populated are silently rejected. |
 | **Turnstile** | Cloudflare's privacy-preserving CAPTCHA alternative. Used in invisible mode on inquiry forms. |
-| **Resend** | Email delivery service. Used to send inquiry notifications to owner and auto-replies to guests. |
+| **Resend** | Email delivery service. Used to send inquiry notifications to owner, auto-replies to guests, and magic link codes for CMS authentication. Integrated via custom Emdash plugin. |
+| **Plugin KV** | Emdash's key-value store accessible to plugins at runtime via `ctx.kv`. Used to store configuration (e.g., Resend API key) that cannot be provided via Worker env bindings due to Vite build-time bundling. |
 | **Crossfade Carousel** | Image slideshow where slides transition by fading opacity (stacked via absolute positioning), as opposed to sliding/swiping. Used for the hero section. |
 | **Ken Burns** | Slow zoom and pan animation effect applied to still photographs, named after the documentary filmmaker. |
 | **Blurhash** | Compact encoding of an image placeholder as a short string, decoded to a blurred preview before the full image loads. |

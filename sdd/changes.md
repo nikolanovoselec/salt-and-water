@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-04-03 — Revision 37: Resend Email Plugin for Emdash Magic Link Auth
+
+Custom Emdash plugin (`resend-email`) registered in Astro config to handle `email:deliver` hook. Sends magic link codes via Resend API. API key stored in Emdash plugin KV store (key: `resend_api_key`) to work around the Vite build-time limitation where `cloudflare:workers` bindings are unavailable. Key is cached in-memory after first fetch. This replaces the previous "login bypass mode" — Emdash admin panel now has a working email delivery gate.
+
+### AC updated
+- **REQ-CMS-3:** Replaced "login bypass mode" description with working Resend plugin details (KV-stored API key, `email:deliver` hook, recipient validation, error handling).
+
+### Constraints updated
+- **CON-STACK:** `RESEND_API_KEY` moved from `wrangler secret put` to Emdash plugin KV store. Vite build limitation workaround documented.
+
+### Glossary updated
+- **Resend:** Updated to include CMS authentication use case.
+- **Plugin KV:** New term — Emdash's key-value store for plugin configuration.
+
 ## 2026-04-03 — Revision 36: Wave Divider Sizing and Positioning Fix
 
 WaveDivider component updated: responsive height increased from `clamp(40px, 6vw, 80px)` to `clamp(50px, 8vw, 100px)` for more prominent wave transitions. Negative margin (`-1px`) eliminates subpixel seam gaps between wave and adjacent sections. Added `position: relative` and `z-index: 2` to ensure wave layers above section backgrounds. Style scope changed to global for consistent application. Homepage Zdrelac feature image no longer constrained by `.container` class, enabling true full-width display.
