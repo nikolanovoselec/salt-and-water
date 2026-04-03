@@ -172,17 +172,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: "Apartmani Novoselec <noreply@graymatter.ch>",
     });
 
-    // Guest auto-reply
-    const guestResult = await sendEmail({
-      to: [cleanEmail],
-      subject: "Vaš upit - Apartmani Novoselec",
-      html: buildGuestEmail(data, "hr"),
-      apiKey: resendKey,
-      from: "Apartmani Novoselec <noreply@graymatter.ch>",
-    });
-
     console.log("[inquiry] Owner email result:", ownerResult);
-    console.log("[inquiry] Guest email result:", guestResult);
     emailSent = ownerResult.success;
 
     // Update email status
