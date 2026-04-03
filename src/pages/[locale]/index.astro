@@ -87,7 +87,7 @@ const oliveOilLabel: Record<Locale, string> = {
   <Hero locale={typedLocale} />
 
   {/* Why Pašman */}
-  <section class="section" data-reveal>
+  <section class="section" data-reveal style="padding-bottom: var(--space-xl);">
     <div class="container">
       <div class="split-section">
         <div class="split-section__left">
@@ -110,18 +110,20 @@ const oliveOilLabel: Record<Locale, string> = {
   </section>
 
   {/* Full-width image - Ždrelac - clickable, links to village page */}
-  <a href={`/${typedLocale}/zdrelac`} class="feature-image" data-reveal style="text-decoration:none; color:inherit; display:block;">
-    <div class="feature-image__wrap">
-      <img src="https://images.pexels.com/photos/18759978/pexels-photo-18759978.jpeg?auto=compress&w=1920" alt="Aerial view of Ždrelac village on Pašman island" width="1920" height="1080" loading="lazy" />
-      <div class="feature-image__overlay">
-        <p class="text-label" style="color: rgba(255,255,255,0.7);">Ždrelac</p>
-        <h2>{zdrelacTitle}</h2>
+  <div class="container" style="padding-bottom: var(--space-xl);">
+    <a href={`/${typedLocale}/zdrelac`} class="feature-image" data-reveal style="text-decoration:none; color:inherit; display:block;">
+      <div class="feature-image__wrap" style="border-radius: 16px; overflow: hidden;">
+        <img src="https://images.pexels.com/photos/18759978/pexels-photo-18759978.jpeg?auto=compress&w=1920" alt="Aerial view of Ždrelac village on Pašman island" width="1920" height="1080" loading="lazy" />
+        <div class="feature-image__overlay" style="display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-xl);">
+          <p class="text-label" style="color: rgba(255,255,255,0.7);">Ždrelac</p>
+          <h2>{zdrelacTitle}</h2>
+        </div>
       </div>
-    </div>
-  </a>
+    </a>
+  </div>
 
   {/* Apartments */}
-  <section class="section section--dark" data-reveal style="position: relative; padding-top: 0;">
+  <section class="section section--dark" data-reveal style="position: relative; padding-top: 0; margin-top: -1px;">
     <svg class="section-wave-top" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: block; width: 100%; height: clamp(50px, 8vw, 100px); transform: scaleY(-1);">
       <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,20 1440,40 L1440,80 L0,80 Z" fill="#F8F5EF" />
     </svg>
@@ -177,7 +179,7 @@ const oliveOilLabel: Record<Locale, string> = {
   )}
 
   {/* Experience section - what to do on the island */}
-  <section class="section gradient-warm" data-reveal>
+  <section class="section gradient-warm" data-reveal style="padding-bottom: 0;">
     <div class="container">
       <p class="text-label text-center">{t(typedLocale, "homepage.experiences")}</p>
       <h2 class="text-center" style="margin-top: var(--space-md); margin-bottom: var(--space-2xl);">
