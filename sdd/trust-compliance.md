@@ -121,7 +121,7 @@ GDPR, privacy policy, Impressum, house rules, cancellation policy, security head
     - `frame-src https://challenges.cloudflare.com` (Turnstile widget)
     - `img-src 'self' data: blob: https:` (Image Resizing, external maps)
     - `style-src 'self' 'unsafe-inline'` (required for Astro island hydration; nonce-based if feasible)
-    - `connect-src 'self'` (API endpoints)
+    - `connect-src 'self' https://challenges.cloudflare.com` (API endpoints + Turnstile verification callbacks)
     - `font-src 'self'` (self-hosted fonts)
     - `object-src 'none'` (no plugins)
     - `base-uri 'self'` (prevent base tag hijacking)

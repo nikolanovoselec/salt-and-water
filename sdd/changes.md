@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-04-03 — Revision 33: Apartment Listing CTA and CSP connect-src for Turnstile
+
+Apartment listing page CTA now links to `/{locale}/kontakt` instead of `mailto:`, aligning with REQ-BK-8 which requires all site CTAs to route through the contact inquiry page. CSP `connect-src` directive updated to allow `https://challenges.cloudflare.com` for Turnstile widget verification callbacks.
+
+### AC updated
+- **REQ-AP-2:** Inquiry section CTA description changed from "email CTA" to kontakt page link, referencing REQ-BK-8.
+- **REQ-TC-6:** `connect-src` acceptance criterion updated from `'self'` to `'self' https://challenges.cloudflare.com` to reflect Turnstile's runtime network requirements.
+
 ## 2026-04-03 — Revision 32: Zdrelac Page CMS Wiring and Encyclopedic Content
 
 The Zdrelac village page now queries the CMS `editorial` collection (filtered by `page_key === "zdrelac"`, sorted by `sort_order`) with graceful fallback to hardcoded content. Croatian fallback content expanded from 4 generic sections to 6 encyclopedic sections covering the bridge, Veliki Bokolj peak, Benedictine monastery Cokovac, olive groves, St. Michael's Fortress, and Galovac islet with caves. DE/SL/EN fallback content retained at 4 sections. The `editorial` collection is now queried by multiple pages (homepage, zdrelac, and others) but is not yet present in seed data.
