@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildVacationRentalSchema, buildBreadcrumbSchema } from "~/lib/schema";
+import { buildVacationRentalSchema } from "~/lib/schema";
 
 // ---------------------------------------------------------------------------
 // Test fixtures
@@ -22,14 +22,10 @@ const LAVANDA = {
 // ---------------------------------------------------------------------------
 
 describe("buildVacationRentalSchema()", () => {
-  it("returns an object with @type 'VacationRental'", () => {
+  it("returns payload without @context/@type (SchemaOrg component adds those)", () => {
     const schema = buildVacationRentalSchema(LAVANDA);
-    expect(schema["@type"]).toBe("VacationRental");
-  });
-
-  it("includes @context pointing to schema.org", () => {
-    const schema = buildVacationRentalSchema(LAVANDA);
-    expect(schema["@context"]).toBe("https://schema.org");
+    expect(schema["@context"]).toBeUndefined();
+    expect(schema["@type"]).toBeUndefined();
   });
 
   it("includes name from apartment data", () => {
@@ -135,112 +131,4 @@ describe("buildVacationRentalSchema()", () => {
 
 // ---------------------------------------------------------------------------
 // buildBreadcrumbSchema
-// ---------------------------------------------------------------------------
-
-describe("buildBreadcrumbSchema()", () => {
-  it("returns an object with @type 'BreadcrumbList'", () => {
-    const schema = buildBreadcrumbSchema([{ label: "Home", href: "/" }]);
-    expect(schema["@type"]).toBe("BreadcrumbList");
-  });
-
-  it("includes @context pointing to schema.org", () => {
-    const schema = buildBreadcrumbSchema([{ label: "Home", href: "/" }]);
-    expect(schema["@context"]).toBe("https://schema.org");
-  });
-
-  it("creates itemListElement array", () => {
-    const schema = buildBreadcrumbSchema([{ label: "Home", href: "/" }]);
-    const items = schema["itemListElement"] as unknown[];
-    expect(Array.isArray(items)).toBe(true);
-  });
-
-  it("position numbers start at 1", () => {
-    const schema = buildBreadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Apartments", href: "/hr/apartmani" },
-    ]);
-    const items = schema["itemListElement"] as Array<Record<string, unknown>>;
-    expect(items[0]["position"]).toBe(1);
-    expect(items[1]["position"]).toBe(2);
-  });
-
-  it("items with href get 'item' property", () => {
-    const schema = buildBreadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Apartments", href: "/hr/apartmani" },
-    ]);
-    const items = schema["itemListElement"] as Array<Record<string, unknown>>;
-    expect(items[0]["item"]).toBeDefined();
-    expect(items[1]["item"]).toBeDefined();
-  });
-
-  it("last item without href has no 'item' property (current page)", () => {
-    const schema = buildBreadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Apartments", href: "/hr/apartmani" },
-      { label: "Lavanda" },
-    ]);
-    const items = schema["itemListElement"] as Array<Record<string, unknown>>;
-    expect(items[2]["item"]).toBeUndefined();
-  });
-
-  it("each list item has @type ListItem", () => {
-    const schema = buildBreadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Lavanda" },
-    ]);
-    const items = schema["itemListElement"] as Array<Record<string, unknown>>;
-    for (const item of items) {
-      expect(item["@type"]).toBe("ListItem");
-    }
-  });
-
-  it("each list item includes name from label", () => {
-    const schema = buildBreadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Lavanda" },
-    ]);
-    const items = schema["itemListElement"] as Array<Record<string, unknown>>;
-    expect(items[0]["name"]).toBe("Home");
-    expect(items[1]["name"]).toBe("Lavanda");
-  });
-
-  it("returns correct structure for 3-level breadcrumb Home > Apartments > Lavanda", () => {
-    const schema = buildBreadcrumbSchema([
-      { label: "Home", href: "https://apartmani.novoselec.ch/hr/" },
-      { label: "Apartments", href: "https://apartmani.novoselec.ch/hr/apartmani" },
-      { label: "Lavanda" },
-    ]);
-
-    const items = schema["itemListElement"] as Array<Record<string, unknown>>;
-    expect(items).toHaveLength(3);
-
-    expect(items[0]["position"]).toBe(1);
-    expect(items[0]["name"]).toBe("Home");
-    expect(items[0]["item"]).toBe("https://apartmani.novoselec.ch/hr/");
-
-    expect(items[1]["position"]).toBe(2);
-    expect(items[1]["name"]).toBe("Apartments");
-    expect(items[1]["item"]).toBe("https://apartmani.novoselec.ch/hr/apartmani");
-
-    expect(items[2]["position"]).toBe(3);
-    expect(items[2]["name"]).toBe("Lavanda");
-    expect(items[2]["item"]).toBeUndefined();
-  });
-
-  it("handles a single-item breadcrumb (home page)", () => {
-    const schema = buildBreadcrumbSchema([{ label: "Home" }]);
-    const items = schema["itemListElement"] as Array<Record<string, unknown>>;
-    expect(items).toHaveLength(1);
-    expect(items[0]["position"]).toBe(1);
-    expect(items[0]["name"]).toBe("Home");
-    expect(items[0]["item"]).toBeUndefined();
-  });
-
-  it("handles empty items array", () => {
-    const schema = buildBreadcrumbSchema([]);
-    const items = schema["itemListElement"] as unknown[];
-    expect(Array.isArray(items)).toBe(true);
-    expect(items).toHaveLength(0);
-  });
-});
+// Note: buildBreadcrumbSchema was removed — Breadcrumbs.astro builds its own schema inline

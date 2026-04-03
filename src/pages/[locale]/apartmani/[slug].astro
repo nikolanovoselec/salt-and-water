@@ -54,7 +54,7 @@ try {
 const breadcrumbItems = [
   { name: t(typedLocale, "nav.home"), href: `/${typedLocale}/` },
   { name: t(typedLocale, "nav.apartments"), href: `/${typedLocale}/apartmani` },
-  { name, href: "" },
+  { name, href: `/${typedLocale}/apartmani/${slug}` },
 ];
 
 const vacationRentalSchema = buildVacationRentalSchema({
