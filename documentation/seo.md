@@ -31,6 +31,7 @@ The sitemap is served at `/sitemap.xml` and generated at request time by `src/pa
 | `/faq` | FAQ |
 | `/privatnost` | Privacy Policy |
 | `/impressum` | Legal notice |
+| `/pristupacnost` | Accessibility statement |
 
 Each page is emitted once per locale, producing 48 `<url>` entries (12 pages × 4 locales).
 
