@@ -106,8 +106,10 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 - **Constraints:** CON-SEC
 - **Priority:** P0
 - **Dependencies:** REQ-CMS-1
-- **Verification:** Access admin panel from phone via Cloudflare Access login, verify session persistence, verify unauthorized users cannot reach admin
-- **Status:** Implemented
+  - **Post-login redirect:** After Cloudflare Access authentication succeeds (Google login, email OTP, etc.), the browser must be redirected to `/_emdash/admin/` and the Emdash admin panel must load without showing "Authentication failed". The Access JWT (`CF_Authorization` cookie) must be validated by the `access()` plugin which extracts the user identity and provisions/authenticates the Emdash user.
+  - **Debugging checklist:** If "Authentication failed" appears after successful CF Access login: (1) verify `CF_ACCESS_AUDIENCE` env var matches the Access Application's AUD tag, (2) verify team domain in astro.config.mjs matches CF Access organization, (3) verify `CF_Authorization` cookie is being set on the `/_emdash/` path, (4) check that `autoProvision: true` creates the user on first login.
+- **Verification:** Access admin panel from phone via Cloudflare Access login, verify session persistence, verify unauthorized users cannot reach admin. **Must verify end-to-end: CF Access login → redirect → Emdash admin loads → can create/edit content.**
+- **Status:** Partial — CF Access gate works (Google login succeeds) but redirect to Emdash admin fails with "Authentication failed"
 
 ### REQ-CMS-4: Mobile Admin UX
 
@@ -184,11 +186,13 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
   - Owner workflow: open admin → see checklist → replace photos → edit text → mark as own content → done
   - **Seed API:** `POST /api/admin/seed` endpoint applies `seed/seed.json` to D1 via Emdash's `applySeed()`. Idempotent (safe to run multiple times). Returns JSON `{ success, result }` on 200 or `{ success: false, error }` on 500.
   - **Seed data (`seed/seed.json`):** 6 collections across 4 locales: `homepage` (section-based: why-pasman, zdrelac, apartments, cta), `pages` (why-pasman, getting-here, about, faq with structured section data), `apartments` (2 listings: Lavanda 4-pax, Tramuntana 2-pax with full field set), `faqs` (categorized Q&A), `guide` (local guide entries across categories), `testimonials` (guest quotes with country metadata). All entries have per-locale variants (hr, de, sl, en).
+  - **Editorial collection seeding:** CMS entries for ALL `editorial` page_keys must be seeded in all 4 locales: `hrana` (5 sections), `aktivnosti` (6 sections), `plaze` (5 sections), `zdrelac` (6+ sections), `homepage` sections, `about`, `privacy`, `impressum`. No page should fall through to hardcoded fallback content once seeding is complete.
+  - **All 4 locales complete:** DE and SL content must be culturally adapted (not machine-translated Croatian). German content is precise and detailed; Slovenian is warm and familiar. No locale should show Croatian fallback for seeded pages.
 - **Constraints:** CON-MEDIA, CON-I18N
 - **Priority:** P0
 - **Dependencies:** REQ-CMS-1, REQ-CMS-2, REQ-I18N-4
-- **Verification:** Deploy fresh instance, run seed endpoint, verify complete site renders in all 4 locales, verify placeholder badges
-- **Status:** Planned
+- **Verification:** Deploy fresh instance, run seed endpoint, verify complete site renders in all 4 locales with no hardcoded fallback content visible, verify placeholder badges
+- **Status:** Partial — 118+ entries seeded in HR and EN for most collections; DE and SL largely missing; editorial entries for hrana/aktivnosti/plaze page_keys not fully seeded
 
 ### REQ-CMS-7: Content Safeguards
 
@@ -215,13 +219,13 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 - **Intent:** Branded error pages that maintain luxury feel
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - Custom 404 page: branded design with site navigation, suggested links (homepage, apartments, getting here, contact), per locale. Uses normal site shell (header/footer from CMS).
+  - Custom 404 page: branded design with site navigation, suggested links (homepage, apartments, getting here, contact), **fully localized per active locale**. Detects locale from URL path prefix (e.g., `/de/nonexistent` → German 404). Falls back to Croatian if locale cannot be determined. Uses normal site shell (header/footer from CMS).
   - Custom 500 page: **hardcoded minimal fallback shell** — no CMS/D1 dependency. Static HTML with property name, contact email/phone, homepage link, brand colors. No CMS-driven nav/footer. Baked into Worker at deploy time.
-- **Constraints:** CON-PERF
+- **Constraints:** CON-PERF, CON-I18N
 - **Priority:** P1
-- **Dependencies:** REQ-VD-1
-- **Verification:** Trigger 404 and 500, verify branded pages
-- **Status:** Planned
+- **Dependencies:** REQ-VD-1, REQ-I18N-3
+- **Verification:** Trigger 404 in each locale (e.g., `/hr/xyz`, `/de/xyz`), verify page renders in correct language with nav and suggested links
+- **Status:** Partial — 404 page exists but shows English text regardless of URL locale
 
 ## Out of Scope
 

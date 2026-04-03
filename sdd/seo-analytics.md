@@ -26,8 +26,8 @@ Schema.org structured data, Open Graph, multilingual sitemap, keyword strategy, 
 - **Constraints:** CON-SEO
 - **Priority:** P1
 - **Dependencies:** REQ-AP-1, REQ-ED-7, REQ-SP-1
-- **Verification:** Google Rich Results Test for all page types
-- **Status:** Implemented
+- **Verification:** Google Rich Results Test for all page types. Verify `VacationRental` JSON-LD on apartment detail pages. Verify `BreadcrumbList` on all pages.
+- **Status:** Partial — basic Schema.org exists but `VacationRental` not applied to apartment detail pages, `BreadcrumbList` not rendered, `FAQPage` not applied to FAQ section
 
 ### REQ-SEO-2: Open Graph & Social
 

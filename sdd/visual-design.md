@@ -184,14 +184,16 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
   - Configurable fill color to match the target section background (e.g., dark navy for transition into dark section, cream for transition back to light)
   - `flip` prop for vertical mirror (top-of-section vs bottom-of-section placement)
   - `aria-hidden="true"` — purely decorative
-  - Homepage uses 3 wave dividers: cream-to-dark before apartments section, dark-to-cream after apartments section, cream-to-dark before sunset CTA section
-  - Subpage heroes: every `HeroSimple` with a background image includes an inline wave SVG at the bottom edge (cream fill `#F8F5EF`), creating an organic transition from hero photo into page content (REQ-VD-12). Pages with custom hero markup (not using HeroSimple) achieve the same effect via CSS `::after` pseudo-element with SVG `mask-image` — same wave path, same responsive height, same cream fill.
-  - ~~`.water-flow` CSS utility class with caustics shimmer~~ — **Superseded:** the previous water-flow approach (CSS mask-image wave + caustics radial-gradient animation on the apartments section) has been replaced by standalone WaveDivider components. The `.water-flow` CSS class is no longer applied to any section.
+  - **Homepage waves (3 placements):** (1) cream-to-dark before apartments section, (2) dark-to-cream after apartments section, (3) cream-to-dark before sunset CTA section. Each wave's `fill` color must exactly match the background of the section it transitions INTO. The `bg` (background) must match the section it sits ON TOP OF. No visible color gaps or mismatches between wave and adjacent sections.
+  - **Homepage hero wave:** The homepage hero section (REQ-SF-1) includes a wave at its bottom edge (cream fill `#F8F5EF`) for organic transition into the first content section. This is part of the hero component, not a separate WaveDivider.
+  - **Subpage hero waves:** Every `HeroSimple` component with a background image includes an inline wave SVG at the bottom edge (cream fill `#F8F5EF`), creating an organic transition from hero photo into page content (REQ-VD-12). Pages with custom hero markup (not using HeroSimple) — including `hrana.astro`, `aktivnosti.astro`, `plaze.astro`, and `zdrelac.astro` — achieve the same effect via inline SVG or CSS `::after` pseudo-element. **Every page with a hero image MUST have a wave at the bottom of the hero.** No exceptions.
+  - **Wave color matching rules:** The fill color of every wave must be sampled from the actual CSS background of the section below it. For pages using `.section` (cream `#F8F5EF`), fill is `#F8F5EF`. For pages using `.section--alt` (stone `#EDE8DE`), fill is `#EDE8DE`. For transitions into dark sections, fill is navy `#0A1F33`. Never hardcode a color that doesn't match the adjacent section.
+  - ~~`.water-flow` CSS utility class with caustics shimmer~~ — **Superseded.**
 - **Constraints:** CON-PERF, CON-A11Y
-- **Priority:** P2
+- **Priority:** P1
 - **Dependencies:** REQ-VD-7
-- **Verification:** Visual review, responsive test
-- **Status:** Implemented
+- **Verification:** Visual review on mobile and desktop — verify no color gaps between wave and adjacent sections on every page. Responsive test at 375px, 768px, 1440px.
+- **Status:** Partial — WaveDivider component exists but waves missing from homepage hero, several subpage heroes, and color transitions broken on homepage
 
 ### REQ-VD-10: Breathing Image Cards
 
@@ -240,14 +242,47 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
   - Wave SVG divider at bottom edge (same pattern as REQ-VD-9: `viewBox="0 0 1440 80"`, `preserveAspectRatio="none"`, organic bezier path, fill `#F8F5EF` to match page background, responsive height `clamp(50px, 8vw, 100px)`, `aria-hidden="true"`)
   - Wave positioned absolute at `bottom: -1px` to seamlessly bridge hero into page content with no visible seam
   - Content z-index layering: image (0), overlay (1), text content (2), wave (3)
-  - All 11 subpages use hero images: apartments listing, gallery, getting here, FAQ, about hosts, local guide, why Pasman, contact, impressum, privacy policy, accessibility statement
+  - All subpages use hero images: apartments listing, gallery, getting here, FAQ, about hosts, local guide, why Pasman, contact, impressum, privacy policy, accessibility statement, hrana, aktivnosti, plaze, zdrelac
+  - **Imagery authenticity:** Subpage hero photos must depict Croatian/Adriatic scenes relevant to the page topic. No Greek islands (Santorini), no tropical resorts, no generic Mediterranean. Each page uses a unique hero image (no duplicates across pages).
   - **Temporary workaround:** Stock photos served from Pexels CDN (same as REQ-SF-1 workaround). Will move to R2 when `/media/` route is fixed.
   - `prefers-reduced-motion`: Ken Burns animation disabled
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P1
 - **Dependencies:** REQ-VD-9, REQ-VD-1
-- **Verification:** Visual review across all subpages, responsive test, reduced-motion test
-- **Status:** Implemented
+- **Verification:** Visual review across ALL subpages — verify wave renders at bottom with correct fill color, no gap. Verify hero images are contextually appropriate and unique per page.
+- **Status:** Partial — hero images present on most pages but wave SVG missing or broken on several subpages (hrana, aktivnosti, plaze); some hero images are non-Croatian stock (Santorini blue domes on beaches page)
+
+### REQ-VD-13: Icon System
+
+- **Intent:** Consistent, professional iconography across the site using Material Design Icons
+- **Applies To:** System
+- **Acceptance Criteria:**
+  - All icons use `@mdi/js` (already installed) — inline SVG path data, not icon font
+  - Icon helper component accepts icon name and renders inline SVG with `currentColor` fill
+  - Icons used for: amenities grid on apartment detail, contact info (email, phone, location), navigation items where appropriate, trust strip items, footer links
+  - Consistent sizing: 20px for inline text, 24px for standalone, 16px for compact lists
+  - `aria-hidden="true"` on decorative icons, descriptive `aria-label` on functional icons
+- **Constraints:** CON-PERF, CON-A11Y
+- **Priority:** P1
+- **Dependencies:** None
+- **Verification:** Visual review — no emoji or text-based icon substitutes remain
+- **Status:** Planned — `@mdi/js` installed but not used anywhere
+
+### REQ-VD-14: Unique Imagery Per Page
+
+- **Intent:** Every page feels distinct and curated — no recycled stock photos
+- **Applies To:** Visitor
+- **Acceptance Criteria:**
+  - Every hero image is unique across all pages (no two pages share the same hero photo)
+  - Every content section image is unique within and across pages (no Pexels URL appears more than once on the entire site)
+  - All images depict Croatian Adriatic coast, Dalmatian architecture, Pašman/Ugljan islands, or contextually relevant Croatian subjects (food, nature, villages)
+  - Explicitly forbidden: Santorini/Greek blue dome imagery, tropical resorts, Maldives-style overwater bungalows, generic Mediterranean stock
+  - When R2 pipeline is ready, all images migrate from Pexels CDN to R2 (REQ-PERF-1)
+- **Constraints:** CON-MEDIA
+- **Priority:** P1
+- **Dependencies:** REQ-VD-12
+- **Verification:** Audit all image URLs — no duplicates, no non-Croatian imagery
+- **Status:** Planned — multiple Pexels images reused across pages, some non-Croatian imagery present
 
 ## Out of Scope
 

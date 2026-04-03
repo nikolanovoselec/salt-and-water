@@ -28,13 +28,15 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Title and subtitle fade up with staggered CSS animation (0.3s and 0.6s delay)
   - On `prefers-reduced-motion`: all animations disabled, content immediately visible
   - Mobile: title scales down via clamp, subtitle uses smaller font size
+  - **Wave at bottom of hero:** Inline SVG wave divider at the bottom edge of the hero section (same pattern as REQ-VD-9: organic bezier path, fill `#F8F5EF` to match page background below, responsive height, `aria-hidden="true"`, positioned absolute at `bottom: -1px`). Creates organic transition from hero photo into the "Why Pašman" section — no hard edge.
+  - **Imagery authenticity:** All hero carousel photos must depict the Croatian Adriatic coast, Pašman island, or Dalmatian architecture. No tropical resorts, Greek islands (Santorini blue domes), or generic Mediterranean stock. Each carousel image must be unique (no photo reused elsewhere on the site).
   - **Temporary workaround:** Stock photos currently served directly from Pexels CDN URLs (external hotlink) due to a routing bug in the `/media/:key` Worker route (404 on R2 fetch). When the `/media/` route is fixed, images will move to R2 with Cloudflare Image Resizing per REQ-PERF-1. Pexels CDN URLs use `?auto=compress&w=` for basic optimization.
   - **Future enhancement:** CMS-managed hero image selection will replace the hardcoded Pexels URLs. Owner will be able to choose and reorder carousel images from the admin panel.
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P0
-- **Dependencies:** None
-- **Verification:** Visual + Lighthouse
-- **Status:** Implemented
+- **Dependencies:** REQ-VD-9
+- **Verification:** Visual + Lighthouse. Verify wave renders at bottom of hero with no gap or color mismatch.
+- **Status:** Partial — carousel and Ken Burns work; wave at bottom missing, some stock photos are non-Croatian
 
 ### REQ-SF-2: Optional Ambient Video Hero
 
@@ -104,14 +106,15 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Links to full editorial content
   - Responsive: stacks vertically on mobile
   - **Apartments preview** section with split-section layout (text + duo-image grid), duo-image is 2-col grid with spacing gap, 3:4 portrait aspect, organic asymmetric border-radius (`20px 4px 20px 4px`), hover zoom (1.03x). Ghost CTA to apartments page.
-  - **Experience triptych** (REQ-ED-4): 3-column image grid within container with gaps (food, activities, beaches), 4:5 portrait aspect, hover zoom (1.05x), 16px border-radius, subtle shadow, gradient label overlay that slides in from bottom on hover (always visible on mobile). Stacks to single column (16:9 aspect) on mobile. Wrapped in warm gradient background section. Each triptych item is a clickable `<a>` element linking to its detail page: Food & Drink -> `/{locale}/hrana` (REQ-ED-8), Nature & Activities -> `/{locale}/aktivnosti` (REQ-ED-9), Beaches -> `/{locale}/plaze` (REQ-ED-10).
+  - **Experience triptych** (REQ-ED-4): 3-column image grid within container with gaps (food, activities, beaches), 4:5 portrait aspect, hover zoom (1.05x), 16px border-radius, subtle shadow, gradient label overlay that slides in from bottom on hover (always visible on mobile). Stacks to single column (16:9 aspect) on mobile. Wrapped in warm gradient background section. Each triptych item is a clickable `<a>` element linking to its detail page: Food & Drink -> `/{locale}/hrana` (REQ-ED-8), Nature & Activities -> `/{locale}/aktivnosti` (REQ-ED-9), Beaches -> `/{locale}/plaze` (REQ-ED-10). **Click/tap on the image or anywhere on the card navigates to the detail page** — not just the label text.
+  - **Ždrelac village card** (feature image with overlay text): clicking/tapping anywhere on the card navigates to `/{locale}/zdrelac`. The entire card is an `<a>` element, not just the text.
   - Toggleable via CMS section settings (REQ-CMS-5)
   - CMS-managed content per locale
 - **Constraints:** CON-PERF, CON-I18N
 - **Priority:** P1
 - **Dependencies:** REQ-ED-1, REQ-ED-4, REQ-ED-6, REQ-CMS-5
-- **Verification:** Visual review, test toggle off/on
-- **Status:** Planned
+- **Verification:** Visual review, test toggle off/on, verify all card links navigate correctly on mobile and desktop
+- **Status:** Partial — layout exists but triptych/village card links broken or not clickable
 
 ### REQ-SF-6: Footer
 
@@ -128,7 +131,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1
 - **Verification:** Visual + link test
-- **Status:** Planned
+- **Status:** Partial — desktop works, mobile language picker exists in hamburger overlay but not verified
 
 ### REQ-SF-7: Sticky Mobile CTA
 

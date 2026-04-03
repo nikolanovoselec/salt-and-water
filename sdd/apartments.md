@@ -96,12 +96,14 @@ Apartment listings, detail pages, photo galleries, amenities, seasonal pricing, 
   - Trust info near inquiry widget: response time, no payment required, no obligation, cancellation summary
   - Contextual objection handling: common concerns answered inline (beach quality, parking, AC, stairs, noise, ferry stress)
   - Sticky mobile CTA at bottom
-  - Breadcrumb navigation
+  - Breadcrumb navigation (REQ-SEO-1 BreadcrumbList schema + visible breadcrumb UI)
+  - Schema.org `VacationRental` structured data per apartment (REQ-SEO-1)
+  - **Pricing table** rendered on detail page using `PricingTable` component showing seasonal rates, cleaning fee, tourist tax (REQ-AP-4)
 - **Constraints:** CON-PERF, CON-A11Y, CON-I18N
 - **Priority:** P0
 - **Dependencies:** REQ-AP-1, REQ-AP-4, REQ-AP-5, REQ-AP-6, REQ-BK-1
-- **Verification:** Full visual review + screen reader test
-- **Status:** Implemented
+- **Verification:** Full visual review + screen reader test. Verify detail page loads reliably for all apartment slugs in all 4 locales. Verify breadcrumbs, pricing table, and Schema.org render.
+- **Status:** Partial — basic detail page renders but: lightbox not implemented (REQ-AP-6), PricingTable component unused, Breadcrumbs component unused, Schema.org VacationRental not applied, reliability issues with slug resolution
 
 ### REQ-AP-4: Seasonal Pricing
 
