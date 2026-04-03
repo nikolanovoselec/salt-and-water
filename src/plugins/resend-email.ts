@@ -20,11 +20,10 @@ export const resendEmailPlugin = definePlugin({
       // On Cloudflare Workers, env vars are available via the cloudflare:workers module
       let apiKey: string | undefined;
       try {
-        const { env } = await import("cloudflare:workers");
-        apiKey = (env as Record<string, string>).RESEND_API_KEY;
+        const mod = await import("cloudflare:workers");
+        apiKey = (mod.env as unknown as Record<string, string>)["RESEND_API_KEY"];
       } catch {
-        // Not on Cloudflare — try process.env
-        try { apiKey = (globalThis as unknown as Record<string, Record<string, string>>).process?.env?.RESEND_API_KEY; } catch { /* */ }
+        // Not on Cloudflare — try process.env fallback
       }
 
       if (!apiKey) {

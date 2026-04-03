@@ -192,6 +192,30 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Verification:** Full lifecycle test: submit inquiry -> owner confirms -> dates blocked -> calendar updated
 - **Status:** Planned
 
+### REQ-BK-8: Contact Inquiry Page
+
+- **Intent:** Provide an immediate, low-friction inquiry path while the full request-to-book widget (REQ-BK-1) is not yet built
+- **Applies To:** Visitor
+- **Acceptance Criteria:**
+  - Standalone page at `/{locale}/kontakt` with simple hero and two-column layout (info + form)
+  - Form fields: name (required), email (required), phone (optional), preferred dates (freeform text, optional), number of guests (number input, optional), message (required)
+  - All field labels localized in 4 locales (hr, de, sl, en) — labels are visible, not placeholder-only
+  - Honeypot hidden field (`website`) for bot filtering, off-screen with `aria-hidden`
+  - GDPR consent checkbox (unchecked by default, required to submit)
+  - Turnstile widget in managed mode with site key, loaded async
+  - Submits to `/api/inquiry` as JSON with `type: "question"`
+  - On success: green confirmation message with 2-hour response promise, form resets, Turnstile resets
+  - On error: terracotta error message, form state preserved (button re-enabled)
+  - Submit button disabled during request with localized "Sending..." text
+  - Status messages use `aria-live="polite"` for screen reader announcement
+  - All site CTAs (navigation desktop + mobile, homepage CTA section, apartment detail price card) link to `/{locale}/kontakt` instead of anchor-based inquiry targets
+  - Contact info section displays email and location
+- **Constraints:** CON-SEC, CON-A11Y, CON-I18N
+- **Priority:** P0
+- **Dependencies:** REQ-BK-2, REQ-TC-5
+- **Verification:** Submit test inquiry from each locale, verify Turnstile renders, verify honeypot hidden, verify GDPR required, verify CTA links resolve
+- **Status:** Implemented
+
 ## Out of Scope
 
 - Online payment / credit card processing

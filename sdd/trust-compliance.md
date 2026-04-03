@@ -100,14 +100,14 @@ GDPR, privacy policy, Impressum, house rules, cancellation policy, security head
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - Unchecked checkbox on inquiry form: "I agree to the processing of my personal data according to the Privacy Policy"
-  - Privacy Policy linked
+  - Privacy Policy linked (GAP: contact page consent text does not currently hyperlink to Privacy Policy — needs fix)
   - Form cannot submit without consent checked
   - Consent timestamp stored with inquiry in D1
   - Per-locale label text
 - **Constraints:** CON-LEGAL, CON-SEC, CON-I18N
 - **Priority:** P0
-- **Dependencies:** REQ-BK-1, REQ-TC-2
-- **Verification:** Test form without consent (rejected), with consent (accepted)
+- **Dependencies:** REQ-BK-8, REQ-TC-2
+- **Verification:** Test form without consent (rejected), with consent (accepted), verify Privacy Policy link present
 - **Status:** Implemented
 
 ### REQ-TC-6: Security Headers
