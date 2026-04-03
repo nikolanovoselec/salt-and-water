@@ -24,6 +24,10 @@ The sitemap is served at `/sitemap.xml` and generated at request time by `src/pa
 | `/apartmani` | Apartment listing |
 | `/zdrelac` | Ždrelac village |
 | `/galerija` | Gallery |
+| `/hrana` | Food and restaurants guide |
+| `/aktivnosti` | Activities guide |
+| `/plaze` | Beaches guide |
+| `/kontakt` | Contact and inquiry form |
 | `/zasto-pasman` | Why Pašman (editorial) |
 | `/dolazak` | Getting Here (ferry, airport, maps) |
 | `/vodic` | Local Guide (beaches, food, activities) |
@@ -33,18 +37,7 @@ The sitemap is served at `/sitemap.xml` and generated at request time by `src/pa
 | `/impressum` | Legal notice |
 | `/pristupacnost` | Accessibility statement |
 
-Each page is emitted once per locale, producing 48 `<url>` entries (12 pages × 4 locales).
-
-The following pages exist as routes but are not yet registered in `sitemap.xml.ts`:
-
-| Slug | Status |
-|---|---|
-| `/hrana` | Route exists, not in sitemap |
-| `/aktivnosti` | Route exists, not in sitemap |
-| `/plaze` | Route exists, not in sitemap |
-| `/kontakt` | Route exists, not in sitemap |
-
-Add these slugs to the `pages` array in `src/pages/sitemap.xml.ts` to include them.
+Each page is emitted once per locale, producing 64 `<url>` entries (16 pages × 4 locales).
 
 ### hreflang alternates
 
