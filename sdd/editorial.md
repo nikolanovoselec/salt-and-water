@@ -26,7 +26,7 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5, REQ-I18N-4
 - **Verification:** Visual review + toggle test
-- **Status:** Planned
+- **Status:** Partial — Page exists at `/{locale}/zasto-pasman` with HeroSimple, hardcoded selling points in all 4 locales (crystal sea, island rhythm, ferry access), CMS override via `editorial` collection with `page_key === "why-pasman"`. Missing: scroll-driven pinned sections, full-bleed photos per section, section toggles, links to guide entries.
 
 ### REQ-ED-2: "Getting Here" Page
 
@@ -46,7 +46,7 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5, REQ-I18N-4
 - **Verification:** Accuracy check against Jadrolinija schedules
-- **Status:** Planned
+- **Status:** Partial — Page exists at `/{locale}/dolazak` with HeroSimple, hardcoded transport sections in all 4 locales (ferry, driving, alternative Zdrelac bridge route), CMS override via `editorial` collection. Missing: visual journey timeline, map image with deep links, airport sections, section toggles.
 
 ### REQ-ED-3: "A Day on Pašman" Section
 
@@ -104,7 +104,7 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5
 - **Verification:** Visual review
-- **Status:** Planned
+- **Status:** Partial — Page exists at `/{locale}/o-nama` with HeroSimple, hardcoded host story in all 4 locales, CMS override via `editorial` collection with `page_key === "about"`. Missing: host photo with arch clip-path, response time badge, WhatsApp link, homepage condensed version, section toggle.
 
 ### REQ-ED-6: "About Ždrelac" Page
 
@@ -138,7 +138,7 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5, REQ-I18N-4
 - **Verification:** Test accordion, verify structured data
-- **Status:** Planned
+- **Status:** Partial — Page exists at `/{locale}/faq` with HeroSimple, hardcoded FAQs in all 4 locales, CMS override via `faqs` collection sorted by `sort_order`. Accordion UI uses native `<details>/<summary>` elements. FAQPage schema.org JSON-LD applied. Missing: category filtering, contextual FAQs on apartment/transport pages, section toggle. Accordion animation is browser-native (no smooth custom animation).
 
 ### REQ-ED-8: "Food & Drink" Detail Page
 

@@ -1,5 +1,50 @@
 # Changelog
 
+## 2026-04-03 — Revision 49: Full Spec Audit — Status Corrections and Gap Identification
+
+Comprehensive audit of all 87 requirements against actual codebase. Found 15 status inaccuracies where implementation state did not match spec status. No new requirements added; no requirements deprecated. All 87 IDs confirmed unique, all cross-references resolve, all CON-* references valid.
+
+### Status corrections (Implemented to Partial) — 4 requirements
+- **REQ-SEO-3** (Analytics): CF Web Analytics beacon not present in Base.astro -- pageview analytics not collected. Custom events via `/api/track` work.
+- **REQ-TC-5** (GDPR Consent): Checkbox exists and works, but consent text does NOT hyperlink to Privacy Policy page.
+- **REQ-AP-4** (Seasonal Pricing): PricingTable component and pricing.ts module exist, but PricingTable is not rendered on any page (dead component). Owner cannot manage seasons via CMS.
+- **REQ-BK-6** (Booking Business Rules): Server-side pricing/availability logic works in API. CMS-facing features (owner-configurable settings, season validation) not built.
+
+### Status corrections (Planned to Partial) — 7 requirements
+- **REQ-SF-3** (Navigation): Transparent-to-solid transition, hamburger menu, mobile overlay, language picker all implemented. Admin link missing from nav (only in footer).
+- **REQ-SF-4** (Language Switcher): LanguageSwitcher dropdown component works, mobile inline picker works. Locale activation filtering and cookie preference not implemented.
+- **REQ-BK-3** (WhatsApp Button): WhatsAppButton component implemented with fixed-position floating button, 3s animation, pre-filled localized messages. CMS-managed number not yet implemented.
+- **REQ-SP-1** (Testimonials): Homepage 3-column grid implemented, loads from CMS with Croatian fallback. Missing carousel, apartment detail placement, "most loved for" tags.
+- **REQ-TC-7** (Accessibility Statement): Page exists at `/{locale}/pristupacnost` with content in all 4 locales, linked from footer. Not CMS-managed, missing contact info and known limitations.
+- **REQ-TC-2** (Privacy Policy): Page exists at `/{locale}/privatnost` with content in all 4 locales plus CMS override. Missing data retention, processor list, WhatsApp disclosure.
+- **REQ-TC-3** (Impressum): Page exists at `/{locale}/impressum` with template content plus CMS override. Contains placeholder values. German-always-available exception not enforced.
+- **REQ-ED-1** (Why Pasman): Page exists at `/{locale}/zasto-pasman` with HeroSimple and hardcoded selling points in all 4 locales, CMS override. Missing: scroll-driven pinned sections, full-bleed photos.
+- **REQ-ED-2** (Getting Here): Page exists at `/{locale}/dolazak` with hardcoded transport info in all 4 locales, CMS override. Missing: visual journey timeline, map, airport sections.
+- **REQ-ED-5** (About Hosts): Page exists at `/{locale}/o-nama` with hardcoded host story in all 4 locales, CMS override. Missing: host photo, response badge, WhatsApp link.
+- **REQ-ED-7** (FAQ): Page exists at `/{locale}/faq` with accordion UI, FAQPage schema, CMS override. Missing: category filtering, contextual placement.
+
+### Status text corrections (no status level change)
+- **REQ-SEO-1** (Schema.org): Updated status text -- FAQPage schema IS implemented on the FAQ page (was incorrectly listed as "Still missing"). BreadcrumbList on non-apartment pages remains the only gap.
+
+### Gaps identified (no spec change, flagged for implementation)
+- **REQ-BK-2**: `buildGuestEmail()` function exists but is never called -- guest auto-reply is dead code. Added to status text.
+- **REQ-BK-2**: Cron Trigger for email retry not implemented (outbox pattern incomplete).
+- **REQ-SF-3**: Admin link (`/_emdash/admin/`) present in Footer but missing from Navigation component per AC.
+- **REQ-TC-5**: GDPR consent text lacks hyperlink to `/{locale}/privatnost`.
+- **REQ-AP-4**: PricingTable.astro is dead code -- exists but never imported.
+
+### Validation results (all passed)
+- All 87 requirement IDs unique across 12 domain files
+- All cross-references in Dependencies fields resolve
+- All Status values are valid (Implemented, Partial, Planned, Deprecated)
+- All requirements have all 9 required fields
+- All CON-* references resolve to constraints.md definitions
+- All 9 CON-* IDs are referenced by at least one requirement
+- README domain table matches 12 domain files on disk
+- Glossary terms are all used in at least one domain file
+
+---
+
 ## 2026-04-03 — Revision 48: Unified Card Overlay Typography
 
 Homepage card overlays (Zdrelac feature image and experience triptych) consolidated from separate CSS classes into a single `.card-overlay` system with shared gradient, label, and title styles.
