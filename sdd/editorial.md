@@ -145,7 +145,7 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Intent:** Showcase local cuisine and dining options to help visitors plan meals and discover the island's food culture
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - Standalone page at `/{locale}/hrana` with 60vh hero image, gradient overlay, locale-aware title and introductory paragraph. Hero includes a bottom wave divider (CSS `::after` with SVG mask-image, cream fill `#F8F5EF`, responsive height) for organic transition into page content (REQ-VD-9).
+  - Standalone page at `/{locale}/hrana` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph, and **wave SVG at the bottom edge** (cream fill `#F8F5EF`, organic bezier path, responsive height). The wave is part of HeroSimple and renders automatically.
   - 5 content sections in alternating image+text row layout: konobas on Pasman, restaurants on Ugljan, Dalmatian specialties, local products (olive oil, wine, figs), markets and shopping
   - Each section: named restaurants/konobas with distance from Zdrelac in km (Konoba Bokolj 0-1 km, Lanterna 10-12 km, Dardin 8-10 km, Intrada 10-12 km)
   - Practical info: Studenac for basics, larger shops in Preko/Kali, Zadar for full shopping
@@ -153,19 +153,21 @@ Content pages that sell the destination and build emotional connection — Why P
   - Alternating layout: odd sections image-left/text-right, even sections reversed (desktop); single column on mobile
   - Images: 4:3 aspect, organic asymmetric border-radius (`20px 4px 20px 4px`) with subtle box-shadow, hover zoom (1.03x)
   - Scroll-triggered reveal via `data-reveal`
+  - Hero image must be contextually appropriate (food/dining scene, not Santorini or tropical)
   - Linked from homepage triptych (REQ-SF-5)
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
-- **Dependencies:** REQ-ED-4, REQ-SF-5
-- **Verification:** Visual review across all 4 locales
-- **Status:** Implemented
+- **Dependencies:** REQ-ED-4, REQ-SF-5, REQ-VD-12
+- **Verification:** Visual review across all 4 locales. Verify wave renders at bottom of hero. Verify hero image is food-related.
+- **Status:** Partial — page renders with content but hero uses custom markup without wave; should use HeroSimple
 
 ### REQ-ED-9: "Nature & Activities" Detail Page
 
 - **Intent:** Present outdoor activities and excursion options to help visitors plan active days on the islands
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - Standalone page at `/{locale}/aktivnosti` with 60vh hero image, gradient overlay, locale-aware title and introductory paragraph
+  - Standalone page at `/{locale}/aktivnosti` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph, and **wave SVG at the bottom edge**
+  - Hero image must depict nature/outdoor activities, not food or beaches
   - 6 content sections: walks and viewpoints (Bokolj hill 8-10 km), cycling (25-40 km loop route), Kornati National Park (departures 10-15 km), Telascica Nature Park, water sports (kayak, SUP, snorkeling, diving), history and culture (St. Michael's Fortress 12-14 km, Galevac monastery)
   - Each section includes distances from Zdrelac and practical tips
   - **CMS wiring:** Page queries the `editorial` collection filtered by `page_key === "aktivnosti"`, sorted by `sort_order`. When CMS entries exist, they replace the hardcoded fallback sections. When no CMS entries exist, hardcoded per-locale content is rendered.
@@ -174,16 +176,17 @@ Content pages that sell the destination and build emotional connection — Why P
   - Linked from homepage triptych (REQ-SF-5)
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
-- **Dependencies:** REQ-ED-4, REQ-SF-5
-- **Verification:** Visual review across all 4 locales
-- **Status:** Implemented
+- **Dependencies:** REQ-ED-4, REQ-SF-5, REQ-VD-12
+- **Verification:** Visual review across all 4 locales. Verify wave renders at bottom of hero.
+- **Status:** Partial — page renders with content but hero uses custom markup without wave; should use HeroSimple
 
 ### REQ-ED-10: "Beaches" Detail Page
 
 - **Intent:** Guide visitors to the best swimming spots, from nearby coves to hidden beaches reachable by boat
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - Standalone page at `/{locale}/plaze` with 60vh hero image, gradient overlay, locale-aware title and introductory paragraph
+  - Standalone page at `/{locale}/plaze` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph, and **wave SVG at the bottom edge**
+  - Hero image must depict Croatian/Adriatic beach or coastline (not Santorini blue domes or tropical beaches)
   - 5 content sections organized by proximity: Zdrelac coves (0-2 km, Mali Zdrelac bay, bridge area), northern Pasman beaches (5-15 km, Matlovac, Soline), Ugljan beaches (10-20 km, Jaz, Kali, Muline), hidden coves (by boat/kayak), practical beach day tips (parking, shade, maestral wind patterns)
   - Each section includes named beaches with distances from Zdrelac
   - **CMS wiring:** Page queries the `editorial` collection filtered by `page_key === "plaze"`, sorted by `sort_order`. When CMS entries exist, they replace the hardcoded fallback sections. When no CMS entries exist, hardcoded per-locale content is rendered.
@@ -192,9 +195,9 @@ Content pages that sell the destination and build emotional connection — Why P
   - Linked from homepage triptych (REQ-SF-5)
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
-- **Dependencies:** REQ-ED-4, REQ-SF-5
-- **Verification:** Visual review across all 4 locales
-- **Status:** Implemented
+- **Dependencies:** REQ-ED-4, REQ-SF-5, REQ-VD-12
+- **Verification:** Visual review across all 4 locales. Verify wave renders at bottom of hero. Verify hero image is a Croatian beach/coast scene.
+- **Status:** Partial — page renders with content but hero uses custom markup without wave and hero image is Santorini (non-Croatian); should use HeroSimple with Croatian beach imagery
 
 ## Out of Scope
 

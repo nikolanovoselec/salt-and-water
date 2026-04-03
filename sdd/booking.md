@@ -86,8 +86,9 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Constraints:** CON-SEC, CON-PERF
 - **Priority:** P0
 - **Dependencies:** REQ-CMS-1
-- **Verification:** End-to-end test with real Resend + Turnstile, test availability race condition
-- **Status:** Implemented
+  - **Email delivery verified:** Owner email and guest auto-reply must actually send via Resend using `RESEND_API_KEY` from Worker env. The `env as unknown as Env` cast pattern must successfully access the key at runtime. Email delivery must be verified with a real test submission, not just by reading code.
+- **Verification:** End-to-end test with real Resend + Turnstile: submit inquiry from live site → verify owner receives email → verify guest receives auto-reply. Test availability race condition.
+- **Status:** Partial — API endpoint exists and persists to D1, but email delivery via Resend not verified end-to-end (RESEND_API_KEY access via cloudflare:workers env unconfirmed)
 
 ### REQ-BK-3: WhatsApp Floating Button
 
@@ -214,8 +215,8 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Constraints:** CON-SEC, CON-A11Y, CON-I18N
 - **Priority:** P0
 - **Dependencies:** REQ-BK-2, REQ-TC-5
-- **Verification:** Submit test inquiry from each locale, verify Turnstile renders, verify honeypot hidden, verify GDPR required, verify CTA links resolve
-- **Status:** Implemented
+- **Verification:** Submit test inquiry from each locale on the **live site**, verify Turnstile renders and validates, verify honeypot hidden, verify GDPR required, verify CTA links resolve, verify form actually submits and owner receives notification email. Not just code review — real end-to-end submission.
+- **Status:** Partial — form renders with Turnstile, but never tested with real submission on live site; email delivery unverified
 
 ## Out of Scope
 

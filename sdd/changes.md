@@ -1,5 +1,48 @@
 # Changelog
 
+## 2026-04-03 — Revision 41: Implementation Audit — Status Corrections and Missing AC
+
+Comprehensive audit of all 12 domains against the live site. Corrected statuses from "Implemented" to "Partial" where acceptance criteria are not met. Added missing acceptance criteria discovered during visual testing.
+
+### Status corrections (Implemented → Partial)
+- **REQ-SF-1** (Hero Section): Wave at bottom missing, some non-Croatian stock photos
+- **REQ-SF-4** (Language Switcher): Desktop dropdown unverified
+- **REQ-SF-5** (Why Pašman + Triptych): Triptych and village card links not clickable
+- **REQ-VD-9** (Wave Dividers): Waves missing from homepage hero and several subpage heroes; color transitions broken on homepage
+- **REQ-VD-12** (Subpage Hero): Waves missing on hrana/aktivnosti/plaze; non-Croatian imagery (Santorini)
+- **REQ-AP-3** (Apartment Detail): Lightbox, PricingTable, Breadcrumbs, Schema.org VacationRental not applied
+- **REQ-BK-2** (Inquiry Pipeline): Email delivery via Resend unverified end-to-end
+- **REQ-BK-8** (Contact Page): Never tested with real submission on live site
+- **REQ-CMS-9** (CF Access Auth): Google login succeeds but Emdash admin shows "Authentication failed"
+- **REQ-CMS-6** (Preloaded Content): DE/SL locales largely missing; editorial page_keys not fully seeded
+- **REQ-CMS-8** (Error Pages): 404 shows English regardless of URL locale
+- **REQ-I18N-1** (Locale Routing): hreflang tags in sitemap only, missing from HTML `<head>`
+- **REQ-I18N-3** (UI Strings): Mixed languages on homepage CTA section
+- **REQ-SEO-1** (Schema.org): VacationRental, BreadcrumbList, FAQPage not applied
+- **REQ-ED-8** (Food & Drink): Hero uses custom markup without wave
+- **REQ-ED-9** (Activities): Hero uses custom markup without wave
+- **REQ-ED-10** (Beaches): Hero uses custom markup without wave; hero image is Santorini
+
+### New requirements
+- **REQ-VD-13** (Icon System): MDI icons via `@mdi/js` — P1, Planned
+- **REQ-VD-14** (Unique Imagery): No duplicate stock photos, no non-Croatian imagery — P1, Planned
+
+### AC additions
+- **REQ-SF-1:** Wave at hero bottom, imagery authenticity rules
+- **REQ-SF-5:** Explicit clickability requirement for triptych cards and village card
+- **REQ-VD-9:** Detailed wave color matching rules, explicit per-page wave requirement
+- **REQ-VD-12:** Imagery authenticity, complete subpage list including editorial detail pages
+- **REQ-AP-3:** Explicit PricingTable, Breadcrumbs, VacationRental schema requirements
+- **REQ-BK-2:** Email delivery must be verified with real test submission
+- **REQ-CMS-9:** Post-login redirect behavior, debugging checklist
+- **REQ-CMS-6:** Editorial collection seeding for all page_keys, DE/SL completeness
+- **REQ-CMS-8:** 404 localization per URL locale prefix
+- **REQ-I18N-1:** hreflang explicitly in HTML `<head>`, not just sitemap
+- **REQ-I18N-3:** No mixed languages on any page — explicit rule
+- **REQ-ED-8/9/10:** Must use HeroSimple component; hero image authenticity per page topic
+
+---
+
 ## 2026-04-03 — Revision 40: CMS Wiring for Activities/Beaches, Hero Overlay, Organic Images
 
 Activities (`aktivnosti`) and Beaches (`plaze`) pages now query the `editorial` CMS collection (filtered by `page_key`, sorted by `sort_order`), falling back to hardcoded content when no CMS entries exist. This matches the pattern already established by the Zdrelac page (REQ-ED-6). Hero overlay gradient tuned to reduce bottom opacity (0.8 to 0.5) for better photo visibility. Food & Drink page images switched to organic asymmetric border-radius with box-shadow. Contact form gets mobile-responsive grid fix.
