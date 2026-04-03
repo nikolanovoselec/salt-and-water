@@ -33,7 +33,8 @@ Apartmani Pašman is a server-side rendered Astro site deployed as a Cloudflare 
 | `src/lib/availability.ts` | Half-open interval overlap logic for booking calendar |
 | `src/lib/pricing.ts` | Season-based price computation, tourist tax, cleaning fee |
 | `src/lib/media.ts` | R2 URL builder (`buildMediaUrl`) and srcset helper |
-| `src/lib/resend.ts` | Fetch-based Resend email client |
+| `src/lib/resend.ts` | Fetch-based Resend email client — used by inquiry and custom admin login flows |
+| `src/plugins/resend-email.ts` | Emdash plugin that handles the `email:deliver` hook for Emdash CMS magic links; reads the Resend API key from Emdash plugin KV (`resend_api_key`) |
 | `src/lib/turnstile.ts` | Server-side Turnstile token verification |
 | `src/lib/content.ts` | Emdash CMS helpers — `getLocalizedCollection`, `getLocalizedEntry`, `getSettings` with locale fallback to Croatian |
 | `src/lib/sanitize.ts` | Input sanitization — HTML stripping, email header injection prevention |
