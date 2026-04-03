@@ -1,7 +1,6 @@
 ---
 import Page from "~/layouts/Page.astro";
 import Hero from "~/components/home/Hero.astro";
-import WaveDivider from "~/components/ui/WaveDivider.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
 import { t } from "~/i18n/t";
 import { getLocalizedCollection, type LocalizedEntry } from "~/lib/content";
@@ -121,11 +120,11 @@ const oliveOilLabel: Record<Locale, string> = {
     </div>
   </a>
 
-  {/* Wave transition to dark section - bg matches cream above, fill matches navy below */}
-  <WaveDivider fill="#0A1F33" bg="#F8F5EF" />
-
   {/* Apartments */}
-  <section class="section section--dark" data-reveal>
+  <section class="section section--dark" data-reveal style="position: relative; padding-top: 0;">
+    <svg class="section-wave-top" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: block; width: 100%; height: clamp(50px, 8vw, 100px); transform: scaleY(-1);">
+      <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,20 1440,40 L1440,80 L0,80 Z" fill="#F8F5EF" />
+    </svg>
     <div class="container">
       <div class="split-section split-section--reverse">
         <div class="split-section__left">
@@ -150,10 +149,10 @@ const oliveOilLabel: Record<Locale, string> = {
         </div>
       </div>
     </div>
+    <svg class="section-wave-bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: block; width: 100%; height: clamp(50px, 8vw, 100px);">
+      <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,20 1440,40 L1440,80 L0,80 Z" fill="#F8F5EF" />
+    </svg>
   </section>
-
-  {/* Wave from dark back to cream - bg matches navy above, fill matches cream below */}
-  <WaveDivider fill="#F8F5EF" bg="#0A1F33" flip />
 
   {/* Testimonials */}
   {testimonials.length > 0 && (
@@ -210,11 +209,11 @@ const oliveOilLabel: Record<Locale, string> = {
     </div>
   </section>
 
-  {/* Wave into sunset CTA - bg matches cream above, fill matches sunset start */}
-  <WaveDivider fill="#0A1F33" bg="#F8F5EF" />
-
   {/* CTA - sunset gradient */}
-  <section class="section sunset-gradient" id="inquiry" data-reveal>
+  <section class="section sunset-gradient" id="inquiry" data-reveal style="position: relative; padding-top: 0;">
+    <svg class="section-wave-top" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: block; width: 100%; height: clamp(50px, 8vw, 100px); transform: scaleY(-1);">
+      <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,20 1440,40 L1440,80 L0,80 Z" fill="#F8F5EF" />
+    </svg>
     <div class="container text-center">
       <p class="text-label" style="color: rgba(255,255,255,0.7);">{t(typedLocale, "nav.contact")}</p>
       <h2 style="margin-top: var(--space-md); color: white;">{ctaTitle}</h2>
