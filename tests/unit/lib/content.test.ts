@@ -20,75 +20,62 @@ beforeEach(() => {
 // ---------------------------------------------------------------------------
 
 describe("getLocalizedCollection()", () => {
-  it("returns entries matched by entry.locale field", async () => {
+  it("passes locale filter to Emdash and returns mapped entries", async () => {
     mockGetCollection.mockResolvedValue({
       entries: [
-        { slug: "apt-one", locale: "de", data: {} },
-        { slug: "apt-two", locale: "hr", data: {} },
+        { slug: "apt-one", locale: "de", data: { name: "Wohnung" } },
       ],
     } as never);
 
     const result = await getLocalizedCollection("apartments", "de");
 
+    expect(mockGetCollection).toHaveBeenCalledWith("apartments", { locale: "de" });
     expect(result).toHaveLength(1);
     expect(result[0].slug).toBe("apt-one");
     expect(result[0].locale).toBe("de");
   });
 
-  it("returns entries matched by data.locale field", async () => {
-    mockGetCollection.mockResolvedValue({
-      entries: [
-        { slug: "page-1", data: { locale: "sl" } },
-        { slug: "page-2", data: { locale: "hr" } },
-      ],
-    } as never);
-
-    const result = await getLocalizedCollection("pages", "sl");
-
-    expect(result).toHaveLength(1);
-    expect(result[0].slug).toBe("page-1");
-  });
-
-  it("returns entries matched by slug suffix convention", async () => {
-    mockGetCollection.mockResolvedValue({
-      entries: [
-        { slug: "about-en", data: {} },
-        { slug: "about-hr", data: {} },
-        { slug: "about-de", data: {} },
-      ],
-    } as never);
-
-    const result = await getLocalizedCollection("pages", "en");
-
-    expect(result).toHaveLength(1);
-    expect(result[0].slug).toBe("about-en");
-  });
-
-  it("falls back to Croatian entries when target locale has none", async () => {
-    mockGetCollection.mockResolvedValue({
-      entries: [
-        { slug: "news-hr", locale: "hr", data: {} },
-        { slug: "tips-hr", locale: "hr", data: {} },
-      ],
-    } as never);
+  it("falls back to Croatian when target locale returns empty", async () => {
+    mockGetCollection
+      .mockResolvedValueOnce({ entries: [] } as never) // de query returns empty
+      .mockResolvedValueOnce({
+        entries: [
+          { slug: "news-hr", locale: "hr", data: {} },
+          { slug: "tips-hr", locale: "hr", data: {} },
+        ],
+      } as never); // hr fallback
 
     const result = await getLocalizedCollection("news", "de");
 
+    expect(mockGetCollection).toHaveBeenCalledTimes(2);
+    expect(mockGetCollection).toHaveBeenNthCalledWith(1, "news", { locale: "de" });
+    expect(mockGetCollection).toHaveBeenNthCalledWith(2, "news", { locale: "hr" });
     expect(result).toHaveLength(2);
     expect(result.every((e) => e.locale === "hr")).toBe(true);
   });
 
-  it("returns all entries when no Croatian entries found either", async () => {
+  it("does not double-query when locale is already hr", async () => {
     mockGetCollection.mockResolvedValue({
       entries: [
-        { slug: "entry-a", locale: "en", data: {} },
-        { slug: "entry-b", locale: "sl", data: {} },
+        { slug: "page-hr", locale: "hr", data: {} },
       ],
     } as never);
 
-    const result = await getLocalizedCollection("misc", "de");
+    const result = await getLocalizedCollection("pages", "hr");
 
-    expect(result).toHaveLength(2);
+    expect(mockGetCollection).toHaveBeenCalledTimes(1);
+    expect(mockGetCollection).toHaveBeenCalledWith("pages", { locale: "hr" });
+    expect(result).toHaveLength(1);
+  });
+
+  it("returns empty array when both locale and hr fallback are empty", async () => {
+    mockGetCollection
+      .mockResolvedValueOnce({ entries: [] } as never)
+      .mockResolvedValueOnce({ entries: [] } as never);
+
+    const result = await getLocalizedCollection("empty", "sl");
+
+    expect(result).toEqual([]);
   });
 
   it("returns empty array when collection is empty", async () => {
@@ -122,7 +109,6 @@ describe("getLocalizedEntry()", () => {
 
     expect(result).not.toBeNull();
     expect(result!.slug).toBe("about-de");
-    // First call should be with locale-specific slug
     expect(mockGetEntry).toHaveBeenCalledWith("pages", "about-de");
   });
 
