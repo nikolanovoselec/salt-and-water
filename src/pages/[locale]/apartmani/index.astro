@@ -204,9 +204,9 @@ const collagePhotos = parsePhotoArray(collageEntry?.data.body);
   .apartment-card__footer .btn {
     padding: 0.6rem 1.5rem;
   }
-  /* Reduce spacing on apartments section */
+  /* Reduce spacing on apartments section — 50% of default */
   :global(.section:first-of-type) {
-    padding-bottom: var(--space-xl);
+    padding-block: clamp(2.5rem, 6vw, 5rem);
   }
 
   /* Collage strip with wave borders */
