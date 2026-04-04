@@ -22,7 +22,7 @@ WCAG 2.1 AA compliance. `prefers-reduced-motion` fully respected — all animati
 
 ## CON-I18N: Internationalization
 
-4 locales: Croatian (`/hr/`), German (`/de/`), Slovenian (`/sl/`), English (`/en/`). Owner-activated per locale (Croatian always on). Locale-prefixed routes. `Intl.DateTimeFormat` and `Intl.NumberFormat` for locale-aware formatting. **Fallback policy:** Disabled locale = 404. Published page with partial missing content within an active locale = Croatian fallback with visible indicator. Legal pages (Impressum) always available in German regardless of DE locale activation. Never mix languages silently. Locale preference stored in functional cookie (no consent required).
+4 locales: Croatian (`/hr/`), German (`/de/`), Slovenian (`/sl/`), English (`/en/`). Owner-activated per locale (Croatian always on). Locale-prefixed routes. `Intl.DateTimeFormat` and `Intl.NumberFormat` for locale-aware formatting. **Fallback policy:** Disabled locale = 404. Published page with partial missing content within an active locale = Croatian fallback with visible indicator. ~~Legal pages (Impressum) always available in German regardless of DE locale activation~~ — Impressum deprecated (REQ-TC-3). Never mix languages silently. Locale preference stored in functional cookie (no consent required).
 
 ## CON-SEC: Security
 

@@ -57,7 +57,7 @@ Apartment listings, detail pages, photo galleries, amenities, seasonal pricing, 
   - Image hover: subtle zoom within overflow:hidden
   - Scroll-triggered staggered fade-up entry
   - If only 1 apartment exists, listing page redirects to detail page
-  - **If zero apartments published in current locale:** lifestyle coming-soon layout (described above) with inquiry CTA, not empty page or 404
+  - **If zero apartments published in current locale:** empty grid renders (CMS-only, no fallback content)
   - 2-column grid on desktop (cards), single column on mobile
   - Only shows apartments published in current locale
 - **Constraints:** CON-PERF, CON-I18N
