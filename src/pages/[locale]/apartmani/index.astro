@@ -66,10 +66,18 @@ const collagePhotos = parsePhotoArray(collageEntry?.data.body);
     </div>
   </section>
 
-  {/* Exterior photo collage */}
+  {/* Exterior photo collage with wave borders */}
   {collagePhotos.length > 0 && (
-    <section class="section section--dark" style="position: relative;">
-      <ScrollCollage images={collagePhotos} />
+    <section class="collage-strip">
+      <svg class="collage-strip__wave collage-strip__wave--top" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="var(--color-navy)" />
+      </svg>
+      <div class="collage-strip__inner">
+        <ScrollCollage images={collagePhotos} />
+      </div>
+      <svg class="collage-strip__wave collage-strip__wave--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M0,0 L0,30 C240,0 480,60 720,30 C960,0 1200,60 1440,30 L1440,0 Z" fill="var(--color-navy)" />
+      </svg>
     </section>
   )}
 
@@ -195,5 +203,34 @@ const collagePhotos = parsePhotoArray(collageEntry?.data.body);
 
   .apartment-card__footer .btn {
     padding: 0.6rem 1.5rem;
+  }
+  /* Reduce spacing on apartments section */
+  :global(.section:first-of-type) {
+    padding-bottom: var(--space-xl);
+  }
+
+  /* Collage strip with wave borders */
+  .collage-strip {
+    position: relative;
+    margin-top: calc(-1 * var(--space-lg));
+  }
+
+  .collage-strip__inner {
+    background: var(--color-navy);
+    padding: var(--space-md) 0;
+  }
+
+  .collage-strip__wave {
+    display: block;
+    width: 100%;
+    height: clamp(30px, 5vw, 60px);
+  }
+
+  .collage-strip__wave--top {
+    margin-bottom: -1px;
+  }
+
+  .collage-strip__wave--bottom {
+    margin-top: -1px;
   }
 </style>
