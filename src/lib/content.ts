@@ -9,6 +9,7 @@ export interface LocalizedEntry {
 
 /**
  * Get all entries from an Emdash collection filtered by locale.
+ * Uses Emdash's built-in locale filter (SQL-level, no pagination needed).
  * Falls back to Croatian if locale-specific content not found.
  */
 export async function getLocalizedCollection(
@@ -16,35 +17,21 @@ export async function getLocalizedCollection(
   locale: Locale,
 ): Promise<LocalizedEntry[]> {
   try {
-    // Paginate through ALL entries (Emdash default page size: 50)
-    const allEntries: unknown[] = [];
-    let cursor: string | undefined;
-    do {
-      const result = await getEmDashCollection(collectionSlug, { cursor, limit: 100 });
-      if (result.entries) allEntries.push(...result.entries);
-      cursor = (result as unknown as Record<string, unknown>).nextCursor as string | undefined;
-    } while (cursor);
-
-    const entries = allEntries;
-    if (entries.length === 0) return [];
-
-    const mapped = (entries as unknown[]).map(mapEntry);
-
-    // Filter by: 1) entry locale, 2) data.locale field, 3) slug suffix convention (-hr, -de, etc.)
-    const matchesLocale = (e: LocalizedEntry, loc: string): boolean =>
-      e.locale === loc ||
-      (e.data.locale as string) === loc ||
-      e.slug.endsWith(`-${loc}`);
-
-    const localeEntries = mapped.filter((e) => matchesLocale(e, locale));
-    if (localeEntries.length > 0) return localeEntries;
+    // Use Emdash's native locale filter — no limit means ALL entries returned
+    const { entries } = await getEmDashCollection(collectionSlug, { locale });
+    if (entries && entries.length > 0) {
+      return entries.map(mapEntry);
+    }
 
     // Fallback: try Croatian
-    const hrEntries = mapped.filter((e) => matchesLocale(e, "hr"));
-    if (hrEntries.length > 0) return hrEntries;
+    if (locale !== "hr") {
+      const { entries: hrEntries } = await getEmDashCollection(collectionSlug, { locale: "hr" });
+      if (hrEntries && hrEntries.length > 0) {
+        return hrEntries.map(mapEntry);
+      }
+    }
 
-    // Last resort: return all entries
-    return mapped;
+    return [];
   } catch (error) {
     console.error(`[CMS] Failed to load collection "${collectionSlug}":`, error);
     return [];
