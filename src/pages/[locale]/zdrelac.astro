@@ -70,9 +70,12 @@ const sections = cmsZdrelac.map((e) => ({
 <style>
   .village-hero {
     position: relative;
-    height: 70vh;
-    min-height: 400px;
+    min-height: 360px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--nav-height) + var(--space-3xl)) 0 var(--space-2xl);
   }
   .village-hero__wave {
     position: absolute;
@@ -85,24 +88,29 @@ const sections = cmsZdrelac.map((e) => ({
   }
 
   .village-hero img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    z-index: 0;
   }
 
   .village-hero__overlay {
     position: absolute;
     inset: 0;
+    background: linear-gradient(180deg, rgba(10, 31, 51, 0.5) 0%, rgba(10, 31, 51, 0.7) 100%);
+    z-index: 1;
     display: flex;
-    align-items: flex-end;
-    background: linear-gradient(transparent 30%, rgba(10, 31, 51, 0.8));
-    padding-bottom: var(--space-3xl);
+    align-items: center;
   }
 
   .village-hero__overlay h1 {
     color: var(--color-white);
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    letter-spacing: -0.02em;
+    font-weight: 400;
   }
 
   .village-hero__intro {
