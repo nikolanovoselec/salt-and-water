@@ -82,6 +82,10 @@ All form inputs are sanitized before processing or storage. Sanitization functio
 | `sanitizePhone()` | Strip non-phone characters, enforce 6–20 char length |
 | `validateWhatsAppNumber()` | Must start with `+` and country code, 10–15 digits; returns `null` if invalid |
 
+## Media Path Validation
+
+`GET /media/[...key]` rejects any key containing `..` or starting with `/` with a `400 Invalid key` response before the R2 lookup runs. This prevents path traversal attempts against the R2 bucket.
+
 ## Schema Validation
 
 All API inputs are validated with Zod before any business logic runs. The inquiry schemas (`src/schemas/inquiry.ts`) enforce:
