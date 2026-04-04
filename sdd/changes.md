@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-04-04 - Revision 61: Path traversal guard + collage JSON validation
+
+### Requirements updated
+- **REQ-PERF-1** (Image Serving Pipeline): Acceptance criteria updated -- media route now rejects keys containing `..` or leading `/` with 400 (path traversal prevention).
+- **REQ-VD-15** (Exterior Photo Collage): Acceptance criteria updated -- collage JSON validated at render time; non-array values discarded, items without string `src`/`alt` filtered out.
+
+---
+
 ## 2026-04-04 - Revision 60: Media route rest parameter fix + REQ-PERF-1 status update
 
 ### Requirements updated
