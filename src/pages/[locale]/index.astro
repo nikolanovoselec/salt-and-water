@@ -33,10 +33,29 @@ const ctaSection = getSection("cta");
 const collageSection = getSection("collage");
 
 // Parse collage photos from CMS (JSON array in body field)
+// Try homepage section first, then direct entry lookup as fallback
 let collagePhotos: Array<{ src: string; alt: string }> = [];
-if (collageSection?.data.body) {
+const collageBody = (collageSection?.data.body as string) ?? "";
+if (!collageBody) {
+  // Fallback: direct entry lookup (bypasses collection pagination)
+  const { getLocalizedEntry } = await import("~/lib/content");
+  const directEntry = await getLocalizedEntry("editorial", "collage", typedLocale);
+  if (directEntry?.data.body) {
+    try {
+      const raw = JSON.parse(directEntry.data.body as string);
+      if (Array.isArray(raw)) {
+        collagePhotos = raw.filter(
+          (item: unknown) =>
+            typeof item === "object" && item !== null &&
+            typeof (item as Record<string, unknown>).src === "string" &&
+            typeof (item as Record<string, unknown>).alt === "string"
+        );
+      }
+    } catch { /* empty */ }
+  }
+} else {
   try {
-    const raw = JSON.parse(collageSection.data.body as string);
+    const raw = JSON.parse(collageBody);
     if (Array.isArray(raw)) {
       collagePhotos = raw.filter(
         (item: unknown) =>
