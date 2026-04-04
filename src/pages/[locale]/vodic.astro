@@ -67,43 +67,32 @@ const imageAlts = [
 <Page title={t(typedLocale, "guide.title")} locale={typedLocale}>
   <HeroSimple title={t(typedLocale, "guide.title")} image="/photos/pine-forest-child.jpg" />
 
-  <section class="section">
-    <div class="container">
-      <div class="guide-grid" data-reveal-stagger>
-        {categories.map((cat, i) => (
-          <div class:list={["guide-item", { "guide-item--reverse": i % 2 === 1 }]} data-reveal>
-            <div class="guide-item__image">
-              <img src={cat.image} alt={imageAlts[i % imageAlts.length]} width="600" height="400" loading="lazy" />
-            </div>
-            <div class="guide-item__content">
-              <h2 class="guide-item__title">{cat.title}</h2>
-              <div class="section-divider" style="margin: var(--space-md) 0;"></div>
-              <p class="guide-item__text">{cat.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Editorial content — history, culture, landmarks from CMS */}
-  {cmsEditorial.length > 0 && (
-    <section class="section section--alt">
+  {/* All content in one unified layout */}
+  {[...categories.map((cat, i) => ({
+    title: cat.title,
+    text: cat.description,
+    image: cat.image || imageAlts[i % imageAlts.length],
+  })), ...cmsEditorial.map((e) => ({
+    title: (e.data.title as string) ?? "",
+    text: (e.data.body as string) ?? "",
+    image: (e.data.image as string) ?? "",
+  }))].map((section, i) => (
+    <section class:list={["section", { "section--alt": i % 2 === 1 }]} data-reveal>
       <div class="container">
-        {cmsEditorial.map((entry, i) => (
-          <div class:list={["content-row", { "content-row--reverse": i % 2 === 1 }]} data-reveal style="margin-bottom: var(--space-2xl);">
+        <div class:list={["content-row", { "content-row--reverse": i % 2 === 1 }]}>
+          {section.image && (
             <div class="content-row__image">
-              <img src={(entry.data.image as string) || "/photos/chapel-pines.jpg"} alt={(entry.data.title as string) || ""} width="800" height="600" loading="lazy" />
+              <img src={section.image} alt={section.title} width="800" height="600" loading="lazy" />
             </div>
-            <div class="content-row__text">
-              <h2>{entry.data.title}</h2>
-              <p class="text-lead">{entry.data.body}</p>
-            </div>
+          )}
+          <div class="content-row__text">
+            <h2>{section.title}</h2>
+            <p class="text-lead">{section.text}</p>
           </div>
-        ))}
+        </div>
       </div>
     </section>
-  )}
+  ))}
 </Page>
 
 <style>
