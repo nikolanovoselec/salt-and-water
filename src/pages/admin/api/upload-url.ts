@@ -38,8 +38,9 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
   const accessKeyId = env.R2_ACCESS_KEY_ID;
   const secretAccessKey = env.R2_SECRET_ACCESS_KEY;
   const accountId = env.CLOUDFLARE_ACCOUNT_ID ?? "";
+  const bucketName = env.R2_BUCKET_NAME ?? "";
 
-  if (!accessKeyId || !secretAccessKey || !accountId) {
+  if (!accessKeyId || !secretAccessKey || !accountId || !bucketName) {
     return jsonResponse({ error: "Storage not configured" }, 503);
   }
 
@@ -71,7 +72,7 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
   });
 
   const endpoint = `https://${accountId}.r2.cloudflarestorage.com`;
-  const url = `${endpoint}/apartmani-media/${objectKey}`;
+  const url = `${endpoint}/${bucketName}/${objectKey}`;
 
   const signed = await r2Client.sign(url, {
     method: "PUT",
