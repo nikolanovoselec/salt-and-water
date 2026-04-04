@@ -47,7 +47,7 @@ GDPR, privacy policy, Impressum, house rules, cancellation policy, security head
     - No data sold to third parties
   - Preloaded with template content in all 4 locales
   - Always accessible in 1 click from any page (footer link)
-  - **Available in German regardless of DE locale activation** (same exception as Impressum — CON-LEGAL)
+  - **Available in German regardless of DE locale activation** (CON-LEGAL)
 - **Constraints:** CON-LEGAL, CON-I18N
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-6

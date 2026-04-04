@@ -149,7 +149,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 - **Applies To:** Owner
 - **Acceptance Criteria:**
   - **Toggleable (optional homepage sections):** Why Pašman, About Ždrelac, A Day on Pašman, Local Guide, Testimonials, Host Story, Direct Booking Benefits
-  - **Always visible (cannot disable):** Hero, Apartments, Navigation, Footer, Inquiry Form, Language Switcher, FAQ, Getting Here, Privacy/Impressum
+  - **Always visible (cannot disable):** Hero, Apartments, Navigation, Footer, Inquiry Form, Language Switcher, FAQ, Getting Here, Privacy
   - Disabled sections: not rendered on homepage, navigation link removed
   - Content preserved when hidden (re-enable restores it)
   - Toggle on phone: simple on/off switches with section name and preview thumbnail
@@ -207,7 +207,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
   - **Missing content warnings:** Dashboard alerts for: missing alt text, empty locale fields on published content, placeholder content still live
   - **Autosave:** Edits saved as draft every 30 seconds. No work lost on session expiry or accidental navigation.
   - **Cannot delete published content without confirmation.** Deletion of apartments requires typing apartment name.
-  - **Singleton pages** (Homepage, Privacy Policy, Impressum) cannot be deleted or unpublished in Croatian. They can be edited but not removed.
+  - **Singleton pages** (Homepage, Privacy Policy) cannot be deleted or unpublished in Croatian. They can be edited but not removed.
 - **Constraints:** CON-CMS
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-I18N-4
