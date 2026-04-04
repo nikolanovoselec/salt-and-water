@@ -1,24 +1,20 @@
 import type { APIRoute } from "astro";
-
+import { env as _env } from "cloudflare:workers";
+import type { Env } from "~/env";
+const env = _env as unknown as Env;
 
 /**
  * Image serving route: fetches from private R2 bucket.
- * URL format: /media/:key?w=800&f=webp&q=80&fit=cover
- * Keys are UUIDs without extensions (e.g., /media/2d537213-c38b-4076-8e2e-a5ee25783c0e)
+ * URL: /api/img/:key (key is a UUID without extension)
  */
-export const GET: APIRoute = async ({ params, locals, request }) => {
+export const GET: APIRoute = async ({ params }) => {
   const key = params.key ?? "";
 
   if (!key || key.includes("..") || key.startsWith("/")) {
     return new Response("Invalid key", { status: 400 });
   }
 
-  // Access R2 via Astro's Cloudflare runtime locals (official pattern)
-  const runtime = (locals as unknown as Record<string, unknown>).runtime as
-    | { env?: { MEDIA?: R2Bucket } }
-    | undefined;
-  const bucket = runtime?.env?.MEDIA;
-
+  const bucket = env.MEDIA;
   if (!bucket) {
     return new Response("Storage not configured", { status: 503 });
   }
