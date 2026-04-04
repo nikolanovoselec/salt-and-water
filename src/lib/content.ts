@@ -16,10 +16,19 @@ export async function getLocalizedCollection(
   locale: Locale,
 ): Promise<LocalizedEntry[]> {
   try {
-    const { entries } = await getEmDashCollection(collectionSlug);
-    if (!entries || entries.length === 0) return [];
+    // Paginate through ALL entries (Emdash default page size: 50)
+    const allEntries: unknown[] = [];
+    let cursor: string | undefined;
+    do {
+      const result = await getEmDashCollection(collectionSlug, { cursor, limit: 100 });
+      if (result.entries) allEntries.push(...result.entries);
+      cursor = (result as Record<string, unknown>).nextCursor as string | undefined;
+    } while (cursor);
 
-    const mapped = entries.map(mapEntry);
+    const entries = allEntries;
+    if (entries.length === 0) return [];
+
+    const mapped = (entries as unknown[]).map(mapEntry);
 
     // Filter by: 1) entry locale, 2) data.locale field, 3) slug suffix convention (-hr, -de, etc.)
     const matchesLocale = (e: LocalizedEntry, loc: string): boolean =>
