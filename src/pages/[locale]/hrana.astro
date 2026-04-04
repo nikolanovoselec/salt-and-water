@@ -19,7 +19,10 @@ const intro: Record<Locale, string> = {
   en: "On Pašman and Ugljan, the cuisine is simple and self-assured: quality grilled fish, homemade olive oil, light Dalmatian wine, and a pace of life measured in meals by the sea.",
 };
 
-// Content from CMS only - no fallback
+// Content from CMS only
+const cmsEntries = (await getLocalizedCollection("editorial", typedLocale))
+  .filter((e) => e.data.page_key === "hrana")
+  .sort((a, b) => ((a.data.sort_order as number) ?? 0) - ((b.data.sort_order as number) ?? 0));
 ---
 
 <Page title={title[typedLocale]} locale={typedLocale}>
