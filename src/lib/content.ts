@@ -22,7 +22,7 @@ export async function getLocalizedCollection(
     do {
       const result = await getEmDashCollection(collectionSlug, { cursor, limit: 100 });
       if (result.entries) allEntries.push(...result.entries);
-      cursor = (result as Record<string, unknown>).nextCursor as string | undefined;
+      cursor = (result as unknown as Record<string, unknown>).nextCursor as string | undefined;
     } while (cursor);
 
     const entries = allEntries;
