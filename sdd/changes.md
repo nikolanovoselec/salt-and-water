@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-04-05 - Revision 76: Listing page inquiry section navy-to-cream gradient
+
+Apartment listing page inquiry CTA section replaced `section--alt` (flat stone background) with a vertical linear gradient from navy to cream. The collage bottom wave fill updated from stone to navy to seamlessly flow into the gradient's navy top. Creates a more dramatic visual transition from the exterior photo collage into the inquiry CTA.
+
+### Requirements updated
+- **REQ-AP-2** (Apartment Listing Page): Inquiry section background changed from `section--alt` to navy-to-cream linear gradient. Wave fill updated from stone to navy. Added top padding documentation.
+- **REQ-VD-9** (Wave Section Dividers): Wave color matching rules expanded to cover gradient sections — wave fill must match the gradient's starting color at the top edge.
+
+---
+
 ## 2026-04-05 - Revision 75: Detail page back-link removed, listing wave color fix
 
 Apartment detail page no longer has a "Back to apartments" CTA section at the bottom — redundant given breadcrumbs and browser navigation. On the apartment listing page, the collage bottom wave fill corrected from navy to stone to match the inquiry `section--alt` section below per wave color matching rules (REQ-VD-9). Seamless margin-top fix on inquiry section to eliminate gap.
