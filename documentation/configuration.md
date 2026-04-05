@@ -84,7 +84,7 @@ Accessed as `env.DB` (type `D1Database`) via `import { env } from "cloudflare:wo
 }
 ```
 
-Accessed as `env.MEDIA` (type `R2Bucket`) via `import { env } from "cloudflare:workers"`. Used by the `/media/:key` route to serve uploaded images and by the Emdash CMS storage integration. The `storage: r2({ binding: "MEDIA" })` option in `astro.config.mjs` connects the same binding to Emdash's file storage.
+Accessed as `env.MEDIA` (type `R2Bucket`) via `import { env } from "cloudflare:workers"`. Used by the `/api/img/[key]` route to serve uploaded images and by the Emdash CMS storage integration. The `storage: r2({ binding: "MEDIA" })` option in `astro.config.mjs` connects the same binding to Emdash's file storage. The previous `/media/:key` route has been removed.
 
 ## Custom Domain Route
 

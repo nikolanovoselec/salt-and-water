@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-05 - Spec review: DE informal register migration scope update (3e409a4)
+
+Commit 3e409a4 completed the DE informal register migration -- 12 keys in `de.json` changed from formal "Sie/Ihre/Ihnen" to informal "ihr/euch/euer" covering booking forms, error messages, CTAs, homepage sections, and footer. Also fixed HR ellipsis to Unicode in kontakt.astro.
+
+### Requirements updated
+- **REQ-I18N-6** (Cultural Content Adaptation): Acceptance criteria expanded -- informal "ihr/euch" scope now explicitly covers all visitor-facing UI strings, booking forms, error messages, CTAs, and editorial content (not just "editorial pages"). Added Privacy Policy formal "Sie" exception (legal convention per CON-LEGAL). Status updated to reflect `de.json` is now fully migrated to informal register. Noted three remaining formal "Sie" holdouts in hardcoded `.astro` fallback strings (index.astro CMS fallback, faq.astro pets answer, 404.astro page text).
+
+### Quality note
+The previous changelog entry (1f2caa0) flagged 404 page formal "Sie" as potentially outside REQ-I18N-6 scope. With this commit broadening the informal convention beyond editorial pages, the 404 and FAQ holdouts are now in-scope gaps to address in a future code pass.
+
+---
+
 ## 2026-04-05 - Spec review: stale nav references fixed (5c9c89f)
 
 Commit 5c9c89f was a docs cleanup (cross-refs, stale page removals from documentation/seo.md and documentation/api-reference.md, REQ-I18N-6 status promotion). The SDD changes in that commit were accurate. Phase 2/3 review found two stale references in storefront.md.
