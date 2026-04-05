@@ -84,7 +84,7 @@ Each editorial page has its own dedicated CMS collection. There is no shared `pa
 | Collection | Page | Notes |
 |---|---|---|
 | `vodic` | Local Guide (`/vodic`) | 8 sections (first 4 are Ždrelac village content, merged in Apr 2026); sorted by `sort_order`; CMS-only |
-| `hrana` | Food & Drink (`/hrana`) | 4 sections; CMS-only, page is blank without entries |
+| `hrana` | Food & Drink (`/hrana`) | Single entry per locale; `gallery` field = JSON array of `{src, alt}` photo objects; `title` and `body` fields for the description section; page shows collage strips only when `gallery` has more than 1 photo per half |
 | `aktivnosti` | Nature & Activities (`/aktivnosti`) | 4 sections; CMS-only, page is blank without entries |
 | `plaze` | Beaches (`/plaze`) | 4 sections; CMS-only, page is blank without entries |
 | `dolazak` | Getting Here (`/dolazak`) | 3 sections; CMS-only |
