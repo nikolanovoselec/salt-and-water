@@ -8,6 +8,9 @@ MiniCollage component gains a `showCaptions` prop that renders each photo's alt 
 - **REQ-VD-15** (Exterior Photo Collage / MiniCollage): Added `showCaptions` prop to acceptance criteria -- optional visible italic caption rendered below each photo, currently enabled only on the gallery page.
 - **REQ-SF-8** (Gallery Page): Clarified that poetic captions are rendered as visible text via `showCaptions` prop (previously spec only mentioned caption assignment, not visible rendering). Status updated accordingly.
 
+### Glossary updated
+- **Poetic Captions**: Updated definition to reflect that captions are now rendered as visible italic text (via `showCaptions`), not just used as alt text.
+
 ---
 
 ## 2026-04-05 - Revision 82: Gallery page rewritten as 139-photo scrolling collage strips
