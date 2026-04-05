@@ -41,8 +41,23 @@ Guidelines for creating and translating content across all 4 locales.
 2. Translate to German with cultural adaptation (longer, more detailed)
 3. Translate to Slovenian with warmth preserved
 4. Translate to English last (universal clarity)
+5. Verify natural phrasing: run all four translations past a native speaker or cross-check with at least two LLMs before publishing
 
 Translation is cultural adaptation, not word-for-word. German descriptions may be 30-50% longer than Croatian. That's correct — test heading wrapping with long German strings.
+
+## Page-Level Voice Rules
+
+Certain pages have tighter voice requirements beyond the locale tone rules above:
+
+| Page | Voice rule |
+|---|---|
+| `aktivnosti` (intro) | Love-letter tone — nature is accepted, not conquered. Warm, unhurried. No superlatives, no "dramatic peaks". |
+| `hrana` (intro) | Personal islander voice — first-person plural ("we cook slowly"), sensory detail (sounds, smells). Reads like someone who lives on the island. |
+| `galerija` (intro) | Poetic and brief — evoke feeling, not description. End with an unanswered statement rather than a full sentence. |
+| `404` | Gentle, never alarming. Tie the error to the sea metaphor ("wandered off"). |
+| Hero tagline | Consistent tone across all 4 locales — evoke escape and belonging, not a tourism pitch. Translations must feel natural, not literal. |
+
+When editing intro text for these pages via CMS or in code, match the voice already established in all 4 locales. When adding a new locale translation, verify natural phrasing with a native speaker or with multiple LLMs before publishing.
 
 ## Content Types
 
