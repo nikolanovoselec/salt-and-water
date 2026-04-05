@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-05 - Remove duplicate gallery photo (24d86df)
+
+Removed duplicate photo UUID from gallery array (two UUIDs pointing to identical image file). Gallery now has 138 photos instead of 139. Strip layout unchanged (14 strips); last strip has 8 photos instead of 9.
+
+### Requirements updated
+- **REQ-VD-15** (Exterior Photo Collage): Gallery page photo count updated from 139 to 138 in the MiniCollage consumer description.
+
+---
+
 ## 2026-04-05 - Unified wave section spacing via .section--wave-in class (86e237b)
 
 The `--space-section` CSS custom property was halved from `clamp(5rem, 12vw, 10rem)` to `clamp(2.5rem, 6vw, 5rem)`, tightening vertical rhythm across all sections. A new `.section--wave-in` CSS utility class was introduced to replace all per-section inline style overrides (`position: relative`, `padding-top: clamp(80px, 12vw, ...)`, `margin-top: -1px`) on sections that receive a wave SVG at their top edge. The class computes padding as `calc(var(--space-section) + clamp(50px, 8vw, 100px))`, combining standard section spacing with wave height. Applied to: homepage apartments section (dark), homepage sunset CTA section, Getting Here dark address section, and apartment listing CTA section (conditionally). Additionally, inline padding overrides on the homepage "Why Pasman" section and experience section were removed, and grid gaps on the homepage split-section and apartment detail page were changed from `--space-lg` to `--space-xl`.
