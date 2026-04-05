@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-05 - Apartment CTA wave conditional on collage presence
+
+The apartment listing page inquiry CTA section wave divider and extra top padding are now conditional on collage photos being present. When the collage strip renders (CMS editorial entry exists with photos), the navy wave SVG and `clamp(80px, 12vw, 120px)` top padding appear as before. When no collage photos are available, both are omitted and the CTA section renders with default styling. Dead CSS class `.collage-strip__wave--bottom` removed (was already unused since wave relocation to CTA section).
+
+### Requirements updated
+- **REQ-AP-2** (Apartment Listing Page): Updated wave/CTA description to reflect conditional rendering — wave and extra padding only present when collage photos exist.
+
+---
+
 ## 2026-04-05 - Gallery caption styling updated to base font size
 
 MiniCollage caption overlay styling changed from extra-small font (`font-size-xs`) to base font size (`font-size-base`) to match the gallery intro text. Padding increased from `space-sm/space-md` to `space-md/space-lg`. Letter-spacing (0.02em) removed in favor of `line-height: 1.6`. Gradient overlay opacity increased from 0.45 to 0.5 for slightly better contrast.
