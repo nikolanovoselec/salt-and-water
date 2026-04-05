@@ -6,7 +6,7 @@ Gallery page MiniCollage strips changed from variable speed (`max(35, photoCount
 
 ### Requirements updated
 - **REQ-SF-8** (Gallery Page): Status updated -- scroll speed is now fixed 80s per strip (was variable formula)
-- **REQ-VD-15** (Exterior Photo Collage / MiniCollage): Acceptance criteria updated -- gallery page uses fixed 80s speed; other pages retain 35s default
+- **REQ-VD-15** (Exterior Photo Collage / MiniCollage): Acceptance criteria updated -- gallery page uses fixed 80s speed; other pages retain 35s default. Also fixed stale text in hrana placement: "sandwiching the description text" corrected to "stacked below the description text" (layout changed in Revision 78, spec not updated then).
 
 ## 2026-04-05 - Revision 83: MiniCollage showCaptions prop; gallery captions now visible
 
