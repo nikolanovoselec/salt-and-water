@@ -35,13 +35,6 @@ const photosRight = allPhotos.slice(mid);
 <Page title={title[typedLocale]} locale={typedLocale} ogImage="https://apartmani.novoselec.ch/api/img/073aa7b8-b7d8-4da9-932d-d39caa24df2a">
   <HeroSimple title={title[typedLocale]} intro={intro[typedLocale]} image="/api/img/073aa7b8-b7d8-4da9-932d-d39caa24df2a" />
 
-  {/* First collage — scrolling left */}
-  {photosLeft.length > 1 && (
-    <div class="editorial-strip">
-      <MiniCollage images={photosLeft} speed={Math.max(35, photosLeft.length * 8)} />
-    </div>
-  )}
-
   {/* Description */}
   <section class="section" data-reveal>
     <div class="container">
@@ -52,10 +45,18 @@ const photosRight = allPhotos.slice(mid);
     </div>
   </section>
 
-  {/* Second collage — scrolling right */}
-  {photosRight.length > 1 && (
-    <div class="editorial-strip">
-      <MiniCollage images={photosRight} speed={Math.max(35, photosRight.length * 8)} reverse />
-    </div>
-  )}
+  {/* Both collages at bottom — one above the other */}
+  <div style="padding-bottom: var(--space-3xl);">
+    {photosLeft.length > 1 && (
+      <div class="editorial-strip">
+        <MiniCollage images={photosLeft} speed={Math.max(35, photosLeft.length * 8)} />
+      </div>
+    )}
+
+    {photosRight.length > 1 && (
+      <div class="editorial-strip" style="margin-top: var(--space-md);">
+        <MiniCollage images={photosRight} speed={Math.max(35, photosRight.length * 8)} reverse />
+      </div>
+    )}
+  </div>
 </Page>
