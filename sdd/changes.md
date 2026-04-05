@@ -23,6 +23,15 @@ Severe content overlap resolved: Ždrelac village page merged into Local Guide (
 - `src/pages/[locale]/zdrelac.astro`
 - `src/pages/[locale]/zasto-pasman.astro`
 
+### Spec fixes (post-commit review)
+- **REQ-ED-5** (About Your Hosts): Status was copy-pasted from REQ-ED-4 (referenced vodic collection, 8 sections). Corrected to reference dedicated `about` CMS collection.
+- **REQ-ED-4** (Local Guide): Acceptance criteria listed only 4 sections but status said 8. Expanded section list to enumerate all 8 (sections 1-4 from Ždrelac merger, sections 5-8 original guide). Updated CMS wiring from `editorial` with `page_key` filter to dedicated `vodic` collection.
+- **REQ-ED-2** (Getting Here): Acceptance criteria still referenced `editorial` collection with `page_key === "dolazak"` filter. Updated to dedicated `dolazak` collection.
+- **REQ-CMS-6** (Preloaded Content): Seed data and editorial seeding descriptions still referenced old `editorial` page_key model and listed `zdrelac` as separate page_key. Updated to reflect dedicated collections and vodic's 8-section count.
+- **REQ-SF-5** (Why Pasman + Zdrelac Section): Zdrelac card link updated from `/{locale}/zdrelac` to `/{locale}/vodic`. Dependencies updated: removed deprecated REQ-ED-1 and REQ-ED-6.
+- **REQ-SEO-5** (Keyword Strategy): Removed "Why Pasman" from internal linking description. Removed REQ-ED-1 from dependencies.
+- **README.md**: Editorial domain description updated to reflect current pages (removed "Why Pasman", "A Day on Pasman"; added food and drink, activities, beaches).
+
 ---
 
 ## 2026-04-04 - Revision 69: Editorial restructure, hero carousel expansion, apartment detail page redesign

@@ -96,11 +96,11 @@ Schema.org structured data, Open Graph, multilingual sitemap, keyword strategy, 
     - EN: "apartments Pašman island", "holiday apartment Pašman Croatia", "accommodation near Zadar"
   - SEO title and meta description templates per page type incorporating target keywords
   - Title length: 50-60 chars. Description: 120-155 chars.
-  - **Internal linking:** Editorial pages (local guide, Getting Here, Why Pašman) link contextually to apartment detail pages. Apartment pages link to relevant guide entries.
+  - **Internal linking:** Editorial pages (local guide, Getting Here, food and drink, activities, beaches) link contextually to apartment detail pages. Apartment pages link to relevant guide entries.
   - Long-tail targeting via editorial content: "best beaches Pašman", "Biograd Tkon ferry schedule", "things to do Pašman island"
 - **Constraints:** CON-SEO, CON-I18N
 - **Priority:** P1
-- **Dependencies:** REQ-I18N-4, REQ-ED-1, REQ-ED-4
+- **Dependencies:** REQ-I18N-4, REQ-ED-4
 - **Verification:** SEO title/meta review per page per locale
 - **Status:** Planned
 

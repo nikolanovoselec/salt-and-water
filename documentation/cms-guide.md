@@ -72,26 +72,25 @@ The collage strip is hidden entirely if the entry is absent or if the JSON is in
 
 ### Editing Page Content
 
-1. Open Admin → Editorial collection
-2. Filter by `page_key` — see the table below for which key controls which page
-3. Each entry represents one section on the page
-4. Edit title, body text, image
-5. Save and publish
+Each editorial page has its own dedicated CMS collection. There is no shared `page_key` filter — you go directly to the collection for the page you want to edit.
 
-**Page key reference:**
+1. Open Admin → select the collection for the page (see table below)
+2. Each entry represents one content section on the page
+3. Edit title, body text, image
+4. Save and publish
 
-| `page_key` | Page | Notes |
+**Collection reference:**
+
+| Collection | Page | Notes |
 |---|---|---|
+| `vodic` | Local Guide (`/vodic`) | 8 sections (first 4 are Ždrelac village content, merged in Apr 2026); sorted by `sort_order`; CMS-only |
 | `hrana` | Food & Drink (`/hrana`) | 4 sections; CMS-only, page is blank without entries |
-| `about` | About Us (`/o-nama`) | Single entry; `body` field is the host story; CMS-only |
-| `getting-here` | Getting Here (`/dolazak`) | 3 sections; CMS-only |
-| `why-pasman` | Why Pašman (`/zasto-pasman`) | Each entry = one content row; fields: `title`, `body`, `image`, `sort_order`; CMS-only, page is blank without entries |
-| `zdrelac` | Ždrelac (`/zdrelac`) | 4 sections; CMS-only, page is blank without entries |
 | `aktivnosti` | Nature & Activities (`/aktivnosti`) | 4 sections; CMS-only, page is blank without entries |
 | `plaze` | Beaches (`/plaze`) | 4 sections; CMS-only, page is blank without entries |
-| `vodic` | Local Guide (`/vodic`) | 4 sections including a Zadar entry; sorted by `sort_order`; page uses only the `editorial` collection (no `guide` collection) |
+| `dolazak` | Getting Here (`/dolazak`) | 3 sections; CMS-only |
+| `about` | About Us (`/o-nama`) | Single entry per locale; `body` field is the host story; CMS-only |
 
-The editorial content was restructured in April 2026: 6 pages consolidated from ~42 sections to 23 (3-4 per page). Migration scripts are in `sql/restructure-editorial*.sql`.
+The `editorial` collection is now used only for homepage section overrides (section keys: `why-pasman`, `zdrelac`, `apartments`, `cta`, `collage`). The `/zdrelac` and `/zasto-pasman` standalone pages have been removed — their content lives in the `vodic` collection and the homepage respectively.
 
 ### Emdash Entry Requirements
 

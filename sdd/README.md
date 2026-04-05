@@ -31,7 +31,7 @@ A vacation rental website for apartments on Pašman island, Croatia. The site is
 | 2 | Apartments | [apartments.md](apartments.md) | P0 | Listings, detail pages, galleries, amenities, pricing, availability |
 | 3 | Booking | [booking.md](booking.md) | P0 | Request-to-book, inquiry pipeline, WhatsApp, trust signals |
 | 4 | i18n | [i18n.md](i18n.md) | P0 | 4-locale routing, owner-activated languages, content localization |
-| 5 | Editorial | [editorial.md](editorial.md) | P1 | Why Pašman, Getting Here, A Day on Pašman, local guide, host story, FAQ |
+| 5 | Editorial | [editorial.md](editorial.md) | P1 | Getting Here, local guide, food and drink, activities, beaches, host story, FAQ |
 | 6 | Social Proof | [social-proof.md](social-proof.md) | P1 | Guest testimonials, trust strip, review aggregates |
 | 7 | Visual Design | [visual-design.md](visual-design.md) | P1 | Color system, typography, scroll animations, micro-interactions, Croatian identity |
 | 8 | CMS | [cms.md](cms.md) | P0 | Emdash integration, media library, Cloudflare Access auth, mobile admin, section toggles, content safeguards, preloaded content |

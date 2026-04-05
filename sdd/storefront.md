@@ -107,12 +107,12 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Responsive: stacks vertically on mobile
   - **Apartments preview** section with split-section layout (text + duo-image grid), duo-image is 2-col grid with spacing gap, 3:4 portrait aspect, organic asymmetric border-radius (`20px 4px 20px 4px`), hover zoom (1.03x). Ghost CTA to apartments page. **Exterior photo collage** (REQ-VD-15) placed after apartment cards within the dark section — an infinite CSS horizontal scroll band of property exterior photos sourced from CMS.
   - **Experience triptych** (REQ-ED-4): 4-item image grid within container with gaps (food, activities, beaches, local guide), 4:5 portrait aspect, hover zoom (1.05x), 16px border-radius, subtle shadow, gradient label overlay (always visible on mobile). Responsive grid: 2-column on mobile, 4-column on desktop (768px+ breakpoint). Wrapped in warm gradient background section. Each triptych item is a clickable `<a>` element linking to its detail page: Food & Drink -> `/{locale}/hrana` (REQ-ED-8), Nature & Activities -> `/{locale}/aktivnosti` (REQ-ED-9), Beaches -> `/{locale}/plaze` (REQ-ED-10), Local Guide -> `/{locale}/vodic` (REQ-ED-4). **Click/tap on the image or anywhere on the card navigates to the detail page** — not just the label text.
-  - **Ždrelac village card** (feature image with overlay text): clicking/tapping anywhere on the card navigates to `/{locale}/zdrelac`. The entire card is an `<a>` element, not just the text.
+  - **Ždrelac village card** (feature image with overlay text): clicking/tapping anywhere on the card navigates to `/{locale}/vodic` (local guide page, which now contains Ždrelac content as sections 1-4). The entire card is an `<a>` element, not just the text.
   - Toggleable via CMS section settings (REQ-CMS-5)
   - CMS-managed content per locale
 - **Constraints:** CON-PERF, CON-I18N
 - **Priority:** P1
-- **Dependencies:** REQ-ED-1, REQ-ED-4, REQ-ED-6, REQ-CMS-5
+- **Dependencies:** REQ-ED-4, REQ-CMS-5
 - **Verification:** Visual review, test toggle off/on, verify all card links navigate correctly on mobile and desktop
 - **Status:** Implemented
 

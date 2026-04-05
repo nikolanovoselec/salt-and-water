@@ -1,6 +1,6 @@
 # Editorial
 
-Content pages that sell the destination and build emotional connection — Why Pašman, Getting Here, A Day on Pašman, local guide, host story, FAQ.
+Content pages that sell the destination and build emotional connection — Getting Here, local guide (with merged Ždrelac village content), food and drink, nature and activities, beaches, host story, FAQ. Why Pašman and About Ždrelac deprecated as standalone pages (content absorbed into homepage and local guide respectively).
 
 ## Key Concepts
 
@@ -34,7 +34,7 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Intent:** Remove travel anxiety — make the journey feel easy and exciting
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - **Current implementation:** Standalone page at `/{locale}/dolazak` with `HeroSimple` photo-backed header (marina/harbor image). Content model restructured from single CMS entry with `sections_json` to individual `editorial` entries filtered by `page_key === "dolazak"`, sorted by `sort_order` — same pattern as all other editorial pages (REQ-ED-1, REQ-ED-8, REQ-ED-9, REQ-ED-10). Each entry renders as one content row with `title`, `body` (rendered as HTML via `set:html`), and optional `image`. Alternating layout: odd rows image-left/text-right, even rows reversed. Single column on mobile.
+  - **Current implementation:** Standalone page at `/{locale}/dolazak` with `HeroSimple` photo-backed header (marina/harbor image). Content from dedicated `dolazak` CMS collection, sorted by `sort_order`. Each entry renders as one content row with `title`, `body` (rendered as HTML via `set:html`), and optional `image`. Alternating layout: odd rows image-left/text-right, even rows reversed. Single column on mobile.
   - **Address + map links section:** Dark-background section at the bottom of the page with property address ("Fratarsko 3, 23271 Zdrelac, Croatia") displayed in serif font, plus two ghost-style buttons linking to Google Maps and Apple Maps with lat/lng coordinates. No static map image or interactive map — just deep-link buttons.
   - **Content sections (3 total, consolidated from 5+):** (1) by car + ferry — two routes: Biograd-Tkon Jadrolinija (25 min) or Zadar-Preko via Ugljan + Ždrelac bridge, (2) without car — Zadar Airport (ZAD), bus/taxi to city, Zadar-Preko ferry + local transport, bike rental from 10 EUR/day, (3) practical travel tips — ferry schedules, parking, peak season advice
   - Ferry info: Jadrolinija link, frequency, cost, peak season advice
@@ -71,16 +71,16 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Intent:** Curated recommendations that build trust and drive SEO
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - **Current state:** Standalone guide page (`/[locale]/vodic`) with `HeroSimple` photo-backed header (REQ-VD-12). **Editorial-only content model** — the `guide` CMS collection is no longer used; all content comes from `editorial` entries with `page_key === "vodic"`, sorted by `sort_order`. Each section renders as a titled content block with optional photo gallery displayed via `MiniCollage` horizontal scroll strip. Scroll-triggered reveal on each section. Alternating section backgrounds (`.section--alt`).
-  - **Content sections (4 total):** (1) Pašman villages — 10 villages, each with character: Ždrelac fishing heritage, Dobropoljana sunsets, Neviđane St. Michael statue, Tkon Benedictine monastery (1129), Kraj Franciscan monastery; (2) Ugljan villages — "Green Island" of olives, Preko with fortress, Kali fishing capital, Kukljica gastro hub; (3) Zadar — Sea Organ, Greeting to the Sun, Roman Forum, St. Donatus, cathedral, Hitchcock sunset quote; (4) Day trips — Kornati NP (89 islands, 40-50 EUR), Telašćica (salt lake Mir, 161m cliffs), Vransko jezero.
+  - **Current state:** Standalone guide page (`/[locale]/vodic`) with `HeroSimple` photo-backed header (REQ-VD-12). **Editorial-only content model** — content comes from dedicated `vodic` CMS collection, sorted by `sort_order`. Each section renders as a titled content block with optional photo gallery displayed via `MiniCollage` horizontal scroll strip. Scroll-triggered reveal on each section. Alternating section backgrounds (`.section--alt`).
+  - **Content sections (8 total):** Sections 1-4 are merged Ždrelac village content (from deprecated REQ-ED-6): (1) the bridge — 210m span, 68m steel arch (2009), views of Zadar archipelago at sunset; (2) the village — stone centre, St. Luke's church (13th century), fishing harbour, lavender and rosemary; (3) the fishermen — night squid fishing with lamps, morning catch on the grill; (4) olive groves, pines and trails — 13 km recreational trail from Bokolj to Soline. Sections 5-8 are original guide content: (5) Pašman villages — 10 villages, each with character: Dobropoljana sunsets, Neviđane St. Michael statue, Tkon Benedictine monastery (1129), Kraj Franciscan monastery; (6) Ugljan villages — "Green Island" of olives, Preko with fortress, Kali fishing capital, Kukljica gastro hub; (7) Zadar — Sea Organ, Greeting to the Sun, Roman Forum, St. Donatus, cathedral, Hitchcock sunset quote; (8) Day trips — Kornati NP (89 islands, 40-50 EUR), Telašćica (salt lake Mir, 161m cliffs), Vransko jezero.
   - Three guide categories have standalone detail pages: Food & Drink (REQ-ED-8), Nature & Activities (REQ-ED-9), Beaches (REQ-ED-10). Linked from homepage experience triptych as 4th card (REQ-SF-5).
   - CMS-managed per locale
   - Toggleable via section settings
 - **Constraints:** CON-CMS, CON-I18N
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5, REQ-I18N-4
-- **Verification:** Visual review of guide page layout; verify editorial entries render correctly for all 4 locales
-- **Status:** Implemented — editorial-only content model (guide collection removed); 4 sections including Zadar city guide; all 4 locales populated (hr/en/de/sl)
+- **Verification:** Visual review of guide page layout; verify all 8 sections render correctly for all 4 locales
+- **Status:** Implemented — editorial-only content model; expanded to 8 sections after Ždrelac merger (sections 1-4 from deprecated REQ-ED-6); dedicated `ec_vodic` CMS collection (migrated from `ec_editorial` page_key filter). All 4 locales populated.
 
 ### REQ-ED-5: "About Your Hosts" Page
 
@@ -99,7 +99,7 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5
 - **Verification:** Visual review
-- **Status:** Implemented — editorial-only content model (guide collection removed); expanded to 8 sections after Ždrelac merger; Zadar city guide section; dedicated `ec_vodic` CMS collection (migrated from `ec_editorial` page_key filter). All 4 locales populated.
+- **Status:** Implemented — dedicated `ec_about` CMS collection. All 4 locales populated.
 
 ### REQ-ED-6: "About Ždrelac" Page
 
