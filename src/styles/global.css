@@ -699,6 +699,7 @@ p {
 
 .editorial-strip {
   margin: 0 0 var(--space-xl);
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
 
 .editorial-text {

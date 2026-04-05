@@ -174,7 +174,7 @@ const oliveOilLabel: Record<Locale, string> = {
 
     {/* Exterior photo collage — CMS managed */}
     {collagePhotos.length > 0 && (
-      <div style="padding-block: var(--space-xl);">
+      <div style="padding-block: var(--space-xl); padding-inline: clamp(1.25rem, 4vw, 3rem);">
         <ScrollCollage images={collagePhotos} />
       </div>
     )}
