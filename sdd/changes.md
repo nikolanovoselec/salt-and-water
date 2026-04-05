@@ -1,16 +1,16 @@
 # Changelog
 
-## 2026-04-05 - Docs: route rename documentation + DE register consistency (eb5def7)
+## 2026-04-05 - Docs: route rename documentation + DE register consistency (eb5def7, be77a1d, 2c0f53a)
 
-Commit eb5def7 was a documentation pass fixing two stale route references and aligning German register guidance between spec and content guide.
+Three commits fixing stale route references in documentation and aligning German register guidance between spec and content guide.
 
 ### Documentation updated
-- **documentation/configuration.md** (MEDIA binding): Updated route reference from `/media/:key` to `/api/img/[key]` and noted the old route has been removed.
-- **documentation/security.md** (Media Path Validation): Updated route reference from `GET /media/[...key]` to `GET /api/img/[key]`, noted old route removal, and clarified that path traversal validation logic moved with the route to `src/pages/api/img/[key].ts`.
-- **documentation/content-guide.md** (German register): Added missing Privacy Policy formal "Sie" exception to align with REQ-I18N-6 acceptance criteria (which had added the exception in the 3e409a4 spec pass). Content guide previously said "throughout" with no exception.
+- **documentation/configuration.md** (MEDIA binding, eb5def7): Updated route reference from `/media/:key` to `/api/img/[key]` and noted the old route has been removed.
+- **documentation/security.md** (Media Path Validation, be77a1d): Updated route reference from `GET /media/[...key]` to `GET /api/img/[key]`, noted old route removal, and clarified that path traversal validation logic moved with the route to `src/pages/api/img/[key].ts`.
+- **documentation/content-guide.md** (German register, 2c0f53a): Added missing Privacy Policy formal "Sie" exception to align with REQ-I18N-6 acceptance criteria (which had added the exception in the 3e409a4 spec pass). Content guide previously said "throughout" with no exception.
 
 ### Requirements updated
-- **REQ-I18N-6** (Cultural Content Adaptation): No change — spec was already updated in 3e409a4. This commit only synced the content guide to match.
+- **REQ-I18N-6** (Cultural Content Adaptation): No change — spec was already updated in 3e409a4. These commits only synced documentation to match.
 
 ---
 
