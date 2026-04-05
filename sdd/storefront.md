@@ -22,7 +22,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - **Progress dots:** Centered at bottom (80px from bottom, 100px on mobile), 8px circles with 1.5px white border at 50% opacity. Active dot fills white and scales to 1.3x. `aria-label` on each dot button (`Slide N`).
   - Two-line title: property name on first line, location on second line in italic at reduced opacity (0.65)
   - `.text-label` location tag above title (localized per locale, e.g. "Otok Pasman, Hrvatska" for Croatian) at 0.7 opacity with wide letter-spacing
-  - Tagline in uppercase sans-serif at 0.7 opacity below title
+  - Tagline below title in `.text-label` style: uppercase sans-serif, 11px (`--font-size-xs`), 600 weight, 0.2em letter-spacing, white at 0.7 opacity (via `rgba`)
   - Ghost CTA button linking to apartments listing
   - Scroll indicator pulses at bottom (CSS keyframe animation)
   - Title and subtitle fade up with staggered CSS animation (0.3s and 0.6s delay)

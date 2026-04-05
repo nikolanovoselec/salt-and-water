@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-05 - Fix nav CTA button, language picker chevron, hero subtitle styling (150b594)
+
+Three CSS bug fixes: (1) nav INQUIRE button was invisible when scrolled (navy text on navy background) -- fixed to white text on navy background, restoring the "always visible" CTA criterion; (2) language picker chevron barely visible over hero -- increased stroke-width and added explicit opacity; (3) hero subtitle styling aligned with `.text-label` pattern (11px, 600 weight, 0.2em tracking, rgba opacity) for visual consistency with the location label above it.
+
+### Requirements updated
+- **REQ-SF-1** (Hero Section): Updated tagline acceptance criterion from "uppercase sans-serif at 0.7 opacity" to `.text-label`-style description matching the new font-size, weight, and letter-spacing values. Opacity preserved via rgba color.
+
+### No status changes
+All affected requirements remain Implemented. REQ-SF-3 (Navigation) already specifies CTA "always visible" -- the bug fix restores that behavior without needing AC changes. REQ-SF-4 (Language Switcher) unaffected at spec level (chevron stroke-width is implementation detail).
+
+---
+
 ## 2026-04-05 - Scope footer-clear to CTA pages only (d7ebc94)
 
 Removed `.section--footer-clear` from 9 editorial/content pages (vodic, hrana, aktivnosti, plaze, galerija, faq, privatnost, o-nama, apartment detail). Class now applied only to 4 pages with CTA/interactive elements near the footer wave: homepage, apartments listing, kontakt, dolazak. Editorial pages use standard section padding -- the footer wave transitions naturally within the existing padding zone.
