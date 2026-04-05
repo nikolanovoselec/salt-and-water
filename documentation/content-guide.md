@@ -15,7 +15,7 @@ Guidelines for creating and translating content across all 4 locales.
 - Detailed appliance and amenity lists
 - Total prices including all fees (PAngV compliance)
 - Use "Ferienwohnung" not "Apartment"
-- Use informal address ("ihr/euch/euer") throughout — not formal "Sie/Ihre/Ihnen"
+- Use informal address ("ihr/euch/euer") throughout — not formal "Sie/Ihre/Ihnen". **Exception:** Privacy Policy always uses formal "Sie" (legal/GDPR convention)
 - Example: "Strand Matlovac (5,2 km, ca. 8 Min. mit dem Auto)"
 - Register example: "Meldet euch bei uns" (not "Kontaktieren Sie uns")
 
