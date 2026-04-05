@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-04-05 - Scope footer-clear to CTA pages only (d7ebc94)
+
+Removed `.section--footer-clear` from 9 editorial/content pages (vodic, hrana, aktivnosti, plaze, galerija, faq, privatnost, o-nama, apartment detail). Class now applied only to 4 pages with CTA/interactive elements near the footer wave: homepage, apartments listing, kontakt, dolazak. Editorial pages use standard section padding -- the footer wave transitions naturally within the existing padding zone.
+
+### Requirements updated
+- **REQ-VD-9** (Wave Section Dividers): Updated `.section--footer-clear` acceptance criterion from "applied universally to every page" to selective application on CTA pages only. Listed the 4 pages that retain the class and the 9 pages that no longer use it.
+
+### Glossary updated
+- **section--footer-clear**: Updated definition from "applied to the last content section on every page" to "applied to pages where a CTA or interactive element sits near the footer wave."
+
+### No status changes
+All affected requirements remain Implemented.
+
+---
+
 ## 2026-04-05 - Remove deleted photo from gallery (b14ea06)
 
 Removed photo UUID `358acbfa-b8d1-4925-9d10-a0ac4f7f5b58` from gallery array. Gallery now has 137 photos instead of 138. Strip layout unchanged (14 strips); last strip has 7 photos instead of 8.

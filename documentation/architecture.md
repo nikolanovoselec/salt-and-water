@@ -220,7 +220,7 @@ The entire visual language lives in `src/styles/global.css` as CSS custom proper
 | `.text-label` | Small-caps label above headings — `--font-size-xs`, wide tracking, muted color |
 | `.section` | Section padding via `--space-section` |
 | `.section--wave-in` | Applied to sections that have an incoming wave SVG at the top; adds extra top padding (`--space-section + clamp(50px, 8vw, 100px)`) and `margin-top: -2px` to prevent seam gaps; replaces per-section inline padding overrides |
-| `.section--footer-clear` | Applied to the last section on every page; adds extra bottom padding (`--space-section + clamp(50px, 8vw, 100px)`) to clear the footer wave overlay; replaces all per-page inline `padding-bottom` overrides |
+| `.section--footer-clear` | Applied to the last section on CTA pages (`/`, `/apartmani`, `/dolazak`, `/kontakt`) that have content flush with the footer wave; adds extra bottom padding (`--space-section + clamp(50px, 8vw, 100px)`) to clear the footer wave overlay |
 | `.section--alt` | Stone background (`--color-bg-alt`) |
 | `.section--dark` | Navy background with white headings |
 | `.container` | Centered max-width wrapper with fluid inline padding |
