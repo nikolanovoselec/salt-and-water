@@ -53,7 +53,7 @@ Certain pages have tighter voice requirements beyond the locale tone rules above
 |---|---|
 | `aktivnosti` (intro) | Love-letter tone — nature is accepted, not conquered. Warm, unhurried. No superlatives, no "dramatic peaks". |
 | `hrana` (intro) | Personal islander voice — first-person plural ("we cook slowly"), sensory detail (sounds, smells). Reads like someone who lives on the island. |
-| `galerija` (intro) | Poetic and brief — evoke feeling, not description. End with an unanswered statement rather than a full sentence. |
+| `galerija` (intro) | Poetic and brief — evoke feeling, not description. Prefer ending with an incomplete or hanging clause that trails off rather than a closed declarative sentence. |
 | `404` | Gentle, never alarming. Tie the error to the sea metaphor ("wandered off"). |
 | Hero tagline | Consistent tone across all 4 locales — evoke escape and belonging, not a tourism pitch. Translations must feel natural, not literal. |
 
@@ -68,3 +68,11 @@ When editing intro text for these pages via CMS or in code, match the voice alre
 | FAQs | question, answer, category | none |
 | Guide | name, category, distance, image | description only |
 | Editorial | page_key, section_key, title, image | body text |
+
+---
+
+## Related Documentation
+
+- [CMS Guide](cms-guide.md#content-guidelines) - Owner-facing content editing reference
+- [SEO Guide](seo.md#on-page-content) - Keyword targets and content intent per page
+- [Architecture — Route Map](architecture.md#route-map) - Page slugs and what each page renders

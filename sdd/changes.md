@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-04-05 - Spec review: voice rules documented in content guide (4a818ed)
+
+Commit 4a818ed added page-level voice rules and LLM verification step to `documentation/content-guide.md`. The spec already captured love-letter tone for REQ-ED-8 (hrana) and REQ-ED-9 (aktivnosti) in the previous changelog entry, and informal German addressing in REQ-I18N-6. Gallery intro tone was missing from REQ-SF-8 -- added now for consistency.
+
+### Requirements updated
+- **REQ-SF-8** (Gallery Page): Intro sentence description updated to specify poetic tone (brief, evocative, open-ended statement) matching the page-level voice rule documented in content-guide.md.
+
+### No status changes
+All affected requirements remain Implemented.
+
+---
+
+## 2026-04-05 - Spec review: complete content polish (b178eff)
+
+Commit b178eff polished all remaining page intros and form labels to love-letter tone. Aktivnosti and hrana hero intros rewritten from descriptive to emotional/sensory. Galerija intro polished in DE/SL/EN. Kontakt form labels updated (dates field, success/error messages, response-time promise in success toast). German text across kontakt page switched from formal "Sie" to informal "ihr/euch" addressing. Hero tagline updated in HR/DE/SL. 404 page copy polished (em-dashes, shortened button labels, natural DE/SL phrasing).
+
+### Requirements updated
+- **REQ-ED-8** (Food & Drink): Intro paragraph description updated to note love-letter tone.
+- **REQ-ED-9** (Nature & Activities): Intro paragraph description updated to note love-letter tone.
+- **REQ-I18N-6** (Cultural Content Adaptation): German addressing convention documented -- informal "ihr/euch" (not formal "Sie").
+
+### No status changes
+All affected requirements remain at their current status. REQ-BK-8 (Contact Inquiry Page), REQ-CMS-8 (Error Pages), REQ-SF-1 (Hero Section), and REQ-SF-8 (Gallery Page) were not updated because their acceptance criteria describe structure, not specific copy text -- the changes are editorial polish within existing spec boundaries.
+
+---
+
 ## 2026-04-05 - Spec review: love-letter content rewrite (7bdfa5f)
 
 Commit 7bdfa5f rebranded the guide page and homepage guide card from informational to love-letter tone. Guide page title changed from "Vodič po Pašmanu" / "Pašman Local Guide" to "Otok našim očima" / "The Island Through Our Eyes" in all 4 locales. Homepage guide card subtitle changed from geographic listing ("Ždrelac, Pašman, Ugljan and surroundings") to poetic ("Pašman, Ugljan, and that small stretch of sea between them"). Beaches page intro rewritten from short Ždrelac-focused sentence to longer love-letter covering both Pašman and Ugljan.

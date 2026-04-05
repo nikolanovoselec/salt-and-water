@@ -111,6 +111,7 @@ Guest inquiries arrive by email to hello@graymatter.ch. The D1 database also sto
 - **Photos:** Minimum 1200px wide for hero use. JPEG or HEIC from phone camera is fine — Cloudflare handles format conversion.
 - **Text:** Write naturally. Croatian can be warmer and more familiar. German should be precise with exact distances.
 - **Locales:** Content can be published per locale independently. Unpublished locales fall back to Croatian.
+- **Voice rules:** Certain pages (`aktivnosti`, `hrana`, `galerija`, `404`) have tighter tone requirements. See [Page-Level Voice Rules](content-guide.md#page-level-voice-rules) before editing intro text on those pages.
 
 ## Troubleshooting
 

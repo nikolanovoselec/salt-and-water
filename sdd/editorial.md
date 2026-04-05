@@ -138,7 +138,7 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Intent:** Showcase local cuisine and dining options to help visitors plan meals and discover the island's food culture
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - Standalone page at `/{locale}/hrana` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph, and **wave SVG at the bottom edge** (cream fill `#F8F5EF`, organic bezier path, responsive height). The wave is part of HeroSimple and renders automatically.
+  - Standalone page at `/{locale}/hrana` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph in love-letter tone (unhurried, sensory, evoking the rhythm of island meals), and **wave SVG at the bottom edge** (cream fill `#F8F5EF`, organic bezier path, responsive height). The wave is part of HeroSimple and renders automatically.
   - **Single unified section** with one CMS entry providing title and body text. ~~4 content sections (consolidated from 5)~~ — replaced by a single love-letter description followed by two stacked photo collages.
   - CMS-only content model: page queries the first entry from the dedicated `hrana` CMS collection. No `sort_order` multi-entry model — a single entry provides all content. If CMS entry is missing, title falls back to locale-aware default; body is empty.
   - **Layout: description then collages.** The description section (title + body) renders first, directly after the hero. Below it, both photo collages are stacked together — first half scrolling left (default), second half scrolling right (`reverse` prop, REQ-VD-15), separated by a small gap. Bottom padding before the footer. Each collage renders only when its half contains more than 1 photo.
@@ -158,7 +158,7 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Intent:** Present outdoor activities and excursion options to help visitors plan active days on the islands
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - Standalone page at `/{locale}/aktivnosti` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph, and **wave SVG at the bottom edge**
+  - Standalone page at `/{locale}/aktivnosti` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph in love-letter tone (nature as acceptance not conquest, unhurried exploration), and **wave SVG at the bottom edge**
   - Hero image must depict nature/outdoor activities, not food or beaches. Hero and OG image use a fixed R2 photo (cyclist on island path), not derived from CMS entry order.
   - 2 content sections (Land + Sea): (1) Land — hiking trails, Veliki Bokolj (274m) viewpoint, Pustograd fortress, cycling the Ždrelac bridge bike lane, 46 km two-island loop, ZZUUM e-bike tours; (2) Sea — Adriatic embrace, crystal coves, Kornati and Telašćica day trips, kayaking, SUP, snorkeling
   - Each section written as a love letter to island life, not an activity list; practical tips woven into emotional narrative
