@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-05 - Fix stale fallback mention in REQ-AP-2
+
+REQ-AP-2 "Current implementation" still referenced "(with hardcoded fallback data when CMS is not yet seeded)" which contradicted the "No fallback" criterion below it. Updated to "(no fallback -- CMS-only)" to match actual code and the existing No fallback criterion.
+
+### Requirements updated
+- **REQ-AP-2** (Apartment Listing Page): Removed stale "hardcoded fallback" parenthetical from current implementation description.
+
+---
+
 ## 2026-04-05 - Apartment CTA wave conditional on collage presence
 
 The apartment listing page inquiry CTA section wave divider and extra top padding are now conditional on collage photos being present. When the collage strip renders (CMS editorial entry exists with photos), the navy wave SVG and `clamp(80px, 12vw, 120px)` top padding appear as before. When no collage photos are available, both are omitted and the CTA section renders with default styling. Dead CSS class `.collage-strip__wave--bottom` removed (was already unused since wave relocation to CTA section).
