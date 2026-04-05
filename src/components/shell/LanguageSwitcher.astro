@@ -20,7 +20,7 @@ function getLocalizedPath(targetLocale: Locale): string {
   <button class="lang-switcher__current" aria-expanded="false" aria-haspopup="listbox">
     {currentLocale.toUpperCase()}
     <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
-      <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
     </svg>
   </button>
   <ul class="lang-switcher__dropdown" role="listbox" aria-label="Languages">
@@ -54,6 +54,7 @@ function getLocalizedPath(targetLocale: Locale): string {
     font-weight: 600;
     letter-spacing: 0.05em;
     color: inherit;
+    opacity: 1;
     padding: var(--space-xs) var(--space-sm);
   }
 
