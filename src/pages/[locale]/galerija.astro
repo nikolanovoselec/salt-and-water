@@ -247,7 +247,7 @@ for (let i = 0; i < galleryItems.length; i += 10) {
   <div class="gallery-collages">
     {strips.map((strip) => (
       <div class="gallery-strip">
-        <MiniCollage images={strip.images} speed={Math.max(35, strip.images.length * 8)} reverse={strip.reverse} showCaptions />
+        <MiniCollage images={strip.images} speed={80} reverse={strip.reverse} showCaptions />
       </div>
     ))}
   </div>
@@ -260,7 +260,7 @@ for (let i = 0; i < galleryItems.length; i += 10) {
   }
 
   .gallery-strip {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-sm);
   }
 
   .gallery-strip:last-child {
