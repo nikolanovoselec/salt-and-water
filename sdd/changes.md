@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-05 - Restore cream wave between triptych and sunset CTA
+
+The inline SVG wave divider between the experience triptych and sunset CTA section on the homepage was restored. The wave uses `fill="var(--color-bg)"` (cream) with `scaleY(-1)` vertical flip, positioned absolute at the top of the CTA section. The CTA section also regains `position: relative` and extra `padding-top` to accommodate the wave.
+
+### Requirements updated
+- **REQ-VD-9** (Wave Section Dividers): Homepage waves restored from 2 placements back to 3. Placement (3) "cream-to-sunset-gradient at top of sunset CTA section" re-added as an inline SVG in the CTA section markup (not a WaveDivider component).
+
+---
+
 ## 2026-04-05 - Remove gradient-warm from homepage experience section
 
 Homepage experience triptych section (`index.astro`) switched from `.section.gradient-warm` to plain `.section`. The warm gradient is now unused on the homepage.
