@@ -263,7 +263,7 @@ These layout components are defined as scoped styles in `src/pages/[locale]/inde
 |---|---|---|
 | `.photo-strip` | Horizontal strip of three images at uniform 3:2 aspect ratio with rounded corners | `display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md)`; each `.photo-strip__item` has `border-radius: 16px` (desktop 20px) and `overflow: hidden` |
 | `.full-bleed-image` | Single image at 21:9 aspect with a gradient overlay and centered text | `aspect-ratio: 21/9`; child `.full-bleed-image__text` is absolute-positioned |
-| `.triptych` | Four-card grid at uniform 4:5 aspect with label overlays and rounded corners | `display: grid; grid-template-columns: repeat(2, 1fr)` on mobile, `repeat(4, 1fr)` from 768 px; `gap: var(--space-md)`; `.triptych__label` is absolute-positioned; items have `border-radius: 16px`; items are `<a>` elements linking to `/hrana`, `/aktivnosti`, `/plaze`, and `/vodic` |
+| `.triptych` | Three-card grid at uniform 4:5 aspect with label overlays and rounded corners | `display: grid; grid-template-columns: repeat(2, 1fr)` on mobile, `repeat(3, 1fr)` from 768 px; `gap: var(--space-md)`; `.triptych__label` is absolute-positioned; items have `border-radius: 16px`; items are `<a>` elements linking to `/hrana`, `/aktivnosti`, and `/plaze` |
 | `.tag-row` | Horizontal wrapping row of inline tag chips | `display: flex; flex-wrap: wrap; gap: var(--space-sm)` |
 | `.tag` | Individual chip inside a `.tag-row` | `border: 1px solid var(--color-border)`, small padding, `--font-size-xs` |
 

@@ -167,7 +167,7 @@ The Phase 6 editorial pages exist primarily to capture long-tail search intent a
 | `/privatnost` | GDPR legal requirement |
 | `/impressum` | German legal requirement (Impressumspflicht) |
 
-All editorial pages use the `hero-simple` pattern (navy header), `data-reveal` scroll animations, and the shared `Page` layout which injects the canonical tag and `<html lang>` attribute.
+All editorial pages use the `hero-simple` pattern (navy header) and the shared `Page` layout which injects the canonical tag and `<html lang>` attribute.
 
 ---
 

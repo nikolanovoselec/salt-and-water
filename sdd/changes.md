@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-04-05 - Revision 73: Triptych reduced to 3 items, layout polish
+
+Experience triptych reduced from 4 to 3 items — Local Guide card removed since it duplicates the guide feature card already present above. Grid changed from 4-column to 3-column on desktop. Apartment detail description section no longer uses scroll-triggered reveal animation. CTA button repositioned into standalone container. Collage padding increased.
+
+### Requirements updated
+- **REQ-SF-5** (Why Pasman + Zdrelac Section): Triptych changed from 4-item to 3-item grid (food, activities, beaches). Local Guide removed — already represented by the guide feature card above. Desktop grid changed from `repeat(4, 1fr)` to `repeat(3, 1fr)`. REQ-ED-4 reference removed from triptych description (guide link handled by feature card, not triptych).
+- **REQ-VD-6** (Photo Frame Treatments): Triptych item count updated from 4 to 3.
+- **REQ-ED-4** (Local Guide): Stale reference fixed — acceptance criteria said guide was linked as "4th card" in triptych. Updated to reflect guide is linked from feature card above the triptych, not from within it.
+
+---
+
 ## 2026-04-05 - Revision 72: Homepage simplification (duo-image removed, guide card renamed)
 
 Homepage apartments section simplified from split-section with duo-image photo grid to centered text-only layout. "Vodic" CTA button removed from Why Pasman section. Zdrelac village card renamed to Guide card with localized label and regional subtitle.
