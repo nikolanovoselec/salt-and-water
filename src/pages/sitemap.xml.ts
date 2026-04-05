@@ -4,13 +4,11 @@ import { locales, defaultLocale } from "~/i18n/config";
 const pages = [
   "",              // homepage
   "/apartmani",
-  "/zdrelac",
   "/galerija",
   "/hrana",
   "/aktivnosti",
   "/plaze",
   "/kontakt",
-  "/zasto-pasman",
   "/dolazak",
   "/vodic",
   "/o-nama",

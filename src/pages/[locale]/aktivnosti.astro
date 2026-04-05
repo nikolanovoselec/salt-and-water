@@ -19,8 +19,7 @@ const intro: Record<Locale, string> = {
   en: "Pašman and Ugljan aren't islands of dramatic heights, but they offer the perfect combination of gentle trails, olive groves, Kornati viewpoints, and a sea that invites exploration.",
 };
 
-const cmsEntries = (await getLocalizedCollection("editorial", typedLocale))
-  .filter((e) => e.data.page_key === "aktivnosti")
+const cmsEntries = (await getLocalizedCollection("aktivnosti", typedLocale))
   .sort((a, b) => (Number(a.data.sort_order) || 0) - (Number(b.data.sort_order) || 0));
 
 const sections = cmsEntries.map((e) => ({

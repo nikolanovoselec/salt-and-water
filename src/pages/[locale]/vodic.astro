@@ -10,8 +10,7 @@ const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
 const typedLocale = locale as Locale;
 
-const cmsEntries = (await getLocalizedCollection("editorial", typedLocale))
-  .filter((e) => e.data.page_key === "vodic")
+const cmsEntries = (await getLocalizedCollection("vodic", typedLocale))
   .sort((a, b) => ((a.data.sort_order as number) ?? 0) - ((b.data.sort_order as number) ?? 0));
 
 const sections = cmsEntries.map((e) => ({

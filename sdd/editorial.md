@@ -27,7 +27,7 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5, REQ-I18N-4
 - **Verification:** Visual review + toggle test
-- **Status:** Implemented
+- **Status:** Deprecated — absorbed into homepage. Homepage already renders why-pasman content via `homepage/why-pasman` CMS section. Standalone page deleted. Revision 70.
 
 ### REQ-ED-2: "Getting Here" Page
 
@@ -99,22 +99,21 @@ Content pages that sell the destination and build emotional connection — Why P
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5
 - **Verification:** Visual review
-- **Status:** Implemented
+- **Status:** Implemented — editorial-only content model (guide collection removed); expanded to 8 sections after Ždrelac merger; Zadar city guide section; dedicated `ec_vodic` CMS collection (migrated from `ec_editorial` page_key filter). All 4 locales populated.
 
 ### REQ-ED-6: "About Ždrelac" Page
 
 - **Intent:** Introduce the village where the apartments are located
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - **Current implementation:** Standalone page at `/{locale}/zdrelac` with full-screen hero (70vh, min 400px) using aerial village photo with gradient overlay (transparent 30% to navy 80%), village name as display heading, and introductory paragraph at 80% white opacity. Hero includes a bottom wave divider (inline SVG with organic bezier path, cream fill `#F8F5EF`, responsive height `clamp(40px, 6vw, 80px)`, `aria-hidden="true"`) for organic transition into page content (REQ-VD-9). Below the hero, content sections in alternating image+text row layout. Each row: 2-column grid on desktop (1fr + 1fr), single column on mobile. Odd rows show image left / text right; even rows reverse. Images rendered conditionally (only if CMS entry has `image` field) with 16px border-radius, 4:3 aspect ratio, subtle hover zoom (1.03x). CTA button at bottom links to apartments listing. Scroll-triggered fade-up reveal on each section. Alternating section backgrounds (`.section--alt`).
-  - **Content sections (4 total):** (1) the bridge — 210m span, 68m steel arch (2009), views of Zadar archipelago at sunset, (2) the village — stone centre, St. Luke's church (13th century), fishing harbour, lavender and rosemary, (3) the fishermen — night squid fishing with lamps, morning catch on the grill, fish straight from the boat, (4) olive groves, pines and trails — 13 km recreational trail from Bokolj to Soline, Mediterranean vegetation
-  - **CMS wiring:** Page queries the `editorial` CMS collection filtered by `page_key === "zdrelac"`, sorted by `sort_order`. CMS-only content model — no hardcoded fallback. If CMS entries are missing, page renders with empty content.
-  - **Homepage appearance (planned):** Brief Ždrelac introduction on homepage between "Why Pašman" and apartments sections (condensed version of standalone page)
+  - ~~Standalone page at `/{locale}/zdrelac`~~ — **Deprecated.** Content merged into Local Guide page (REQ-ED-4) as sections 1-4 (the bridge, the village, the fishermen, olive groves). Standalone page deleted.
+  - Content preserved in dedicated `ec_vodic` CMS collection with `sort_order` 1-4 (first sections on the guide page).
+  - Homepage retains condensed Ždrelac introduction (feature image card linking to `/vodic`).
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
-- **Dependencies:** REQ-CMS-1, REQ-I18N-4
-- **Verification:** Visual review across all 4 locales; verify CMS override when editorial entries with page_key "zdrelac" exist
-- **Status:** Implemented
+- **Dependencies:** REQ-ED-4
+- **Verification:** Verify Ždrelac content appears as first sections on guide page
+- **Status:** Deprecated — merged into REQ-ED-4 (Local Guide). Revision 70.
 
 ### REQ-ED-7: FAQ
 
@@ -142,7 +141,7 @@ Content pages that sell the destination and build emotional connection — Why P
   - Standalone page at `/{locale}/hrana` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph, and **wave SVG at the bottom edge** (cream fill `#F8F5EF`, organic bezier path, responsive height). The wave is part of HeroSimple and renders automatically.
   - 4 content sections (consolidated from 5): (1) grilled fish and konoba culture — Mureta, Udica, Kiss with distances, (2) olive oil — Ugljan's 200,000 trees, family producers, tasting, (3) dining as ritual — multi-course Dalmatian meal progression, pošip wine, (4) markets and provisions — Kali fish market, Zadar Ribarnica, island shops, Hajduk ice cream in Kukljica
   - Each section includes named restaurants/producers with contextual details
-  - CMS-only content model: page queries `editorial` collection filtered by `page_key === "hrana"`, sorted by `sort_order`. No hardcoded fallback — if CMS entries missing, no sections render.
+  - CMS-only content model: page queries dedicated `hrana` CMS collection, sorted by `sort_order`. No hardcoded fallback — if CMS entries missing, no sections render.
   - Alternating layout: odd sections image-left/text-right, even sections reversed (desktop); single column on mobile
   - Images: 4:3 aspect, organic asymmetric border-radius (`20px 4px 20px 4px`) with subtle box-shadow, hover zoom (1.03x)
   - Scroll-triggered reveal via `data-reveal`
@@ -163,7 +162,7 @@ Content pages that sell the destination and build emotional connection — Why P
   - Hero image must depict nature/outdoor activities, not food or beaches
   - 4 content sections (consolidated from 6): (1) trails and viewpoints — Veliki Bokolj (274m) with panoramic telescope, Pustograd 6th-century fortress, (2) cycling — Ždrelac bridge bike lane, 46 km two-island loop, Staza 7/8, ZZUUM e-bike tours, rental from 10 EUR/day, (3) Kornati and Telašćica — 89 islands, salt lake Mir, 161m cliffs, day trips from 40-50 EUR, (4) water sports — kayaking to hidden coves, SUP on calm mornings, snorkeling/diving, clean sea currents
   - Each section includes distances from Ždrelac and practical tips
-  - **CMS wiring:** Page queries the `editorial` collection filtered by `page_key === "aktivnosti"`, sorted by `sort_order`. CMS-only content model — no hardcoded fallback. If CMS entries missing, no sections render.
+  - **CMS wiring:** Page queries the dedicated `aktivnosti` CMS collection, sorted by `sort_order`. CMS-only content model — no hardcoded fallback. If CMS entries missing, no sections render.
   - Same alternating row layout, image styling, and reveal animations as REQ-ED-8
   - Linked from homepage triptych (REQ-SF-5)
 - **Constraints:** CON-I18N, CON-PERF
@@ -181,7 +180,7 @@ Content pages that sell the destination and build emotional connection — Why P
   - Hero image must depict Croatian/Adriatic beach or coastline (not Santorini blue domes or tropical beaches)
   - 4 content sections (consolidated from 5): (1) Ždrelac coves — Matlovac sandy beach with beach bar, Soline mineral-rich sand, pine forest microclimate, (2) Pašman beaches — Banj shallow water, Lokva under tamarisk in Neviđane, Mrljane with view of heart-shaped Galešnjak, (3) Ugljan beaches — Jaz Blue Flag in Preko, Sabuša in Kukljica, Mostir snorkeling, (4) hidden coves — kayak-access south side cliffs, Prtljug in Lukoran (40m pebble cove, no facilities)
   - Each section includes named beaches with distances from Ždrelac
-  - **CMS wiring:** Page queries the `editorial` collection filtered by `page_key === "plaze"`, sorted by `sort_order`. CMS-only content model — no hardcoded fallback. If CMS entries missing, no sections render.
+  - **CMS wiring:** Page queries the dedicated `plaze` CMS collection, sorted by `sort_order`. CMS-only content model — no hardcoded fallback. If CMS entries missing, no sections render.
   - Same alternating row layout, image styling, and reveal animations as REQ-ED-8
   - Linked from homepage triptych (REQ-SF-5)
 - **Constraints:** CON-I18N, CON-PERF

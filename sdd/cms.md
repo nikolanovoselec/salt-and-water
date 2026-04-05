@@ -6,7 +6,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 
 - **Emdash**: Astro integration providing admin panel, REST API, content loader, media library
 - **Mobile-first admin**: Every operation must work on owner's phone
-- **Collections**: Apartments, seasons, testimonials, FAQs, pages, editorial, site-settings (guide collection deprecated -- content migrated to editorial)
+- **Collections**: apartments, testimonials, faqs, site-settings. Editorial pages use dedicated collections per page: vodic, hrana, aktivnosti, plaze, dolazak, about. Homepage sections remain in editorial collection. Dead collections removed: guide, posts, pages.
 - **Section toggles**: Owner can show/hide optional homepage sections without deleting content
 - **Preloaded content**: Site requires CMS seed data to render content — no hardcoded fallbacks on editorial pages
 - **Structured editing**: Prefer structured fields over freeform rich text for most content types
@@ -21,7 +21,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
   - Emdash as Astro integration with D1 database and R2 storage
   - Admin panel at `/_emdash/admin/` for authenticated owner only
   - Content queried via Emdash content loader (`getEmDashCollection`, `getEmDashEntry`) wrapped in a locale-aware abstraction layer providing `getLocalizedCollection(collectionSlug, locale)`, `getLocalizedEntry(collectionSlug, slug, locale)`, and `getSettings()`. Collection queries use cursor-based pagination (100 entries per page) to retrieve all entries regardless of collection size. All queries filter by `data.locale` field with automatic Croatian fallback.
-  - Collections: homepage, apartments, testimonials, faqs, pages, editorial (all currently seeded). Guide collection deprecated and emptied -- all guide content migrated to editorial entries with `page_key=vodic`. Planned: seasons, inquiries, site-settings
+  - Collections: apartments, testimonials, faqs (all currently seeded). Editorial pages use dedicated collections: vodic, hrana, aktivnosti, plaze, dolazak, about. Homepage sections remain in editorial collection. Dead collections removed: guide, posts, pages, homepage. Planned: seasons, inquiries, site-settings
   - Site-settings: property name, WhatsApp number, phone number, email, active locales, hero photos, social links, section visibility toggles, check-in/out times, tourist tax rate
   - Public queries filtered by active locale and published status. Admin queries show all content including drafts/unpublished.
   - **Failure modes:**

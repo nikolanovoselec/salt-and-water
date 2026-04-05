@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-04-05 - Revision 70: Content consolidation + CMS collection restructure
+
+Severe content overlap resolved: Ždrelac village page merged into Local Guide (vodic) as first 4 sections. Why Pašman standalone page deprecated (homepage section sufficient). Kornati/Telašćica shortened to teaser in aktivnosti (full content in vodic/izleti). CMS restructured from single overloaded `ec_editorial` collection to dedicated collections per page (vodic, hrana, aktivnosti, plaze, dolazak, about). Dead collections deleted (guide, posts, pages). Navigation reduced from 6 to 5 items.
+
+### Requirements updated
+- **REQ-ED-1** (Why Pašman): Deprecated — absorbed into homepage.
+- **REQ-ED-4** (Local Guide): Expanded from 4 to 8 sections (Ždrelac content merged as sections 1-4). Dedicated `ec_vodic` collection.
+- **REQ-ED-6** (About Ždrelac): Deprecated — merged into REQ-ED-4.
+- **REQ-ED-8** (Food & Drink): CMS wiring updated — dedicated `ec_hrana` collection.
+- **REQ-ED-9** (Nature & Activities): CMS wiring updated — dedicated `ec_aktivnosti` collection.
+- **REQ-ED-10** (Beaches): CMS wiring updated — dedicated `ec_plaze` collection.
+- **REQ-CMS-1** (Emdash Integration): Collections list updated — editorial pages now use dedicated collections per page instead of single `ec_editorial` with page_key filter. Dead collections removed.
+
+### Navigation updated
+- Removed Ždrelac nav item. Desktop and mobile nav now have 5 items.
+
+### Sitemap updated
+- Removed `/zdrelac` and `/zasto-pasman` from sitemap pages array.
+
+### Pages deleted
+- `src/pages/[locale]/zdrelac.astro`
+- `src/pages/[locale]/zasto-pasman.astro`
+
+---
+
 ## 2026-04-04 - Revision 69: Editorial restructure, hero carousel expansion, apartment detail page redesign
 
 Editorial content consolidated from 5-6 sections to 3-4 per page across all 6 editorial pages (hrana, aktivnosti, plaze, zdrelac, dolazak, vodic) for stronger narrative density. Vodic (local guide) page switched from hybrid guide-collection + editorial model to editorial-only (guide collection removed). Zadar city guide section added as a new vodic entry. Hero carousel expanded from 4 to 7 real island photos. HeroSimple component height increased from 280px minimum to 50vh. Apartment detail page redesigned to use HeroSimple + MiniCollage components (replacing custom hero markup + ScrollCollage).

@@ -19,8 +19,7 @@ const intro: Record<Locale, string> = {
   en: "Ždrelac was made for spontaneous swimming: a short walk, towel over your shoulder, and a sea that beckons at any time of day.",
 };
 
-const cmsEntries = (await getLocalizedCollection("editorial", typedLocale))
-  .filter((e) => e.data.page_key === "plaze")
+const cmsEntries = (await getLocalizedCollection("plaze", typedLocale))
   .sort((a, b) => (Number(a.data.sort_order) || 0) - (Number(b.data.sort_order) || 0));
 
 const sections = cmsEntries.map((e) => ({
