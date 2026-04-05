@@ -15,7 +15,9 @@ Guidelines for creating and translating content across all 4 locales.
 - Detailed appliance and amenity lists
 - Total prices including all fees (PAngV compliance)
 - Use "Ferienwohnung" not "Apartment"
+- Use informal address ("ihr/euch/euer") throughout — not formal "Sie/Ihre/Ihnen"
 - Example: "Strand Matlovac (5,2 km, ca. 8 Min. mit dem Auto)"
+- Register example: "Meldet euch bei uns" (not "Kontaktieren Sie uns")
 
 ### Slovenian (SL) — Warm and Neighborly
 - Similar warmth to Croatian, but distinct language

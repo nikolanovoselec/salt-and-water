@@ -68,7 +68,7 @@ Served at `/robots.txt` by `src/pages/robots.txt.ts`. All crawlers are allowed o
 |---|---|
 | `/admin/` | Owner admin panel — not indexable |
 | `/_emdash/` | CMS interface — not indexable |
-| `/media/` | Raw R2 asset URLs — canonical images are served via apartment pages |
+| `/media/` | Stale — route removed. Images are now served via `/api/img/:key`. Disallow retained to prevent crawling of any cached/legacy URLs. |
 | `/api/` | JSON API endpoints — no indexable content |
 
 The `Sitemap:` directive in robots.txt points to `/sitemap.xml` using the request origin, so it works correctly across staging and production domains.

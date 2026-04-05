@@ -64,8 +64,8 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - "Inquire" CTA button always visible in nav, links to `/{locale}/kontakt` (REQ-BK-8)
   - Hamburger menu on mobile with fullscreen overlay, including inline language picker (locale links with active state highlight)
   - Hamburger button: `.nav__hamburger` class with CSS styles (display flex, flex-direction column, gap 6px, no background/border, cursor pointer, padding 12px, z-index 101, position relative), three `<span>` elements (block, 24x2px, currentColor background, 1px border-radius, transform/opacity transitions). Selected via `#hamburger-btn` ID. CSS transform morph to X on `.is-open` (translateY + rotate).
-  - **Nav items (current order):** Apartments, Ždrelac (village page, REQ-ED-6), Gallery (REQ-SF-8), Getting Here, Local Guide, About. "Why Pašman" and FAQ removed from primary navigation (pages still exist, accessible via footer or direct URL).
-  - **Admin link:** Navigation includes a link to the Emdash admin panel (`/_emdash/admin/`) labeled with the `nav.admin` translation key. Visible in both desktop nav and mobile menu. No authentication gate on the link itself (Emdash handles auth).
+  - **Nav items (current order):** Apartments, Gallery (REQ-SF-8), Getting Here, Local Guide, About. ~~Ždrelac~~ removed (page deprecated, REQ-ED-6). "Why Pašman" and FAQ removed from primary navigation (pages still exist, accessible via footer or direct URL).
+  - **Admin link:** Footer includes a link to the Emdash admin panel (`/_emdash/admin/`) labeled with the `nav.admin` translation key. No authentication gate on the link itself (Emdash handles auth). ~~Previously in navigation header~~ — moved to footer only.
   - Menu items stagger in with animation
   - Focus trapping when fullscreen menu is open
   - Transition driven by IntersectionObserver (0.4s ease)
@@ -158,7 +158,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Acceptance Criteria:**
   - **Current implementation:** Standalone page at `/{locale}/galerija` with `HeroSimple` photo-backed header (REQ-VD-12), locale-aware title, and a locale-specific intro sentence in poetic tone (brief, evocative, ending with an open statement rather than a closed sentence). 137 island photos (excluding apartment interiors) rendered as alternating infinite-scroll `MiniCollage` strips — photos split into groups of 10, each group becoming one strip (14 strips total: 13 full strips of 10 + 1 strip of 7); strips alternate scroll direction (`reverse` prop on odd-indexed strips). Photo order is deterministically shuffled per locale using the first character of the locale as a seed (XOR with the UUID's leading 32-bit integer), so each language version presents a different visual sequence. Poetic Croatian captions from a 50-item list are assigned to photos by rotating index (`i % captions.length`) and used as both alt text and visible overlay captions (via `showCaptions` prop on MiniCollage, REQ-VD-15). Captions appear as sans-serif white text (normal weight, 90% opacity) over a bottom-edge gradient on each photo. All images served from R2 via `/api/img/{key}` with UUID keys — real island photos, zero stock photography.
   - Accessible from primary navigation in all locales
-  - Linked from navigation as top-level page (between Ždrelac and Getting Here)
+  - Linked from navigation as top-level page (between Apartments and Getting Here)
 - **Constraints:** CON-PERF, CON-I18N, CON-A11Y
 - **Priority:** P1
 - **Dependencies:** REQ-VD-15, REQ-VD-12

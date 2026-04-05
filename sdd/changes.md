@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-04-05 - Spec review: stale nav references fixed (5c9c89f)
+
+Commit 5c9c89f was a docs cleanup (cross-refs, stale page removals from documentation/seo.md and documentation/api-reference.md, REQ-I18N-6 status promotion). The SDD changes in that commit were accurate. Phase 2/3 review found two stale references in storefront.md.
+
+### Requirements updated
+- **REQ-SF-3** (Navigation): Nav items list still referenced "Ždrelac (village page, REQ-ED-6)" — page deprecated in Revision 70, link removed from navigation code. Updated nav list to: Apartments, Gallery, Getting Here, Local Guide, About. Also corrected admin link location: was described as "in navigation header and mobile menu" but is actually in footer only.
+- **REQ-SF-8** (Gallery Page): Navigation position described as "between Ždrelac and Getting Here" — updated to "between Apartments and Getting Here" since Ždrelac nav item no longer exists.
+
+---
+
+## 2026-04-05 - Spec review: fix stale kontakt info criterion (1f2caa0)
+
+Phase 3 clean pass. REQ-BK-8 acceptance criterion "Contact info section displays email and location" was stale -- the kontakt page info section has been a heading + description paragraph with 2-hour response promise since the content polish, not an email/location display. Updated to match actual implementation.
+
+### Requirements updated
+- **REQ-BK-8** (Contact Inquiry Page): Last acceptance criterion updated from "displays email and location" to "displays heading and description paragraph with 2-hour response promise."
+
+### Quality note
+404 page German text still uses formal "Sie" register while REQ-I18N-6 documents informal "ihr/euch" as the convention. REQ-I18N-6 scopes this to "editorial pages" so the error page is not in violation, but a future code pass may want to align 404 DE copy with the informal convention for consistency.
+
+---
+
 ## 2026-04-05 - Spec review: voice rules documented in content guide (4a818ed)
 
 Commit 4a818ed added page-level voice rules and LLM verification step to `documentation/content-guide.md`. The spec already captured love-letter tone for REQ-ED-8 (hrana) and REQ-ED-9 (aktivnosti) in the previous changelog entry, and informal German addressing in REQ-I18N-6. Gallery intro tone was missing from REQ-SF-8 -- added now for consistency.

@@ -211,7 +211,7 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
   - Submit button disabled during request with localized "Sending..." text
   - Status messages use `aria-live="polite"` for screen reader announcement
   - All site CTAs (navigation desktop + mobile, homepage CTA section, apartment detail price card) link to `/{locale}/kontakt` instead of anchor-based inquiry targets
-  - Contact info section displays email and location
+  - Contact info section displays heading and description paragraph with 2-hour response promise
 - **Constraints:** CON-SEC, CON-A11Y, CON-I18N
 - **Priority:** P0
 - **Dependencies:** REQ-BK-2, REQ-TC-5
