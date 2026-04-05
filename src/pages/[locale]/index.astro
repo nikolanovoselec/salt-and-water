@@ -144,7 +144,7 @@ const oliveOilLabel: Record<Locale, string> = {
   <div class="container" style="padding-bottom: var(--space-xl);">
     <a href={`/${typedLocale}/vodic`} class="feature-image" data-reveal style="text-decoration:none; color:inherit; display:block;">
       <div class="feature-image__wrap" style="border-radius: 16px; overflow: hidden;">
-        <img src="/api/img/aa0fd53c-5d96-4a78-a5b5-0f68b543515a" alt="Aerial view of Ždrelac village on Pašman island" width="1920" height="1080" loading="lazy" />
+        <img src="/api/img/c047fffd-b9b7-4a05-84f9-7df061389901" alt="Stara kapelica među borovima na otoku Pašmanu" width="1920" height="1080" loading="lazy" />
         <div class="card-overlay">
           <span class="card-overlay__label">{guideLabel[typedLocale]}</span>
           <span class="card-overlay__title">{guideSubtitle[typedLocale]}</span>
@@ -164,14 +164,19 @@ const oliveOilLabel: Record<Locale, string> = {
       <p class="text-lead" style="color: rgba(255,255,255,0.75); margin-top: var(--space-lg); margin-inline: auto;">
         {aptsBody}
       </p>
-      <a href={`/${typedLocale}/apartmani`} class="btn btn--ghost" style="margin-top: var(--space-2xl);">
+    </div>
+
+    <div class="container text-center" style="padding-block: var(--space-2xl);">
+      <a href={`/${typedLocale}/apartmani`} class="btn btn--ghost">
         {t(typedLocale, "nav.apartments")}
       </a>
     </div>
 
     {/* Exterior photo collage — CMS managed */}
     {collagePhotos.length > 0 && (
-      <ScrollCollage images={collagePhotos} />
+      <div style="padding-block: var(--space-xl);">
+        <ScrollCollage images={collagePhotos} />
+      </div>
     )}
 
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position: absolute; bottom: -1px; left: 0; width: 100%; height: clamp(50px, 8vw, 100px); display: block; z-index: 2;">
@@ -228,13 +233,6 @@ const oliveOilLabel: Record<Locale, string> = {
           <div class="card-overlay">
             <span class="card-overlay__label">{t(typedLocale, "guide.beaches")}</span>
             <span class="card-overlay__title">{t(typedLocale, "homepage.triptych.beachesSubtitle")}</span>
-          </div>
-        </a>
-        <a href={`/${typedLocale}/vodic`} class="triptych__item">
-          <img src="/api/img/c047fffd-b9b7-4a05-84f9-7df061389901" alt="Stara kapelica među borovima na otoku Pašmanu" width="600" height="750" loading="lazy" />
-          <div class="card-overlay">
-            <span class="card-overlay__label">{t(typedLocale, "nav.localGuide")}</span>
-            <span class="card-overlay__title">{t(typedLocale, "homepage.triptych.guideSubtitle")}</span>
           </div>
         </a>
       </div>
@@ -469,7 +467,7 @@ const oliveOilLabel: Record<Locale, string> = {
 
   @media (min-width: 768px) {
     .triptych {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
