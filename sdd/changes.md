@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-05 - Equalize border-radius to 16px (9d69bd1)
+
+All image container border-radius values normalized to a consistent 16px across the site. Previously mixed: apartment cards (12px), feature image desktop (24px), apt-meta/apt-amenities (12px), breath-card (22px). Collage, triptych, and guide card were already 16px.
+
+### AC updated
+- **REQ-VD-6:** Homepage photo system range changed from "16-24px" to consistent "16px". Feature image no longer has separate desktop/mobile radius (was 24px desktop / 16px mobile, now 16px everywhere).
+- **REQ-VD-10:** Breathing image card border-radius updated from 22px to 16px.
+- **REQ-AP-2:** Apartment detail meta grid border-radius updated from 12px to 16px.
+
+### No status changes
+- REQ-VD-6, REQ-VD-10, REQ-AP-2 remain Implemented (visual refinement only).
+
 ## 2026-04-05 - Fix stale fallback mention in REQ-AP-2
 
 REQ-AP-2 "Current implementation" still referenced "(with hardcoded fallback data when CMS is not yet seeded)" which contradicted the "No fallback" criterion below it. Updated to "(no fallback -- CMS-only)" to match actual code and the existing No fallback criterion.

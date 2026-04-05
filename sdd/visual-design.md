@@ -122,7 +122,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Intent:** Make photos look polished and art-directed
 - **Applies To:** System
 - **Acceptance Criteria:**
-  - **Homepage photos (organic system):** All homepage photo treatments use rounded corners (16-24px border-radius), contained within page grid with gaps, and subtle box-shadow. Specific treatments: ~~photo strip (removed — images moved to hero carousel)~~, feature image (21:9 desktop / 16:9 mobile, 24px radius desktop / 16px mobile, contained with shadow), ~~duo-image (removed — apartments preview section simplified to centered text-only layout)~~, triptych (4:5, 3 items, 16px radius, labels always visible). All images within containers, not edge-to-edge.
+  - **Homepage photos (organic system):** All homepage photo treatments use a consistent 16px border-radius, contained within page grid with gaps, and subtle box-shadow. Specific treatments: ~~photo strip (removed — images moved to hero carousel)~~, feature image (21:9 desktop / 16:9 mobile, 16px radius, contained with shadow), ~~duo-image (removed — apartments preview section simplified to centered text-only layout)~~, triptych (4:5, 3 items, 16px radius, labels always visible). All images within containers, not edge-to-edge.
   - **Apartment galleries:** Standard aspect ratios (4:3 landscape, 3:4 portrait) with subtle `border-radius: 4-8px`. No extreme clip-path masks -- let the photography speak.
   - ~~**Guide page cards** (local guide): Full-bleed image cards with gradient overlay.~~ **Superseded:** The local guide page (`/vodic`) now uses an editorial section layout with titled content blocks and `MiniCollage` horizontal photo strips per section, replacing the previous card-overlay grid.
   - **Editorial/curated photos** (food, Why Pašman, activities, beaches, getting here): Dalmatian stone arch `clip-path` for select featured images only (pre-curated in CMS, not auto-applied to all uploads)
@@ -201,7 +201,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Intent:** Subtle life-like motion on feature images conveying premium quality
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - `.breath-card` component: 22px border-radius, `overflow: clip`, 4:3 aspect ratio, deep shadow
+  - `.breath-card` component: 16px border-radius, `overflow: clip`, 4:3 aspect ratio, deep shadow
   - Image inside scales between 1.03x and 1.06x with slight vertical drift (-6px) on a 7.5s infinite ease-in-out cycle
   - Warm-tone gradient overlay (`::before`) blends warm gold and cool azure radial gradients with a bottom-darkening linear gradient
   - Figcaption: glassmorphism treatment (frosted blur, translucent navy background, subtle border, positioned absolute at bottom)
