@@ -296,7 +296,8 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
   - `showCaptions` prop (default false): when enabled, renders each photo's alt text as an overlay caption positioned absolute at the bottom of the photo. Caption styling: sans-serif (`var(--font-sans)`), base font size, normal weight (400), line-height 1.6, white text at 90% opacity, padding `var(--space-md) var(--space-lg)`, with a bottom-to-top gradient background (`rgba(0,0,0,0.5)` to transparent) for legibility over any image. `pointer-events: none` so the overlay does not interfere with hover pause. Currently enabled only on the gallery page (REQ-SF-8) to display poetic Croatian captions over photos.
   - `@keyframes scroll-collage` from `translateX(0)` to `translateX(-50%)` with duplicated image track
   - Image height: 250px mobile, 350px desktop
-  - 16px border-radius, `var(--space-md)` gap between images
+  - 16px border-radius, `var(--space-md)` gap between images (multi-image strips only)
+  - **Single-image fallback:** When only 1 image is provided, MiniCollage renders a static full-width image (4:3 aspect, `object-fit: cover`) with no border-radius, no max-width constraint, no scrolling animation, and no hover zoom. The single image is edge-to-edge, matching the visual weight of multi-image collage strips.
   - All collage/strip containers (homepage collage, apartments collage, gallery strips, editorial strips) use responsive horizontal padding `clamp(1.25rem, 4vw, 3rem)` so that rounded-corner images have breathing room from viewport edges
   - 35s loop duration, `linear infinite` timing
   - Pauses on hover (`:hover` sets `animation-play-state: paused`)

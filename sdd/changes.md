@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-05 - MiniCollage single-image fallback: edge-to-edge (c497e32)
+
+MiniCollage single-image fallback (`.mini-collage--single`) changed from rounded contained image to edge-to-edge full-width. Removed `border-radius: 16px` and `max-width: 700px` so a single image spans the full container width with no rounding, matching the visual weight of multi-image collage strips. Hover zoom (`scale(1.03)` transition) also removed from single-image fallback.
+
+### AC updated
+- **REQ-VD-15** (Exterior Photo Collage / MiniCollage): Added single-image fallback acceptance criterion documenting the edge-to-edge behavior (no border-radius, no max-width, no hover zoom, static 4:3 image). Clarified that 16px border-radius applies to multi-image strips only.
+
+### No status changes
+- REQ-VD-15 remains Implemented (visual refinement of single-image edge case).
+
+---
+
 ## 2026-04-05 - Subpixel gap fixes, spacing reductions, dolazak wave (63c07db)
 
 Wave SVG transition added to the Getting Here (dolazak) page's dark "address" section, creating an organic light-to-dark transition matching the wave pattern used elsewhere on the site. Homepage spacing reduced (tighter gaps between sections). Subpixel gap fixes (margin-top: -1px) on homepage CTA and dolazak dark section.
