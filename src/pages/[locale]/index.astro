@@ -27,7 +27,6 @@ function getSection(key: string): LocalizedEntry | undefined {
 }
 
 const whySection = getSection("why-pasman");
-const zdrelacSection = getSection("zdrelac");
 const aptsSection = getSection("apartments");
 const ctaSection = getSection("cta");
 const collageSection = getSection("collage");
@@ -59,12 +58,16 @@ const whyItems = [
   { hr: "Autentična Dalmacija", de: "Authentisches Dalmatien", sl: "Pristna Dalmacija", en: "Authentic Dalmatia" },
 ];
 
-const zdrelacTitle = (zdrelacSection?.data.title as string) ?? {
-  hr: "Tiho selo na sjevernom vrhu otoka",
-  de: "Ein ruhiges Dorf an der Nordspitze der Insel",
-  sl: "Tiha vas na severnem vrhu otoka",
-  en: "A quiet village at the northern tip of the island",
-}[typedLocale];
+const guideLabel: Record<Locale, string> = {
+  hr: "Vodič", de: "Reiseführer", sl: "Vodnik", en: "Guide",
+};
+
+const guideSubtitle: Record<Locale, string> = {
+  hr: "Ždrelac, Pašman, Ugljan i okolica",
+  de: "Ždrelac, Pašman, Ugljan und Umgebung",
+  sl: "Ždrelac, Pašman, Ugljan in okolica",
+  en: "Ždrelac, Pašman, Ugljan and surroundings",
+};
 
 const aptsTitle = (aptsSection?.data.title as string) ?? {
   hr: "Vaš dom na Jadranu",
@@ -133,9 +136,6 @@ const oliveOilLabel: Record<Locale, string> = {
               <span class="tag">{item[typedLocale]}</span>
             ))}
           </div>
-          <a href={`/${typedLocale}/vodic`} class="btn">
-            {t(typedLocale, "nav.localGuide")}
-          </a>
         </div>
       </div>
     </div>
@@ -147,8 +147,8 @@ const oliveOilLabel: Record<Locale, string> = {
       <div class="feature-image__wrap" style="border-radius: 16px; overflow: hidden;">
         <img src="/api/img/aa0fd53c-5d96-4a78-a5b5-0f68b543515a" alt="Aerial view of Ždrelac village on Pašman island" width="1920" height="1080" loading="lazy" />
         <div class="card-overlay">
-          <span class="card-overlay__label">Ždrelac</span>
-          <span class="card-overlay__title">{zdrelacTitle}</span>
+          <span class="card-overlay__label">{guideLabel[typedLocale]}</span>
+          <span class="card-overlay__title">{guideSubtitle[typedLocale]}</span>
         </div>
       </div>
     </a>
@@ -159,29 +159,15 @@ const oliveOilLabel: Record<Locale, string> = {
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: clamp(50px, 8vw, 100px); display: block; z-index: 2; transform: scaleY(-1);">
       <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,20 1440,40 L1440,80 L0,80 Z" fill="#F8F5EF" />
     </svg>
-    <div class="container">
-      <div class="split-section split-section--reverse">
-        <div class="split-section__left">
-          <p class="text-label" style="color: rgba(255,255,255,0.7);">{t(typedLocale, "apartments.title")}</p>
-          <h2>{aptsTitle}</h2>
-          <p class="text-lead" style="color: rgba(255,255,255,0.75); margin-top: var(--space-lg);">
-            {aptsBody}
-          </p>
-          <a href={`/${typedLocale}/apartmani`} class="btn btn--ghost" style="margin-top: var(--space-2xl);">
-            {t(typedLocale, "nav.apartments")}
-          </a>
-        </div>
-        <div class="split-section__right">
-          <div class="duo-image">
-            <div class="img-organic">
-              <img src="/api/img/8dfecf5d-4e47-4b26-bcf3-c7238d9cb2d9" alt="Luka Ždrelac s brodovima i kristalno čistim morem" width="600" height="800" loading="lazy" />
-            </div>
-            <div class="img-organic">
-              <img src="/api/img/22876145-0df0-4ee1-bed3-c3a076e06e4e" alt="Terasa s roštiljem i mediteranskim vrtom" width="600" height="800" loading="lazy" />
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container text-center">
+      <p class="text-label" style="color: rgba(255,255,255,0.7);">{t(typedLocale, "apartments.title")}</p>
+      <h2>{aptsTitle}</h2>
+      <p class="text-lead" style="color: rgba(255,255,255,0.75); margin-top: var(--space-lg); margin-inline: auto;">
+        {aptsBody}
+      </p>
+      <a href={`/${typedLocale}/apartmani`} class="btn btn--ghost" style="margin-top: var(--space-2xl);">
+        {t(typedLocale, "nav.apartments")}
+      </a>
     </div>
 
     {/* Exterior photo collage — CMS managed */}
@@ -420,26 +406,6 @@ const oliveOilLabel: Record<Locale, string> = {
 
   
 
-  /* ============================================================
-     DUO IMAGE - two photos with rounded corners
-     ============================================================ */
-  .duo-image {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
-  }
-
-  .duo-image .img-organic img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.8s var(--ease-out);
-  }
-
-  .duo-image .img-organic:hover img {
-    transform: scale(1.03);
-  }
 
   /* ============================================================
      TESTIMONIALS - with subtle gradient background
