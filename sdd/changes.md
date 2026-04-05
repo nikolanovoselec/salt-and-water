@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-04-05 - Revision 84: Gallery scroll speed fixed at 80s; strip gap tightened
+
+Gallery page MiniCollage strips changed from variable speed (`max(35, photoCount * 8)`) to a fixed 80-second duration per strip, giving uniform scroll pacing across all 14 strips regardless of photo count. Strip vertical gap reduced from `space-lg` to `space-sm` for a denser collage feel.
+
+### Requirements updated
+- **REQ-SF-8** (Gallery Page): Status updated -- scroll speed is now fixed 80s per strip (was variable formula)
+- **REQ-VD-15** (Exterior Photo Collage / MiniCollage): Acceptance criteria updated -- gallery page uses fixed 80s speed; other pages retain 35s default
+
 ## 2026-04-05 - Revision 83: MiniCollage showCaptions prop; gallery captions now visible
 
 MiniCollage component gains a `showCaptions` prop that renders each photo's alt text as a visible italic caption below the image. Gallery page enables this prop so the 50 poetic Croatian captions are now displayed as visible text, not just used as alt text.

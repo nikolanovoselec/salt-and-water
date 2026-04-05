@@ -163,7 +163,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Priority:** P1
 - **Dependencies:** REQ-VD-15, REQ-VD-12
 - **Verification:** Visual review + responsive check on mobile/desktop. Verify strips scroll in alternating directions. Verify different locale produces different photo order.
-- **Status:** Implemented — 139 real island photos in alternating scrolling collage strips (14 strips); locale-specific intro text in all 4 locales; locale-seeded deterministic shuffle for per-language visual variety; 50 poetic Croatian captions (not localized) rendered as visible italic text below each photo; speed per strip is `max(35, photoCount * 8)` seconds; zero stock photos
+- **Status:** Implemented — 139 real island photos in alternating scrolling collage strips (14 strips); locale-specific intro text in all 4 locales; locale-seeded deterministic shuffle for per-language visual variety; 50 poetic Croatian captions (not localized) rendered as visible italic text below each photo; fixed 80s scroll speed per strip; zero stock photos
 
 ## Out of Scope
 
