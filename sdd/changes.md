@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-04-05 - CSS polish: wave gap fix, spacing, nav visited color (5e301cd)
+
+Six CSS bug fixes from feedback round 8. The only spec-relevant change: `.section--wave-in` margin-top increased from -1px to -2px to fully close a subpixel rendering gap between wave SVGs and adjacent sections. Remaining fixes (apartment detail spacing reduction, contact/dolazak footer wave clearance padding, mobile nav visited link color) are implementation-level CSS adjustments with no spec impact.
+
+### AC updated
+- **REQ-VD-9** (Wave Section Dividers): `.section--wave-in` margin-top updated from `-1px` to `-2px`.
+
+### Glossary updated
+- **section--wave-in**: margin-top value updated from `-1px` to `-2px`.
+
+### No status changes
+- All affected requirements remain Implemented.
+
+---
+
 ## 2026-04-05 - Remove duplicate gallery photo (24d86df)
 
 Removed duplicate photo UUID from gallery array (two UUIDs pointing to identical image file). Gallery now has 138 photos instead of 139. Strip layout unchanged (14 strips); last strip has 8 photos instead of 9.
