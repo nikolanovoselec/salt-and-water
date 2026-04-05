@@ -143,7 +143,7 @@ const oliveOilLabel: Record<Locale, string> = {
   {/* Full-width image - Ždrelac - clickable, links to village page */}
   <div class="container" style="padding-bottom: var(--space-xl);">
     <a href={`/${typedLocale}/vodic`} class="feature-image" data-reveal style="text-decoration:none; color:inherit; display:block;">
-      <div class="feature-image__wrap" style="border-radius: 16px; overflow: hidden;">
+      <div class="feature-image__wrap">
         <img src="/api/img/c047fffd-b9b7-4a05-84f9-7df061389901" alt="Stara kapelica među borovima na otoku Pašmanu" width="1920" height="1080" loading="lazy" />
         <div class="card-overlay">
           <span class="card-overlay__label">{guideLabel[typedLocale]}</span>
@@ -388,7 +388,6 @@ const oliveOilLabel: Record<Locale, string> = {
     .feature-image__wrap img {
       aspect-ratio: 16 / 9;
     }
-    /* border-radius inherited from base rule (16px) */
   }
 
   
