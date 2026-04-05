@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-04-05 - Remove deleted photo from gallery (b14ea06)
+
+Removed photo UUID `358acbfa-b8d1-4925-9d10-a0ac4f7f5b58` from gallery array. Gallery now has 137 photos instead of 138. Strip layout unchanged (14 strips); last strip has 7 photos instead of 8.
+
+### Requirements updated
+- **REQ-SF-8** (Gallery Page): Photo count updated from 138 to 137 in acceptance criteria and status. Last strip size updated from 8 to 7.
+- **REQ-VD-14** (Unique Imagery Per Page): Photo count updated from "138+ photos total" to "137+ photos total" in status.
+- **REQ-VD-15** (Exterior Photo Collage): Gallery page photo count updated from 138 to 137 in the MiniCollage consumer description.
+
+---
+
 ## 2026-04-05 - Centralize footer wave clearance with .section--footer-clear class (d26caba)
 
 New `.section--footer-clear` CSS utility class in `global.css` replaces all per-page inline `padding-bottom` overrides for footer wave clearance. Applied to the last content section on every page (13 pages total). Same `padding-bottom: calc(var(--space-section) + clamp(50px, 8vw, 100px))` value that was previously duplicated as inline styles. Follows the same pattern as `.section--wave-in` (top-edge wave clearance) but for the bottom edge.
