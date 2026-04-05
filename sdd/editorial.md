@@ -8,7 +8,7 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Arrival guide**: Complete transport info — ferry, airport, driving, parking
 - **Storytelling**: "A Day on Pašman", seasonal atmosphere, daylight progression
 - **Host story**: Personal connection to the place
-- **Editorial density**: 3-4 focused sections per page (consolidated from 5-6 for stronger narrative flow). Exception: Food & Drink uses a single unified section with two-direction photo collages.
+- **Editorial density**: 3-4 focused sections per page (consolidated from 5-6 for stronger narrative flow). Exception: Food & Drink uses a single unified section (description first, then two stacked photo collages scrolling in opposite directions).
 
 ## Requirements
 
@@ -139,10 +139,10 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - Standalone page at `/{locale}/hrana` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph, and **wave SVG at the bottom edge** (cream fill `#F8F5EF`, organic bezier path, responsive height). The wave is part of HeroSimple and renders automatically.
-  - **Single unified section** with one CMS entry providing title and body text. ~~4 content sections (consolidated from 5)~~ — replaced by a single love-letter description sandwiched between two photo collages.
+  - **Single unified section** with one CMS entry providing title and body text. ~~4 content sections (consolidated from 5)~~ — replaced by a single love-letter description followed by two stacked photo collages.
   - CMS-only content model: page queries the first entry from the dedicated `hrana` CMS collection. No `sort_order` multi-entry model — a single entry provides all content. If CMS entry is missing, title falls back to locale-aware default; body is empty.
-  - **Two-direction collage layout:** All photos from the CMS entry's `gallery` field are split into two halves. The first half renders as a MiniCollage strip scrolling left (default direction) above the description. The second half renders as a MiniCollage strip scrolling right (`reverse` prop, REQ-VD-15) below the description. Each collage renders only when its half contains more than 1 photo.
-  - ~~Alternating layout: odd sections image-left/text-right, even sections reversed (desktop); single column on mobile~~ — replaced by collage-description-collage sandwich layout.
+  - **Layout: description then collages.** The description section (title + body) renders first, directly after the hero. Below it, both photo collages are stacked together — first half scrolling left (default), second half scrolling right (`reverse` prop, REQ-VD-15), separated by a small gap. Bottom padding before the footer. Each collage renders only when its half contains more than 1 photo.
+  - ~~Alternating layout: odd sections image-left/text-right, even sections reversed (desktop); single column on mobile~~ — replaced by description-then-collages layout.
   - ~~Images: 4:3 aspect, organic asymmetric border-radius (`20px 4px 20px 4px`) with subtle box-shadow, hover zoom (1.03x)~~ — images now displayed within MiniCollage strips (16px border-radius, 250px/350px height).
   - Scroll-triggered reveal via `data-reveal` on the description section
   - Hero image must be contextually appropriate (food/dining scene, not Santorini or tropical)
@@ -150,7 +150,7 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
 - **Dependencies:** REQ-ED-4, REQ-SF-5, REQ-VD-12, REQ-VD-15
-- **Verification:** Visual review across all 4 locales. Verify wave renders at bottom of hero. Verify hero image is food-related. Verify two collages scroll in opposite directions.
+- **Verification:** Visual review across all 4 locales. Verify wave renders at bottom of hero. Verify hero image is food-related. Verify description appears before both collages. Verify two collages scroll in opposite directions.
 - **Status:** Implemented
 
 ### REQ-ED-9: "Nature & Activities" Detail Page

@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-05 - Revision 78: Food page collages moved below description
+
+Food & Drink page layout changed from collage-description-collage sandwich to description-first layout. Both MiniCollage strips now render below the text section (stacked together with a small gap and bottom padding before footer), instead of sandwiching the description. Reading flow improved: visitor reads the love-letter text first, then sees the photo collages.
+
+### Requirements updated
+- **REQ-ED-8** (Food & Drink Detail Page): Layout description changed from "first collage above description, second below" to "description first, then both collages stacked below." Verification criterion added for description-before-collages order.
+
+### Editorial key concepts updated
+- **Editorial density**: Exception wording updated to reflect description-then-collages layout.
+
+---
+
 ## 2026-04-05 - Revision 77: Food page unified section with two-direction collages
 
 Food & Drink page (`hrana`) restructured from 4 multi-section CMS entries (sorted by `sort_order`, alternating text/image rows) to a single unified section. One CMS entry provides title, body, and a gallery of all photos. Photos are split into two halves rendered as MiniCollage strips scrolling in opposite directions (left above, right below), sandwiching the description text. MiniCollage component gains a `reverse` prop for right-to-left scrolling.
