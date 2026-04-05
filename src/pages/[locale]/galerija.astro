@@ -1,8 +1,8 @@
 ---
 import Page from "~/layouts/Page.astro";
 import HeroSimple from "~/components/ui/HeroSimple.astro";
+import MiniCollage from "~/components/ui/MiniCollage.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
-import { t } from "~/i18n/t";
 
 const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
@@ -12,105 +12,241 @@ const galleryTitle: Record<Locale, string> = {
   hr: "Galerija", de: "Galerie", sl: "Galerija", en: "Gallery",
 };
 
-type GalleryItem = { src: string; alt: string; caption: string };
+const intro: Record<Locale, string> = {
+  hr: "Sve boje otoka na jednom mjestu — more, kameni zidovi, konobe, borovi i onaj mir koji se ne da opisati, samo osjetiti.",
+  de: "Alle Farben der Inseln an einem Ort — das Meer, die Steinmauern, die Konobas, die Pinien und jene Ruhe, die sich nicht beschreiben, nur fühlen lässt.",
+  sl: "Vse barve otokov na enem mestu — morje, kamniti zidovi, konobe, borovci in tisti mir, ki ga ni mogoče opisati, samo občutiti.",
+  en: "All the colours of the islands in one place — the sea, the stone walls, the konobas, the pines, and that peace which cannot be described, only felt.",
+};
 
-const t4 = (hr: string, de: string, sl: string, en: string) =>
-  ({ hr, de, sl, en }[typedLocale] ?? en);
-
-const images: GalleryItem[] = [
-  // Island scenery
-  { src: "/api/img/8dfecf5d-4e47-4b26-bcf3-c7238d9cb2d9", alt: t4("Luka Ždrelac", "Hafen Ždrelac", "Pristanišče Ždrelac", "Ždrelac harbour"), caption: t4("Tirkizno more i brodovi u luci", "Türkises Meer und Boote im Hafen", "Turkizno morje in čolni v pristanišču", "Turquoise water and boats in the harbour") },
-  { src: "/api/img/8fa232be-df70-418c-9933-0960203d6bba", alt: t4("Tirkizni zaljev", "Türkise Bucht", "Turkizen zaliv", "Turquoise bay"), caption: t4("Jedrilice u tirkiznom zaljevu", "Segelboote in türkiser Bucht", "Jadrnice v turkiznem zalivu", "Sailboats in turquoise bay") },
-  { src: "/api/img/5242d047-a955-4cd7-afe7-79191db2202b", alt: t4("Zalazak sunca", "Sonnenuntergang", "Sončni zahod", "Sunset"), caption: t4("Dramatičan zalazak nad Jadranom", "Dramatischer Sonnenuntergang", "Dramatičen sončni zahod", "Dramatic sunset over the Adriatic") },
-  { src: "/api/img/ceec62e2-e1a1-42db-914b-64807c4751f7", alt: t4("Kristalno more", "Kristallklares Meer", "Kristalno morje", "Crystal clear sea"), caption: t4("Prozirno more i otoci", "Durchsichtiges Meer und Inseln", "Prozorno morje in otoki", "Transparent sea and islands") },
-  // Beaches
-  { src: "/api/img/953b4b07-6c3a-4df1-8358-63a2997e6d24", alt: t4("Pješčana plaža", "Sandstrand", "Peščena plaža", "Sandy beach"), caption: t4("Kristalno čisto more i pijesak", "Kristallklares Meer und Sand", "Kristalno čisto morje in pesek", "Crystal clear sea and sand") },
-  { src: "/api/img/029648ae-b7af-4bd4-831a-4ceba2b9c4d7", alt: t4("Obiteljska plaža", "Familienstrand", "Družinska plaža", "Family beach"), caption: t4("Plitka voda savršena za djecu", "Flaches Wasser perfekt für Kinder", "Plitva voda popolna za otroke", "Shallow water perfect for children") },
-  { src: "/api/img/0df6dd12-bd04-42c7-aaec-811b75bd7ae4", alt: t4("Skrivena uvala", "Versteckte Bucht", "Skrita zalivčka", "Secluded cove"), caption: t4("Staza do skrivene uvale", "Pfad zur versteckten Bucht", "Pot do skrite zalivčke", "Path to a secluded cove") },
-  { src: "/api/img/aafdb60d-c80b-41f6-a3ad-353c50622e22", alt: t4("Vrata na plažu", "Tor zum Strand", "Vrata na plažo", "Door to the beach"), caption: t4("Korak do mora", "Ein Schritt zum Meer", "Korak do morja", "One step to the sea") },
-  // Monuments & landmarks
-  { src: "/api/img/c9c4485b-df86-4179-8d49-6cbbfbe0948c", alt: t4("Zvonik", "Glockenturm", "Zvonik", "Bell tower"), caption: t4("Crkva sv. Luke u Ždrelcu", "Kirche St. Lukas in Ždrelac", "Cerkev sv. Luka v Ždrelcu", "Church of St. Luke in Ždrelac") },
-  { src: "/api/img/c047fffd-b9b7-4a05-84f9-7df061389901", alt: t4("Kapelica u boricima", "Kapelle in den Pinien", "Kapelica med bori", "Chapel among pines"), caption: t4("Stara kapela u borovoj šumi", "Alte Kapelle im Pinienwald", "Stara kapela v borovem gozdu", "Old chapel in the pine forest") },
-  { src: "/api/img/b57f32b0-5684-47fb-8358-4ab3637f251f", alt: t4("Kameni lukovi", "Steinbögen", "Kamniti loki", "Stone arches"), caption: t4("Vidikovac s pogledom na more", "Aussichtspunkt mit Meerblick", "Razgledna točka z razgledom na morje", "Viewpoint overlooking the sea") },
-  { src: "/api/img/90ffbceb-9d1a-4b1d-9938-18f134f6774e", alt: t4("Tvrđava i zaljev", "Festung und Bucht", "Trdnjava in zaliv", "Fortress and bay"), caption: t4("Ruševine i pogled na Zadar", "Ruinen und Blick auf Zadar", "Ruševine in pogled na Zadar", "Ruins and Zadar view") },
-  // Panoramas & hiking
-  { src: "/api/img/6bc0414c-fcd2-46d9-a737-ad755e39661b", alt: t4("Panorama s vrha", "Panorama vom Gipfel", "Panorama z vrha", "Hilltop panorama"), caption: t4("Pogled na otočje s vidikovca", "Inselblick vom Aussichtspunkt", "Pogled na otočje z razgledišča", "Archipelago view from the viewpoint") },
-  { src: "/api/img/7186c488-dfb3-4220-91a3-c66698c98e40", alt: t4("Planinarska staza", "Wanderweg", "Pohodniška pot", "Hiking trail"), caption: t4("Staze po kamenim vrhovima", "Wege über steinige Gipfel", "Poti čez kamnite vrhove", "Trails over rocky peaks") },
-  { src: "/api/img/98611c2d-5fbe-4ab6-87c0-43cc6c17bd73", alt: t4("Panorama otoka", "Inselpanorama", "Panorama otoka", "Island panorama"), caption: t4("Pogled na otoke i Zadar", "Blick auf die Inseln und Zadar", "Pogled na otoke in Zadar", "View of islands and Zadar") },
-  // Golden hour & atmosphere
-  { src: "/api/img/d8d7081e-1a5f-4c7a-ae8d-294b78e6f209", alt: t4("Obala na zalasku", "Küste bei Sonnenuntergang", "Obala ob sončnem zahodu", "Coast at sunset"), caption: t4("Zlatno svjetlo na obali", "Goldenes Licht an der Küste", "Zlata svetloba na obali", "Golden light on the coast") },
-  { src: "/api/img/dd602881-521e-437a-a666-c9433bbc29a5", alt: t4("Djeca na plaži", "Kinder am Strand", "Otroci na plaži", "Kids at the beach"), caption: t4("Ljetne radosti", "Sommerfreuden", "Poletne radosti", "Summer joys") },
-  { src: "/api/img/37815428-68df-4fe1-9dbc-afbd57f9e735", alt: t4("Marina", "Jachthafen", "Marina", "Marina"), caption: t4("Jedrilice u marini", "Segelboote im Hafen", "Jadrnice v marini", "Sailboats in the marina") },
+// Poetic captions — randomly assigned to photos
+const captions = [
+  "More ovdje šapće sporije nego igdje",
+  "Dan se topi u tirkiznoj tišini",
+  "Gdje pogled zastane, srce ostane",
+  "Sunce ovdje zna nježnije dodirnuti",
+  "Između kamena i mora, mir traje",
+  "Sve je lakše kad miriše sol",
+  "Ovdje vrijeme sjedi u hladu",
+  "Tišina ima boju kasnog ljeta",
+  "More se prelijeva kao misao o sreći",
+  "Gdje borovi čuvaju plavetnilo od buke",
+  "Još jedan trenutak za nikamo krenuti",
+  "Na ovom svjetlu i kamen omekša",
+  "Vjetar nosi ono što ne kažemo",
+  "Dan počinje solju, završava zlatom",
+  "Ovdje se srce privikne na mir",
+  "Plavetnilo bez žurbe, dan bez kraja",
+  "Mjesto gdje se oči odmore prve",
+  "U hladu borova ljeto diše sporije",
+  "Sve što trebaš stane u horizont",
+  "More pamti korake bolje od pijeska",
+  "Kad se nebo spusti sasvim blizu",
+  "Tu gdje se dan lagano raspline",
+  "Kamen, sol i jedna tiha sreća",
+  "Jutro miriše na more i mogućnost",
+  "Večer ovdje dolazi na prstima",
+  "Gdje se tišina sluša otvorenim srcem",
+  "Još malo sunca za dušu",
+  "Svjetlo se lomi kao nježna uspomena",
+  "Ovdje i valovi govore polako",
+  "Ljeto ostavlja trag samo u nama",
+  "Pod ovim nebom sve postaje jednostavno",
+  "More i mir, bez suvišnih riječi",
+  "Gdje svaki pogled traje dulje nego inače",
+  "Iz daljine sve napokon sjedne na mjesto",
+  "Sol u zraku, mir pod kožom",
+  "Ovdje se dan ne broji satima",
+  "Dok more šuti, sve je rečeno",
+  "Tišina između valova vrijedi najviše",
+  "U svakom kamenu malo starog sunca",
+  "Mjesto za disati punim, sporim srcem",
+  "More blista kao da nas prepoznaje",
+  "Ovdje se misli razvežu same od sebe",
+  "Ljeto se ovdje zadržava bez pitanja",
+  "Između valova i bora, dom",
+  "Kad dan zamiriše na bor i sol",
+  "Pogled koji ostaje i kad odeš",
+  "Nad morem sve misli postanu mekše",
+  "Tu gdje večer zagrli cijeli arhipelag",
+  "Svaki povjetarac donese malo nježnosti",
+  "Ovdje se voli tiho, kao more",
 ];
+
+// All site photos (excluding apartment interiors)
+const allPhotos = [
+  "029648ae-b7af-4bd4-831a-4ceba2b9c4d7",
+  "0393443b-e7dc-479e-b043-d7d980ad55e1",
+  "0621f077-6293-41da-912a-4082f1e8f4cb",
+  "06286405-5d35-4914-9100-45bc15836b9c",
+  "073aa7b8-b7d8-4da9-932d-d39caa24df2a",
+  "0982b47c-c4f4-43e1-9c58-f04a022d6f72",
+  "0a755441-53ec-4cc7-910e-b70a0a749af8",
+  "0adf700c-2020-4c19-995e-b588cd1efe75",
+  "0afa5c7a-6108-454d-b309-80eccc3b8f6b",
+  "0cbf334f-714a-477a-a3a2-93a969de238b",
+  "0df6dd12-bd04-42c7-aaec-811b75bd7ae4",
+  "10f81456-3381-4a33-af7b-841ff2f0968a",
+  "1203a417-fbf4-4065-bef9-233b75a4af44",
+  "1440d18e-8893-4ad2-b5b0-58ecde874053",
+  "160403c9-f0ca-4466-80d9-37501c2523e4",
+  "175374f4-d6c7-4bc7-976c-37d65076a4e6",
+  "1844062d-a374-43e7-87ea-c8969229ddfd",
+  "18cbc9f6-7a26-487b-bcc0-54f9f03b1228",
+  "1dd03fc7-b363-45e8-a0d8-e3c38a0c653b",
+  "2209099e-d7eb-4547-9126-c46caaa9f36f",
+  "22876145-0df0-4ee1-bed3-c3a076e06e4e",
+  "239f494b-8676-4974-a2ba-196101b97cea",
+  "2d3a23e2-766d-4b0e-9699-eb745d7a5375",
+  "2f348da2-de88-4bb0-8f54-d517545b6cff",
+  "31c226bc-fef0-4674-b9c8-de46f09abb95",
+  "32b68797-3c57-426a-bb33-fc856a3d622b",
+  "358acbfa-b8d1-4925-9d10-a0ac4f7f5b58",
+  "37815428-68df-4fe1-9dbc-afbd57f9e735",
+  "3c09df48-ab13-40aa-bd76-143225d481f2",
+  "3c44b6bf-a0ba-4a18-8a2c-a0ce204f912e",
+  "4123015d-6315-4581-ab6d-ac7aa6d07f99",
+  "4181b561-2828-4119-b04e-9fc596d65569",
+  "4201530a-78a2-40e5-af96-64d377895483",
+  "44031e0b-e5a5-4440-92f1-da0cfe43074c",
+  "465ef234-770d-4701-84fb-6210a1b389c2",
+  "48e8767e-6de5-4b63-93c1-1cde9f436d2b",
+  "4aba2550-a360-428b-b5f1-67066e40320e",
+  "4c9238fa-0890-44a6-8f35-1ff787a8a27b",
+  "4eddaca7-ec01-41e8-9fc7-8eb3d382e819",
+  "521e766d-6fa2-40cc-b73e-6fe808d3c5af",
+  "5242d047-a955-4cd7-afe7-79191db2202b",
+  "53f1b8ec-b097-4c8d-81a5-8ac198eb9935",
+  "553f1285-2e1e-4c24-b4db-b813eb7c4a0c",
+  "573c51dc-2d6c-485d-933f-d4b9d34b9249",
+  "5a98a168-c73a-4612-a7c1-6a2eb43ee2e8",
+  "5b21ffe5-207b-400c-9604-8a88cbdaeffc",
+  "61e68265-09c5-43c6-9df7-c8190d9d4179",
+  "63602263-55d3-4a01-b699-18fa5f97fb82",
+  "64bb7be6-26c4-442c-8c91-a0b354e4f00e",
+  "6a7a1924-9ce1-42ff-9e33-c9f744fab108",
+  "6bc0414c-fcd2-46d9-a737-ad755e39661b",
+  "6d309c52-5d17-4b52-a140-fec174dcd258",
+  "7186c488-dfb3-4220-91a3-c66698c98e40",
+  "72f185ba-70c1-44f4-a52d-8588a9d11cb4",
+  "75b9fb8b-a774-4d3a-9381-edd1194abdb7",
+  "761acb41-b319-4306-9207-299eec79fcc7",
+  "76a5d07a-ae63-41e4-83f8-34fc5f409e69",
+  "7be5ef1b-e031-477d-856c-c76001883f12",
+  "7e81349d-a188-486a-9941-992cd6fdab01",
+  "7ffafe49-fec8-4716-97bd-64623e30b045",
+  "80e67ac4-301c-45d5-890d-f209ac230776",
+  "822c88eb-c5a2-4700-8c79-0f1f7e4d18ec",
+  "82139df3-55b2-4dc1-8439-f76321d815dd",
+  "8720a025-de53-44cc-9841-ff427574b836",
+  "895cee15-cbb0-4be7-aa67-5f38f985811c",
+  "8aab7799-256b-4fb6-a8fc-0ead509a4b61",
+  "8b247b53-1ad5-402c-872b-a1e12fe4e5b1",
+  "8d97e0b5-1aba-4b9c-a4c4-37ca0f28a567",
+  "8dfecf5d-4e47-4b26-bcf3-c7238d9cb2d9",
+  "8fa232be-df70-418c-9933-0960203d6bba",
+  "90ffbceb-9d1a-4b1d-9938-18f134f6774e",
+  "9085a316-ca18-4655-b313-4f2cdb7732eb",
+  "950b6440-d3d1-49dd-bac8-0716fb49146f",
+  "953b4b07-6c3a-4df1-8358-63a2997e6d24",
+  "98490610-981e-4fbb-b13d-f2a57e0ac235",
+  "98611c2d-5fbe-4ab6-87c0-43cc6c17bd73",
+  "9a36a70c-0f4f-40be-b072-315e2a1a8776",
+  "9e2d375e-bef7-4d52-959a-d6925ad0989c",
+  "a1f5a8fb-6616-4c17-a60f-e7df4eec89bc",
+  "a35dea5e-bf24-4235-b8b2-001f906f55e7",
+  "a475aa55-a458-43c6-b90f-7f609c64d578",
+  "a6aacd6e-25c9-4b9d-b5a1-9fcd183e5f43",
+  "a876a7dd-0ebc-4bdf-9bd5-ad04b0e83668",
+  "aa0fd53c-5d96-4a78-a5b5-0f68b543515a",
+  "aafdb60d-c80b-41f6-a3ad-353c50622e22",
+  "b1d06889-7253-4556-8a00-8308b8dc912c",
+  "b57f32b0-5684-47fb-8358-4ab3637f251f",
+  "b8c1cd18-d918-4d76-a9b7-0c4fe6d81910",
+  "bd440b3f-7f65-4971-bfba-639458c5b9ec",
+  "be52d013-c2ce-4d8f-a40b-1ba4bab87f3f",
+  "c047fffd-b9b7-4a05-84f9-7df061389901",
+  "c09dd48c-7dd7-49a0-9f7c-026b9e394872",
+  "c1d2cb33-8aa1-4a83-ab1b-a5c07dbada44",
+  "c4b47191-7259-4d17-96f6-53e50f918346",
+  "c5d2a82f-a2de-45ef-96c2-3d2198ff3b35",
+  "c87c88a4-ed10-4fd9-997e-ca5e1b40ea2d",
+  "c9bd48f2-3d38-41c0-9204-7636a70cbfc2",
+  "c9c4485b-df86-4179-8d49-6cbbfbe0948c",
+  "c9ccb3d6-c79c-4bdc-bda9-9688894826c7",
+  "ccf204e0-5eb3-4494-aee3-9b51a6de7bb8",
+  "cec88481-2e5e-4e70-869a-fc18cfe376b5",
+  "ceec62e2-e1a1-42db-914b-64807c4751f7",
+  "d34a2bf1-ed9e-48c6-88d6-c4c5cf24df0a",
+  "d57cdaef-2625-448e-bd51-5bdc90de4883",
+  "d5c7a2e2-abae-4dc1-a097-ca4688133095",
+  "d685e0a4-c616-4cca-82fa-fd52ff726039",
+  "d73e9f3d-95d9-4750-900a-b348ecff5a21",
+  "d8d7081e-1a5f-4c7a-ae8d-294b78e6f209",
+  "dd602881-521e-437a-a666-c9433bbc29a5",
+  "e05eb033-213c-4367-9862-1b8bad5fb991",
+  "e1d12712-48c2-4a80-9e9c-42c88dbe1a9b",
+  "e43d2e91-7aa1-4201-b23f-d3e90105f3ef",
+  "e45133d5-e0ea-41f2-81af-a6bbcecfb04e",
+  "e4d2733f-f5ba-4f21-9556-efa36316f126",
+  "e5356081-c622-43f5-b604-4c9542cfbf61",
+  "e6e356f2-7c7e-436d-be12-2956432026f0",
+  "e76ea49c-c4b6-4eaa-9f5f-353be73e9ac5",
+  "ea88551c-999f-4bac-88dc-b64084819d23",
+  "f333d305-5dd4-4bcf-9ee0-86238381ac74",
+  "f42b0bf7-e460-4543-a38a-bd307e2758a5",
+  "f4237605-fb09-4377-b79d-78194b2727cb",
+  "f86c5b2b-8832-4432-b471-602616520ea6",
+  "f9307c22-5989-4485-8cda-9356e22bcf7c",
+  "ff065ff8-2c28-4296-a831-232def4a038c",
+];
+
+// Shuffle photos deterministically by locale (different order per language)
+const seed = typedLocale.charCodeAt(0);
+const shuffled = [...allPhotos].sort((a, b) => {
+  const ha = (parseInt(a.slice(0, 8), 16) ^ seed) >>> 0;
+  const hb = (parseInt(b.slice(0, 8), 16) ^ seed) >>> 0;
+  return ha - hb;
+});
+
+// Build gallery items with rotating captions
+const galleryItems = shuffled.map((uuid, i) => ({
+  src: `/api/img/${uuid}`,
+  alt: captions[i % captions.length],
+}));
+
+// Split into strips of 10
+const strips: Array<{ images: typeof galleryItems; reverse: boolean }> = [];
+for (let i = 0; i < galleryItems.length; i += 10) {
+  strips.push({
+    images: galleryItems.slice(i, i + 10),
+    reverse: strips.length % 2 === 1,
+  });
+}
 ---
 
 <Page title={galleryTitle[typedLocale]} locale={typedLocale}>
-  <HeroSimple title={galleryTitle[typedLocale]} image="/api/img/bd440b3f-7f65-4971-bfba-639458c5b9ec" />
+  <HeroSimple title={galleryTitle[typedLocale]} intro={intro[typedLocale]} image="/api/img/bd440b3f-7f65-4971-bfba-639458c5b9ec" />
 
-  <section class="section">
-    <div class="container">
-      <div class="gallery-grid" data-reveal-stagger>
-        {images.map((img) => (
-          <figure class="gallery-item" data-reveal>
-            <div class="gallery-item__image">
-              <img src={img.src} alt={img.alt} width="800" height="600" loading="lazy" />
-            </div>
-            {img.caption && <figcaption class="gallery-item__caption">{img.caption}</figcaption>}
-          </figure>
-        ))}
+  <div class="gallery-collages">
+    {strips.map((strip) => (
+      <div class="gallery-strip">
+        <MiniCollage images={strip.images} speed={Math.max(35, strip.images.length * 8)} reverse={strip.reverse} />
       </div>
-    </div>
-  </section>
+    ))}
+  </div>
 </Page>
 
 <style>
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
+  .gallery-collages {
+    padding-block: var(--space-xl);
   }
 
-  @media (min-width: 768px) {
-    .gallery-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-lg);
-    }
+  .gallery-strip {
+    margin-bottom: var(--space-lg);
   }
 
-  .gallery-item {
-    overflow: hidden;
-    border-radius: 12px;
-    background: var(--color-white);
-    box-shadow: 0 0 0 1px rgba(10,31,51,0.06), 0 4px 16px rgba(10,31,51,0.06);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  .gallery-strip:last-child {
+    margin-bottom: 0;
   }
-
-  .gallery-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 0 1px rgba(10,31,51,0.06), 0 20px 60px rgba(10,31,51,0.12);
-  }
-
-  .gallery-item__image {
-    overflow: hidden;
-  }
-
-  .gallery-item__image img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .gallery-item:hover .gallery-item__image img {
-    transform: scale(1.05);
-  }
-
-  .gallery-item__caption {
-    padding: var(--space-sm) var(--space-md);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-light);
-    text-align: center;
-  }
-
 </style>
