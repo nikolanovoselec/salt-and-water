@@ -290,6 +290,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - Pure CSS infinite horizontal scroll (marquee technique) — no JavaScript
+  - `reverse` prop: when set, animation plays in reverse direction (`animation-direction: reverse`), scrolling right-to-left instead of the default left-to-right. Used for two-direction collage pairs (e.g., Food & Drink page, REQ-ED-8).
   - `@keyframes scroll-collage` from `translateX(0)` to `translateX(-50%)` with duplicated image track
   - Image height: 250px mobile, 350px desktop
   - 16px border-radius, `var(--space-md)` gap between images
@@ -299,7 +300,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
   - Accessibility: `aria-roledescription="carousel"`, duplicate images get `aria-hidden="true"`
   - Photos sourced from CMS editorial entry (`page_key=homepage`, `section_key=collage`, `body` field containing JSON array of `{src, alt}` objects). JSON is validated at render time: non-array values are discarded, and array items missing `src` or `alt` string fields are filtered out.
   - Owner manages collage by editing the gallery array in Emdash admin — add/remove photos without code changes
-  - Placed on homepage in the apartments section (`section--dark`), after the text content. Also reused on: (1) apartment listing page (`section--dark`, exterior photos from same CMS entry, 35s speed), (2) apartment detail page (interior photos from `gallery` CMS field, 35s speed), and (3) all editorial detail pages (aktivnosti, dolazak, hrana, plaze, vodic) where each CMS section with photos renders a MiniCollage strip at 35s speed. All MiniCollage instances use a uniform 35s loop duration site-wide.
+  - Placed on homepage in the apartments section (`section--dark`), after the text content. Also reused on: (1) apartment listing page (`section--dark`, exterior photos from same CMS entry, 35s speed), (2) apartment detail page (interior photos from `gallery` CMS field, 35s speed), (3) editorial detail pages (aktivnosti, dolazak, plaze, vodic) where each CMS section with photos renders a MiniCollage strip at 35s speed, and (4) Food & Drink page (hrana) where a single gallery is split into two MiniCollage strips scrolling in opposite directions (default left, `reverse` right) sandwiching the description text. All MiniCollage instances use a minimum 35s loop duration site-wide (actual speed: `max(35, photoCount * 8)`).
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P2
 - **Dependencies:** REQ-VD-14, REQ-SF-1

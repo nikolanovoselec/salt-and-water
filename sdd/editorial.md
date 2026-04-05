@@ -8,7 +8,7 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Arrival guide**: Complete transport info — ferry, airport, driving, parking
 - **Storytelling**: "A Day on Pašman", seasonal atmosphere, daylight progression
 - **Host story**: Personal connection to the place
-- **Editorial density**: 3-4 focused sections per page (consolidated from 5-6 for stronger narrative flow)
+- **Editorial density**: 3-4 focused sections per page (consolidated from 5-6 for stronger narrative flow). Exception: Food & Drink uses a single unified section with two-direction photo collages.
 
 ## Requirements
 
@@ -139,18 +139,18 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - Standalone page at `/{locale}/hrana` with `HeroSimple` component (REQ-VD-12) — photo-backed hero with gradient overlay, locale-aware title, introductory paragraph, and **wave SVG at the bottom edge** (cream fill `#F8F5EF`, organic bezier path, responsive height). The wave is part of HeroSimple and renders automatically.
-  - 4 content sections (consolidated from 5): (1) grilled fish and konoba culture — Mureta, Udica, Kiss with distances, (2) olive oil — Ugljan's 200,000 trees, family producers, tasting, (3) dining as ritual — multi-course Dalmatian meal progression, pošip wine, (4) markets and provisions — Kali fish market, Zadar Ribarnica, island shops, Hajduk ice cream in Kukljica
-  - Each section includes named restaurants/producers with contextual details
-  - CMS-only content model: page queries dedicated `hrana` CMS collection, sorted by `sort_order`. No hardcoded fallback — if CMS entries missing, no sections render.
-  - Alternating layout: odd sections image-left/text-right, even sections reversed (desktop); single column on mobile
-  - Images: 4:3 aspect, organic asymmetric border-radius (`20px 4px 20px 4px`) with subtle box-shadow, hover zoom (1.03x)
-  - Scroll-triggered reveal via `data-reveal`
+  - **Single unified section** with one CMS entry providing title and body text. ~~4 content sections (consolidated from 5)~~ — replaced by a single love-letter description sandwiched between two photo collages.
+  - CMS-only content model: page queries the first entry from the dedicated `hrana` CMS collection. No `sort_order` multi-entry model — a single entry provides all content. If CMS entry is missing, title falls back to locale-aware default; body is empty.
+  - **Two-direction collage layout:** All photos from the CMS entry's `gallery` field are split into two halves. The first half renders as a MiniCollage strip scrolling left (default direction) above the description. The second half renders as a MiniCollage strip scrolling right (`reverse` prop, REQ-VD-15) below the description. Each collage renders only when its half contains more than 1 photo.
+  - ~~Alternating layout: odd sections image-left/text-right, even sections reversed (desktop); single column on mobile~~ — replaced by collage-description-collage sandwich layout.
+  - ~~Images: 4:3 aspect, organic asymmetric border-radius (`20px 4px 20px 4px`) with subtle box-shadow, hover zoom (1.03x)~~ — images now displayed within MiniCollage strips (16px border-radius, 250px/350px height).
+  - Scroll-triggered reveal via `data-reveal` on the description section
   - Hero image must be contextually appropriate (food/dining scene, not Santorini or tropical)
   - Linked from homepage triptych (REQ-SF-5)
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
-- **Dependencies:** REQ-ED-4, REQ-SF-5, REQ-VD-12
-- **Verification:** Visual review across all 4 locales. Verify wave renders at bottom of hero. Verify hero image is food-related.
+- **Dependencies:** REQ-ED-4, REQ-SF-5, REQ-VD-12, REQ-VD-15
+- **Verification:** Visual review across all 4 locales. Verify wave renders at bottom of hero. Verify hero image is food-related. Verify two collages scroll in opposite directions.
 - **Status:** Implemented
 
 ### REQ-ED-9: "Nature & Activities" Detail Page
@@ -163,7 +163,7 @@ Content pages that sell the destination and build emotional connection — Getti
   - 4 content sections (consolidated from 6): (1) trails and viewpoints — Veliki Bokolj (274m) with panoramic telescope, Pustograd 6th-century fortress, (2) cycling — Ždrelac bridge bike lane, 46 km two-island loop, Staza 7/8, ZZUUM e-bike tours, rental from 10 EUR/day, (3) Kornati and Telašćica — 89 islands, salt lake Mir, 161m cliffs, day trips from 40-50 EUR, (4) water sports — kayaking to hidden coves, SUP on calm mornings, snorkeling/diving, clean sea currents
   - Each section includes distances from Ždrelac and practical tips
   - **CMS wiring:** Page queries the dedicated `aktivnosti` CMS collection, sorted by `sort_order`. CMS-only content model — no hardcoded fallback. If CMS entries missing, no sections render.
-  - Same alternating row layout, image styling, and reveal animations as REQ-ED-8
+  - Multi-section alternating layout: odd sections on default background, even sections on `.section--alt`. Each section has title, MiniCollage photo strip, and body text. Scroll-triggered reveal via `data-reveal`.
   - Linked from homepage triptych (REQ-SF-5)
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
@@ -181,7 +181,7 @@ Content pages that sell the destination and build emotional connection — Getti
   - 4 content sections (consolidated from 5): (1) Ždrelac coves — Matlovac sandy beach with beach bar, Soline mineral-rich sand, pine forest microclimate, (2) Pašman beaches — Banj shallow water, Lokva under tamarisk in Neviđane, Mrljane with view of heart-shaped Galešnjak, (3) Ugljan beaches — Jaz Blue Flag in Preko, Sabuša in Kukljica, Mostir snorkeling, (4) hidden coves — kayak-access south side cliffs, Prtljug in Lukoran (40m pebble cove, no facilities)
   - Each section includes named beaches with distances from Ždrelac
   - **CMS wiring:** Page queries the dedicated `plaze` CMS collection, sorted by `sort_order`. CMS-only content model — no hardcoded fallback. If CMS entries missing, no sections render.
-  - Same alternating row layout, image styling, and reveal animations as REQ-ED-8
+  - Multi-section alternating layout: odd sections on default background, even sections on `.section--alt`. Each section has title, MiniCollage photo strip, and body text. Scroll-triggered reveal via `data-reveal`.
   - Linked from homepage triptych (REQ-SF-5)
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1

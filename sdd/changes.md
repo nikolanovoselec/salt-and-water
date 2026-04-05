@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-04-05 - Revision 77: Food page unified section with two-direction collages
+
+Food & Drink page (`hrana`) restructured from 4 multi-section CMS entries (sorted by `sort_order`, alternating text/image rows) to a single unified section. One CMS entry provides title, body, and a gallery of all photos. Photos are split into two halves rendered as MiniCollage strips scrolling in opposite directions (left above, right below), sandwiching the description text. MiniCollage component gains a `reverse` prop for right-to-left scrolling.
+
+### Requirements updated
+- **REQ-ED-8** (Food & Drink Detail Page): Acceptance criteria rewritten — single CMS entry replaces multi-entry `sort_order` model; alternating row layout replaced by collage-description-collage sandwich; two-direction MiniCollage strips replace per-section images; added REQ-VD-15 dependency.
+- **REQ-VD-15** (Exterior Photo Collage / MiniCollage): Added `reverse` prop documentation — `animation-direction: reverse` for right-to-left scrolling, used on Food & Drink page.
+
+### Glossary updated
+- **MiniCollage**: Added `reverse` direction capability.
+
+### Stale references fixed
+- **REQ-ED-9** (Nature & Activities): Replaced "Same alternating row layout ... as REQ-ED-8" with self-contained description of the multi-section alternating layout, since REQ-ED-8 no longer uses that pattern.
+- **REQ-ED-10** (Beaches): Same stale reference fix as REQ-ED-9.
+
+### Editorial key concepts updated
+- **Editorial density**: Added exception noting Food & Drink uses single unified section.
+
+---
+
 ## 2026-04-05 - Revision 76: Listing page inquiry section navy-to-cream gradient
 
 Apartment listing page inquiry CTA section replaced `section--alt` (flat stone background) with a vertical linear gradient from navy to cream. The collage bottom wave fill updated from stone to navy to seamlessly flow into the gradient's navy top. Creates a more dramatic visual transition from the exterior photo collage into the inquiry CTA.
