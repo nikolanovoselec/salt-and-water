@@ -296,6 +296,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
   - `@keyframes scroll-collage` from `translateX(0)` to `translateX(-50%)` with duplicated image track
   - Image height: 250px mobile, 350px desktop
   - 16px border-radius, `var(--space-md)` gap between images
+  - All collage/strip containers (homepage collage, apartments collage, gallery strips, editorial strips) use responsive horizontal padding `clamp(1.25rem, 4vw, 3rem)` so that rounded-corner images have breathing room from viewport edges
   - 35s loop duration, `linear infinite` timing
   - Pauses on hover (`:hover` sets `animation-play-state: paused`)
   - Reduced motion: animation disabled, fallback to static display with `overflow-x: auto`

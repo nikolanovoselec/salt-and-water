@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-05 - Add horizontal padding to all collage strips (505b26f)
+
+All collage and image strip containers (homepage collage, apartments listing collage, gallery strips, editorial strips in global CSS) gain responsive horizontal padding `clamp(1.25rem, 4vw, 3rem)`. This ensures 16px rounded-corner images have breathing room from viewport edges instead of touching the screen sides.
+
+### AC updated
+- **REQ-VD-15:** Added acceptance criterion documenting the responsive horizontal padding on all collage/strip containers.
+
+### No status changes
+- REQ-VD-15 remains Implemented (visual refinement only).
+
+---
+
 ## 2026-04-05 - Equalize border-radius to 16px (9d69bd1)
 
 All image container border-radius values normalized to a consistent 16px across the site. Previously mixed: apartment cards (12px), feature image desktop (24px), apt-meta/apt-amenities (12px), breath-card (22px). Collage, triptych, and guide card were already 16px.
