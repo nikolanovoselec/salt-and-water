@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-04-05 - Footer wave clearance on apartments listing and about pages (1e17bc9)
+
+Added `padding-bottom: calc(var(--space-section) + clamp(50px, 8vw, 100px))` to the last section on `/apartmani/` (listing page) and `/o-nama` (about page), matching the existing pattern on `/kontakt`, `/dolazak`, and homepage. Prevents the footer top-edge wave SVG from overlapping page content. Same CSS-level spacing fix previously classified as no spec impact (see 5e301cd below).
+
+### No AC updated
+No spec changes required. Footer wave clearance padding is an implementation-level CSS concern, not a new feature or behavior change. The footer wave (REQ-SF-6) and wave height (REQ-VD-9) are already fully documented.
+
+### No status changes
+All affected requirements remain Implemented.
+
 ## 2026-04-05 - CSS polish: wave gap fix, spacing, nav visited color (5e301cd)
 
 Six CSS bug fixes from feedback round 8. The only spec-relevant change: `.section--wave-in` margin-top increased from -1px to -2px to fully close a subpixel rendering gap between wave SVGs and adjacent sections. Remaining fixes (apartment detail spacing reduction, contact/dolazak footer wave clearance padding, mobile nav visited link color) are implementation-level CSS adjustments with no spec impact.
