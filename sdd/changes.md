@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-04-05 - Remove gradient-warm from homepage experience section
+
+Homepage experience triptych section (`index.astro`) switched from `.section.gradient-warm` to plain `.section`. The warm gradient is now unused on the homepage.
+
+### Requirements updated
+- **REQ-SF-5** (Why Pašman + Ždrelac Section): Experience triptych description updated — "Wrapped in warm gradient background section" replaced with "Plain cream section background (`.section`) — warm gradient background removed".
+- **REQ-VD-8** (Gradient Utility System): Warm gradient description updated — "for experience/editorial sections" changed to "for editorial sections (no longer used on the homepage experience triptych)".
+- **REQ-VD-9** (Wave Section Dividers): Updated stale reference from "warm gradient section" to "experience triptych section" in the removed-wave note, since the triptych no longer uses `.gradient-warm`.
+
+---
+
 ## 2026-04-05 - Gallery caption styling changed from italic to sans-serif normal
 
 MiniCollage caption overlay styling updated: font changed from italic (browser default serif/inherited) to explicit sans-serif (`var(--font-sans)`) with `font-weight: 400`, `font-style: normal`, and `letter-spacing: 0.02em`. Text opacity increased from 85% to 90%. Gradient background lightened from `rgba(0,0,0,0.5)` to `rgba(0,0,0,0.45)`.
