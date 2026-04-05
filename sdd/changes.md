@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-04-05 - Spec cleanup: remove stale zdrelac.astro reference from REQ-VD-9
+
+**REQ-VD-9** (Wave Section Dividers): Removed `zdrelac.astro` from the list of pages with custom hero markup. The Zdrelac page was deleted and merged into `vodic.astro` (which uses `HeroSimple`, not custom hero markup) in Revision 70. The reference was stale.
+
+---
+
 ## 2026-04-05 - Re-add showCaptions as photo overlay; remove triptych-to-CTA wave
 
 `showCaptions` prop re-added to `MiniCollage` with a different rendering approach. Previously (Revision 83), captions were rendered as text below each photo (outside the image frame). They are now rendered as an absolute-positioned overlay at the bottom of each photo — italic white text at 85% opacity over a bottom-up dark gradient (`rgba(0,0,0,0.5)` to transparent), `pointer-events: none`. The `.mini-collage__item` container gains `position: relative` to enable the overlay. The gallery page passes `showCaptions` to all strips so the 50 poetic Croatian captions are again visible to sighted visitors, while also serving as alt text.
