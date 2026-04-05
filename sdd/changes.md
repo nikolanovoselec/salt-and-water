@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-04-05 - Revision 83: MiniCollage showCaptions prop; gallery captions now visible
+
+MiniCollage component gains a `showCaptions` prop that renders each photo's alt text as a visible italic caption below the image. Gallery page enables this prop so the 50 poetic Croatian captions are now displayed as visible text, not just used as alt text.
+
+### Requirements updated
+- **REQ-VD-15** (Exterior Photo Collage / MiniCollage): Added `showCaptions` prop to acceptance criteria -- optional visible italic caption rendered below each photo, currently enabled only on the gallery page.
+- **REQ-SF-8** (Gallery Page): Clarified that poetic captions are rendered as visible text via `showCaptions` prop (previously spec only mentioned caption assignment, not visible rendering). Status updated accordingly.
+
+---
+
 ## 2026-04-05 - Revision 82: Gallery page rewritten as 139-photo scrolling collage strips
 
 Gallery page (`galerija`) completely rewritten from an 18-photo static masonry grid to 139 photos (124 original + 15 added) displayed as horizontally scrolling MiniCollage strips with alternating directions (14 strips: 13 of 10 photos + 1 of 9). Photos are deterministically shuffled per locale so each language sees a different arrangement. 50 poetic Croatian captions rotate across photos as alt text. HeroSimple now accepts an `intro` prop for introductory text below the title, first used on the gallery page.
