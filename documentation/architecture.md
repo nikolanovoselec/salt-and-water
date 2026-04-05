@@ -203,7 +203,7 @@ The entire visual language lives in `src/styles/global.css` as CSS custom proper
 | Colors (semantic) | `--color-text`, `--color-text-heading`, `--color-text-light`, `--color-text-muted`, `--color-bg`, `--color-bg-alt`, `--color-bg-dark`, `--color-accent`, `--color-border` |
 | Typography (scale) | `--font-size-xs` (11px) through `--font-size-5xl` (60px) plus `--font-size-display` (`clamp(3rem, 7vw, 6rem)`) |
 | Typography (faces) | `--font-serif` (DM Serif Display → Playfair Display → Georgia), `--font-sans` (Inter → system stack) |
-| Spacing | `--space-xs` through `--space-4xl`; `--space-section` (`clamp(5rem, 12vw, 10rem)`) for section vertical rhythm |
+| Spacing | `--space-xs` through `--space-4xl`; `--space-section` (`clamp(2.5rem, 6vw, 5rem)`) for section vertical rhythm |
 | Layout | `--max-width` (1280px), `--max-width-narrow` (720px), `--max-width-text` (60ch), `--nav-height` (80px) |
 | Motion | `--ease-out`, `--ease-in-out`, `--duration-fast` (0.15s), `--duration-normal` (0.4s), `--duration-slow` (0.8s) |
 | Radius | `--radius-sm` (2px), `--radius-md` (6px), `--radius-lg` (12px) |
@@ -219,6 +219,7 @@ The entire visual language lives in `src/styles/global.css` as CSS custom proper
 | `.text-lead` | Refined body copy — `--font-size-xl`, 1.65 line-height |
 | `.text-label` | Small-caps label above headings — `--font-size-xs`, wide tracking, muted color |
 | `.section` | Section padding via `--space-section` |
+| `.section--wave-in` | Applied to sections that have an incoming wave SVG at the top; adds extra top padding (`--space-section + clamp(50px, 8vw, 100px)`) and `margin-top: -1px` to prevent seam gaps; replaces per-section inline padding overrides |
 | `.section--alt` | Stone background (`--color-bg-alt`) |
 | `.section--dark` | Navy background with white headings |
 | `.container` | Centered max-width wrapper with fluid inline padding |

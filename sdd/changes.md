@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-04-05 - Unified wave section spacing via .section--wave-in class (86e237b)
+
+The `--space-section` CSS custom property was halved from `clamp(5rem, 12vw, 10rem)` to `clamp(2.5rem, 6vw, 5rem)`, tightening vertical rhythm across all sections. A new `.section--wave-in` CSS utility class was introduced to replace all per-section inline style overrides (`position: relative`, `padding-top: clamp(80px, 12vw, ...)`, `margin-top: -1px`) on sections that receive a wave SVG at their top edge. The class computes padding as `calc(var(--space-section) + clamp(50px, 8vw, 100px))`, combining standard section spacing with wave height. Applied to: homepage apartments section (dark), homepage sunset CTA section, Getting Here dark address section, and apartment listing CTA section (conditionally). Additionally, inline padding overrides on the homepage "Why Pasman" section and experience section were removed, and grid gaps on the homepage split-section and apartment detail page were changed from `--space-lg` to `--space-xl`.
+
+### Requirements updated
+- **REQ-VD-9** (Wave Section Dividers): Added `.section--wave-in` documentation as a new bullet describing the CSS utility class and its usage across pages. Updated homepage waves description to note that wave-receiving sections use `.section--wave-in` instead of inline styles. Updated editorial section waves to note `.section--wave-in` usage on the dolazak dark section.
+- **REQ-AP-2** (Apartment Listing Page): Replaced inline `clamp(80px, 12vw, 120px)` padding reference with `.section--wave-in` class for the conditional wave CTA section.
+- **REQ-ED-2** (Getting Here): Added `.section--wave-in` class note to the dark address section description.
+
+### Glossary updated
+- **section--wave-in**: New term documenting the CSS utility class for wave-receiving sections.
+
+### No status changes
+- REQ-VD-9, REQ-AP-2, REQ-ED-2 remain Implemented (refactor of inline styles to reusable CSS class).
+
+---
+
 ## 2026-04-05 - MiniCollage single-image fallback: edge-to-edge (c497e32)
 
 MiniCollage single-image fallback (`.mini-collage--single`) changed from rounded contained image to edge-to-edge full-width. Removed `border-radius: 16px` and `max-width: 700px` so a single image spans the full container width with no rounding, matching the visual weight of multi-image collage strips. Hover zoom (`scale(1.03)` transition) also removed from single-image fallback.
