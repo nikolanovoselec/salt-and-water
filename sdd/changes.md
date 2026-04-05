@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-04-05 - Centralize footer wave clearance with .section--footer-clear class (d26caba)
+
+New `.section--footer-clear` CSS utility class in `global.css` replaces all per-page inline `padding-bottom` overrides for footer wave clearance. Applied to the last content section on every page (13 pages total). Same `padding-bottom: calc(var(--space-section) + clamp(50px, 8vw, 100px))` value that was previously duplicated as inline styles. Follows the same pattern as `.section--wave-in` (top-edge wave clearance) but for the bottom edge.
+
+### AC updated
+- **REQ-VD-9** (Wave Section Dividers): Added `.section--footer-clear` bullet documenting the CSS utility class, its padding formula, its relationship to REQ-SF-6 (footer wave), and its universal application across all pages.
+
+### Glossary updated
+- **section--footer-clear**: New term documenting the CSS utility class for footer wave bottom-edge clearance.
+
+### No status changes
+All affected requirements remain Implemented.
+
+---
+
 ## 2026-04-05 - Footer wave clearance on apartments listing and about pages (1e17bc9)
 
 Added `padding-bottom: calc(var(--space-section) + clamp(50px, 8vw, 100px))` to the last section on `/apartmani/` (listing page) and `/o-nama` (about page), matching the existing pattern on `/kontakt`, `/dolazak`, and homepage. Prevents the footer top-edge wave SVG from overlapping page content. Same CSS-level spacing fix previously classified as no spec impact (see 5e301cd below).
