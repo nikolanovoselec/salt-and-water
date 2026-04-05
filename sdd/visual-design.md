@@ -285,7 +285,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Priority:** P1
 - **Dependencies:** REQ-VD-12
 - **Verification:** Audit all image URLs — no duplicates, no non-Croatian imagery
-- **Status:** Implemented — all pages use unique real island photos stored in R2 with UUID keys, served via `/api/img/{key}`; 139+ photos total (gallery page alone uses 139); zero Pexels URLs, zero stock photos, zero local `/photos/` paths remain; no non-Croatian imagery present
+- **Status:** Implemented — all pages use unique real island photos stored in R2 with UUID keys, served via `/api/img/{key}`; 138+ photos total (gallery page alone uses 138); zero Pexels URLs, zero stock photos, zero local `/photos/` paths remain; no non-Croatian imagery present
 
 ### REQ-VD-15: Exterior Photo Collage
 

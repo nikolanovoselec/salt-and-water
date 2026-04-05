@@ -113,7 +113,7 @@ UUIDs are managed in each page's `ogImage` prop in `src/pages/[locale]/`. The fa
 
 ### Gallery alt text
 
-Gallery items in `src/pages/[locale]/galerija.astro` use 50 rotating poetic Croatian captions (e.g. "more šuti, a govori sve", "lavanda i sol") assigned by rotating index (`i % captions.length`). Alt text is intentionally evocative rather than descriptive — the images are decorative in an auto-scrolling context and the captions reinforce the editorial voice. They are not localized (Croatian only). The gallery uses 139 distinct island photos shuffled deterministically per locale.
+Gallery items in `src/pages/[locale]/galerija.astro` use 50 rotating poetic Croatian captions (e.g. "more šuti, a govori sve", "lavanda i sol") assigned by rotating index (`i % captions.length`). Alt text is intentionally evocative rather than descriptive — the images are decorative in an auto-scrolling context and the captions reinforce the editorial voice. They are not localized (Croatian only). The gallery uses 138 distinct island photos shuffled deterministically per locale.
 
 ---
 
