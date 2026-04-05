@@ -103,11 +103,9 @@ const hasMultiple = images.length > 1;
     }
   }
 
-  /* Single image fallback */
+  /* Single image fallback — no radius, full width like collage strips */
   .mini-collage--single {
-    border-radius: 16px;
     overflow: hidden;
-    max-width: 700px;
   }
 
   .mini-collage--single img {
@@ -115,11 +113,6 @@ const hasMultiple = images.length > 1;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .mini-collage--single:hover img {
-    transform: scale(1.03);
   }
 
   @media (prefers-reduced-motion: reduce) {
