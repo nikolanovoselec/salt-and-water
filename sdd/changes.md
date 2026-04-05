@@ -1,12 +1,15 @@
 # Changelog
 
-## 2026-04-05 - Re-add showCaptions as photo overlay (not below-image)
+## 2026-04-05 - Re-add showCaptions as photo overlay; remove triptych-to-CTA wave
 
 `showCaptions` prop re-added to `MiniCollage` with a different rendering approach. Previously (Revision 83), captions were rendered as text below each photo (outside the image frame). They are now rendered as an absolute-positioned overlay at the bottom of each photo — italic white text at 85% opacity over a bottom-up dark gradient (`rgba(0,0,0,0.5)` to transparent), `pointer-events: none`. The `.mini-collage__item` container gains `position: relative` to enable the overlay. The gallery page passes `showCaptions` to all strips so the 50 poetic Croatian captions are again visible to sighted visitors, while also serving as alt text.
+
+The inline SVG wave divider between the experience triptych section and the sunset CTA section on the homepage was removed. The CTA section now transitions directly from the warm gradient section without a wave. The `position: relative` and extra `padding-top` on the CTA `<section>` were also removed.
 
 ### Requirements updated
 - **REQ-VD-15** (Exterior Photo Collage / MiniCollage): `showCaptions` prop re-added to acceptance criteria with overlay positioning details (absolute bottom, gradient background, pointer-events none).
 - **REQ-SF-8** (Gallery Page): Current implementation updated — captions now rendered as visible overlay text via `showCaptions` (not alt-text-only).
+- **REQ-VD-9** (Wave Section Dividers): Homepage waves reduced from 3 placements to 2. Removed placement (3) "cream-to-dark before sunset CTA section" — wave no longer exists in code.
 
 ### Glossary updated
 - **Poetic Captions**: Updated to reflect overlay rendering (italic white text over bottom-edge gradient).
