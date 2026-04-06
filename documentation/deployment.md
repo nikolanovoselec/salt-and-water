@@ -125,7 +125,7 @@ migrations/       # D1 SQL migration files (applied via wrangler)
 seed/
   seed.json       # Emdash CMS seed — 6 collections, ~80 entries, all 4 locales
   media/          # Stock media sourcing plan (README.md)
-public/           # Static assets (fonts, favicon; no photos)
+public/           # Static assets (fonts, logo.png, favicon PNGs, web manifest; no photos)
 wrangler.jsonc    # Cloudflare Worker configuration
 astro.config.mjs  # Astro build configuration
 ```
