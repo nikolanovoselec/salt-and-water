@@ -16,7 +16,7 @@ const ctaText = lowestPrice
 
 <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
   <a href="#inquiry" class="sticky-cta__link">
-    <span class="sticky-cta__price">{ctaText}</span>
+    {lowestPrice && <span class="sticky-cta__price">{ctaText}</span>}
     <span class="sticky-cta__action">{t(locale, "cta.checkAvailability")}</span>
   </a>
 </div>

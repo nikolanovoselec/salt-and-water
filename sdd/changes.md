@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-04-06 - Family origin story corrected — Črešnjevo (Zagorje), not the island (81992f5)
+
+Parents are from Črešnjevo in Zagorje, not born on Pašman island. They fell in love with the island decades ago and made it their second home. The About page and homepage apartments section have been rewritten in all 4 locales to reflect this true story. The parallel between green hills (Zagorje) and the sea (Ždrelac) — that they chose this place, just as tourists do — is the emotional core of the narrative.
+
+### Requirements updated
+- **REQ-ED-5** (About Your Hosts): Tone example corrected — family chose Pašman, they were not born there. "Our family has been on this island for generations" replaced with the accurate framing. CMS content (ec_about, 4 locales) and hardcoded homepage apartments fallback updated to match.
+- **REQ-SF-5** (Why Pasman + Zdrelac Section): Apartments preview body text updated — now uses personal family narrative (chose Pasman as second home) instead of generic comfort description. Heading DE register corrected: "Ihr Zuhause" to "Euer Zuhause" (REQ-I18N-6 continuation).
+- **REQ-I18N-6** (Cultural Content Adaptation): One more DE formal "Sie" holdout resolved — homepage apartments heading "Ihr Zuhause" changed to "Euer Zuhause". Remaining formal holdouts reduced from two to one (404.astro only).
+
+---
+
 ## 2026-04-05 - Deep translation polish: FAQ fallbacks + CMS editorial content (c53ef69)
 
 Commit c53ef69 polished all FAQ fallback strings (DE informal, EN conversational, SL native) and 27 D1 CMS entries across aktivnosti, hrana, dolazak in DE/EN/SL. Croatianisms removed, tone aligned per REQ-I18N-6.

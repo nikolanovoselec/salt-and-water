@@ -90,7 +90,7 @@ Content pages that sell the destination and build emotional connection — Getti
   - Standalone page (`/hr/o-nama`, `/de/ueber-uns`, `/sl/o-nas`, `/en/about-us`) AND condensed version on homepage
   - Photo(s) of the hosts (framed with Dalmatian arch clip-path mask)
   - Rich text story about their connection to Pašman, the property, the family
-  - Warm, personal tone — "Our family has been on this island for generations"
+  - Warm, personal tone — "We didn't grow up here; we chose Pašman, returned for decades, and slowly made it our second home." (Parents are from Črešnjevo, Zagorje — they chose the island, they were not born on it.)
   - CMS-managed per locale — each language can have different length/tone
   - Response time badge: "We usually respond within 2 hours"
   - WhatsApp link for direct contact
