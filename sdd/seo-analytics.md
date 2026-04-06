@@ -188,7 +188,7 @@ Schema.org structured data, Open Graph, multilingual sitemap, keyword strategy, 
 - **Priority:** P2
 - **Dependencies:** None
 - **Verification:** Verify theme-color changes browser chrome on Android. Verify iOS "Add to Home Screen" uses apple-touch-icon and short title. Verify manifest loads without errors in DevTools Application panel.
-- **Status:** Implemented — theme-color (light/dark), apple-touch-icon reference, manifest link, and apple-mobile-web-app-title in Base.astro head. Icon image files (apple-touch-icon.png, android-chrome PNGs) still need to be generated from favicon.svg and placed in public/.
+- **Status:** Implemented — theme-color (light/dark), apple-touch-icon reference, manifest link, and apple-mobile-web-app-title in Base.astro head. Icon image files (apple-touch-icon.png, android-chrome-192x192.png, android-chrome-512x512.png) generated from favicon.svg and present in public/ but not yet committed to the repository.
 
 ## Out of Scope
 

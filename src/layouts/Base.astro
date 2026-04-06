@@ -27,6 +27,7 @@ const metaDescription = description ?? t(lang, "meta.description");
 const siteOrigin = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, "");
 const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).toString();
 const hreflangLinks = buildHreflangLinks(Astro.url.pathname, siteOrigin);
+const socialImage = ogImage ?? `${siteOrigin}/api/img/aa0fd53c-5d96-4a78-a5b5-0f68b543515a`;
 ---
 
 <!doctype html>
@@ -47,7 +48,7 @@ const hreflangLinks = buildHreflangLinks(Astro.url.pathname, siteOrigin);
     <meta property="og:description" content={metaDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImage ?? `${siteOrigin}/api/img/aa0fd53c-5d96-4a78-a5b5-0f68b543515a`} />
+    <meta property="og:image" content={socialImage} />
     <meta property="og:site_name" content="Apartmani Novoselec" />
     <meta property="og:locale" content={lang === "hr" ? "hr_HR" : lang === "de" ? "de_CH" : lang === "sl" ? "sl_SI" : "en_US"} />
 
@@ -55,7 +56,7 @@ const hreflangLinks = buildHreflangLinks(Astro.url.pathname, siteOrigin);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={metaDescription} />
-    <meta name="twitter:image" content={ogImage ?? `${siteOrigin}/api/img/aa0fd53c-5d96-4a78-a5b5-0f68b543515a`} />
+    <meta name="twitter:image" content={socialImage} />
 
     {/* Theme color */}
     <meta name="theme-color" content="#F8F5EF" media="(prefers-color-scheme: light)" />

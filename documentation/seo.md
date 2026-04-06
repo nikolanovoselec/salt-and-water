@@ -144,12 +144,12 @@ Two `theme-color` meta tags are emitted in every `<head>` — one for each color
 
 | Media query | Value | Usage |
 |---|---|---|
-| `(prefers-color-scheme: light)` | `#F8F5EF` (cream) | Browser chrome tint on mobile, PWA splash |
+| `(prefers-color-scheme: light)` | `#F8F5EF` (cream) | Browser chrome tint on mobile (address bar, tab strip) |
 | `(prefers-color-scheme: dark)` | `#0A1F33` (navy) | Same, dark mode |
 
 ### Web App Manifest
 
-`/site.webmanifest` (static file at `public/site.webmanifest`) enables "Add to Home Screen" on Android and provides metadata for PWA-aware browsers:
+`/site.webmanifest` (static file at `public/site.webmanifest`) enables "Add to Home Screen" on Android and provides home-screen metadata for browsers that support the Web App Manifest spec. This is not a PWA — there is no service worker, offline support, or push notifications.
 
 | Field | Value |
 |---|---|

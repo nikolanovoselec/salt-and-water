@@ -12,8 +12,14 @@
 /api/img/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
-# Favicon and static images
+# Favicon and app icons
 /favicon*
+  Cache-Control: public, max-age=2592000
+/apple-touch-icon*
+  Cache-Control: public, max-age=2592000
+/android-chrome*
+  Cache-Control: public, max-age=2592000
+/site.webmanifest
   Cache-Control: public, max-age=2592000
 
 # HTML pages — short cache with stale-while-revalidate
