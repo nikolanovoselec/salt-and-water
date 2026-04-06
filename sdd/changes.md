@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-06 - Fix inquiry pipeline order in Key Concepts (post d70feaf)
+
+Commit d70feaf corrected the JSDoc comment in `inquiry.ts` to match the actual code execution order. The sdd Key Concepts in booking.md had the same stale order.
+
+### Other updates
+- **booking.md Key Concepts**: Inquiry pipeline description corrected from "Form submission -> Turnstile validation -> persist to D1 -> ..." to "Form submission -> Zod validation -> honeypot check -> Turnstile verification -> input sanitization -> persist to D1 -> ...". Cheap local checks (Zod, honeypot) run before the expensive Turnstile network call.
+
+---
+
 ## 2026-04-06 - Sync spec with docs audit (commit ec25953): remove Image Resizing fiction, dead seed claims, guest auto-reply, wrong key format, pagination myth
 
 Cross-referencing the 25 documentation findings fixed in ec25953 against the SDD. Five categories of stale claims identified and corrected.

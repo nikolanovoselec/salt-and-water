@@ -32,7 +32,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 - **Priority:** P0
 - **Dependencies:** None
 - **Verification:** Full admin walkthrough on phone
-- **Status:** Deprecated - all sections always visible
+- **Status:** Implemented — Emdash as Astro integration with D1 and R2. Admin panel at `/_emdash/admin/` with Cloudflare Access auth. Content loaded via locale-aware abstraction layer. All editorial collections seeded in HR (partial DE/SL/EN). Site-settings, section toggles, and locale activation not yet configurable from admin (all hardcoded).
 
 ### REQ-CMS-2: Media Library (Mobile-First)
 
@@ -57,7 +57,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 - **Priority:** P0
 - **Dependencies:** REQ-CMS-1
 - **Verification:** Upload 10 photos from iPhone including HEIC, verify display in all contexts
-- **Status:** Deprecated - all sections always visible
+- **Status:** Partial — Emdash media library functional with R2 storage. Presigned upload URLs implemented. Images served via `/api/img/{key}` Worker route (originals, no transformation). Missing: blurhash computation, focal point, gallery reordering, resolution/aspect-ratio warnings.
 
 ### REQ-CMS-3: Magic Link Authentication
 

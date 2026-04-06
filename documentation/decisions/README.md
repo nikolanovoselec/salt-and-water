@@ -32,7 +32,7 @@ Decisions made during implementation with rationale.
 
 **Decision:** Serve photos raw from R2 via `GET /api/img/:key` with `Cache-Control: immutable`. No Worker-side format conversion, no Cloudflare Image Resizing (`/cdn-cgi/image/`), no srcset variants.
 
-Workers have 128MB memory and strict CPU limits — HEIC decoding and AVIF encoding would cause OOM and timeout. Cloudflare Image Resizing requires a paid add-on and per-transform billing, which is disproportionate for a two-apartment site with a modest photo set. Raw R2 serving is sufficient: photos are already optimized at upload time (JPEG, ≤15MB), cached immutably at the edge for 1 year, and served at full resolution to all clients. The `buildMediaUrl` and `buildSrcset` helpers in `src/lib/media.ts` are scaffolding for future responsive image work but are not currently called.
+Workers have 128MB memory and strict CPU limits — HEIC decoding and AVIF encoding would cause OOM and timeout. Cloudflare Image Resizing requires a paid add-on and per-transform billing, which is disproportionate for a two-apartment site with a modest photo set. Raw R2 serving is sufficient: photos are already optimized at upload time (JPEG, ≤15MB), cached immutably at the edge for 1 year, and served at full resolution to all clients. The `buildMediaUrl` and `buildSrcset` helpers that were scaffolded in `src/lib/media.ts` were removed (commit `b7e80b0`) as dead code — Image Resizing was never implemented.
 
 ### AD2: Magic Link auth via Resend instead of Google OAuth
 
@@ -92,7 +92,7 @@ Zod validates shape and types. Sanitization addresses content safety concerns or
 
 **Decision:** All photos (hero carousel, page heroes, gallery, apartment interiors, editorial content rows) are stored in the `apartmani-media` R2 bucket and served via `GET /api/img/:uuid`. The `public/photos/` directory has been deleted. No photos are committed to the repository.
 
-**Rationale:** R2 serving was the intended end state from the start. The earlier blocker — 404s on `.jpg`-suffixed keys via the old `/media/[...key]` catch-all — was resolved by switching to extension-free UUID keys and moving the serving route to `src/pages/api/img/[key].ts`. The new route uses `locals.emdash.storage.download(key)` with a direct `env.MEDIA` fallback, applies `Cache-Control: public, max-age=31536000, immutable`, and validates keys against path traversal. Photo swaps and new uploads require no redeploy — only a CMS field update.
+**Rationale:** R2 serving was the intended end state from the start. The earlier blocker — 404s on `.jpg`-suffixed keys via the old `/media/[...key]` catch-all — was resolved by adopting `UUID.ext` keys (extension included, matching Emdash's native upload format) and moving the serving route to `src/pages/api/img/[key].ts`. The new route uses `locals.emdash.storage.download(key)` with a direct `env.MEDIA` fallback, applies `Cache-Control: public, max-age=31536000, immutable`, and validates keys against path traversal. Photo swaps and new uploads require no redeploy — only a CMS field update.
 
 ### AD11: Scroll animations gated on `.reveal-ready` JS class
 
