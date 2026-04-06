@@ -131,6 +131,8 @@ The admin panel uses Cloudflare Access for CMS authentication, with legacy Magic
 
 Season-based pricing supports cross-season stays. Tourist tax is applied per taxable person per night (adults + children 12–17; children under 12 exempt). Cleaning fee is flat. See `src/lib/pricing.ts` for `computeStayPrice()`.
 
+**Current limitations:** The booking inquiry handler (`src/pages/api/inquiry.ts`) passes `cleaningFee: 0` and `touristTaxRate: 1.35` as hardcoded values (marked `TODO: get from apartment/site settings`). Price estimates produced by the `type: "booking"` branch therefore do not reflect the actual cleaning fee and may not reflect the configured tourist tax rate until these are wired to their data sources (apartment settings and `site-settings` CMS collection respectively). The `seasons` table also has no migration yet — see [Configuration — D1 Migrations](configuration.md#d1-migrations).
+
 ## Availability Model
 
 Bookings are stored as half-open intervals `[checkIn, checkOut)`. The checkout day is available for new check-ins. Overlap detection uses the condition: `proposed.checkIn < block.checkOut AND proposed.checkOut > block.checkIn`. The `availability_blocks` table stores blocks by apartment ID with `source` tracking (`manual | ics | inquiry`). The calendar API at `GET /api/apartments/:id/availability` expands blocks into individual booked dates for display.
