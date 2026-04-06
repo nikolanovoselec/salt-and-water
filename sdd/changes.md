@@ -1,5 +1,43 @@
 # Changelog
 
+## 2026-04-06 - Deep verification sweep: fix remaining stale claims across all domains
+
+Comprehensive verification of every SDD domain file against actual codebase. Fixed six categories of stale or inaccurate claims.
+
+### Requirements updated
+- **REQ-CMS-1** (Emdash Integration): Status changed from "Deprecated - all sections always visible" to "Implemented" with accurate description of what works and what's missing. The CMS IS the core of the site — it was never deprecated.
+- **REQ-CMS-2** (Media Library): Status changed from "Deprecated - all sections always visible" to "Partial" — R2 storage and presigned uploads work, but blurhash/focal point/gallery reorder are missing.
+- **REQ-CMS-4** (Mobile Admin UX): Status changed from "Deprecated - all sections always visible" to "Planned" — Emdash admin is usable on phone but no custom task-based dashboard.
+- **REQ-CMS-7** (Content Safeguards): Status changed from "Deprecated - all sections always visible" to "Planned" — no safeguards are implemented.
+- **REQ-BK-2** (Inquiry Server Pipeline): Fixed email outbox pattern description — no Cron Trigger exists for retries; code stores `retry` status but nothing processes it. Changed from "Cron Trigger (every 5 minutes) processes retries" to "no Cron Trigger exists to process retries — retry is aspirational." Fixed owner email description — removed "one-tap Confirm & Block Dates link" claim (actual email is plain HTML notification with no admin deep links).
+- **REQ-ED-4** (Local Guide): Status fixed — `ec_vodic` changed to `vodic` (actual CMS collection slug has no `ec_` prefix).
+- **REQ-ED-5** (About Your Hosts): Status fixed — `ec_about` changed to `about` (actual CMS collection slug).
+- **REQ-ED-6** (About Zdrelac): Fixed `ec_vodic` reference to `vodic`.
+
+### Constraints updated
+- **CON-SEC**: Turnstile mode changed from "invisible mode" to "managed mode, always visible" — matching the actual `data-appearance="always"` attribute in kontakt.astro.
+
+### Validation results (no changes needed)
+- **CON-STACK**: Already fixed in prior session (Image Resizing removed, UUID.ext format, owner-only email).
+- **CON-PERF**: Already fixed (no Image Resizing, no AVIF/WebP claims).
+- **CON-MEDIA**: Already fixed (served as-is, no EXIF stripping).
+- **Glossary**: Image Resizing marked as not used. HEIC correctly says "served as-is." Resend correctly says "no guest auto-reply." Magic Link correctly deprecated.
+- **REQ-PERF-1**: Already fixed (serves originals, UUID.ext keys, no Image Resizing).
+- **REQ-BK-8**: Already correct (managed mode Turnstile, owner notification only).
+- **REQ-SEO-1 through REQ-SEO-10**: All current and accurate.
+- All other domain files verified against code — no remaining stale claims found.
+
+### Stale content confirmed absent
+- No "Cloudflare Image Resizing" claims remain in active acceptance criteria
+- No "guest auto-reply" claims remain in active spec (only noted as "not implemented")
+- No dead collections (guide, pages, amenities) referenced as active
+- No seed endpoint referenced as active
+- No cursor-based pagination claims remain (fixed to "no pagination")
+- UUID.ext key format consistently used across all domain files
+- buildVacationRentalSchema not referenced in spec (correctly excluded per "no HOW" rule)
+
+---
+
 ## 2026-04-06 - Fix inquiry pipeline order in Key Concepts (post d70feaf)
 
 Commit d70feaf corrected the JSDoc comment in `inquiry.ts` to match the actual code execution order. The sdd Key Concepts in booking.md had the same stale order.

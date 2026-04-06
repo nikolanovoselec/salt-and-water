@@ -141,7 +141,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 - **Priority:** P0
 - **Dependencies:** REQ-CMS-1
 - **Verification:** Full task flow on iPhone: upload photos, edit text, update prices, mark dates, confirm inquiry, toggle section
-- **Status:** Deprecated - all sections always visible
+- **Status:** Planned — Emdash admin panel is usable on phone (responsive) but no task-based dashboard. Owner edits content via Emdash's default collection UI, not the custom task-based flows described in AC.
 
 ### REQ-CMS-5: Section Visibility Toggles
 
@@ -211,7 +211,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-I18N-4
 - **Verification:** Test each safeguard scenario on phone
-- **Status:** Deprecated - all sections always visible
+- **Status:** Planned — none of the content safeguards (validation, locale indicators, slug redirects, autosave, duplicate-from-Croatian) are implemented
 
 ### REQ-CMS-8: Error Pages
 
