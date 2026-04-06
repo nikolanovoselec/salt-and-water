@@ -64,7 +64,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Logo, language switcher, and nav links always visible
   - "Inquire" CTA button always visible in nav, links to `/{locale}/kontakt` (REQ-BK-8)
   - Hamburger menu on mobile with fullscreen overlay, including inline language picker (locale links with active state highlight)
-  - **Mobile menu brand icon:** Sailboat logo at 48px centered above nav links (white inverted via CSS filter), providing brand identity at the top of the fullscreen menu overlay
+  - Mobile menu contains no logo — nav links, language picker, and CTA button only
   - Hamburger button: `.nav__hamburger` class with CSS styles (display flex, flex-direction column, gap 6px, no background/border, cursor pointer, padding 12px, z-index 101, position relative), three `<span>` elements (block, 24x2px, currentColor background, 1px border-radius, transform/opacity transitions). Selected via `#hamburger-btn` ID. CSS transform morph to X on `.is-open` (translateY + rotate).
   - **Nav items (current order):** Apartments, Gallery (REQ-SF-8), Getting Here, Local Guide, About. ~~Ždrelac~~ removed (page deprecated, REQ-ED-6). "Why Pašman" and FAQ removed from primary navigation (pages still exist, accessible via footer or direct URL).
   - **Admin link:** Footer includes a link to the Emdash admin panel (`/_emdash/admin/`) labeled with the `nav.admin` translation key. No authentication gate on the link itself (Emdash handles auth). ~~Previously in navigation header~~ — moved to footer only.
@@ -121,7 +121,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Intent:** Secondary navigation, legal links, property identity
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - **Brand identity:** Sailboat logo icon (36px, white inverted via CSS `brightness(0) invert(1)` filter) displayed left of "Apartmani Novoselec" text in the footer brand section, using flexbox alignment
+  - **Brand identity:** "Apartmani Novoselec" text rendered as serif heading in the footer brand section. No logo image in footer — logo appears only in the top nav header.
   - Physical address displayed below tagline (muted, small text)
   - Quick links to all visible sections
   - Legal links: privacy policy, house rules, inquiry/contact page, admin panel
@@ -144,7 +144,7 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - After scrolling past hero, a bottom bar slides up with two text spans: primary label (`cta.checkAvailability`, e.g., "Check availability") and secondary label (`homepage.cta.title`, e.g., "Get in touch"). No price is displayed.
   - Tapping navigates to the contact page (`/{locale}/kontakt`, REQ-BK-8)
   - Thin bar (~56px), does not obscure content
-  - Visibility controlled by hero sentinel only: hidden while hero is in viewport, visible after scrolling past hero. No secondary observer (inquiry section observer was removed)
+  - Visibility controlled by two sentinels: shows when `.hero-sentinel` leaves the viewport (hero scrolled past); hides again when `.sticky-cta-end` sentinel scrolls out of view above the fold. On the homepage, `.sticky-cta-end` is placed immediately after the triptych section, so the CTA disappears once the user scrolls past the triptych. On non-homepage pages where no `.sticky-cta-end` exists, the bar remains visible for the full scroll past the hero.
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P0
 - **Dependencies:** REQ-BK-8

@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-04-06 - Spec review: sticky CTA triptych sentinel + logo scope reduced (37fa731)
+
+Commit 37fa731 made two behavior changes: (1) `StickyMobileCTA` now hides when the user scrolls past the experience triptych section on the homepage, via a new `.sticky-cta-end` sentinel div placed immediately after the triptych. (2) The sailboat logo was removed from the mobile menu and footer — it now appears only in the top nav header.
+
+### Spec changes
+
+- **REQ-SF-3** (Navigation): Removed "Mobile menu brand icon" acceptance criterion. Replaced with: "Mobile menu contains no logo — nav links, language picker, and CTA button only."
+- **REQ-SF-6** (Footer): Updated brand identity criterion — sailboat logo removed from footer. Footer brand section now shows text-only "Apartmani Novoselec" heading. No logo image.
+- **REQ-SF-7** (Sticky Mobile CTA): Updated visibility criterion from single hero-sentinel observer to dual-sentinel model. Added `.sticky-cta-end` sentinel behavior: CTA hides when user scrolls past triptych on homepage; stays visible on all other pages (no `.sticky-cta-end` present).
+- **Sailboat Logo** (Glossary): Updated placement description — header only (28px), not footer (36px) or mobile menu (48px).
+
 ## 2026-04-06 - Spec review: logo optimized, no spec changes needed (9556fdc)
 
 Commit 9556fdc optimized `logo.png` from 135KB to 13KB, moved the mobile menu logo outside the `<nav>` element (now a sibling, still visually above nav links), added `loading="lazy"` to footer and mobile menu logo images, and added a 30-day cache header for `/logo.png`.
