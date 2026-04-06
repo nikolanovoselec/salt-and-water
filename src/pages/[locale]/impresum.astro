@@ -1,0 +1,47 @@
+---
+import Page from "~/layouts/Page.astro";
+import HeroSimple from "~/components/ui/HeroSimple.astro";
+import { isValidLocale, type Locale } from "~/i18n/config";
+import { getLocalizedCollection } from "~/lib/content";
+
+const { locale } = Astro.params;
+if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
+const typedLocale = locale as Locale;
+
+const pages = await getLocalizedCollection("editorial", typedLocale);
+const page = pages.find((p) => p.data.page_key === "impressum");
+
+const fallback: Record<Locale, { title: string; body: string }> = {
+  hr: { title: "Impresum", body: "Operator (Betreiber): Apartmani Novoselec\nAdresa: Ždrelac, otok Pašman, Hrvatska\nKontakt: hello@novoselec.ch\n\nRazvoj web stranice: Gray Matter GmbH (graymatter.ch)\n\nZasluge za fotografije: Dio fotografija na ovoj web stranici snimili su Sara & Marco s Places of Juma (placesofjuma.com). Njihove prekrasne fotografije na poseban način hvataju svjetlo, boje i mir otoka Pašmana — hvala im na tome.\n\nOdricanje od odgovornosti za vanjske poveznice: Ova web stranica sadrži poveznice na vanjske web stranice trećih strana. Nemamo utjecaj na njihov sadržaj te za taj sadržaj ne preuzimamo nikakvu odgovornost. Za sadržaj povezanih stranica uvijek je odgovoran odgovarajući ponuđač ili operator tih stranica.\n\nAutorska prava: Sadržaji i djela objavljeni na ovoj web stranici podliježu autorskom pravu. Svako umnožavanje, obrada, distribucija ili bilo kakvo korištenje izvan granica autorskog prava zahtijeva prethodnu pisanu suglasnost nositelja prava. Preuzimanja i kopije dozvoljene su samo za privatnu, nekomercijalnu upotrebu." },
+  de: { title: "Impressum", body: "Betreiber: Apartmani Novoselec\nAdresse: Ždrelac, Insel Pašman, Kroatien\nKontakt: hello@novoselec.ch\n\nWebentwicklung: Gray Matter GmbH (graymatter.ch)\n\nFotohinweise: Einige Fotos auf dieser Website stammen von Sara & Marco von Places of Juma (placesofjuma.com). Ihre Bilder fangen die Stimmung der Insel Pašman mit viel Gespür für Licht, Farben und Details ein — herzlichen Dank dafür.\n\nHaftungsausschluss für externe Links: Diese Website enthält Links zu externen Websites Dritter. Auf deren Inhalte haben wir keinen Einfluss; für diese fremden Inhalte übernehmen wir keine Gewähr. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.\n\nUrheberrecht: Die Inhalte und Werke auf dieser Website unterliegen dem Urheberrecht. Jede Vervielfältigung, Bearbeitung, Verbreitung oder sonstige Verwertung ausserhalb der Grenzen des Urheberrechts bedarf der vorherigen schriftlichen Zustimmung des jeweiligen Rechteinhabers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet." },
+  sl: { title: "Impresum", body: "Upravljavec: Apartmani Novoselec\nNaslov: Ždrelac, otok Pašman, Hrvaška\nKontakt: hello@novoselec.ch\n\nRazvoj spletne strani: Gray Matter GmbH (graymatter.ch)\n\nAvtorske pravice za fotografije: Nekatere fotografije na tej spletni strani sta posnela Sara & Marco iz Places of Juma (placesofjuma.com). Njuna fotografija iskreno in lepo ujame vzdušje otoka Pašman — svetlobo, barve in mir — hvala za to.\n\nIzjava o odgovornosti za zunanje povezave: Ta spletna stran vsebuje povezave do zunanjih spletnih strani tretjih oseb. Na vsebino teh strani nimamo vpliva, zato zanjo ne prevzemamo odgovornosti. Za vsebino povezanih strani je vedno odgovoren posamezni ponudnik oziroma upravljavec teh strani.\n\nAvtorske pravice: Vsebine in dela, objavljena na tej spletni strani, so varovana z avtorskim pravom. Vsako razmnoževanje, obdelava, razširjanje ali druga uporaba izven okvirov avtorskega prava je dovoljena le s predhodnim pisnim soglasjem imetnika pravic. Prenosi in kopije so dovoljeni samo za zasebno, nekomercialno uporabo." },
+  en: { title: "Legal Notice", body: "Operator: Apartmani Novoselec\nAddress: Ždrelac, Island of Pašman, Croatia\nContact: hello@novoselec.ch\n\nWebsite development: Gray Matter GmbH (graymatter.ch)\n\nPhoto credits: Some photos on this website are by Sara & Marco from Places of Juma (placesofjuma.com). Their beautiful photography captures Pašman's calm, light and character in a way that feels true to the island — thank you for sharing that.\n\nDisclaimer for external links: This website contains links to external third-party websites. We have no influence over the content of those websites and therefore accept no liability for such external content. The respective provider or operator of the linked pages is always responsible for their content.\n\nCopyright: All content and works published on this website are subject to copyright. Any reproduction, editing, distribution or other use beyond the limits of copyright law requires the prior written consent of the respective rights holder. Downloads and copies are permitted for private, non-commercial use only." },
+};
+
+const title = (page?.data.title as string) ?? fallback[typedLocale].title;
+const body = (page?.data.body as string) ?? fallback[typedLocale].body;
+---
+
+<Page title={title} locale={typedLocale}>
+  <HeroSimple title={title} image="/api/img/c4b47191-7259-4d17-96f6-53e50f918346" />
+
+  <section class="section">
+    <div class="container legal-content">
+      {body.split("\n\n").map((paragraph) => (
+        <p set:html={paragraph.replace(/\n/g, "<br />")} />
+      ))}
+    </div>
+  </section>
+</Page>
+
+<style>
+  .legal-content {
+    max-width: 700px;
+    margin-inline: auto;
+  }
+
+  .legal-content p {
+    margin-bottom: var(--space-lg);
+    line-height: 1.7;
+  }
+</style>
