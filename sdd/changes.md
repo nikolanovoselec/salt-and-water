@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-06 - Swiss German ss normalization extended to seed data (9dbd965)
+
+Commit 9dbd965 replaced remaining `ß` with `ss` in seed content files (`apartments.json`, `testimonials.json`). Three German strings affected: Tramuntana shortDescription, valueProp, and one testimonial quote. Completes the Swiss German orthography normalization started in 63ce6b7 (which covered translations and `.astro` fallbacks).
+
+### Requirements updated
+- **REQ-I18N-6** (Cultural Content Adaptation): Status clarified — `ss` normalization now explicitly covers seed data alongside translations and `.astro` fallbacks.
+
+---
+
 ## 2026-04-06 - Footer wave clearance added to about page (ee1f014)
 
 Commit ee1f014 added `section--footer-clear` to the about page (`o-nama.astro`). The about page has a single content section between the hero and footer, making it vulnerable to footer wave overlap on the host story text.
