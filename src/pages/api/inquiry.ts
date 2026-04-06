@@ -16,9 +16,9 @@ function escapeHtml(s: string): string {
 /**
  * POST /api/inquiry
  * Full inquiry server pipeline:
- * 1. Turnstile verify
+ * 1. Zod validate
  * 2. Honeypot check
- * 3. Zod validate
+ * 3. Turnstile verify
  * 4. Availability revalidate (bookings only)
  * 5. D1 persist
  * 6. Resend emails (outbox pattern)
