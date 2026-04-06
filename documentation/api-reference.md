@@ -62,6 +62,7 @@ All R2 keys are UUID format (e.g., `aa0fd53c-5d96-4a78-a5b5-0f68b543515a.jpg`), 
 |---|---|
 | `400` | Empty key, path traversal (`..`), or leading slash |
 | `404` | Object not found in R2 |
+| `500` | R2 runtime error during direct bucket access |
 | `503` | R2 bucket not configured |
 
 **Implementation:** `src/pages/api/img/[key].ts`. Tries `locals.emdash.storage.download(key)` first; falls back to `env.MEDIA` bucket access.
@@ -329,9 +330,11 @@ Confirms a booking inquiry and atomically blocks the dates in `availability_bloc
 |---|---|
 | `400` | Missing `:id` parameter |
 | `400` | Inquiry is not a booking type, or is missing apartment/date fields |
+| `401` | Missing or invalid `auth_token` cookie |
 | `404` | Inquiry not found |
 | `409` | Inquiry is already confirmed |
 | `409` | Date conflict — returns `{ "error": "date_conflict", "message": "These dates overlap with an existing booking" }` |
+| `500` | `JWT_SECRET` not configured |
 
 **Notes:**
 
