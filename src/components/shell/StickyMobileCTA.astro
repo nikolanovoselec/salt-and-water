@@ -11,8 +11,8 @@ const { locale } = Astro.props;
 
 <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
   <a href={`/${locale}/kontakt`} class="sticky-cta__link">
-    <span class="sticky-cta__price">{t(locale, "cta.checkAvailability")}</span>
-    <span class="sticky-cta__action">{t(locale, "homepage.cta.title")}</span>
+    <span class="sticky-cta__primary">{t(locale, "cta.checkAvailability")}</span>
+    <span class="sticky-cta__secondary">{t(locale, "homepage.cta.title")}</span>
   </a>
 </div>
 
@@ -43,13 +43,13 @@ const { locale } = Astro.props;
     color: var(--color-navy);
   }
 
-  .sticky-cta__price {
-    font-family: var(--font-serif);
-    font-size: var(--font-size-lg);
-    font-weight: 400;
+  .sticky-cta__primary {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
   }
 
-  .sticky-cta__action {
+  .sticky-cta__secondary {
     font-size: var(--font-size-sm);
     font-weight: 600;
     text-transform: uppercase;

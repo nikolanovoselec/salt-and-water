@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-06 - Sticky CTA: price removed, replaced with two text labels (19bc983)
+
+Commit 19bc983 removed the price display from `StickyMobileCTA`. The `cta.fromPrice` interpolation and the hardcoded `priceText` variable were deleted. The two spans now render `cta.checkAvailability` (primary) and `homepage.cta.title` (secondary) — both purely text labels with no price.
+
+### Requirements updated
+- **REQ-SF-7** (Sticky Mobile CTA): AC rewritten — price span removed entirely. Bar now shows two text labels: `cta.checkAvailability` (e.g., "Check availability") as primary and `homepage.cta.title` (e.g., "Get in touch") as secondary. The `cta.fromPrice` translation key is no longer used by this component.
+
+---
+
 ## 2026-04-06 - Spec validation: fix stale MiniCollage speed claim (49c03ec)
 
 Post-commit spec review against code found one inaccurate acceptance criterion.
