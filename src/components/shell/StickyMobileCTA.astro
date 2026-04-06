@@ -69,39 +69,17 @@ const priceText = t(locale, "cta.fromPrice", { price: "100" });
 <script>
   const stickyCta = document.getElementById("sticky-cta");
   const heroSentinel = document.querySelector(".hero-sentinel");
-  const inquirySection = document.getElementById("inquiry");
 
   if (stickyCta && heroSentinel) {
-    let heroVisible = true;
-    let inquiryVisible = false;
-
     const heroObserver = new IntersectionObserver(
       ([entry]) => {
-        heroVisible = entry.isIntersecting;
-        updateVisibility();
+        const shouldShow = !entry.isIntersecting;
+        stickyCta.classList.toggle("is-visible", shouldShow);
+        stickyCta.setAttribute("aria-hidden", String(!shouldShow));
       },
       { threshold: 0 }
     );
 
-    const inquiryObserver = inquirySection
-      ? new IntersectionObserver(
-          ([entry]) => {
-            inquiryVisible = entry.isIntersecting;
-            updateVisibility();
-          },
-          { threshold: 0.1 }
-        )
-      : null;
-
-    function updateVisibility() {
-      const shouldShow = !heroVisible && !inquiryVisible;
-      stickyCta?.classList.toggle("is-visible", shouldShow);
-      stickyCta?.setAttribute("aria-hidden", String(!shouldShow));
-    }
-
     heroObserver.observe(heroSentinel);
-    if (inquirySection && inquiryObserver) {
-      inquiryObserver.observe(inquirySection);
-    }
   }
 </script>

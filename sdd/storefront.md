@@ -139,12 +139,11 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Intent:** Keep inquiry conversion path always accessible on mobile
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - After scrolling past hero, a bottom bar slides up with two spans: price label ("From €X/night") + action text ("Check Availability")
-  - Tapping scrolls to the `#inquiry` section on the current page (homepage or apartment listing)
+  - After scrolling past hero, a bottom bar slides up with two spans: price label ("From €100/night") + action text ("Check Availability")
+  - Price is a static placeholder (€100/night), always displayed — not derived from seasonal pricing data
+  - Tapping navigates to the contact page (`/{locale}/kontakt`, REQ-BK-8)
   - Thin bar (~56px), does not obscure content
   - Disappears when inquiry form is in viewport
-  - Price pulled from lowest active seasonal rate
-  - **Failure mode — no pricing available:** If no lowestPrice is provided, the price span is not rendered at all (conditionally omitted from DOM). Only the action text ("Check Availability") appears. The CTA still links to the inquiry section.
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P0
 - **Dependencies:** REQ-BK-8

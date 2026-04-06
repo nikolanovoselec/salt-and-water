@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-06 - Sticky CTA hardcoded price + kontakt link (b81b047)
+
+Commit b81b047 simplified the sticky mobile CTA: price is now a static €100/night (always displayed), and the link target changed from `#inquiry` anchor to `/{locale}/kontakt` (contact page). The `lowestPrice` prop was removed from both `StickyMobileCTA` and `Page` components — no dynamic pricing is passed through.
+
+### Requirements updated
+- **REQ-SF-7** (Sticky Mobile CTA): Three AC changes. (1) Price is now a static placeholder (€100/night), always rendered — removed "Price pulled from lowest active seasonal rate" criterion. (2) Link target changed from `#inquiry` anchor back to `/{locale}/kontakt` (REQ-BK-8), aligning with the existing REQ-BK-8 criterion that all site CTAs link to the contact page. (3) Removed failure-mode criterion (conditional DOM omission when no lowestPrice) — the price span is now unconditional.
+
+---
+
 ## 2026-04-06 - Sticky CTA conditional price rendering + link target correction (0dd5631)
 
 Commit 0dd5631 fixed duplicated "Check Availability" text in the sticky mobile CTA when no price was available. The price span is now conditionally rendered only when lowestPrice is provided, preventing the doubled text.
