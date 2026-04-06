@@ -47,9 +47,9 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Priority:** P0
 - **Dependencies:** REQ-AP-1, REQ-AP-4, REQ-AP-5, REQ-BK-6
 - **Verification:** Submit test inquiry, verify email delivery, test Turnstile, test min stay enforcement, test cross-season pricing, test capacity rejection
-- **Status:** Deprecated - email-based workflow sufficient
+- **Status:** Planned
 
-> **Note:** The interim contact page (REQ-BK-8) currently serves as the primary inquiry entry point. REQ-BK-1's full two-tab widget with date picker, pricing, and availability will replace it.
+> **Note:** The interim contact page (REQ-BK-8) currently serves as the primary inquiry entry point. REQ-BK-1's full two-tab widget with date picker, pricing, and availability will replace it. The Zod schema and server handler in REQ-BK-2 already accept `type: "booking"` submissions; only the UI surface is missing.
 
 ### REQ-BK-2: Inquiry Server Pipeline
 

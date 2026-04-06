@@ -87,7 +87,7 @@ Apartment listings, detail pages, photo galleries, amenities, seasonal pricing, 
     2. ~~Photo gallery (REQ-AP-6)~~ — Deprecated; replaced by `MiniCollage` compact horizontal scroll strip below hero (see current implementation item 2)
     3. Description: Portable Text rendered from Emdash
     4. ~~Pricing table + availability calendar side by side on desktop (REQ-AP-4, REQ-AP-5)~~ — Deprecated
-    5. ~~Inline inquiry widget pre-filled with this apartment (REQ-BK-1)~~ — Deprecated; inquiry via contact page (REQ-BK-8)
+    5. ~~Inline inquiry widget pre-filled with this apartment (REQ-BK-1)~~ — Deferred; current apartment pages route inquiries via contact page (REQ-BK-8). REQ-BK-1 remains Planned and will replace this when built.
     6. ~~Trust: direct booking benefits strip (REQ-BK-5)~~ — Deprecated + contextual testimonial snippet (REQ-SP-1)
     7. Detailed amenities grid: icon + label, grouped by category (climate, kitchen, bathroom, outdoor, access)
     8. Bed configuration: visual diagram with bed types and dimensions

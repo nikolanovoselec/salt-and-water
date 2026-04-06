@@ -117,7 +117,7 @@ All photos — editorial, hero, apartment interior, and gallery — are stored i
 
 Key validation rejects empty keys, path traversal sequences (`..`), and leading slashes.
 
-All image keys across the codebase use `UUID.ext` format. No descriptive slug keys exist in source code or production data. See [AD15](decisions/README.md#ad15-all-r2-image-keys-standardized-to-uuid-format) for the standardization decision.
+Most image keys use `UUID.ext` format (e.g., `aa0fd53c-5d96-4a78-a5b5-0f68b543515a.jpg`). The hard-coded hero carousel keys in `Hero.astro` are extension-less UUIDs — an exception predating the `UUID.ext` standard that works because the route derives content type from R2 object metadata, not the key suffix. No descriptive slug keys exist in source code or production data. See [AD15](decisions/README.md#ad15-all-r2-image-keys-standardized-to-uuid-format) for the standardization decision.
 
 ### Owner uploads
 

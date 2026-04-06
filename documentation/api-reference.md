@@ -44,7 +44,7 @@ Dynamic robots.txt. Allows all crawlers on public pages and disallows crawling o
 
 Serves a photo from the `apartmani-media` R2 bucket. This is the sole image-serving route for all photos — hero carousel, page heroes, apartment galleries, gallery page, and editorial content rows.
 
-All R2 keys are UUID format (e.g., `aa0fd53c-5d96-4a78-a5b5-0f68b543515a.jpg`), matching Emdash's native upload format. The extension is included in the key.
+Keys uploaded via `POST /admin/api/upload-url` or the Emdash media library use `UUID.ext` format (e.g., `aa0fd53c-5d96-4a78-a5b5-0f68b543515a.jpg`). Some hard-coded hero carousel keys are extension-less UUIDs. Both forms are accepted — the route passes the key directly to R2 and derives content type from object metadata, not the key suffix.
 
 **Authentication:** None required.
 
@@ -52,7 +52,7 @@ All R2 keys are UUID format (e.g., `aa0fd53c-5d96-4a78-a5b5-0f68b543515a.jpg`), 
 
 | Parameter | Format | Description |
 |---|---|---|
-| `key` | `<uuid>.<ext>` | R2 object key — UUID with file extension, as returned by `POST /admin/api/upload-url` |
+| `key` | `<uuid>` or `<uuid>.<ext>` | R2 object key — opaque UUID, optionally with file extension |
 
 **Response:** Binary image data (`image/jpeg`, `image/png`, `image/webp`, etc.) with `Cache-Control: public, max-age=31536000, immutable`.
 

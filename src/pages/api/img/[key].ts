@@ -3,7 +3,7 @@ import { env as _env } from "cloudflare:workers";
 
 /**
  * Image serving route: fetches from R2 via Emdash storage abstraction.
- * URL: /api/img/:key (key is a descriptive slug or UUID identifying the R2 object)
+ * URL: /api/img/:key (key is a UUID.ext string, e.g. "aa0fd53c-5d96-4a78-a5b5-0f68b543515a.jpg")
  *
  * Uses locals.emdash.storage.download() — same R2 instance as CMS.
  * Falls back to direct env.MEDIA bucket access.
