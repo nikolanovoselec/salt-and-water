@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-04-06 - Final spec review: formal "Sie" exception expanded to Impressum
+
+Post-session validation of all session-changed requirements (REQ-SF-3, REQ-SF-6, REQ-SF-7, REQ-TC-2, REQ-TC-3, constraints, glossary). One gap found and fixed.
+
+### Requirements updated
+- **REQ-I18N-6** (Cultural Content Adaptation): Expanded formal "Sie" exception from "Privacy Policy" to "Privacy Policy and Impressum" -- the German impressum fallback text uses formal "Sie" (legal convention), matching the Privacy Policy exception. Status line updated correspondingly.
+
+### Validation results (no changes needed)
+- **REQ-SF-3** (Navigation): Nav items, scroll trigger, logo behavior, hamburger spec, mobile menu all verified against code. Accurate.
+- **REQ-SF-6** (Footer): Brand text-only heading, wave SVG, legal links (impressum first), gradient, address, bottom bar all verified against code. Accurate.
+- **REQ-SF-7** (Sticky Mobile CTA): Two text spans, dual sentinel logic, no price, kontakt link, mobile-only display all verified against code. Accurate.
+- **REQ-TC-2** (Privacy Policy): Content coverage matches fallback text. GAP note remains valid. Accurate.
+- **REQ-TC-3** (Impressum): Fallback content (all 4 locales), footer link, HeroSimple, CMS editorial collection all verified against code. Accurate.
+- **Constraints**: CON-LEGAL, CON-I18N, CON-SEC all current. No orphaned constraints.
+- **Glossary**: Impressum, Sailboat Logo, Wave Divider, all session-relevant terms verified. No stale definitions.
+
+---
+
 ## 2026-04-06 - Spec review: Impressum page restored (31dd3a0)
 
 Commit 31dd3a0 added a new Impressum page at `/{locale}/impresum` with full 4-locale fallback content including operator identity, Gray Matter GmbH attribution, Places of Juma photo credits, external link disclaimer, and copyright notice. Footer link added in legal links section. Translation key `footer.impressum` added for all 4 locales.
