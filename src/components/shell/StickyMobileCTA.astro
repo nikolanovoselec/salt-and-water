@@ -66,10 +66,10 @@ const { locale } = Astro.props;
 
 <script>
   const stickyCta = document.getElementById("sticky-cta");
-  const heroSentinel = document.querySelector(".hero-sentinel");
+  const heroTrigger = document.querySelector(".hero-title") || document.querySelector(".hero-sentinel");
   const endSentinel = document.querySelector(".sticky-cta-end");
 
-  if (stickyCta && heroSentinel) {
+  if (stickyCta && heroTrigger) {
     let pastHero = false;
     let reachedEnd = false;
 
@@ -83,7 +83,7 @@ const { locale } = Astro.props;
     new IntersectionObserver(([entry]) => {
       pastHero = !entry.isIntersecting;
       update();
-    }).observe(heroSentinel);
+    }).observe(heroTrigger);
 
     if (endSentinel) {
       new IntersectionObserver(([entry]) => {
