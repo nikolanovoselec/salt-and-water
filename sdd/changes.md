@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-06 - Sticky CTA conditional price rendering + link target correction (0dd5631)
+
+Commit 0dd5631 fixed duplicated "Check Availability" text in the sticky mobile CTA when no price was available. The price span is now conditionally rendered only when lowestPrice is provided, preventing the doubled text.
+
+### Requirements updated
+- **REQ-SF-7** (Sticky Mobile CTA): Two AC corrections. (1) Link target updated from `/{locale}/kontakt` to `#inquiry` anchor on the current page — matches actual implementation since the CTA was wired. (2) Failure mode rewritten: price span is conditionally omitted from DOM (not just hidden or empty) when no lowestPrice is provided, leaving only the action text.
+
+---
+
 ## 2026-04-06 - Family origin story corrected — Črešnjevo (Zagorje), not the island (81992f5)
 
 Parents are from Črešnjevo in Zagorje, not born on Pašman island. They fell in love with the island decades ago and made it their second home. The About page and homepage apartments section have been rewritten in all 4 locales to reflect this true story. The parallel between green hills (Zagorje) and the sea (Ždrelac) — that they chose this place, just as tourists do — is the emotional core of the narrative.

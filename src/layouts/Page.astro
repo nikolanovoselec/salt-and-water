@@ -12,7 +12,6 @@ interface Props {
   locale: Locale;
   ogImage?: string;
   noIndex?: boolean;
-  lowestPrice?: number;
   hasHero?: boolean;
 }
 
@@ -22,7 +21,6 @@ const {
   locale,
   ogImage,
   noIndex,
-  lowestPrice,
   hasHero = false,
 } = Astro.props;
 ---
@@ -40,5 +38,5 @@ const {
 
   <Footer locale={locale} />
 
-  <StickyMobileCTA locale={locale} lowestPrice={lowestPrice} />
+  <StickyMobileCTA locale={locale} />
 </Base>
