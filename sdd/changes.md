@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-06 - Spec validation: fix stale MiniCollage speed claim (49c03ec)
+
+Post-commit spec review against code found one inaccurate acceptance criterion.
+
+### Requirements updated
+- **REQ-AP-3** (Apartment Detail Page): AC item 2 corrected — MiniCollage speed is not a uniform 35s; it scales dynamically with gallery size (minimum 35s). Updated wording from "uniform 35s speed" to "speed scales with gallery size, minimum 35s".
+
+---
+
 ## 2026-04-06 - Price format: tilde replaced with natural language per locale (6a3c6b8)
 
 Commit 6a3c6b8 replaced the `~` tilde prefix in the sticky mobile CTA price label with locale-appropriate natural language words: EN "around", DE "ca.", HR "oko", SL "ok.". The `cta.fromPrice` translation key in all 4 locale JSON files was updated. No code logic changed — only translation strings.

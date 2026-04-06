@@ -7,14 +7,12 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-
-const priceText = t(locale, "cta.fromPrice", { price: "100" });
 ---
 
 <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
   <a href={`/${locale}/kontakt`} class="sticky-cta__link">
-    <span class="sticky-cta__price">{priceText}</span>
-    <span class="sticky-cta__action">{t(locale, "cta.checkAvailability")}</span>
+    <span class="sticky-cta__price">{t(locale, "cta.checkAvailability")}</span>
+    <span class="sticky-cta__action">{t(locale, "homepage.cta.title")}</span>
   </a>
 </div>
 
