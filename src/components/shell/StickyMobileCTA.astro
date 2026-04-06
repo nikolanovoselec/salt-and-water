@@ -73,10 +73,11 @@ const { locale } = Astro.props;
     let pastHero = false;
     let pastEnd = false;
 
+    const el = stickyCta;
     function updateVisibility() {
       const shouldShow = pastHero && !pastEnd;
-      stickyCta.classList.toggle("is-visible", shouldShow);
-      stickyCta.setAttribute("aria-hidden", String(!shouldShow));
+      el.classList.toggle("is-visible", shouldShow);
+      el.setAttribute("aria-hidden", String(!shouldShow));
     }
 
     new IntersectionObserver(
