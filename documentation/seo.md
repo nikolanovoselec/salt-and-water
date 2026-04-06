@@ -165,7 +165,7 @@ The manifest is linked from every page via `<link rel="manifest" href="/site.web
 
 ### Apple Touch Icon
 
-`<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />` and `<meta name="apple-mobile-web-app-title" content="Apartmani" />` are present in every `<head>`. The PNG files (`apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`) must be generated from `public/favicon.svg` and placed in `public/` — they are not yet committed.
+`<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />` and `<meta name="apple-mobile-web-app-title" content="Apartmani" />` are present in every `<head>`. The PNG files (`apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`) were generated from `public/favicon.svg` and are committed in `public/`. All three are served with a 30-day cache via `public/_headers`.
 
 ---
 

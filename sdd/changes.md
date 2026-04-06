@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-06 - Spec review: favicon PNGs committed, icon caching (cc92ae2)
+
+Commit cc92ae2 added the three generated PNG icon files to the repository (apple-touch-icon.png, android-chrome-192x192.png, android-chrome-512x512.png), added cache-control headers for icon paths and site.webmanifest, and deduplicated the OG image fallback expression in Base.astro.
+
+### Requirements updated
+- **REQ-SEO-10** (Browser Integration & Home Screen): Status updated from "files not yet committed" to fully implemented with cache headers.
+
+---
+
 ## 2026-04-06 - Spec review: REQ-SEO-10 status correction (5d88975)
 
 Updated REQ-SEO-10 status to reflect that icon image files (apple-touch-icon.png, android-chrome PNGs) have been generated and exist in public/ but are not yet committed.

@@ -27,6 +27,7 @@ function getLocalizedPath(targetLocale: string): string {
 <header class="nav" id="site-nav">
   <div class="nav__inner container">
     <a href={`/${locale}`} class="nav__logo" aria-label={t(locale, "nav.home")}>
+      <img src="/logo.png" alt="" class="nav__logo-icon" width="32" height="32" />
       <span class="nav__logo-text">Apartmani Novoselec</span>
     </a>
 
@@ -62,6 +63,7 @@ function getLocalizedPath(targetLocale: string): string {
 {/* Mobile menu overlay */}
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
   <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+    <img src="/logo.png" alt="" class="mobile-menu__logo" width="48" height="48" />
     {navItems.map((item) => (
       <a href={item.href} class="mobile-menu__link">
         {t(locale, item.key)}
@@ -113,6 +115,9 @@ function getLocalizedPath(targetLocale: string): string {
   }
 
   .nav__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
     text-decoration: none;
     color: var(--color-white);
     transition: color var(--duration-normal) var(--ease-out);
@@ -120,6 +125,18 @@ function getLocalizedPath(targetLocale: string): string {
 
   .nav.is-scrolled .nav__logo {
     color: var(--color-navy);
+  }
+
+  .nav__logo-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: filter var(--duration-normal) var(--ease-out);
+  }
+
+  .nav.is-scrolled .nav__logo-icon {
+    filter: none;
   }
 
   .nav__logo-text {
@@ -236,6 +253,14 @@ function getLocalizedPath(targetLocale: string): string {
     flex-direction: column;
     align-items: center;
     gap: var(--space-xl);
+  }
+
+  .mobile-menu__logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    margin-bottom: var(--space-md);
   }
 
   .mobile-menu__link,
