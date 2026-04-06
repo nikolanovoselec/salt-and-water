@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-04-06 - Price format: tilde replaced with natural language per locale (6a3c6b8)
+
+Commit 6a3c6b8 replaced the `~` tilde prefix in the sticky mobile CTA price label with locale-appropriate natural language words: EN "around", DE "ca.", HR "oko", SL "ok.". The `cta.fromPrice` translation key in all 4 locale JSON files was updated. No code logic changed — only translation strings.
+
+### Requirements updated
+- **REQ-SF-7** (Sticky Mobile CTA): AC updated — price label no longer uses tilde (`~`) prefix. Each locale now renders its own natural approximation word via the `cta.fromPrice` translation key with `{price}` interpolation.
+
+---
+
+## 2026-04-06 - Spec sync: tilde price format, remove inquiry observer AC, fix detail CTA link (4f784d4)
+
+Post-commit spec review found three stale references after commit 4f784d4.
+
+### Requirements updated
+- **REQ-SF-7** (Sticky Mobile CTA): (1) Price label AC updated from "From €100/night" to "~ €100/night" — matches tilde prefix in all 4 locale translation keys (`cta.fromPrice`). (2) Removed stale "Disappears when inquiry form is in viewport" AC — the inquiry section IntersectionObserver was deleted in 4f784d4; CTA visibility is now controlled by the hero sentinel only. (3) Added explicit AC documenting hero-only observer behavior.
+- **REQ-AP-3** (Apartment Detail Page): Sidebar price card CTA link description updated from "linking to listing page inquiry section" to "linking to contact page (`/{locale}/kontakt`, REQ-BK-8)" — matches actual implementation since b81b047.
+
+---
+
 ## 2026-04-06 - Sticky CTA hardcoded price + kontakt link (b81b047)
 
 Commit b81b047 simplified the sticky mobile CTA: price is now a static €100/night (always displayed), and the link target changed from `#inquiry` anchor to `/{locale}/kontakt` (contact page). The `lowestPrice` prop was removed from both `StickyMobileCTA` and `Page` components — no dynamic pricing is passed through.

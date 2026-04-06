@@ -78,7 +78,7 @@ Apartment listings, detail pages, photo galleries, amenities, seasonal pricing, 
     3. Description: plain text from CMS `description` field
     4. Meta grid: 2-column grid on stone background (16px radius) showing sleeps, bedrooms, size (m2), beach distance — locale-aware labels
     5. "Best for" line below meta grid
-    6. Sidebar: price card (white, 16px radius, shadow) showing "from EUR X/night" with locale-aware label, inquiry CTA button linking to listing page inquiry section
+    6. Sidebar: price card (white, 16px radius, shadow) showing "from EUR X/night" with locale-aware label, inquiry CTA button linking to contact page (`/{locale}/kontakt`, REQ-BK-8)
     7. Sidebar: amenities checklist (2-column grid on stone background, checkmark prefix) parsed from `amenities_json` field
     8. ~~Back-to-apartments CTA in alt-background section~~ — **Removed:** redundant navigation; visitors use breadcrumbs or browser back button
     9. Responsive: single column on mobile, 1.5fr/1fr grid on desktop (768px+ breakpoint)

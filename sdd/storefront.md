@@ -139,11 +139,11 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
 - **Intent:** Keep inquiry conversion path always accessible on mobile
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
-  - After scrolling past hero, a bottom bar slides up with two spans: price label ("From €100/night") + action text ("Check Availability")
-  - Price is a static placeholder (€100/night), always displayed — not derived from seasonal pricing data
+  - After scrolling past hero, a bottom bar slides up with two spans: approximate price label + action text ("Check Availability")
+  - Price is a static placeholder (€100/night) with locale-appropriate approximation word (EN: "around", DE: "ca.", HR: "oko", SL: "ok."), always displayed — not derived from seasonal pricing data. Format uses `cta.fromPrice` translation key with `{price}` interpolation.
   - Tapping navigates to the contact page (`/{locale}/kontakt`, REQ-BK-8)
   - Thin bar (~56px), does not obscure content
-  - Disappears when inquiry form is in viewport
+  - Visibility controlled by hero sentinel only: hidden while hero is in viewport, visible after scrolling past hero. No secondary observer (inquiry section observer was removed)
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P0
 - **Dependencies:** REQ-BK-8
