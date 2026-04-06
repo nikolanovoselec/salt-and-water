@@ -15,8 +15,13 @@ All responses pass through `src/middleware/headers.ts`. Headers are set uncondit
 | `X-Frame-Options` | `DENY` |
 | `X-Content-Type-Options` | `nosniff` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
-| `Permissions-Policy` | `camera=(), microphone=(), geolocation=()` |
+| `Strict-Transport-Security` | `max-age=31536000; includeSubDomains; preload` |
+| `Cross-Origin-Opener-Policy` | `same-origin` |
+| `Cross-Origin-Resource-Policy` | `same-origin` |
+| `Permissions-Policy` | `camera=(), microphone=(), geolocation=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), payment=(), usb=()` |
 | `Content-Security-Policy` | See below |
+
+HSTS with `preload` opts the domain into browser preload lists, enforcing HTTPS before the first connection. COOP (`same-origin`) prevents cross-origin windows from sharing a browsing context group, mitigating Spectre-class attacks. CORP (`same-origin`) blocks cross-origin reads of responses from this origin.
 
 ## Content Security Policy
 
@@ -121,6 +126,24 @@ See [Authentication](authentication.md) for the full model. Key properties:
 ## URL Normalization
 
 The redirects middleware enforces canonical URLs: trailing slashes are removed with a 301 redirect. This prevents duplicate content and reduces attack surface from path normalization issues. `/_emdash/` paths are excluded from this rule — the CMS mounts under that prefix and requires the trailing slash to function correctly.
+
+## Static Asset Cache Headers
+
+`public/_headers` sets Cloudflare cache directives for static assets before the Worker even runs. Rules applied:
+
+| Path pattern | Cache-Control |
+|---|---|
+| `/_astro/*` | `public, max-age=31536000, immutable` (content-hashed by Astro) |
+| `/*.woff2`, `/*.woff` | `public, max-age=2592000` (30 days) |
+| `/api/img/*` | `public, max-age=86400, stale-while-revalidate=604800` |
+| `/favicon*`, `/images/*` | `public, max-age=2592000` (30 days) |
+| `/*` (HTML pages) | `public, max-age=3600, stale-while-revalidate=86400` |
+
+These headers are applied by Cloudflare's edge before the request reaches the Worker. The `/api/img/*` rule is separate from the immutable rule because image keys are UUIDs but the response bodies can be updated by replacing the R2 object.
+
+## Vulnerability Disclosure
+
+`public/.well-known/security.txt` follows the [securitytxt.org](https://securitytxt.org/) standard. It declares the contact address, preferred languages, canonical URL, and an expiry date. Researchers who discover a vulnerability can reference this file to find the responsible disclosure contact.
 
 ---
 

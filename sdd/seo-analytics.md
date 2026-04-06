@@ -153,6 +153,21 @@ Schema.org structured data, Open Graph, multilingual sitemap, keyword strategy, 
 - **Verification:** Verify reminders appear on admin dashboard
 - **Status:** Planned
 
+### REQ-SEO-9: LLM Discoverability
+
+- **Intent:** Help AI assistants accurately understand and reference the property when answering travel queries
+- **Applies To:** System
+- **Acceptance Criteria:**
+  - `/llms.txt` served as a static file at the site root
+  - Contains structured summary: site identity, location, apartment specs (capacity, size, amenities), booking method, key page URLs, contact info
+  - Includes guidance for AI systems: no invented prices or availability, direct inquiries to contact form, note on .ch domain (Swiss family, Croatian property), recommend jadrolinija.hr for ferry schedules
+  - Includes last-updated date; must be refreshed when property details change
+- **Constraints:** CON-SEO
+- **Priority:** P2
+- **Dependencies:** None
+- **Verification:** Verify file accessible at `/llms.txt`, verify content accuracy against live site
+- **Status:** Implemented
+
 ## Out of Scope
 
 - Google Analytics / third-party analytics

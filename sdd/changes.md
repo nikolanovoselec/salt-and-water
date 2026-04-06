@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-04-06 - Security hardening, llms.txt, security.txt, static caching headers (67083a1)
+
+Commit 67083a1 added three new static files and hardened security headers. (1) `public/.well-known/security.txt` — RFC 9116 security contact disclosure with mailto, expiry, preferred languages, and canonical URL. (2) `public/llms.txt` — structured site summary for AI assistants covering property details, apartment specs, booking method, key page URLs, and guidance for accurate AI responses. (3) `public/_headers` — Cloudflare static headers file defining Cache-Control tiers for content-hashed Astro assets (immutable, 1 year), fonts (30 days), R2 image API (1 day + 7-day stale-while-revalidate), favicons/static images (30 days), and HTML pages (1 hour + 1-day stale-while-revalidate). (4) `src/middleware/headers.ts` updated with three new security headers: HSTS (max-age=31536000, includeSubDomains, preload), Cross-Origin-Opener-Policy (same-origin), Cross-Origin-Resource-Policy (same-origin). Permissions-Policy expanded from 3 restrictions (camera, microphone, geolocation) to 9 (added accelerometer, gyroscope, magnetometer, midi, payment, usb).
+
+### Requirements added
+- **REQ-TC-8** (Security Contact Disclosure): New P2 requirement for `/.well-known/security.txt` per RFC 9116. Status: Implemented.
+- **REQ-SEO-9** (LLM Discoverability): New P2 requirement for `/llms.txt` AI-readable site summary. Status: Implemented.
+
+### Requirements updated
+- **REQ-TC-6** (Security Headers): Added HSTS, COOP, CORP to acceptance criteria. Expanded Permissions-Policy from 3 to 9 restricted APIs.
+- **REQ-PERF-2** (Edge Caching): Added static asset caching via `_headers` file to acceptance criteria. Status changed from Planned to Partial (static caching implemented, dynamic edge caching still planned).
+
+### Constraints updated
+- **CON-SEC**: Added HSTS, COOP, CORP to header list. Expanded Permissions-Policy detail. Added security.txt mention.
+
+### Glossary terms added
+- security.txt, llms.txt, HSTS, COOP, CORP
+
+---
+
 ## 2026-04-06 - FAQ answers render as HTML, Schema.org strips HTML (45de3f3)
 
 Commit 45de3f3 fixed two rendering issues introduced when inline `<a>` links were added to FAQ answers in 76ff40a: (1) FAQ answers now render as HTML via Astro's `set:html` directive instead of plain text interpolation, so inline links and formatting actually appear as clickable elements in the browser; (2) Schema.org FAQPage structured data strips HTML tags from answer text before JSON-LD emission, ensuring search engines receive clean plain text in `acceptedAnswer.text` rather than raw HTML markup.

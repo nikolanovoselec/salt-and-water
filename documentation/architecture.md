@@ -57,6 +57,16 @@ Apartmani Pašman is a server-side rendered Astro site deployed as a Cloudflare 
 | `src/components/ui/MiniCollage.astro` | Compact infinite-scroll photo strip. Props: `images: Array<{ src: string; alt: string }>` (required), `speed` (animation duration in seconds, default 20), `reverse` (boolean, default `false` — when `true`, applies `.mini-collage--reverse` which sets `animation-direction: reverse` so the strip scrolls right instead of left), `showCaptions` (boolean, default `false` — when `true`, renders each photo's alt text as an absolute-positioned overlay at the bottom of the photo: sans-serif normal-weight text (`--font-sans`, `font-weight: 400`, `letter-spacing: 0.02em`) at 90% opacity over a bottom-to-top gradient `rgba(0,0,0,0.45)` to transparent; `pointer-events: none`). Renders a WCAG carousel region. Hover pauses animation. Strips with fewer than 2 images fall back to a static single image. Used on apartment detail pages (interior photos), the Food & Drink page (dual opposing strips), and the gallery page (with `showCaptions` enabled). |
 | `src/styles/global.css` | Design system — CSS custom properties, typography scale, layout utilities, component classes, animation utilities |
 
+## Static Public Files
+
+Three files in `public/` are served directly by Cloudflare before the Worker runs:
+
+| File | Purpose |
+|---|---|
+| `public/_headers` | Cloudflare cache-control rules for static assets — content-hashed Astro bundles cached immutably, fonts and favicons 30 days, R2 images 1 day with SWR, HTML 1 hour with SWR |
+| `public/llms.txt` | Machine-readable site description for LLMs — property details, apartment specs, key pages, and notes to AI assistants |
+| `public/.well-known/security.txt` | Vulnerability disclosure contact per [securitytxt.org](https://securitytxt.org/) |
+
 ## Request Lifecycle
 
 ```

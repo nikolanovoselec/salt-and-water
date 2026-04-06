@@ -129,7 +129,10 @@ GDPR, privacy policy, house rules, cancellation policy, security headers, and ac
   - X-Frame-Options: DENY
   - X-Content-Type-Options: nosniff
   - Referrer-Policy: strict-origin-when-cross-origin
-  - Permissions-Policy: restrict camera, microphone, geolocation
+  - Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  - Cross-Origin-Opener-Policy: same-origin
+  - Cross-Origin-Resource-Policy: same-origin
+  - Permissions-Policy: restrict camera, microphone, geolocation, accelerometer, gyroscope, magnetometer, midi, payment, usb
   - Set via Workers response headers
 - **Constraints:** CON-SEC
 - **Priority:** P1
@@ -152,6 +155,21 @@ GDPR, privacy policy, house rules, cancellation policy, security headers, and ac
 - **Dependencies:** REQ-CMS-1
 - **Verification:** Page exists and is accurate
 - **Status:** Deprecated - page removed, not needed for vacation rental
+
+### REQ-TC-8: Security Contact Disclosure
+
+- **Intent:** Enable responsible disclosure of security vulnerabilities via standard well-known URI
+- **Applies To:** System
+- **Acceptance Criteria:**
+  - `/.well-known/security.txt` served as a static file
+  - Contains: Contact (mailto), Expires date, Preferred-Languages (hr, en, de, sl), Canonical URL
+  - Expires date set to a future date (must be updated before expiry)
+  - Conforms to RFC 9116
+- **Constraints:** CON-SEC
+- **Priority:** P2
+- **Dependencies:** None
+- **Verification:** Verify file accessible at `/.well-known/security.txt`, validate fields present
+- **Status:** Implemented
 
 ## Out of Scope
 
