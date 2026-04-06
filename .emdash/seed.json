@@ -1,0 +1,2178 @@
+{
+  "version": "1",
+  "collections": [
+    {
+      "slug": "gallery_captions",
+      "label": "Gallery Captions",
+      "label_singular": "Gallery Caption",
+      "description": "Poetic photo captions for the gallery page, localized per language",
+      "fields": [
+        {
+          "slug": "text",
+          "label": "Caption Text",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "sort_order",
+          "label": "Sort Order",
+          "type": "number"
+        }
+      ]
+    }
+  ],
+  "content": {
+    "gallery_captions": [
+      {
+        "id": "gc-01-hr",
+        "slug": "caption-01-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "More ovdje šapće sporije nego igdje",
+          "sort_order": 1
+        }
+      },
+      {
+        "id": "gc-01-de",
+        "slug": "caption-01-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-01-hr",
+        "data": {
+          "text": "Hier flüstert das Meer langsamer als anderswo",
+          "sort_order": 1
+        }
+      },
+      {
+        "id": "gc-01-sl",
+        "slug": "caption-01-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-01-hr",
+        "data": {
+          "text": "Morje tu šepeta v svojem počasnem ritmu",
+          "sort_order": 1
+        }
+      },
+      {
+        "id": "gc-01-en",
+        "slug": "caption-01-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-01-hr",
+        "data": {
+          "text": "The sea whispers at its own quiet pace here",
+          "sort_order": 1
+        }
+      },
+      {
+        "id": "gc-02-hr",
+        "slug": "caption-02-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Dan se topi u tirkiznoj tišini",
+          "sort_order": 2
+        }
+      },
+      {
+        "id": "gc-02-de",
+        "slug": "caption-02-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-02-hr",
+        "data": {
+          "text": "Der Tag zerfliesst in türkisfarbener Stille",
+          "sort_order": 2
+        }
+      },
+      {
+        "id": "gc-02-sl",
+        "slug": "caption-02-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-02-hr",
+        "data": {
+          "text": "Dan se raztaplja v turkizni tišini",
+          "sort_order": 2
+        }
+      },
+      {
+        "id": "gc-02-en",
+        "slug": "caption-02-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-02-hr",
+        "data": {
+          "text": "The day dissolves into turquoise silence",
+          "sort_order": 2
+        }
+      },
+      {
+        "id": "gc-03-hr",
+        "slug": "caption-03-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Gdje pogled zastane, srce ostane",
+          "sort_order": 3
+        }
+      },
+      {
+        "id": "gc-03-de",
+        "slug": "caption-03-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-03-hr",
+        "data": {
+          "text": "Wo der Blick verweilt, schlägt das Herz ruhiger",
+          "sort_order": 3
+        }
+      },
+      {
+        "id": "gc-03-sl",
+        "slug": "caption-03-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-03-hr",
+        "data": {
+          "text": "Kjer obstane pogled, se umiri srce",
+          "sort_order": 3
+        }
+      },
+      {
+        "id": "gc-03-en",
+        "slug": "caption-03-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-03-hr",
+        "data": {
+          "text": "Where the eyes rest, the heart drops anchor",
+          "sort_order": 3
+        }
+      },
+      {
+        "id": "gc-04-hr",
+        "slug": "caption-04-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Sunce ovdje zna nježnije dodirnuti",
+          "sort_order": 4
+        }
+      },
+      {
+        "id": "gc-04-de",
+        "slug": "caption-04-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-04-hr",
+        "data": {
+          "text": "Hier weiss das Sonnenlicht sanfter zu berühren",
+          "sort_order": 4
+        }
+      },
+      {
+        "id": "gc-04-sl",
+        "slug": "caption-04-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-04-hr",
+        "data": {
+          "text": "Tu se sonce dotakne nekoliko mehkeje",
+          "sort_order": 4
+        }
+      },
+      {
+        "id": "gc-04-en",
+        "slug": "caption-04-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-04-hr",
+        "data": {
+          "text": "Here, the sun knows how to touch more gently",
+          "sort_order": 4
+        }
+      },
+      {
+        "id": "gc-05-hr",
+        "slug": "caption-05-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Između kamena i mora, mir traje",
+          "sort_order": 5
+        }
+      },
+      {
+        "id": "gc-05-de",
+        "slug": "caption-05-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-05-hr",
+        "data": {
+          "text": "Zwischen Stein und Meer hält die Ruhe an",
+          "sort_order": 5
+        }
+      },
+      {
+        "id": "gc-05-sl",
+        "slug": "caption-05-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-05-hr",
+        "data": {
+          "text": "Med kamnom in morjem mir vztraja",
+          "sort_order": 5
+        }
+      },
+      {
+        "id": "gc-05-en",
+        "slug": "caption-05-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-05-hr",
+        "data": {
+          "text": "Between stone and sea, peace endures",
+          "sort_order": 5
+        }
+      },
+      {
+        "id": "gc-06-hr",
+        "slug": "caption-06-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Sve je lakše kad miriše sol",
+          "sort_order": 6
+        }
+      },
+      {
+        "id": "gc-06-de",
+        "slug": "caption-06-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-06-hr",
+        "data": {
+          "text": "Mit dem Duft von Salz wird alles ein bisschen leichter",
+          "sort_order": 6
+        }
+      },
+      {
+        "id": "gc-06-sl",
+        "slug": "caption-06-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-06-hr",
+        "data": {
+          "text": "Ko zadiši sol, postanejo misli lažje",
+          "sort_order": 6
+        }
+      },
+      {
+        "id": "gc-06-en",
+        "slug": "caption-06-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-06-hr",
+        "data": {
+          "text": "Everything feels lighter when the air tastes of salt",
+          "sort_order": 6
+        }
+      },
+      {
+        "id": "gc-07-hr",
+        "slug": "caption-07-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Ovdje vrijeme sjedi u hladu",
+          "sort_order": 7
+        }
+      },
+      {
+        "id": "gc-07-de",
+        "slug": "caption-07-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-07-hr",
+        "data": {
+          "text": "Hier ruht sich die Zeit im Schatten aus",
+          "sort_order": 7
+        }
+      },
+      {
+        "id": "gc-07-sl",
+        "slug": "caption-07-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-07-hr",
+        "data": {
+          "text": "Tukaj čas preprosto počiva v senci",
+          "sort_order": 7
+        }
+      },
+      {
+        "id": "gc-07-en",
+        "slug": "caption-07-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-07-hr",
+        "data": {
+          "text": "Time takes a seat in the shade around here",
+          "sort_order": 7
+        }
+      },
+      {
+        "id": "gc-08-hr",
+        "slug": "caption-08-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Tišina ima boju kasnog ljeta",
+          "sort_order": 8
+        }
+      },
+      {
+        "id": "gc-08-de",
+        "slug": "caption-08-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-08-hr",
+        "data": {
+          "text": "Die Stille trägt die Farbe des Spätsommers",
+          "sort_order": 8
+        }
+      },
+      {
+        "id": "gc-08-sl",
+        "slug": "caption-08-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-08-hr",
+        "data": {
+          "text": "Tišina nosi barve poznega poletja",
+          "sort_order": 8
+        }
+      },
+      {
+        "id": "gc-08-en",
+        "slug": "caption-08-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-08-hr",
+        "data": {
+          "text": "Silence takes on the colour of late summer",
+          "sort_order": 8
+        }
+      },
+      {
+        "id": "gc-09-hr",
+        "slug": "caption-09-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "More se prelijeva kao misao o sreći",
+          "sort_order": 9
+        }
+      },
+      {
+        "id": "gc-09-de",
+        "slug": "caption-09-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-09-hr",
+        "data": {
+          "text": "Das Meer wogt wie ein leiser Gedanke ans Glück",
+          "sort_order": 9
+        }
+      },
+      {
+        "id": "gc-09-sl",
+        "slug": "caption-09-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-09-hr",
+        "data": {
+          "text": "Morje se preliva kot misel na srečo",
+          "sort_order": 9
+        }
+      },
+      {
+        "id": "gc-09-en",
+        "slug": "caption-09-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-09-hr",
+        "data": {
+          "text": "The water ripples like a quiet thought of joy",
+          "sort_order": 9
+        }
+      },
+      {
+        "id": "gc-10-hr",
+        "slug": "caption-10-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Gdje borovi čuvaju plavetnilo od buke",
+          "sort_order": 10
+        }
+      },
+      {
+        "id": "gc-10-de",
+        "slug": "caption-10-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-10-hr",
+        "data": {
+          "text": "Wo die Pinien das tiefe Blau vor der Welt beschützen",
+          "sort_order": 10
+        }
+      },
+      {
+        "id": "gc-10-sl",
+        "slug": "caption-10-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-10-hr",
+        "data": {
+          "text": "Kjer borovci varujejo modrino pred hrupom",
+          "sort_order": 10
+        }
+      },
+      {
+        "id": "gc-10-en",
+        "slug": "caption-10-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-10-hr",
+        "data": {
+          "text": "Where pines protect the blue from the outside world",
+          "sort_order": 10
+        }
+      },
+      {
+        "id": "gc-11-hr",
+        "slug": "caption-11-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Još jedan trenutak za nikamo krenuti",
+          "sort_order": 11
+        }
+      },
+      {
+        "id": "gc-11-de",
+        "slug": "caption-11-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-11-hr",
+        "data": {
+          "text": "Ein weiterer Moment, um einfach nur hier zu bleiben",
+          "sort_order": 11
+        }
+      },
+      {
+        "id": "gc-11-sl",
+        "slug": "caption-11-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-11-hr",
+        "data": {
+          "text": "Še en trenutek, da nikamor ne greš",
+          "sort_order": 11
+        }
+      },
+      {
+        "id": "gc-11-en",
+        "slug": "caption-11-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-11-hr",
+        "data": {
+          "text": "Just another moment to be exactly where you are",
+          "sort_order": 11
+        }
+      },
+      {
+        "id": "gc-12-hr",
+        "slug": "caption-12-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Na ovom svjetlu i kamen omekša",
+          "sort_order": 12
+        }
+      },
+      {
+        "id": "gc-12-de",
+        "slug": "caption-12-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-12-hr",
+        "data": {
+          "text": "In diesem Licht wird selbst Stein weich",
+          "sort_order": 12
+        }
+      },
+      {
+        "id": "gc-12-sl",
+        "slug": "caption-12-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-12-hr",
+        "data": {
+          "text": "V tej svetlobi celo kamen postane mehak",
+          "sort_order": 12
+        }
+      },
+      {
+        "id": "gc-12-en",
+        "slug": "caption-12-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-12-hr",
+        "data": {
+          "text": "Even the stone yields to this kind of light",
+          "sort_order": 12
+        }
+      },
+      {
+        "id": "gc-13-hr",
+        "slug": "caption-13-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Vjetar nosi ono što ne kažemo",
+          "sort_order": 13
+        }
+      },
+      {
+        "id": "gc-13-de",
+        "slug": "caption-13-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-13-hr",
+        "data": {
+          "text": "Der Wind trägt, was wir nicht sagen",
+          "sort_order": 13
+        }
+      },
+      {
+        "id": "gc-13-sl",
+        "slug": "caption-13-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-13-hr",
+        "data": {
+          "text": "Veter nežno odnese vse neizrečeno",
+          "sort_order": 13
+        }
+      },
+      {
+        "id": "gc-13-en",
+        "slug": "caption-13-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-13-hr",
+        "data": {
+          "text": "The wind carries what we leave unsaid",
+          "sort_order": 13
+        }
+      },
+      {
+        "id": "gc-14-hr",
+        "slug": "caption-14-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Dan počinje solju, završava zlatom",
+          "sort_order": 14
+        }
+      },
+      {
+        "id": "gc-14-de",
+        "slug": "caption-14-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-14-hr",
+        "data": {
+          "text": "Der Morgen schmeckt nach Salz, der Abend wird zu Gold",
+          "sort_order": 14
+        }
+      },
+      {
+        "id": "gc-14-sl",
+        "slug": "caption-14-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-14-hr",
+        "data": {
+          "text": "Dan se prebudi s soljo in zaspi v zlatu",
+          "sort_order": 14
+        }
+      },
+      {
+        "id": "gc-14-en",
+        "slug": "caption-14-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-14-hr",
+        "data": {
+          "text": "Mornings taste of salt, and evenings turn to gold",
+          "sort_order": 14
+        }
+      },
+      {
+        "id": "gc-15-hr",
+        "slug": "caption-15-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Ovdje se srce privikne na mir",
+          "sort_order": 15
+        }
+      },
+      {
+        "id": "gc-15-de",
+        "slug": "caption-15-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-15-hr",
+        "data": {
+          "text": "Hier lernt das Herz, wieder ruhig zu schlagen",
+          "sort_order": 15
+        }
+      },
+      {
+        "id": "gc-15-sl",
+        "slug": "caption-15-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-15-hr",
+        "data": {
+          "text": "Tukaj se srce navadi na mir",
+          "sort_order": 15
+        }
+      },
+      {
+        "id": "gc-15-en",
+        "slug": "caption-15-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-15-hr",
+        "data": {
+          "text": "The heart quickly learns the rhythm of peace here",
+          "sort_order": 15
+        }
+      },
+      {
+        "id": "gc-16-hr",
+        "slug": "caption-16-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Plavetnilo bez žurbe, dan bez kraja",
+          "sort_order": 16
+        }
+      },
+      {
+        "id": "gc-16-de",
+        "slug": "caption-16-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-16-hr",
+        "data": {
+          "text": "Blau ohne Eile, ein Tag ohne Ende",
+          "sort_order": 16
+        }
+      },
+      {
+        "id": "gc-16-sl",
+        "slug": "caption-16-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-16-hr",
+        "data": {
+          "text": "Modrina brez naglice, dan, ki noče miniti",
+          "sort_order": 16
+        }
+      },
+      {
+        "id": "gc-16-en",
+        "slug": "caption-16-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-16-hr",
+        "data": {
+          "text": "Unhurried waters and a day that forgets to end",
+          "sort_order": 16
+        }
+      },
+      {
+        "id": "gc-17-hr",
+        "slug": "caption-17-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Mjesto gdje se oči odmore prve",
+          "sort_order": 17
+        }
+      },
+      {
+        "id": "gc-17-de",
+        "slug": "caption-17-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-17-hr",
+        "data": {
+          "text": "Hier finden die Augen als Erstes ihre Ruhe",
+          "sort_order": 17
+        }
+      },
+      {
+        "id": "gc-17-sl",
+        "slug": "caption-17-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-17-hr",
+        "data": {
+          "text": "Kotiček, kjer se pogled prvič zares sprosti",
+          "sort_order": 17
+        }
+      },
+      {
+        "id": "gc-17-en",
+        "slug": "caption-17-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-17-hr",
+        "data": {
+          "text": "A place where your eyes are the first to exhale",
+          "sort_order": 17
+        }
+      },
+      {
+        "id": "gc-18-hr",
+        "slug": "caption-18-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "U hladu borova ljeto diše sporije",
+          "sort_order": 18
+        }
+      },
+      {
+        "id": "gc-18-de",
+        "slug": "caption-18-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-18-hr",
+        "data": {
+          "text": "Im Schatten der Pinien atmet der Sommer langsamer",
+          "sort_order": 18
+        }
+      },
+      {
+        "id": "gc-18-sl",
+        "slug": "caption-18-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-18-hr",
+        "data": {
+          "text": "V senci borov poletje diha počasneje",
+          "sort_order": 18
+        }
+      },
+      {
+        "id": "gc-18-en",
+        "slug": "caption-18-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-18-hr",
+        "data": {
+          "text": "Summer breathes a little slower beneath the pines",
+          "sort_order": 18
+        }
+      },
+      {
+        "id": "gc-19-hr",
+        "slug": "caption-19-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Sve što trebaš stane u horizont",
+          "sort_order": 19
+        }
+      },
+      {
+        "id": "gc-19-de",
+        "slug": "caption-19-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-19-hr",
+        "data": {
+          "text": "Alles, was du brauchst, passt in den Horizont",
+          "sort_order": 19
+        }
+      },
+      {
+        "id": "gc-19-sl",
+        "slug": "caption-19-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-19-hr",
+        "data": {
+          "text": "Vse, kar potrebuješ, se zlije v obzorje",
+          "sort_order": 19
+        }
+      },
+      {
+        "id": "gc-19-en",
+        "slug": "caption-19-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-19-hr",
+        "data": {
+          "text": "Everything you need fits into the horizon",
+          "sort_order": 19
+        }
+      },
+      {
+        "id": "gc-20-hr",
+        "slug": "caption-20-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "More pamti korake bolje od pijeska",
+          "sort_order": 20
+        }
+      },
+      {
+        "id": "gc-20-de",
+        "slug": "caption-20-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-20-hr",
+        "data": {
+          "text": "Das Meer behält deine Schritte besser als der Sand",
+          "sort_order": 20
+        }
+      },
+      {
+        "id": "gc-20-sl",
+        "slug": "caption-20-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-20-hr",
+        "data": {
+          "text": "Morje si zapomni korake bolje kot pesek",
+          "sort_order": 20
+        }
+      },
+      {
+        "id": "gc-20-en",
+        "slug": "caption-20-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-20-hr",
+        "data": {
+          "text": "The sea remembers your steps better than sand",
+          "sort_order": 20
+        }
+      },
+      {
+        "id": "gc-21-hr",
+        "slug": "caption-21-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Kad se nebo spusti sasvim blizu",
+          "sort_order": 21
+        }
+      },
+      {
+        "id": "gc-21-de",
+        "slug": "caption-21-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-21-hr",
+        "data": {
+          "text": "Wenn sich der Himmel bis auf das Wasser neigt",
+          "sort_order": 21
+        }
+      },
+      {
+        "id": "gc-21-sl",
+        "slug": "caption-21-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-21-hr",
+        "data": {
+          "text": "Ko nebo zares objame morje",
+          "sort_order": 21
+        }
+      },
+      {
+        "id": "gc-21-en",
+        "slug": "caption-21-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-21-hr",
+        "data": {
+          "text": "When the sky lowers itself to meet the water",
+          "sort_order": 21
+        }
+      },
+      {
+        "id": "gc-22-hr",
+        "slug": "caption-22-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Tu gdje se dan lagano raspline",
+          "sort_order": 22
+        }
+      },
+      {
+        "id": "gc-22-de",
+        "slug": "caption-22-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-22-hr",
+        "data": {
+          "text": "Dort, wo der Tag sanft zerfliesst",
+          "sort_order": 22
+        }
+      },
+      {
+        "id": "gc-22-sl",
+        "slug": "caption-22-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-22-hr",
+        "data": {
+          "text": "Tukaj, kjer se dan povsem tiho izteče",
+          "sort_order": 22
+        }
+      },
+      {
+        "id": "gc-22-en",
+        "slug": "caption-22-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-22-hr",
+        "data": {
+          "text": "Right here, where daylight gently dissolves",
+          "sort_order": 22
+        }
+      },
+      {
+        "id": "gc-23-hr",
+        "slug": "caption-23-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Kamen, sol i jedna tiha sreća",
+          "sort_order": 23
+        }
+      },
+      {
+        "id": "gc-23-de",
+        "slug": "caption-23-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-23-hr",
+        "data": {
+          "text": "Stein, Salz und ein stilles Glück",
+          "sort_order": 23
+        }
+      },
+      {
+        "id": "gc-23-sl",
+        "slug": "caption-23-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-23-hr",
+        "data": {
+          "text": "Kamen, sol in tiha sreča",
+          "sort_order": 23
+        }
+      },
+      {
+        "id": "gc-23-en",
+        "slug": "caption-23-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-23-hr",
+        "data": {
+          "text": "Sunbaked stone, sea salt, and a quiet sort of joy",
+          "sort_order": 23
+        }
+      },
+      {
+        "id": "gc-24-hr",
+        "slug": "caption-24-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Jutro miriše na more i mogućnost",
+          "sort_order": 24
+        }
+      },
+      {
+        "id": "gc-24-de",
+        "slug": "caption-24-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-24-hr",
+        "data": {
+          "text": "Der Morgen riecht nach Meer und Möglichkeit",
+          "sort_order": 24
+        }
+      },
+      {
+        "id": "gc-24-sl",
+        "slug": "caption-24-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-24-hr",
+        "data": {
+          "text": "Jutro diši po morju in možnostih",
+          "sort_order": 24
+        }
+      },
+      {
+        "id": "gc-24-en",
+        "slug": "caption-24-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-24-hr",
+        "data": {
+          "text": "Morning smells of sea and possibility",
+          "sort_order": 24
+        }
+      },
+      {
+        "id": "gc-25-hr",
+        "slug": "caption-25-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Večer ovdje dolazi na prstima",
+          "sort_order": 25
+        }
+      },
+      {
+        "id": "gc-25-de",
+        "slug": "caption-25-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-25-hr",
+        "data": {
+          "text": "Die Dämmerung schleicht sich hier auf leisen Sohlen an",
+          "sort_order": 25
+        }
+      },
+      {
+        "id": "gc-25-sl",
+        "slug": "caption-25-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-25-hr",
+        "data": {
+          "text": "Mrak se tu spusti kar po prstih",
+          "sort_order": 25
+        }
+      },
+      {
+        "id": "gc-25-en",
+        "slug": "caption-25-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-25-hr",
+        "data": {
+          "text": "Dusk arrives on tiptoes in these parts",
+          "sort_order": 25
+        }
+      },
+      {
+        "id": "gc-26-hr",
+        "slug": "caption-26-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Gdje se tišina sluša otvorenim srcem",
+          "sort_order": 26
+        }
+      },
+      {
+        "id": "gc-26-de",
+        "slug": "caption-26-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-26-hr",
+        "data": {
+          "text": "Wo man der Stille mit dem Herzen lauscht",
+          "sort_order": 26
+        }
+      },
+      {
+        "id": "gc-26-sl",
+        "slug": "caption-26-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-26-hr",
+        "data": {
+          "text": "Kjer tišini prisluhnemo z odprtim srcem",
+          "sort_order": 26
+        }
+      },
+      {
+        "id": "gc-26-en",
+        "slug": "caption-26-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-26-hr",
+        "data": {
+          "text": "Where you listen to the quiet with an open heart",
+          "sort_order": 26
+        }
+      },
+      {
+        "id": "gc-27-hr",
+        "slug": "caption-27-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Još malo sunca za dušu",
+          "sort_order": 27
+        }
+      },
+      {
+        "id": "gc-27-de",
+        "slug": "caption-27-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-27-hr",
+        "data": {
+          "text": "Noch ein wenig Sonne für deine Seele",
+          "sort_order": 27
+        }
+      },
+      {
+        "id": "gc-27-sl",
+        "slug": "caption-27-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-27-hr",
+        "data": {
+          "text": "Še malo sonca za dušo",
+          "sort_order": 27
+        }
+      },
+      {
+        "id": "gc-27-en",
+        "slug": "caption-27-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-27-hr",
+        "data": {
+          "text": "A little more sun for the soul",
+          "sort_order": 27
+        }
+      },
+      {
+        "id": "gc-28-hr",
+        "slug": "caption-28-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Svjetlo se lomi kao nježna uspomena",
+          "sort_order": 28
+        }
+      },
+      {
+        "id": "gc-28-de",
+        "slug": "caption-28-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-28-hr",
+        "data": {
+          "text": "Das Licht bricht wie eine zarte Erinnerung",
+          "sort_order": 28
+        }
+      },
+      {
+        "id": "gc-28-sl",
+        "slug": "caption-28-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-28-hr",
+        "data": {
+          "text": "Svetloba se preliva kot topel, star spomin",
+          "sort_order": 28
+        }
+      },
+      {
+        "id": "gc-28-en",
+        "slug": "caption-28-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-28-hr",
+        "data": {
+          "text": "The light scatters like a fond memory",
+          "sort_order": 28
+        }
+      },
+      {
+        "id": "gc-29-hr",
+        "slug": "caption-29-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Ovdje i valovi govore polako",
+          "sort_order": 29
+        }
+      },
+      {
+        "id": "gc-29-de",
+        "slug": "caption-29-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-29-hr",
+        "data": {
+          "text": "Selbst die Wellen flüstern hier bedächtig",
+          "sort_order": 29
+        }
+      },
+      {
+        "id": "gc-29-sl",
+        "slug": "caption-29-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-29-hr",
+        "data": {
+          "text": "Tukaj tudi valovi govorijo počasi",
+          "sort_order": 29
+        }
+      },
+      {
+        "id": "gc-29-en",
+        "slug": "caption-29-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-29-hr",
+        "data": {
+          "text": "Even the waves speak slowly here",
+          "sort_order": 29
+        }
+      },
+      {
+        "id": "gc-30-hr",
+        "slug": "caption-30-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Ljeto ostavlja trag samo u nama",
+          "sort_order": 30
+        }
+      },
+      {
+        "id": "gc-30-de",
+        "slug": "caption-30-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-30-hr",
+        "data": {
+          "text": "Der Sommer hinterlässt seine Spuren nur in uns",
+          "sort_order": 30
+        }
+      },
+      {
+        "id": "gc-30-sl",
+        "slug": "caption-30-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-30-hr",
+        "data": {
+          "text": "Poletje riše sledi samo še v naših srcih",
+          "sort_order": 30
+        }
+      },
+      {
+        "id": "gc-30-en",
+        "slug": "caption-30-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-30-hr",
+        "data": {
+          "text": "Summer leaves its footprints only within us",
+          "sort_order": 30
+        }
+      },
+      {
+        "id": "gc-31-hr",
+        "slug": "caption-31-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Pod ovim nebom sve postaje jednostavno",
+          "sort_order": 31
+        }
+      },
+      {
+        "id": "gc-31-de",
+        "slug": "caption-31-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-31-hr",
+        "data": {
+          "text": "Unter diesem Himmel wird alles einfach",
+          "sort_order": 31
+        }
+      },
+      {
+        "id": "gc-31-sl",
+        "slug": "caption-31-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-31-hr",
+        "data": {
+          "text": "Pod tem nebom vse postane preprosto",
+          "sort_order": 31
+        }
+      },
+      {
+        "id": "gc-31-en",
+        "slug": "caption-31-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-31-hr",
+        "data": {
+          "text": "Beneath this sky, everything becomes simple",
+          "sort_order": 31
+        }
+      },
+      {
+        "id": "gc-32-hr",
+        "slug": "caption-32-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "More i mir, bez suvišnih riječi",
+          "sort_order": 32
+        }
+      },
+      {
+        "id": "gc-32-de",
+        "slug": "caption-32-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-32-hr",
+        "data": {
+          "text": "Meer und Ruhe, ohne grosse Worte",
+          "sort_order": 32
+        }
+      },
+      {
+        "id": "gc-32-sl",
+        "slug": "caption-32-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-32-hr",
+        "data": {
+          "text": "Samo valovi in mir, brez odvečnih besed",
+          "sort_order": 32
+        }
+      },
+      {
+        "id": "gc-32-en",
+        "slug": "caption-32-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-32-hr",
+        "data": {
+          "text": "Water and quiet, with nothing left to say",
+          "sort_order": 32
+        }
+      },
+      {
+        "id": "gc-33-hr",
+        "slug": "caption-33-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Gdje svaki pogled traje dulje nego inače",
+          "sort_order": 33
+        }
+      },
+      {
+        "id": "gc-33-de",
+        "slug": "caption-33-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-33-hr",
+        "data": {
+          "text": "Wo jeder Blick etwas länger dauert",
+          "sort_order": 33
+        }
+      },
+      {
+        "id": "gc-33-sl",
+        "slug": "caption-33-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-33-hr",
+        "data": {
+          "text": "Tu se vsak pogled ustavi nekoliko dlje",
+          "sort_order": 33
+        }
+      },
+      {
+        "id": "gc-33-en",
+        "slug": "caption-33-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-33-hr",
+        "data": {
+          "text": "Where every glance lasts a little longer",
+          "sort_order": 33
+        }
+      },
+      {
+        "id": "gc-34-hr",
+        "slug": "caption-34-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Iz daljine sve napokon sjedne na mjesto",
+          "sort_order": 34
+        }
+      },
+      {
+        "id": "gc-34-de",
+        "slug": "caption-34-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-34-hr",
+        "data": {
+          "text": "Aus der Ferne fügt sich endlich alles",
+          "sort_order": 34
+        }
+      },
+      {
+        "id": "gc-34-sl",
+        "slug": "caption-34-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-34-hr",
+        "data": {
+          "text": "Iz daljave se vse končno postavi na svoje mesto",
+          "sort_order": 34
+        }
+      },
+      {
+        "id": "gc-34-en",
+        "slug": "caption-34-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-34-hr",
+        "data": {
+          "text": "From a distance, everything simply falls into place",
+          "sort_order": 34
+        }
+      },
+      {
+        "id": "gc-35-hr",
+        "slug": "caption-35-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Sol u zraku, mir pod kožom",
+          "sort_order": 35
+        }
+      },
+      {
+        "id": "gc-35-de",
+        "slug": "caption-35-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-35-hr",
+        "data": {
+          "text": "Salz in der Luft, Ruhe unter der Haut",
+          "sort_order": 35
+        }
+      },
+      {
+        "id": "gc-35-sl",
+        "slug": "caption-35-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-35-hr",
+        "data": {
+          "text": "Sol na ustnicah in globok mir pod kožo",
+          "sort_order": 35
+        }
+      },
+      {
+        "id": "gc-35-en",
+        "slug": "caption-35-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-35-hr",
+        "data": {
+          "text": "Salt on the breeze, stillness beneath the skin",
+          "sort_order": 35
+        }
+      },
+      {
+        "id": "gc-36-hr",
+        "slug": "caption-36-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Ovdje se dan ne broji satima",
+          "sort_order": 36
+        }
+      },
+      {
+        "id": "gc-36-de",
+        "slug": "caption-36-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-36-hr",
+        "data": {
+          "text": "Hier zählt man den Tag nicht in Stunden",
+          "sort_order": 36
+        }
+      },
+      {
+        "id": "gc-36-sl",
+        "slug": "caption-36-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-36-hr",
+        "data": {
+          "text": "Tukaj dneva ne merimo v urah",
+          "sort_order": 36
+        }
+      },
+      {
+        "id": "gc-36-en",
+        "slug": "caption-36-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-36-hr",
+        "data": {
+          "text": "Here, the day isn't measured in hours",
+          "sort_order": 36
+        }
+      },
+      {
+        "id": "gc-37-hr",
+        "slug": "caption-37-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Dok more šuti, sve je rečeno",
+          "sort_order": 37
+        }
+      },
+      {
+        "id": "gc-37-de",
+        "slug": "caption-37-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-37-hr",
+        "data": {
+          "text": "Wenn das Meer schweigt, ist alles gesagt",
+          "sort_order": 37
+        }
+      },
+      {
+        "id": "gc-37-sl",
+        "slug": "caption-37-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-37-hr",
+        "data": {
+          "text": "Ko morje obmolkne, je vse izrečeno",
+          "sort_order": 37
+        }
+      },
+      {
+        "id": "gc-37-en",
+        "slug": "caption-37-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-37-hr",
+        "data": {
+          "text": "When the sea falls silent, nothing more needs saying",
+          "sort_order": 37
+        }
+      },
+      {
+        "id": "gc-38-hr",
+        "slug": "caption-38-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Tišina između valova vrijedi najviše",
+          "sort_order": 38
+        }
+      },
+      {
+        "id": "gc-38-de",
+        "slug": "caption-38-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-38-hr",
+        "data": {
+          "text": "Die Pause zwischen zwei Wellen birgt die grösste Ruhe",
+          "sort_order": 38
+        }
+      },
+      {
+        "id": "gc-38-sl",
+        "slug": "caption-38-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-38-hr",
+        "data": {
+          "text": "Tišina med valovi šteje največ",
+          "sort_order": 38
+        }
+      },
+      {
+        "id": "gc-38-en",
+        "slug": "caption-38-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-38-hr",
+        "data": {
+          "text": "The silence between the waves matters most",
+          "sort_order": 38
+        }
+      },
+      {
+        "id": "gc-39-hr",
+        "slug": "caption-39-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "U svakom kamenu malo starog sunca",
+          "sort_order": 39
+        }
+      },
+      {
+        "id": "gc-39-de",
+        "slug": "caption-39-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-39-hr",
+        "data": {
+          "text": "Jeder Stein bewahrt ein wenig vom Licht vergangener Tage",
+          "sort_order": 39
+        }
+      },
+      {
+        "id": "gc-39-sl",
+        "slug": "caption-39-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-39-hr",
+        "data": {
+          "text": "V vsakem kamnu je skrito malo včerajšnjega sonca",
+          "sort_order": 39
+        }
+      },
+      {
+        "id": "gc-39-en",
+        "slug": "caption-39-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-39-hr",
+        "data": {
+          "text": "Each stone holds the warmth of yesterday's sun",
+          "sort_order": 39
+        }
+      },
+      {
+        "id": "gc-40-hr",
+        "slug": "caption-40-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Mjesto za disati punim, sporim srcem",
+          "sort_order": 40
+        }
+      },
+      {
+        "id": "gc-40-de",
+        "slug": "caption-40-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-40-hr",
+        "data": {
+          "text": "Ein Ort, um mit vollem, ruhigem Herzen zu atmen",
+          "sort_order": 40
+        }
+      },
+      {
+        "id": "gc-40-sl",
+        "slug": "caption-40-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-40-hr",
+        "data": {
+          "text": "Kraj, kjer dihaš s polnim, počasnim srcem",
+          "sort_order": 40
+        }
+      },
+      {
+        "id": "gc-40-en",
+        "slug": "caption-40-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-40-hr",
+        "data": {
+          "text": "A place to breathe freely, with a slow and steady heart",
+          "sort_order": 40
+        }
+      },
+      {
+        "id": "gc-41-hr",
+        "slug": "caption-41-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "More blista kao da nas prepoznaje",
+          "sort_order": 41
+        }
+      },
+      {
+        "id": "gc-41-de",
+        "slug": "caption-41-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-41-hr",
+        "data": {
+          "text": "Das Wasser glitzert, als würde es uns willkommen heissen",
+          "sort_order": 41
+        }
+      },
+      {
+        "id": "gc-41-sl",
+        "slug": "caption-41-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-41-hr",
+        "data": {
+          "text": "Morje se blešči, kot da nas prepozna",
+          "sort_order": 41
+        }
+      },
+      {
+        "id": "gc-41-en",
+        "slug": "caption-41-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-41-hr",
+        "data": {
+          "text": "The sea glimmers as if it recognises us",
+          "sort_order": 41
+        }
+      },
+      {
+        "id": "gc-42-hr",
+        "slug": "caption-42-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Ovdje se misli razvežu same od sebe",
+          "sort_order": 42
+        }
+      },
+      {
+        "id": "gc-42-de",
+        "slug": "caption-42-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-42-hr",
+        "data": {
+          "text": "Hier lösen sich deine Gedanken von selbst",
+          "sort_order": 42
+        }
+      },
+      {
+        "id": "gc-42-sl",
+        "slug": "caption-42-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-42-hr",
+        "data": {
+          "text": "Tukaj se misli razvezejo same od sebe",
+          "sort_order": 42
+        }
+      },
+      {
+        "id": "gc-42-en",
+        "slug": "caption-42-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-42-hr",
+        "data": {
+          "text": "Here, thoughts untangle on their own",
+          "sort_order": 42
+        }
+      },
+      {
+        "id": "gc-43-hr",
+        "slug": "caption-43-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Ljeto se ovdje zadržava bez pitanja",
+          "sort_order": 43
+        }
+      },
+      {
+        "id": "gc-43-de",
+        "slug": "caption-43-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-43-hr",
+        "data": {
+          "text": "Der Sommer bleibt hier einfach immer ein wenig länger",
+          "sort_order": 43
+        }
+      },
+      {
+        "id": "gc-43-sl",
+        "slug": "caption-43-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-43-hr",
+        "data": {
+          "text": "Poletje tukaj ostane brez vprašanj",
+          "sort_order": 43
+        }
+      },
+      {
+        "id": "gc-43-en",
+        "slug": "caption-43-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-43-hr",
+        "data": {
+          "text": "Summer overstays its welcome here, and no one minds",
+          "sort_order": 43
+        }
+      },
+      {
+        "id": "gc-44-hr",
+        "slug": "caption-44-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Između valova i bora, dom",
+          "sort_order": 44
+        }
+      },
+      {
+        "id": "gc-44-de",
+        "slug": "caption-44-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-44-hr",
+        "data": {
+          "text": "Zwischen Wellen und Pinien, dein Zuhause",
+          "sort_order": 44
+        }
+      },
+      {
+        "id": "gc-44-sl",
+        "slug": "caption-44-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-44-hr",
+        "data": {
+          "text": "Med valovi in borovci, dom",
+          "sort_order": 44
+        }
+      },
+      {
+        "id": "gc-44-en",
+        "slug": "caption-44-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-44-hr",
+        "data": {
+          "text": "Between the waves and the pines, home",
+          "sort_order": 44
+        }
+      },
+      {
+        "id": "gc-45-hr",
+        "slug": "caption-45-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Kad dan zamiriše na bor i sol",
+          "sort_order": 45
+        }
+      },
+      {
+        "id": "gc-45-de",
+        "slug": "caption-45-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-45-hr",
+        "data": {
+          "text": "Wenn der Tag nach Pinien und Salz duftet",
+          "sort_order": 45
+        }
+      },
+      {
+        "id": "gc-45-sl",
+        "slug": "caption-45-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-45-hr",
+        "data": {
+          "text": "Ko dan zadiši po boru in soli",
+          "sort_order": 45
+        }
+      },
+      {
+        "id": "gc-45-en",
+        "slug": "caption-45-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-45-hr",
+        "data": {
+          "text": "When the afternoon carries the scent of pine and sea salt",
+          "sort_order": 45
+        }
+      },
+      {
+        "id": "gc-46-hr",
+        "slug": "caption-46-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Pogled koji ostaje i kad odeš",
+          "sort_order": 46
+        }
+      },
+      {
+        "id": "gc-46-de",
+        "slug": "caption-46-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-46-hr",
+        "data": {
+          "text": "Ein Blick, der bleibt, auch wenn du gehst",
+          "sort_order": 46
+        }
+      },
+      {
+        "id": "gc-46-sl",
+        "slug": "caption-46-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-46-hr",
+        "data": {
+          "text": "Podoba, ki ostane s tabo, tudi ko odideš",
+          "sort_order": 46
+        }
+      },
+      {
+        "id": "gc-46-en",
+        "slug": "caption-46-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-46-hr",
+        "data": {
+          "text": "A view that follows you long after you've gone",
+          "sort_order": 46
+        }
+      },
+      {
+        "id": "gc-47-hr",
+        "slug": "caption-47-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Nad morem sve misli postanu mekše",
+          "sort_order": 47
+        }
+      },
+      {
+        "id": "gc-47-de",
+        "slug": "caption-47-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-47-hr",
+        "data": {
+          "text": "Über dem Meer werden alle Gedanken weicher",
+          "sort_order": 47
+        }
+      },
+      {
+        "id": "gc-47-sl",
+        "slug": "caption-47-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-47-hr",
+        "data": {
+          "text": "Nad morjem misli postanejo mehkejše",
+          "sort_order": 47
+        }
+      },
+      {
+        "id": "gc-47-en",
+        "slug": "caption-47-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-47-hr",
+        "data": {
+          "text": "Above the sea, every thought softens",
+          "sort_order": 47
+        }
+      },
+      {
+        "id": "gc-48-hr",
+        "slug": "caption-48-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Tu gdje večer zagrli cijeli arhipelag",
+          "sort_order": 48
+        }
+      },
+      {
+        "id": "gc-48-de",
+        "slug": "caption-48-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-48-hr",
+        "data": {
+          "text": "Dort, wo die Dämmerung die ganze Inselwelt umarmt",
+          "sort_order": 48
+        }
+      },
+      {
+        "id": "gc-48-sl",
+        "slug": "caption-48-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-48-hr",
+        "data": {
+          "text": "Kjer večer mehkobno objame vse te otoke",
+          "sort_order": 48
+        }
+      },
+      {
+        "id": "gc-48-en",
+        "slug": "caption-48-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-48-hr",
+        "data": {
+          "text": "Where evening gently wraps around the islands",
+          "sort_order": 48
+        }
+      },
+      {
+        "id": "gc-49-hr",
+        "slug": "caption-49-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Svaki povjetarac donese malo nježnosti",
+          "sort_order": 49
+        }
+      },
+      {
+        "id": "gc-49-de",
+        "slug": "caption-49-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-49-hr",
+        "data": {
+          "text": "Jeder Windhauch bringt ein wenig Zärtlichkeit",
+          "sort_order": 49
+        }
+      },
+      {
+        "id": "gc-49-sl",
+        "slug": "caption-49-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-49-hr",
+        "data": {
+          "text": "Vsak vetrič prinese malo nežnosti",
+          "sort_order": 49
+        }
+      },
+      {
+        "id": "gc-49-en",
+        "slug": "caption-49-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-49-hr",
+        "data": {
+          "text": "Each gentle breeze carries a soft kind of grace",
+          "sort_order": 49
+        }
+      },
+      {
+        "id": "gc-50-hr",
+        "slug": "caption-50-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Ovdje se voli tiho, kao more",
+          "sort_order": 50
+        }
+      },
+      {
+        "id": "gc-50-de",
+        "slug": "caption-50-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-50-hr",
+        "data": {
+          "text": "Die Liebe ist hier so still und tief wie das Meer",
+          "sort_order": 50
+        }
+      },
+      {
+        "id": "gc-50-sl",
+        "slug": "caption-50-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-50-hr",
+        "data": {
+          "text": "Tukaj je ljubezen tiha, tako globoka kot morje",
+          "sort_order": 50
+        }
+      },
+      {
+        "id": "gc-50-en",
+        "slug": "caption-50-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-50-hr",
+        "data": {
+          "text": "Love here is quiet and deep, much like the sea",
+          "sort_order": 50
+        }
+      }
+    ]
+  }
+}

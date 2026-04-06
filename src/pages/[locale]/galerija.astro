@@ -3,6 +3,7 @@ import Page from "~/layouts/Page.astro";
 import HeroSimple from "~/components/ui/HeroSimple.astro";
 import MiniCollage from "~/components/ui/MiniCollage.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
+import { getLocalizedCollection } from "~/lib/content";
 
 const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
@@ -19,59 +20,10 @@ const intro: Record<Locale, string> = {
   en: "All the island's colors in one place — sea, stone walls, konobas, pines, and that kind of peace you can't really describe. You only feel it.",
 };
 
-// Poetic captions — randomly assigned to photos
-const captions = [
-  "More ovdje šapće sporije nego igdje",
-  "Dan se topi u tirkiznoj tišini",
-  "Gdje pogled zastane, srce ostane",
-  "Sunce ovdje zna nježnije dodirnuti",
-  "Između kamena i mora, mir traje",
-  "Sve je lakše kad miriše sol",
-  "Ovdje vrijeme sjedi u hladu",
-  "Tišina ima boju kasnog ljeta",
-  "More se prelijeva kao misao o sreći",
-  "Gdje borovi čuvaju plavetnilo od buke",
-  "Još jedan trenutak za nikamo krenuti",
-  "Na ovom svjetlu i kamen omekša",
-  "Vjetar nosi ono što ne kažemo",
-  "Dan počinje solju, završava zlatom",
-  "Ovdje se srce privikne na mir",
-  "Plavetnilo bez žurbe, dan bez kraja",
-  "Mjesto gdje se oči odmore prve",
-  "U hladu borova ljeto diše sporije",
-  "Sve što trebaš stane u horizont",
-  "More pamti korake bolje od pijeska",
-  "Kad se nebo spusti sasvim blizu",
-  "Tu gdje se dan lagano raspline",
-  "Kamen, sol i jedna tiha sreća",
-  "Jutro miriše na more i mogućnost",
-  "Večer ovdje dolazi na prstima",
-  "Gdje se tišina sluša otvorenim srcem",
-  "Još malo sunca za dušu",
-  "Svjetlo se lomi kao nježna uspomena",
-  "Ovdje i valovi govore polako",
-  "Ljeto ostavlja trag samo u nama",
-  "Pod ovim nebom sve postaje jednostavno",
-  "More i mir, bez suvišnih riječi",
-  "Gdje svaki pogled traje dulje nego inače",
-  "Iz daljine sve napokon sjedne na mjesto",
-  "Sol u zraku, mir pod kožom",
-  "Ovdje se dan ne broji satima",
-  "Dok more šuti, sve je rečeno",
-  "Tišina između valova vrijedi najviše",
-  "U svakom kamenu malo starog sunca",
-  "Mjesto za disati punim, sporim srcem",
-  "More blista kao da nas prepoznaje",
-  "Ovdje se misli razvežu same od sebe",
-  "Ljeto se ovdje zadržava bez pitanja",
-  "Između valova i bora, dom",
-  "Kad dan zamiriše na bor i sol",
-  "Pogled koji ostaje i kad odeš",
-  "Nad morem sve misli postanu mekše",
-  "Tu gdje večer zagrli cijeli arhipelag",
-  "Svaki povjetarac donese malo nježnosti",
-  "Ovdje se voli tiho, kao more",
-];
+// Poetic captions from CMS — localized per language
+const captionEntries = (await getLocalizedCollection("gallery_captions", typedLocale))
+  .sort((a, b) => (Number(a.data.sort_order) || 0) - (Number(b.data.sort_order) || 0));
+const captions = captionEntries.map((e) => (e.data.text as string) || "");
 
 // All site photos (excluding apartment interiors)
 const allPhotos = [

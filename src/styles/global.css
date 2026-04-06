@@ -185,6 +185,7 @@ p {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-muted);
+  max-width: none;
 }
 
 /* German hyphenation */
@@ -484,6 +485,7 @@ p {
 
 /* ---------- Utilities ---------- */
 .text-center { text-align: center; }
+.text-center p { margin-inline: auto; }
 
 .visually-hidden {
   position: absolute;

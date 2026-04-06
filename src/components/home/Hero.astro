@@ -104,13 +104,8 @@ const heroImages = [
     height: 100%;
     object-fit: cover;
     display: block;
-    /* Continuous slow zoom — never static */
+    /* Continuous slow zoom — runs on ALL slides so fade-in catches motion mid-flow */
     animation: heroZoom 12s ease-in-out infinite alternate;
-    animation-play-state: paused;
-  }
-
-  .hero__slide.is-active img {
-    animation-play-state: running;
   }
 
   @keyframes heroZoom {
@@ -143,8 +138,6 @@ const heroImages = [
     margin-bottom: var(--space-xl);
     letter-spacing: 0.2em;
     font-size: var(--font-size-xs);
-    text-align: center;
-    max-width: none;
   }
 
   .hero-title {
@@ -212,6 +205,6 @@ const heroImages = [
       slides[current].classList.add('is-active');
     }
 
-    setInterval(next, 6000);
+    setInterval(next, 10000);
   });
 </script>
