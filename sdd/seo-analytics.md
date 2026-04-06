@@ -32,17 +32,20 @@ Schema.org structured data, Open Graph, multilingual sitemap, keyword strategy, 
 
 ### REQ-SEO-2: Open Graph & Social
 
-- **Intent:** Beautiful social sharing previews
+- **Intent:** Beautiful social sharing previews across all platforms
 - **Applies To:** System
 - **Acceptance Criteria:**
   - OG image per apartment (hero photo via Image Resizing at 1200x630)
   - OG title, description per page per locale
   - Default OG image for non-apartment pages
+  - `og:site_name` set to property name on all pages
+  - `og:locale` set per language (hr_HR, de_CH, sl_SI, en_US)
+  - **Twitter Card meta tags:** `twitter:card` (summary_large_image), `twitter:title`, `twitter:description`, `twitter:image` on all pages. Image falls back to the same default OG image when no page-specific image is set.
 - **Constraints:** CON-SEO
 - **Priority:** P1
 - **Dependencies:** REQ-AP-1, REQ-CMS-2
-- **Verification:** Test sharing on WhatsApp, Facebook
-- **Status:** Partial — per-page OG images set on 10 subpages via `ogImage` prop on Page layout. Default fallback image applied to homepage, apartment listing, apartment detail, galerija, privatnost, and 404. OG title and description rendered per page per locale via Base.astro head. Still missing: per-apartment OG image (hero photo via Image Resizing at 1200x630)
+- **Verification:** Test sharing on WhatsApp, Facebook, Twitter/X. Validate cards via Twitter Card Validator.
+- **Status:** Partial — per-page OG images set on 10 subpages via `ogImage` prop on Page layout. Default fallback image applied to homepage, apartment listing, apartment detail, galerija, privatnost, and 404. OG title and description rendered per page per locale. `og:site_name` and `og:locale` emitted on all pages. Twitter Card tags (summary_large_image) emitted on all pages with title, description, and image. Still missing: per-apartment OG image (hero photo via Image Resizing at 1200x630)
 
 ### REQ-SEO-3: Analytics + Conversion Events
 
@@ -169,6 +172,23 @@ Schema.org structured data, Open Graph, multilingual sitemap, keyword strategy, 
 - **Dependencies:** None
 - **Verification:** Verify file accessible at `/llms.txt`, verify content accuracy against live site
 - **Status:** Implemented
+
+### REQ-SEO-10: Browser Integration & Home Screen
+
+- **Intent:** Professional browser chrome appearance and mobile home-screen icon for returning visitors
+- **Applies To:** System
+- **Acceptance Criteria:**
+  - `theme-color` meta tag: cream (`#F8F5EF`) for light mode, deep navy (`#0A1F33`) for dark mode, selected via `prefers-color-scheme` media attribute
+  - `apple-touch-icon` (180x180) referenced in `<head>` for iOS home-screen bookmarks
+  - `apple-mobile-web-app-title` set to short property name
+  - Web app manifest (`site.webmanifest`) linked in `<head>`, containing: app name, short name, Android Chrome icons (192x192, 512x512), theme color, background color, display mode (standalone), start URL (`/hr/`)
+  - SVG favicon (`favicon.svg`) as primary icon
+  - **Note:** This is a lightweight home-screen/bookmark enhancement, not a full PWA. No service worker, no offline support, no push notifications.
+- **Constraints:** CON-SEO
+- **Priority:** P2
+- **Dependencies:** None
+- **Verification:** Verify theme-color changes browser chrome on Android. Verify iOS "Add to Home Screen" uses apple-touch-icon and short title. Verify manifest loads without errors in DevTools Application panel.
+- **Status:** Implemented — theme-color (light/dark), apple-touch-icon reference, manifest link, and apple-mobile-web-app-title in Base.astro head. Icon image files (apple-touch-icon.png, android-chrome PNGs) still need to be generated from favicon.svg and placed in public/.
 
 ## Out of Scope
 

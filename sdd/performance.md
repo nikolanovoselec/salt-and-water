@@ -73,7 +73,7 @@ Image serving, edge caching, bundle budget.
 
 ## Out of Scope
 
-- PWA / Service Worker (unnecessary for this scale)
+- PWA / Service Worker (unnecessary for this scale). Note: a lightweight `site.webmanifest` exists for home-screen icon and browser chrome (REQ-SEO-10), but no service worker, offline support, or app-like PWA behavior is implemented.
 - Full offline-first architecture
 - Background sync
 - Push notifications

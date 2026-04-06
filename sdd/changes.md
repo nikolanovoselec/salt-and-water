@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-04-06 - Twitter cards, theme-color, og:locale, manifest, favicon refs (ecfc35f)
+
+Commit ecfc35f added remaining social/browser meta tags identified from graymatter.ch comparison: Twitter Card tags (summary_large_image with title, description, image), `og:locale` per language (hr_HR, de_CH, sl_SI, en_US), `og:site_name`, theme-color meta for light/dark modes, apple-touch-icon and manifest references in `<head>`, and a `site.webmanifest` for home-screen presentation. Icon image files still need to be generated from favicon.svg.
+
+### Requirements updated
+- **REQ-SEO-2** (Open Graph & Social): Added Twitter Card meta tags, `og:site_name`, and `og:locale` to acceptance criteria. Updated status and verification.
+
+### Requirements added
+- **REQ-SEO-10** (Browser Integration & Home Screen): New P2 requirement for theme-color, apple-touch-icon, web app manifest, and SVG favicon.
+
+### Other changes
+- **Performance Out of Scope**: Clarified that "PWA / Service Worker" exclusion does not apply to the lightweight web manifest (REQ-SEO-10).
+- **Glossary**: Added "Web App Manifest" term.
+
+---
+
 ## 2026-04-06 - Remove misleading lastmod from sitemap, doc fixes (bfe415f)
 
 Commit bfe415f removed `<lastmod>` from sitemap URL entries -- setting it to the current date on every request provided no real signal to search engines and was misleading. Documentation and spec updated to reflect dynamic apartment slugs, `_headers` restoration, and `LLMs-Txt` directive from prior commit (07b4de2).
