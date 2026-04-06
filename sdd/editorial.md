@@ -121,8 +121,10 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - Emdash collection: question + answer per locale, category tag, sort order
-  - Categories: Booking & Payment, The Apartment, Getting There, The Island
+  - Categories: `getting-there`, `apartment`, `booking`, `house-rules`
+  - 8 fallback FAQ entries per locale (used when CMS collection is empty): getting-there (2), apartment (3), booking (2), house-rules (1). House rules entry: personal tone explaining no cleaning service, asks guests to leave apartment as found.
   - Accordion UI with smooth animation
+  - `#house-rules` deep-link: the `<details>` element with category `house-rules` receives `id="house-rules"` (category-based, not index-based). Inline script auto-opens and smooth-scrolls to this element when page loads with `#house-rules` hash.
   - Contextual: apartment pages show apartment FAQs, transport page shows transport FAQs
   - Schema.org FAQPage markup
   - Owner manages from phone
@@ -130,8 +132,8 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Constraints:** CON-CMS, CON-I18N, CON-SEO
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5, REQ-I18N-4
-- **Verification:** Test accordion, verify structured data, verify fallback content matches locale tone conventions (REQ-I18N-6)
-- **Status:** Implemented — hardcoded fallback FAQ entries (used when CMS `faqs` collection is empty) are culturally adapted per locale: DE uses informal "ihr" register, EN uses warm conversational tone, SL uses native Slovenian phrasing. Transport FAQ answers in DE/EN/SL cross-reference the Getting Here page.
+- **Verification:** Test accordion, verify structured data, verify fallback content matches locale tone conventions (REQ-I18N-6), verify `#house-rules` anchor auto-opens and scrolls to the correct entry
+- **Status:** Implemented — hardcoded fallback FAQ entries (used when CMS `faqs` collection is empty) are culturally adapted per locale: DE uses informal "ihr" register, EN uses warm conversational tone, SL uses native Slovenian phrasing. Transport FAQ answers in DE/EN/SL cross-reference the Getting Here page. Categories present in fallback data: `getting-there`, `apartment`, `booking`, `house-rules`. `#house-rules` deep-link is supported: anchor id is derived from `faq.category === "house-rules"` (not position), and an inline script auto-opens and scrolls to the element on hash navigation.
 
 ### REQ-ED-8: "Food & Drink" Detail Page
 

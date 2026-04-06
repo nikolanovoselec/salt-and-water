@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-06 - House rules FAQ entry + category-based anchor (d579b1f)
+
+Commit d579b1f added a "house rules" FAQ entry in all 4 locales (HR: "Kućni red", DE: "Hausordnung", SL: "Hišni red", EN: "House rules") with category `house-rules`. Message: no cleaning service, leave apartment as found. Anchor id on `<details>` elements is now derived from `faq.category === "house-rules"` rather than last-item index, making the anchor stable regardless of entry order. An inline script auto-opens and scrolls to the element when `window.location.hash === "#house-rules"` on page load.
+
+### Requirements updated
+- **REQ-ED-7** (FAQ): Acceptance criteria updated — categories corrected from aspirational names ("Booking & Payment", "The Apartment", "Getting There", "The Island") to actual code values (`getting-there`, `apartment`, `booking`, `house-rules`). Added AC for 8 fallback entries per locale, `#house-rules` category-based anchor with auto-open/scroll behavior. Verification updated to include anchor test. Status updated to reflect house-rules entry and stable anchor logic.
+
+---
+
 ## 2026-04-06 - Swiss German ss normalization extended to seed data (9dbd965)
 
 Commit 9dbd965 replaced remaining `ß` with `ss` in seed content files (`apartments.json`, `testimonials.json`). Three German strings affected: Tramuntana shortDescription, valueProp, and one testimonial quote. Completes the Swiss German orthography normalization started in 63ce6b7 (which covered translations and `.astro` fallbacks).
