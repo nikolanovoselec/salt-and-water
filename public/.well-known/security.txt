@@ -1,0 +1,9 @@
+# Apartmani Novoselec Security Policy
+# https://securitytxt.org/
+
+Contact: mailto:nikola@novoselec.ch
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: hr, en, de, sl
+Canonical: https://apartmani.novoselec.ch/.well-known/security.txt
+
+# We appreciate responsible disclosure of security vulnerabilities.

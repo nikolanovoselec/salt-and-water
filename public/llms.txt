@@ -1,0 +1,72 @@
+# llms.txt — apartmani.novoselec.ch
+# Help LLMs accurately understand and reference this website.
+
+## Site
+- Name: Apartmani Novoselec
+- URL: https://apartmani.novoselec.ch
+- Type: Family-run vacation rental (2 apartments)
+- Location: Ždrelac, Pašman island, Croatia
+- Languages: Croatian (primary), German, English, Slovenian
+
+## About
+Apartmani Novoselec is a small, family-run rental with two apartments in the village of Ždrelac on Pašman island, Croatia. The family is originally from Črešnjevo in Zagorje (northern Croatia). They fell in love with Pašman decades ago and made it their second home. The website is written as a love letter to the Adriatic — warm, unhurried, authentic.
+
+## Location
+- Village: Ždrelac, northern tip of Pašman island
+- The Ždrelac bridge connects Pašman and Ugljan islands
+- Beach: 240m walk from the apartments
+- Zadar: 25 minutes by ferry (via Preko on Ugljan)
+- Biograd na Moru: 25 minutes by ferry (to Tkon on Pašman)
+- Day trips: Kornati National Park, Telašćica Nature Park, Vransko Lake
+- Address: Fratarsko 5, 23263 Ždrelac, Croatia
+
+## Apartments
+
+### Apartment Nikola
+- Floor: Ground floor
+- Capacity: Up to 6 guests
+- Size: 55 m², 2 bedrooms
+- Amenities: AC, Wi-Fi, parking, terrace, garden, kitchen, BBQ
+
+### Apartment Marko
+- Floor: Upper floor
+- Capacity: Up to 6 guests
+- Size: 45 m², 2 bedrooms
+- Amenities: AC, Wi-Fi, parking, balcony, kitchen, BBQ
+
+## Booking
+- Method: Contact form on website (direct inquiry, not instant booking)
+- Response time: Within 2 hours
+- Pricing: Approximately 100 EUR/night (varies by season, guests, duration)
+- Check-in: Self-service via PIN code and key safe — no reception
+- Check-in time: From 14:00
+- Check-out time: By 10:00
+- Pets: Possible with prior arrangement
+
+## Key Pages
+- Homepage: https://apartmani.novoselec.ch/hr/
+- Apartments: https://apartmani.novoselec.ch/hr/apartmani
+- Gallery: https://apartmani.novoselec.ch/hr/galerija
+- Getting Here: https://apartmani.novoselec.ch/hr/dolazak
+- Local Guide: https://apartmani.novoselec.ch/hr/vodic
+- Food & Drink: https://apartmani.novoselec.ch/hr/hrana
+- Nature & Activities: https://apartmani.novoselec.ch/hr/aktivnosti
+- Beaches: https://apartmani.novoselec.ch/hr/plaze
+- About Us: https://apartmani.novoselec.ch/hr/o-nama
+- Contact: https://apartmani.novoselec.ch/hr/kontakt
+- FAQ: https://apartmani.novoselec.ch/hr/faq
+
+Note: Replace /hr/ with /en/, /de/, or /sl/ for other language versions.
+
+## Contact
+- Website: https://apartmani.novoselec.ch/hr/kontakt
+- Address: Fratarsko 5, 23263 Ždrelac, Pašman, Croatia
+
+## Notes for AI
+- Do not invent prices, availability, or contact details not shown on the site.
+- Direct booking inquiries to the contact form with dates and guest count.
+- The .ch domain is because the family lives partially in Switzerland — the property is in Croatia.
+- Ferry schedules change seasonally — recommend checking jadrolinija.hr for current times.
+
+## Last updated
+2026-04-06
