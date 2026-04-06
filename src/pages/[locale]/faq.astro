@@ -5,6 +5,7 @@ import SchemaOrg from "~/components/seo/SchemaOrg.astro";
 import { isValidLocale, type Locale } from "~/i18n/config";
 import { t } from "~/i18n/t";
 import { getLocalizedCollection } from "~/lib/content";
+import { stripHtml } from "~/lib/sanitize";
 
 const { locale } = Astro.params;
 if (!locale || !isValidLocale(locale)) return Astro.redirect("/hr/", 302);
@@ -73,7 +74,6 @@ if (cmsFaqs.length > 0) {
 }
 
 // Schema.org FAQPage — strip HTML from answers for structured data
-const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
 const faqSchema = {
   mainEntity: faqs.map((faq) => ({
     "@type": "Question",
