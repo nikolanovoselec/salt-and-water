@@ -255,7 +255,7 @@ The entire visual language lives in `src/styles/global.css` as CSS custom proper
 | `.hero-simple__bg` | Fallback background when no image prop is passed — navy radial-gradient from azure at top to dark navy |
 | `.hero-simple__overlay` | Dark navy gradient overlay (`z-index: 1`) that dims the photo for legible white text; always rendered when an image is present |
 | `.hero-simple__wave` | Inline SVG wave pinned to `bottom: -1px` at `z-index: 3`; height `clamp(40px, 6vw, 80px)`; cream fill (`#F8F5EF`) blends the hero into the page background |
-| `.hero-simple__subtitle` | Small-caps uppercase subtitle rendered beneath the `<h1>` — `--font-size-sm`, wide tracking, 50% white opacity |
+| `.hero-simple__subtitle` | Uppercase subtitle rendered beneath the `<h1>` via `text-transform: uppercase` — `--font-size-sm`, wide tracking, 50% white opacity |
 
 ### ScrollCollage CSS Classes
 
