@@ -61,7 +61,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
   - Image clip-path reveal: CSS `clip-path: inset()` transition on scroll-triggered class via `data-reveal-clip` attribute
   - Staggered entry: CSS `transition-delay` per child (100ms increments) via `data-reveal-stagger` attribute
   - ~~Section divider wavy SVG fades in on scroll entry~~ — Wave dividers are now always visible (REQ-VD-9), not scroll-triggered
-  - **Ken Burns:** Hero carousel uses a continuous CSS keyframe animation (`heroZoom`, 12s ease-in-out infinite alternate) on slide images — scaling from 1.0 to 1.1 with a subtle translate3d drift (-1%, -1%). Animation is paused by default (`animation-play-state: paused`) and plays only on `.is-active` slides. The infinite alternating cycle ensures the hero image is never static, replacing the previous one-shot 8s transition.
+  - **Ken Burns:** Hero carousel uses a continuous CSS keyframe animation (`heroZoom`, 12s ease-in-out infinite alternate) on slide images — scaling from 1.0 to 1.1 with a subtle translate3d drift (-1%, -1%). Animation runs continuously on ALL slides (no pause/resume tied to active state), so the long 8s crossfade reveals each incoming slide already mid-motion. The infinite alternating cycle ensures the hero image is never static.
   - **Breathing/floating keyframes:** `@keyframes breathe` (scale 1 to 1.02, 6s infinite), `@keyframes float` (translateY 0 to -8px, 5s infinite), `@keyframes slowZoom` (scale 1 to 1.05). Utility classes `.animate-breathe` and `.animate-float` available for decorative elements.
   - **GSAP optional:** Max 1 signature moment per page if CSS cannot achieve it (e.g., pinned "A Day on Pašman" timeline on desktop). If GSAP adds >20KB to bundle, skip it and use CSS-only alternative.
   - No parallax (complexity vs. value tradeoff for this project)
@@ -286,7 +286,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Priority:** P1
 - **Dependencies:** REQ-VD-12
 - **Verification:** Audit all image URLs — no duplicates, no non-Croatian imagery
-- **Status:** Implemented — all pages use unique real island photos stored in R2 with `UUID.ext` keys, served via `/api/img/{key}`; 137+ photos total (gallery page alone uses 137); zero Pexels URLs, zero stock photos, zero local `/photos/` paths remain; no non-Croatian imagery present
+- **Status:** Implemented — all pages use unique real island photos stored in R2 with `UUID.ext` keys, served via `/api/img/{key}`; 142+ photos total (gallery page alone uses 142); zero Pexels URLs, zero stock photos, zero local `/photos/` paths remain; no non-Croatian imagery present
 
 ### REQ-VD-15: Exterior Photo Collage
 
@@ -294,12 +294,12 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - Pure CSS infinite horizontal scroll (marquee technique) — no JavaScript
-  - `reverse` prop: when set, animation plays in reverse direction (`animation-direction: reverse`), scrolling right-to-left instead of the default left-to-right. Used for two-direction collage pairs (e.g., Food & Drink page, REQ-ED-8).
+  - `reverse` prop: when set, animation plays in reverse direction (`animation-direction: reverse`), scrolling right-to-left instead of the default left-to-right. Used for two-direction collage pairs (e.g., Food & Drink page, REQ-ED-8) and for alternating scroll direction on editorial pages (vodic, dolazak, plaze, aktivnosti — odd-indexed sections use `reverse`).
   - `showCaptions` prop (default false): when enabled, renders each photo's alt text as an overlay caption positioned absolute at the bottom of the photo. Caption styling: sans-serif (`var(--font-sans)`), base font size, normal weight (400), line-height 1.6, white text at 90% opacity, padding `var(--space-md) var(--space-lg)`, with a bottom-to-top gradient background (`rgba(0,0,0,0.5)` to transparent) for legibility over any image. `pointer-events: none` so the overlay does not interfere with hover pause. Currently enabled only on the gallery page (REQ-SF-8) to display poetic Croatian captions over photos.
   - `@keyframes scroll-collage` from `translateX(0)` to `translateX(-50%)` with duplicated image track
   - Image height: 250px mobile, 350px desktop
   - 16px border-radius, `var(--space-md)` gap between images (multi-image strips only)
-  - **Single-image fallback:** When only 1 image is provided, MiniCollage renders a static full-width image (4:3 aspect, `object-fit: cover`) with no border-radius, no max-width constraint, no scrolling animation, and no hover zoom. The single image is edge-to-edge, matching the visual weight of multi-image collage strips.
+  - **Single-image fallback:** When only 1 image is provided, MiniCollage renders a static centered image (4:3 aspect, `object-fit: cover`) with `border-radius: 16px`, `max-width: 1000px`, and `margin-inline: auto`. No scrolling animation, no hover zoom. The single image has rounded corners matching the collage strip aesthetic.
   - All collage/strip containers (homepage collage, apartments collage, gallery strips, editorial strips) use responsive horizontal padding `clamp(1.25rem, 4vw, 3rem)` so that rounded-corner images have breathing room from viewport edges
   - 35s loop duration, `linear infinite` timing
   - Pauses on hover (`:hover` sets `animation-play-state: paused`)
@@ -307,7 +307,7 @@ Color system, typography, scroll animations, micro-interactions, and Croatian vi
   - Accessibility: `aria-roledescription="carousel"`, duplicate images get `aria-hidden="true"`
   - Photos sourced from CMS editorial entry (`page_key=homepage`, `section_key=collage`, `body` field containing JSON array of `{src, alt}` objects). JSON is validated at render time: non-array values are discarded, and array items missing `src` or `alt` string fields are filtered out.
   - Owner manages collage by editing the gallery array in Emdash admin — add/remove photos without code changes
-  - Placed on homepage in the apartments section (`section--dark`), after the text content. Also reused on: (1) apartment listing page (`section--dark`, exterior photos from same CMS entry, 35s speed), (2) apartment detail page (interior photos from `gallery` CMS field, 35s speed), (3) editorial detail pages (aktivnosti, dolazak, plaze, vodic) where each CMS section with photos renders a MiniCollage strip at 35s speed, (4) Food & Drink page (hrana) where a single gallery is split into two MiniCollage strips scrolling in opposite directions (default left, `reverse` right) stacked below the description text, and (5) Gallery page (galerija, REQ-SF-8) where 137 photos are split into strips of 10 (14 strips total) with alternating scroll directions and deterministic locale-based shuffle order. MiniCollage speed: 35s default for most pages; gallery page (REQ-SF-8) uses a fixed 80s duration per strip for uniform scroll pacing across all 14 strips.
+  - Placed on homepage in the apartments section (`section--dark`), after the text content. Also reused on: (1) apartment listing page (`section--dark`, exterior photos from same CMS entry, 35s speed), (2) apartment detail page (interior photos from `gallery` CMS field, 35s speed), (3) editorial detail pages (aktivnosti, dolazak, plaze, vodic) where each CMS section with photos renders a MiniCollage strip at 35s speed with alternating scroll direction (`reverse` on odd-indexed sections, matching galerija and hrana), (4) Food & Drink page (hrana) where a single gallery is split into two MiniCollage strips scrolling in opposite directions (default left, `reverse` right) stacked below the description text, and (5) Gallery page (galerija, REQ-SF-8) where 142 photos are split into strips of 10 with alternating scroll directions and deterministic locale-based shuffle order. MiniCollage speed: 35s default for most pages; gallery page (REQ-SF-8) uses a fixed 80s duration per strip for uniform scroll pacing across all strips.
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P2
 - **Dependencies:** REQ-VD-14, REQ-SF-1

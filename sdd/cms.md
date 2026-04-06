@@ -6,7 +6,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
 
 - **Emdash**: Astro integration providing admin panel, REST API, content loader, media library
 - **Mobile-first admin**: Every operation must work on owner's phone
-- **Collections**: apartments, testimonials, faqs, site-settings. Editorial pages use dedicated collections per page: vodic, hrana, aktivnosti, plaze, dolazak, about. Homepage sections remain in editorial collection. Dead collections removed: guide, posts, pages.
+- **Collections**: apartments, testimonials, faqs, site-settings, gallery_captions. Editorial pages use dedicated collections per page: vodic, hrana, aktivnosti, plaze, dolazak, about. Homepage sections remain in editorial collection. Dead collections removed: guide, posts, pages.
 - **Section toggles**: Owner can show/hide optional homepage sections without deleting content
 - **Preloaded content**: Site requires CMS seed data to render content — no hardcoded fallbacks on editorial pages
 - **Structured editing**: Prefer structured fields over freeform rich text for most content types
@@ -21,7 +21,7 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
   - Emdash as Astro integration with D1 database and R2 storage
   - Admin panel at `/_emdash/admin/` for authenticated owner only
   - Content queried via Emdash content loader (`getEmDashCollection`, `getEmDashEntry`) wrapped in a locale-aware abstraction layer providing `getLocalizedCollection(collectionSlug, locale)`, `getLocalizedEntry(collectionSlug, slug, locale)`, and `getSettings()`. `getLocalizedCollection` calls `getEmDashCollection` once with a locale filter — no pagination; Emdash returns all matching entries in a single response. All queries filter by `data.locale` field with automatic Croatian fallback.
-  - Collections: apartments, testimonials, faqs (all currently seeded). Editorial pages use dedicated collections: vodic, hrana, aktivnosti, plaze, dolazak, about. Homepage sections remain in editorial collection. Dead collections removed: guide, posts, pages, homepage. Planned: seasons, inquiries, site-settings
+  - Collections: apartments, testimonials, faqs, gallery_captions (all currently seeded). Editorial pages use dedicated collections: vodic, hrana, aktivnosti, plaze, dolazak, about. Homepage sections remain in editorial collection. Dead collections removed: guide, posts, pages, homepage. Planned: seasons, inquiries, site-settings
   - Site-settings: property name, WhatsApp number, phone number, email, active locales, hero photos, social links, section visibility toggles, check-in/out times, tourist tax rate
   - Public queries filtered by active locale and published status. Admin queries show all content including drafts/unpublished.
   - **Failure modes:**
@@ -184,8 +184,8 @@ Emdash CMS integration, media library, authentication, mobile admin UX, section 
   - Optional hero video: one 10-15s ambient stock clip
   - Site deployable and visitor-ready on day one
   - Owner workflow: open admin → see checklist → replace photos → edit text → mark as own content → done
-  - **Seeding:** Content seeded directly into D1 via SQL migration files. `seed/seed.json` and the seed API endpoint have been removed (live D1 is the source of truth).
-  - **Dedicated collection seeding (critical):** Editorial pages now use dedicated CMS collections (not `editorial` with page_key filter). Each must be seeded in all 4 locales: `vodic` (8 sections — includes merged Ždrelac content as sections 1-4), `hrana` (1 entry per locale — single unified section with gallery), `aktivnosti` (2 sections — Land + Sea), `plaze` (4 sections), `dolazak` (3 sections), `about` (1 section). Homepage sections and privacy remain in the `editorial` collection. Hardcoded fallback content has been removed from all editorial pages — pages render empty sections if CMS entries are missing. Complete seeding is a prerequisite for a functional site.
+  - **Seeding:** Content seeded directly into D1 via SQL migration files and Emdash seed file (`.emdash/seed.json`). `seed/seed.json` and the seed API endpoint have been removed (live D1 is the source of truth).
+  - **Dedicated collection seeding (critical):** Editorial pages now use dedicated CMS collections (not `editorial` with page_key filter). Each must be seeded in all 4 locales: `vodic` (8 sections — includes merged Ždrelac content as sections 1-4), `hrana` (1 entry per locale — single unified section with gallery), `aktivnosti` (2 sections — Land + Sea), `plaze` (4 sections), `dolazak` (3 sections), `about` (1 section), `gallery_captions` (57 captions per locale, 228 total — poetic photo captions used on the gallery page). Homepage sections and privacy remain in the `editorial` collection. Hardcoded fallback content has been removed from all editorial pages — pages render empty sections if CMS entries are missing. Complete seeding is a prerequisite for a functional site.
   - **All 4 locales complete:** DE and SL content must be culturally adapted (not machine-translated Croatian). German content is precise and detailed; Slovenian is warm and familiar. No locale should show Croatian fallback for seeded pages.
 - **Constraints:** CON-MEDIA, CON-I18N
 - **Priority:** P0

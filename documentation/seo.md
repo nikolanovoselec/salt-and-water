@@ -172,7 +172,7 @@ The manifest is linked from every page via `<link rel="manifest" href="/site.web
 
 ## Gallery Alt Text
 
-Gallery items in `src/pages/[locale]/galerija.astro` use 50 rotating poetic Croatian captions (e.g. "more šuti, a govori sve", "lavanda i sol") assigned by rotating index (`i % captions.length`). Alt text is intentionally evocative rather than descriptive — the images are decorative in an auto-scrolling context and the captions reinforce the editorial voice. They are not localized (Croatian only). The gallery uses 137 distinct island photos shuffled deterministically per locale.
+Gallery items in `src/pages/[locale]/galerija.astro` use 57 rotating captions per locale sourced from the `gallery_captions` CMS collection (228 total across 4 locales), assigned by rotating index (`i % captions.length`). Alt text is intentionally evocative rather than descriptive — the images are decorative in an auto-scrolling context and the captions reinforce the editorial voice. Captions are fully localized in all 4 locales (HR, DE, SL, EN). The gallery uses 142 distinct island photos shuffled deterministically per locale.
 
 ---
 

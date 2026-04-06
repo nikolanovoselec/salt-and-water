@@ -2172,6 +2172,307 @@
           "text": "Love here is quiet and deep, much like the sea",
           "sort_order": 50
         }
+      },
+      {
+        "id": "gc-51-hr",
+        "slug": "caption-51-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Prvi koraci putovanja, zapisani u soli i sjeni palmi",
+          "sort_order": 51
+        }
+      },
+      {
+        "id": "gc-51-de",
+        "slug": "caption-51-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-51-hr",
+        "data": {
+          "text": "Die ersten Schritte der Reise, geschrieben in Salz und Palmenschatten",
+          "sort_order": 51
+        }
+      },
+      {
+        "id": "gc-51-sl",
+        "slug": "caption-51-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-51-hr",
+        "data": {
+          "text": "Prvi koraki potovanja, zapisani v soli in senci palm",
+          "sort_order": 51
+        }
+      },
+      {
+        "id": "gc-51-en",
+        "slug": "caption-51-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-51-hr",
+        "data": {
+          "text": "The first steps of the journey, written in salt and palm shade",
+          "sort_order": 51
+        }
+      },
+      {
+        "id": "gc-52-hr",
+        "slug": "caption-52-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Plovidba prema obzoru gdje se more pretvara u tekuće zlato",
+          "sort_order": 52
+        }
+      },
+      {
+        "id": "gc-52-de",
+        "slug": "caption-52-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-52-hr",
+        "data": {
+          "text": "Unterwegs zum Horizont, wo das Wasser zu flüssigem Gold wird",
+          "sort_order": 52
+        }
+      },
+      {
+        "id": "gc-52-sl",
+        "slug": "caption-52-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-52-hr",
+        "data": {
+          "text": "Plovba proti obzorju, kjer se morje prelije v tekoče zlato",
+          "sort_order": 52
+        }
+      },
+      {
+        "id": "gc-52-en",
+        "slug": "caption-52-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-52-hr",
+        "data": {
+          "text": "Sailing toward a horizon where the water turns to liquid gold",
+          "sort_order": 52
+        }
+      },
+      {
+        "id": "gc-53-hr",
+        "slug": "caption-53-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Tirkizni valovi otvaraju put u svijet zelene i narančaste",
+          "sort_order": 53
+        }
+      },
+      {
+        "id": "gc-53-de",
+        "slug": "caption-53-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-53-hr",
+        "data": {
+          "text": "Türkise Wellen weisen den Weg in eine Welt aus Grün und Orange",
+          "sort_order": 53
+        }
+      },
+      {
+        "id": "gc-53-sl",
+        "slug": "caption-53-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-53-hr",
+        "data": {
+          "text": "Turkizni valovi ti odpirajo pot do zelenih gričev in oranžnih streh",
+          "sort_order": 53
+        }
+      },
+      {
+        "id": "gc-53-en",
+        "slug": "caption-53-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-53-hr",
+        "data": {
+          "text": "Turquoise waves lead the way to a world of green and orange",
+          "sort_order": 53
+        }
+      },
+      {
+        "id": "gc-54-hr",
+        "slug": "caption-54-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Svjetlost pleše uz pjesmu koju samo more zna odsvirati",
+          "sort_order": 54
+        }
+      },
+      {
+        "id": "gc-54-de",
+        "slug": "caption-54-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-54-hr",
+        "data": {
+          "text": "Das Licht tanzt zu einer Melodie, die nur das Meer spielen kann",
+          "sort_order": 54
+        }
+      },
+      {
+        "id": "gc-54-sl",
+        "slug": "caption-54-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-54-hr",
+        "data": {
+          "text": "Svetloba pleše na melodijo, ki jo pozna le morje",
+          "sort_order": 54
+        }
+      },
+      {
+        "id": "gc-54-en",
+        "slug": "caption-54-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-54-hr",
+        "data": {
+          "text": "The light dances to a song only the sea can play",
+          "sort_order": 54
+        }
+      },
+      {
+        "id": "gc-55-hr",
+        "slug": "caption-55-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Kameno srce koje počiva u nježnom zagrljaju Jadrana",
+          "sort_order": 55
+        }
+      },
+      {
+        "id": "gc-55-de",
+        "slug": "caption-55-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-55-hr",
+        "data": {
+          "text": "Ein Herz aus Stein, geborgen im sanften Blau der Adria",
+          "sort_order": 55
+        }
+      },
+      {
+        "id": "gc-55-sl",
+        "slug": "caption-55-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-55-hr",
+        "data": {
+          "text": "Kamnito srce, ki varno počiva v objemu modrega Jadrana",
+          "sort_order": 55
+        }
+      },
+      {
+        "id": "gc-55-en",
+        "slug": "caption-55-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-55-hr",
+        "data": {
+          "text": "A stone heart resting in the soft cradle of the Adriatic",
+          "sort_order": 55
+        }
+      },
+      {
+        "id": "gc-56-hr",
+        "slug": "caption-56-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Jutarnja svjetlost budi tihe tajne drevnog kamena",
+          "sort_order": 56
+        }
+      },
+      {
+        "id": "gc-56-de",
+        "slug": "caption-56-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-56-hr",
+        "data": {
+          "text": "Das Morgenlicht weckt die stillen Geheimnisse alter Gassen",
+          "sort_order": 56
+        }
+      },
+      {
+        "id": "gc-56-sl",
+        "slug": "caption-56-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-56-hr",
+        "data": {
+          "text": "Jutranja zarja prebuja tihe skrivnosti starodavnih ulic",
+          "sort_order": 56
+        }
+      },
+      {
+        "id": "gc-56-en",
+        "slug": "caption-56-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-56-hr",
+        "data": {
+          "text": "Morning light wakes the quiet secrets of the ancient stone",
+          "sort_order": 56
+        }
+      },
+      {
+        "id": "gc-57-hr",
+        "slug": "caption-57-hr",
+        "status": "published",
+        "locale": "hr",
+        "data": {
+          "text": "Gdje plavetnilo neba i mora postaju jedna priča",
+          "sort_order": 57
+        }
+      },
+      {
+        "id": "gc-57-de",
+        "slug": "caption-57-de",
+        "status": "published",
+        "locale": "de",
+        "translationOf": "gc-57-hr",
+        "data": {
+          "text": "Wo das Blau von Himmel und Meer zu einer Geschichte verschmilzt",
+          "sort_order": 57
+        }
+      },
+      {
+        "id": "gc-57-sl",
+        "slug": "caption-57-sl",
+        "status": "published",
+        "locale": "sl",
+        "translationOf": "gc-57-hr",
+        "data": {
+          "text": "Kjer se modrina neba in morja zlijeta v eno samo zgodbo",
+          "sort_order": 57
+        }
+      },
+      {
+        "id": "gc-57-en",
+        "slug": "caption-57-en",
+        "status": "published",
+        "locale": "en",
+        "translationOf": "gc-57-hr",
+        "data": {
+          "text": "Where the blue of the sky and the sea become one story",
+          "sort_order": 57
+        }
       }
     ]
   }

@@ -1,6 +1,6 @@
 # Pending Items — Apartmani Novoselec
 
-Last updated: 2026-04-05 (session 5)
+Last updated: 2026-04-06 (session 6)
 
 ## Completed This Session
 
@@ -37,3 +37,4 @@ Last updated: 2026-04-05 (session 5)
 - DE/SL editorial content thin in some pages (HR and EN complete)
 - 3 HEIC photos not processed (no HEIC support in container)
 - Apartment comparison table (not requested)
+- ~~Gallery captions hardcoded Croatian-only~~ — resolved: `gallery_captions` CMS collection with 57 captions per locale (228 total across HR/DE/SL/EN), queried via `getLocalizedCollection`
