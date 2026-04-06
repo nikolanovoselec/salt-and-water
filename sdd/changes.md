@@ -1,5 +1,33 @@
 # Changelog
 
+## 2026-04-06 - Post-3828ad7 final convergence: docs-only inquiry caller correction, no spec drift
+
+Verification pass after commit 3828ad7 (docs-only). The commit corrected `documentation/api-reference.md`'s description of `POST /api/inquiry` callers — replacing the inaccurate "apartment detail page booking forms (`type: 'booking'`), apartment quick-question modals (`type: 'question'`), and the standalone contact page" claim with the accurate "currently the only frontend caller is `src/pages/[locale]/kontakt.astro`, submitting `type: 'question'` inquiries; the `type: 'booking'` path exists in the schema and handler but has no UI surface yet". No source code changed, no requirements need to be added, updated, or deprecated.
+
+### Spec audit against the corrected reality
+- **REQ-BK-8** (Contact Inquiry Page) — Implemented. Acceptance criteria already say "Standalone page at `/{locale}/kontakt`", "Submits to `/api/inquiry` as JSON with `type: 'question'`", and "All site CTAs ... link to `/{locale}/kontakt` instead of anchor-based inquiry targets". Matches the corrected docs exactly.
+- **REQ-BK-1** (Request-to-Book Widget) — Deprecated. Describes the full two-tab booking widget with date picker, capacity validation, cross-season pricing, and `type: "booking"` submission path. Correctly marked Deprecated with the explanatory note: "The interim contact page (REQ-BK-8) currently serves as the primary inquiry entry point. REQ-BK-1's full two-tab widget with date picker, pricing, and availability will replace it." This matches the docs' new statement that the booking-type path "exists in the Zod schema and server handler but has no UI surface yet".
+- **REQ-BK-2** (Inquiry Server Pipeline) — Implemented. Server pipeline (Zod → honeypot → Turnstile → sanitize → optional booking validation → D1 insert → Resend) is locale-agnostic and accepts both `type: "booking"` and `type: "question"`. The fact that no frontend currently submits `type: "booking"` does not invalidate the pipeline's contract — REQ-BK-2 documents server capability, not current frontend usage. No change needed.
+- **REQ-BK-3** (WhatsApp Floating Button) — Deprecated ("only inquiry via contact form"). Consistent.
+- **REQ-BK-4** (Click-to-Call) — Deprecated ("email-based workflow sufficient"). Consistent.
+- **REQ-BK-7** (Inquiry Lifecycle) — Deprecated ("email-based workflow sufficient"). Consistent.
+- **REQ-SF-7** (Sticky Mobile CTA) — Per changelog entry above, dependencies were already migrated from REQ-BK-1/REQ-AP-4 to REQ-BK-8. Verified: no "future booking widget" references remain in active spec.
+
+### Source verification
+- `find src -name "*.astro" -exec grep -l "api/inquiry"` returns exactly one file: `src/pages/[locale]/kontakt.astro`. Confirms the corrected docs claim — no apartment detail page, no modal, no other component submits to `/api/inquiry`.
+- `src/pages/[locale]/` directory listing confirms no booking-form page or component exists outside `kontakt.astro`. Apartment pages (`apartmani/index.astro`, `apartmani/[slug].astro`) are read-only marketing surfaces with CTAs that link to `/{locale}/kontakt`, matching REQ-BK-8 criterion #11.
+- `src/pages/api/inquiry.ts` server handler retains the booking branch (Zod schema variant + availability revalidation) — correct, since REQ-BK-2 documents server capability and the schema is preserved for the future REQ-BK-1 implementation.
+
+### Cross-domain consistency check
+- `documentation/api-reference.md` and `sdd/booking.md` are now in agreement. The old docs claim that contradicted the spec (suggesting a `type: "booking"` UI exists) was resolved by editing the docs, not the spec — correct call, since the spec was already accurate.
+- No `sdd/` requirement needed updating, deprecating, or adding.
+- No glossary, constraints, or actor changes triggered.
+
+### Result
+**Spec is converged with reality at commit 3828ad7.** Zero requirements added, zero updated, zero deprecated. The full SDD review pipeline (docs → spec → source) is now mutually consistent on the inquiry flow: only `kontakt.astro` is a live caller, only `type: "question"` is in production use, and the future booking widget path is correctly tracked as a Deprecated REQ-BK-1 awaiting reactivation.
+
+---
+
 ## 2026-04-06 - Post-1b9b6ba verification: REQ-SF-1 animations restored, WaveDivider purge, file-path leak removed, third wave variant documented
 
 Verification pass after commit 1b9b6ba. The commit itself restored REQ-SF-1's `scrollPulse` and `fadeUp` keyframe entry animations and rephrased every remaining `WaveDivider`/`WaveDivider.astro` reference in REQ-VD-4, REQ-VD-9, and REQ-VD-12 to "inline SVG (no reusable component)". This pass re-verified those changes against source and swept for residual stale acceptance criteria.
