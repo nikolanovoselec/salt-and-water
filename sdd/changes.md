@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-06 - Spec review: logo optimized, no spec changes needed (9556fdc)
+
+Commit 9556fdc optimized `logo.png` from 135KB to 13KB, moved the mobile menu logo outside the `<nav>` element (now a sibling, still visually above nav links), added `loading="lazy"` to footer and mobile menu logo images, and added a 30-day cache header for `/logo.png`.
+
+### No spec changes required
+- **Logo file size** is an asset optimization detail, not a behavioral requirement.
+- **Mobile menu logo position** ("centered above nav links") still accurately describes the visual result; DOM structure is an implementation detail.
+- **`loading="lazy"` on logo images** is a minor performance improvement for below-fold/hidden elements; does not change acceptance criteria.
+- **Cache header for `/logo.png`** already covered by REQ-PERF-2 criterion: "favicons and static images cached 30 days."
+
+---
+
 ## 2026-04-06 - Spec review: logo acceptance criteria refined in storefront (d7733cc)
 
 Commit d7733cc refined the inline acceptance criteria for the sailboat logo in REQ-SF-3 and REQ-SF-6 (formatting and detail only — no new requirements). Documentation files (architecture.md, deployment.md) updated in parallel to describe logo rendering in Navigation, Footer, and Mobile menu components, and to list logo.png in the public/ directory.
