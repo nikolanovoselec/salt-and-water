@@ -1,5 +1,50 @@
 # Changelog
 
+## 2026-04-06 - Post-f0993c1 verification: REQ-BK-1 status flip Deprecated→Planned, REQ-AP-3 nested annotation corrected
+
+Verification pass after commit f0993c1 (docs + spec). The commit corrected the hero image key format claim in `/api/img/:key` documentation and flipped REQ-BK-1's status from `Deprecated` to `Planned` on the basis that "the Zod schema and server handler already accept `type: "booking"`". REQ-AP-3's visual hierarchy nested annotation for the inline inquiry widget bullet was changed from "Deprecated" to "Deferred" to track REQ-BK-1's reactivation. Source verification confirms the schema/handler claim is accurate but incomplete — three additional gaps surfaced.
+
+### Status changes verified against source
+
+- **REQ-BK-1** (Request-to-Book Widget) — Status: Deprecated → Planned. Verified accurate in part:
+  - `src/schemas/inquiry.ts` defines `bookingInquirySchema` (discriminated union variant `type: literal("booking")`) with all REQ-BK-1 fields: checkIn, checkOut, adults, childrenUnder12, children12to17, apartmentId, name, email, phone, message, hasPets, petNote, gdprConsent, turnstileToken, honeypot, locale. Confirmed.
+  - `src/pages/api/inquiry.ts` has a full `type === "booking"` branch with availability revalidation (`hasOverlap`), price computation (`computeStayPrice`), and discriminated INSERT into the `inquiries` table populating all booking-only columns (check_in, check_out, adults, children_under_12, children_12_to_17, has_pets, pet_note, price_estimate). Confirmed.
+  - `migrations/0002_availability.sql` defines the `inquiries` table with `type TEXT NOT NULL -- booking | question` and every booking column the handler writes. Confirmed.
+  - The status flip is therefore well-grounded for the schema/handler/storage layers.
+
+- **REQ-AP-3** (Apartment Detail Page) — Status itself unchanged (still Implemented). Only the visual hierarchy item #5 nested annotation was changed from "Deprecated" to "Deferred" with a note that REQ-BK-1 is now Planned. Verified accurate — the dependency line for REQ-AP-3 still does not list REQ-BK-1 (correct, since REQ-AP-3 is the existing detail page implementation and REQ-BK-1 is a future enhancement, not a runtime prerequisite).
+
+### Quality issues fixed in this pass
+
+- **REQ-BK-1 reactivation note overstated readiness.** The commit message and the original explanatory note ("only the UI surface is missing") implied the booking branch is end-to-end runnable. Source verification surfaced three concrete server-side gaps that block the booking branch from actually running today:
+  1. **Missing `seasons` D1 table.** `src/pages/api/inquiry.ts:105` queries `SELECT id, apartment_id, name, start_date, end_date, price_per_night, min_stay FROM seasons WHERE apartment_id = ?`. No migration in `migrations/` creates this table. A real `type: "booking"` submission would crash on `SQLITE_ERROR: no such table: seasons`.
+  2. **Hardcoded cleaning fee.** `src/pages/api/inquiry.ts:126` passes `cleaningFee: 0` with a `TODO: get from apartment settings` comment.
+  3. **Hardcoded tourist tax rate.** `src/pages/api/inquiry.ts:127` passes `touristTaxRate: 1.35` with a `TODO: get from site settings` comment.
+  Rewrote the REQ-BK-1 note to explicitly enumerate these gaps and to call out that reactivating REQ-BK-1 transitively requires reactivating its dependencies REQ-AP-4 (Seasonal Pricing — currently Deprecated, owns the `seasons` table), REQ-AP-5 (Availability Calendar — currently Deprecated), and REQ-BK-6 (Booking Business Rules — currently Deprecated, owns the cleaning fee and tourist tax configuration). The note now accurately reflects that "schema and handler skeleton exist" ≠ "runnable end-to-end".
+
+### Ripple effects to other REQ-* dependencies
+
+- **REQ-BK-1 dependency chain is now broken.** REQ-BK-1 (Planned) declares `Dependencies: REQ-AP-1, REQ-AP-4, REQ-AP-5, REQ-BK-6`. Three of those four (REQ-AP-4, REQ-AP-5, REQ-BK-6) are still `Deprecated`. A Planned requirement cannot be satisfied without its dependencies, so reactivating REQ-BK-1 to Planned without reactivating those dependencies leaves the spec internally inconsistent at the dependency-graph level. **Not auto-fixed in this pass** because the user's intent for the dependency chain isn't yet clear (the original commit only flipped REQ-BK-1; it did not touch REQ-AP-4/REQ-AP-5/REQ-BK-6). The note above documents the gap so the next planning session can decide: either also reactivate the three dependencies, or rescope REQ-BK-1's AC to drop pricing/availability/business-rules requirements and trim its Dependencies line to `REQ-AP-1` only.
+- **REQ-SF-7** (Sticky Mobile CTA) — Verified clean. Already migrated from REQ-BK-1 to REQ-BK-8 in an earlier pass. No change.
+- **REQ-AP-3** dependency line — Verified clean (`Dependencies: REQ-AP-1` only, REQ-BK-1 is not listed). No change.
+- **REQ-AP-4** line 121 (`If visitor selects dates in inquiry widget, itemized total computed (see REQ-BK-1)`) — Cross-reference is fine; REQ-AP-4 is itself Deprecated so nothing to update.
+- **REQ-BK-8** intent line ("...while the full request-to-book widget (REQ-BK-1) is not yet built") — Still accurate; REQ-BK-1 being Planned (not yet built) does not contradict this phrasing.
+- **Glossary, constraints, actors** — No changes triggered.
+
+### Source verification commands run
+
+- `Read migrations/0002_availability.sql` — confirmed `inquiries` table schema with booking columns, confirmed no `seasons` table.
+- `Read src/schemas/inquiry.ts` — confirmed `bookingInquirySchema` shape.
+- `Read src/pages/api/inquiry.ts` — confirmed `type === "booking"` branch, surfaced the three gaps above.
+- `Grep "FROM seasons|seasons WHERE|TABLE seasons"` — confirmed only one match (the handler's SELECT), no CREATE TABLE.
+- `Grep "REQ-BK-1"` across `sdd/` — confirmed only the two cross-references identified above (REQ-BK-8 intent, REQ-AP-4 AC line 121); both remain accurate.
+
+### Result
+
+REQ-BK-1 status flip Deprecated → Planned **stands** (the schema/handler/table layer that the commit cited as evidence does exist). The accompanying note has been rewritten to enumerate the three remaining server-side gaps and the broken dependency chain, so the spec no longer overstates how close REQ-BK-1 is to shippable. One follow-up decision is queued for the next planning session: reactivate REQ-AP-4/REQ-AP-5/REQ-BK-6 alongside REQ-BK-1, or rescope REQ-BK-1's AC and dependencies to match a leaner first-cut booking widget.
+
+---
+
 ## 2026-04-06 - Post-3828ad7 final convergence: docs-only inquiry caller correction, no spec drift
 
 Verification pass after commit 3828ad7 (docs-only). The commit corrected `documentation/api-reference.md`'s description of `POST /api/inquiry` callers — replacing the inaccurate "apartment detail page booking forms (`type: 'booking'`), apartment quick-question modals (`type: 'question'`), and the standalone contact page" claim with the accurate "currently the only frontend caller is `src/pages/[locale]/kontakt.astro`, submitting `type: 'question'` inquiries; the `type: 'booking'` path exists in the schema and handler but has no UI surface yet". No source code changed, no requirements need to be added, updated, or deprecated.

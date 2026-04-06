@@ -29,8 +29,8 @@ The homepage and visual shell — hero, navigation, footer, language switcher, a
   - Mobile: title scales down via clamp (subtitle remains 11px at all breakpoints)
   - **Wave at bottom of hero:** Inline SVG wave divider at the bottom edge of the hero section (same pattern as REQ-VD-9: organic bezier path, fill `#F8F5EF` to match page background below, responsive height `clamp(50px, 8vw, 100px)`, `aria-hidden="true"`, positioned absolute at `bottom: -2px` for subpixel gap fix). Creates organic transition from hero photo into the "Why Pašman" section — no hard edge.
   - **Imagery authenticity:** All hero carousel photos must depict the Croatian Adriatic coast, Pašman island, or Dalmatian architecture. No tropical resorts, Greek islands (Santorini blue domes), or generic Mediterranean stock. Each carousel image must be unique (no photo reused elsewhere on the site).
-  - **Image source:** All hero carousel photos are real island images stored in R2 and served via `/api/img/{key}` Worker route (REQ-PERF-1).
-  - **Future enhancement:** CMS-managed hero image selection will replace the hardcoded local paths. Owner will be able to choose and reorder carousel images from the admin panel.
+  - **Image source:** All 7 hero carousel photos are real island images stored in R2 and served via `/api/img/{key}` Worker route (REQ-PERF-1). The 7 hero keys are hard-coded as bare extension-less UUIDs (legacy, from before the `UUID.ext` standard introduced by `POST /admin/api/upload-url`). The route accepts both forms because content type is read from R2 object metadata.
+  - **Future enhancement:** CMS-managed hero image selection will replace the hardcoded keys. Owner will be able to choose and reorder carousel images from the admin panel; new selections will use the standard `UUID.ext` format produced by the upload pipeline.
 - **Constraints:** CON-PERF, CON-A11Y
 - **Priority:** P0
 - **Dependencies:** REQ-VD-9

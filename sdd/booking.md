@@ -49,7 +49,7 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
 - **Verification:** Submit test inquiry, verify email delivery, test Turnstile, test min stay enforcement, test cross-season pricing, test capacity rejection
 - **Status:** Planned
 
-> **Note:** The interim contact page (REQ-BK-8) currently serves as the primary inquiry entry point. REQ-BK-1's full two-tab widget with date picker, pricing, and availability will replace it. The Zod schema and server handler in REQ-BK-2 already accept `type: "booking"` submissions; only the UI surface is missing.
+> **Note:** The interim contact page (REQ-BK-8) currently serves as the primary inquiry entry point. REQ-BK-1's full two-tab widget with date picker, pricing, and availability will replace it. The Zod schema (`bookingInquirySchema`) and the `type: "booking"` branch of the server handler already exist. Reactivating REQ-BK-1 also requires reactivating its dependencies: REQ-AP-4 (Seasonal Pricing — currently Deprecated; the `seasons` D1 table referenced by the booking branch has no migration yet), REQ-AP-5 (Availability Calendar — currently Deprecated), and REQ-BK-6 (Booking Business Rules — currently Deprecated; cleaning fee and tourist tax rate are still hardcoded TODOs in the handler). The booking branch is therefore not runnable end-to-end as of this status flip; only the schema shape and the broad pipeline skeleton are in place.
 
 ### REQ-BK-2: Inquiry Server Pipeline
 
