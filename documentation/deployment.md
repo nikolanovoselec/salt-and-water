@@ -8,7 +8,7 @@ Dev setup, deployment steps, and Cloudflare resource provisioning.
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22+ (CI uses Node 22; local dev works on 20+ but 22 is recommended for parity)
 - Wrangler CLI: `npm install` (included as devDependency)
 - Cloudflare account with access to the `apartmani` Worker project
 

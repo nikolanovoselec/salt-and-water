@@ -102,6 +102,7 @@ Returns booked dates for a single apartment within a date range. Used by the ava
 | Status | Condition |
 |---|---|
 | `400` | Missing `id`, `start`, or `end` |
+| `500` | D1 query failure |
 
 **Implementation:** `src/pages/api/apartments/[id]/availability.ts`, uses `getBookedDatesInRange()` from `src/lib/availability.ts`.
 
@@ -148,6 +149,7 @@ Cookieless analytics event logging. Writes to the D1 `events` table. No PII is s
 | Status | Condition |
 |---|---|
 | `400` | Missing or unrecognized `type` field |
+| `500` | D1 write failure |
 
 **Implementation:** `src/pages/api/track.ts`.
 
