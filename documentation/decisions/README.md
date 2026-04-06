@@ -10,7 +10,7 @@ Decisions made during implementation with rationale.
 
 | ID | Decision | Category | Date |
 |----|----------|----------|------|
-| AD1 | Use Cloudflare Image Resizing instead of Worker-side processing | Architecture | 2026-04-02 |
+| AD1 | Serve photos raw from R2; no Worker-side or edge image processing | Architecture | 2026-04-02 |
 | AD2 | Magic Link auth via Resend instead of Google OAuth | Security | 2026-04-02 |
 | AD3 | CSS-first animations, GSAP optional for max 1 signature moment | UI/Frontend | 2026-04-02 |
 | AD4 | No PWA — unnecessary complexity for this scale | Architecture | 2026-04-02 |
@@ -28,11 +28,11 @@ Decisions made during implementation with rationale.
 
 ---
 
-### AD1: Use Cloudflare Image Resizing instead of Worker-side processing
+### AD1: Serve photos raw from R2; no Worker-side or edge image processing
 
-**Decision:** Serve image variants via Cloudflare Image Resizing (`/cdn-cgi/image/`) instead of processing uploads in the Worker.
+**Decision:** Serve photos raw from R2 via `GET /api/img/:key` with `Cache-Control: immutable`. No Worker-side format conversion, no Cloudflare Image Resizing (`/cdn-cgi/image/`), no srcset variants.
 
-Workers have 128MB memory and strict CPU limits. Decoding 15MB HEIC files, generating AVIF/WebP variants, and computing blurhash in-Worker would cause OOM and timeout. Image Resizing runs on Cloudflare's edge infrastructure with no such limits, supports HEIC natively, and caches transformed images at the edge.
+Workers have 128MB memory and strict CPU limits — HEIC decoding and AVIF encoding would cause OOM and timeout. Cloudflare Image Resizing requires a paid add-on and per-transform billing, which is disproportionate for a two-apartment site with a modest photo set. Raw R2 serving is sufficient: photos are already optimized at upload time (JPEG, ≤15MB), cached immutably at the edge for 1 year, and served at full resolution to all clients. The `buildMediaUrl` and `buildSrcset` helpers in `src/lib/media.ts` are scaffolding for future responsive image work but are not currently called.
 
 ### AD2: Magic Link auth via Resend instead of Google OAuth
 

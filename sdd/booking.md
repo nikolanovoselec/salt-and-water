@@ -64,13 +64,13 @@ Request-to-book inquiry flow, business rules, server pipeline, WhatsApp integrat
   - Inquiry persisted to D1 `inquiries` table before email attempt with status `new`
   - Input sanitized: all user-supplied fields stripped of HTML before rendering in email output, email header injection prevented, URLs stripped from message body
   - Honeypot hidden field for bot detection (in addition to Turnstile)
-  - Email to owner via Resend: formatted HTML with all inquiry details, computed price, guest contact, one-tap "Confirm & Block Dates" link (deep link to admin action). Sent from `noreply@graymatter.ch`. (Owner notification only — no guest auto-reply is sent.)
-  - **Email delivery via outbox pattern:**
+  - Email to owner via Resend: formatted HTML with inquiry details (name, email, phone, dates, guest count, apartment, pets, message, locale). No admin deep links or "Confirm & Block Dates" action — owner replies directly via email. Sent from `noreply@graymatter.ch`. (Owner notification only — no guest auto-reply is sent.)
+  - **Email delivery (single-attempt):**
     - Inquiry persisted to D1 with `email_status: pending`
     - Immediate send attempt (one try in request lifecycle)
-    - On failure: `email_status: retry`, `retry_at` set to now + 2 minutes
-    - Cron Trigger (every 5 minutes) processes retries, max 3 attempts total
-    - After 3 failures: `email_status: failed`, inquiry still safe in D1, visible in admin with "Email delivery failed" badge
+    - On success: `email_status: sent`
+    - On failure: `email_status: retry`, `retry_at` set to now + 2 minutes (stored in D1 but no Cron Trigger exists to process retries — retry is aspirational)
+    - Inquiry always safe in D1 regardless of email delivery outcome
   - Rate limit: enforced via **Cloudflare WAF Rate Limiting Rules** (not application code). Max 5 POST requests to `/api/inquiry` per IP per 10 minutes. Turnstile is the primary bot defense; WAF rate limit is the secondary layer.
   - **API response contract:**
     - `200` success — inquiry saved, email sent (or queued)

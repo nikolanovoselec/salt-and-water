@@ -80,7 +80,7 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5, REQ-I18N-4
 - **Verification:** Visual review of guide page layout; verify all 8 sections render correctly for all 4 locales
-- **Status:** Implemented — editorial-only content model; expanded to 8 sections after Ždrelac merger (sections 1-4 from deprecated REQ-ED-6); dedicated `ec_vodic` CMS collection (migrated from `ec_editorial` page_key filter). All 4 locales populated.
+- **Status:** Implemented — editorial-only content model; expanded to 8 sections after Ždrelac merger (sections 1-4 from deprecated REQ-ED-6); dedicated `vodic` CMS collection. All 4 locales populated.
 
 ### REQ-ED-5: "About Your Hosts" Page
 
@@ -99,7 +99,7 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Priority:** P1
 - **Dependencies:** REQ-CMS-1, REQ-CMS-5
 - **Verification:** Visual review
-- **Status:** Implemented — dedicated `ec_about` CMS collection. All 4 locales populated.
+- **Status:** Implemented — dedicated `about` CMS collection. All 4 locales populated.
 
 ### REQ-ED-6: "About Ždrelac" Page
 
@@ -107,7 +107,7 @@ Content pages that sell the destination and build emotional connection — Getti
 - **Applies To:** Visitor
 - **Acceptance Criteria:**
   - ~~Standalone page at `/{locale}/zdrelac`~~ — **Deprecated.** Content merged into Local Guide page (REQ-ED-4) as sections 1-4 (the bridge, the village, the fishermen, olive groves). Standalone page deleted.
-  - Content preserved in dedicated `ec_vodic` CMS collection with `sort_order` 1-4 (first sections on the guide page).
+  - Content preserved in dedicated `vodic` CMS collection with `sort_order` 1-4 (first sections on the guide page).
   - Homepage retains condensed Ždrelac introduction (feature image card linking to `/vodic`).
 - **Constraints:** CON-I18N, CON-PERF
 - **Priority:** P1
