@@ -1,4 +1,4 @@
-# Apartmani Novoselec
+# Salt & Water
 
 Vacation rental website for family apartments in Ždrelac, Pašman island, Croatia.
 
